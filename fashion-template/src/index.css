@@ -85,7 +85,9 @@ body {
   margin-right: 5em;
 }
 
-
+.ui.footerlogo.image {
+    filter: invert(100%);
+}
 
 .ui.center.aligned.segment.attendance-preview {
   background-color: #f5f5f5;

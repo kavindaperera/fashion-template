@@ -24,7 +24,7 @@ const HomePage = ({ history, store, currentStore }) => {
                   <Grid.Column>
                     <Image
                       onClick={() => history.push("/collection")}
-                      src={s.storeLogo}
+                      src={"/company.png"}
                       size="small"
                       centered
                     />
@@ -51,6 +51,9 @@ const HomePage = ({ history, store, currentStore }) => {
                     <Icon name="right arrow" />
                   </Button>
                 </GridRow>
+                <Grid.Row>
+
+                </Grid.Row>
               </Grid>
             )
         )}

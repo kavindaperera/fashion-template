@@ -114,15 +114,8 @@ class CollectionDashboard extends Component {
             </h5>
             <ProductList products={products} />
           </Grid.Column>
-          <Grid.Row centered columns={4}>
-            <h5>powered by</h5>
-            <Image
-              src={"/company.png"}
-              as="a"
-              size="medium"
-              href="http://google.com/"
-              target="_blank"
-            />
+          <Grid.Row>
+            
           </Grid.Row>
         </Grid>
       </div>

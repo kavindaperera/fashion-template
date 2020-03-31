@@ -6,6 +6,7 @@ import NavBar from "../../features/nav/NavBar/NavBar";
 import ProductDetailedPage from '../../features/collection/ProductDetailed/ProductDetailedPage'
 import HomePage from "../../features/store/HomePage";
 import ModalManager from '../../features/modals/ModalManager'
+import Footer from "../../features/footer/Footer";
 
 class App extends Component {
   render() {
@@ -30,6 +31,7 @@ class App extends Component {
             </div>
           )}
         />
+        <Footer/>
       </div>
     );
   }
