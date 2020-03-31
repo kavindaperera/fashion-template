@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Grid, Image, Label, GridRow, Button, Icon } from "semantic-ui-react";
 import { firestoreConnect } from "react-redux-firebase";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
 import _ from "lodash";
 
 const mapState = state => ({
@@ -38,22 +40,27 @@ const HomePage = ({ history, store, currentStore }) => {
                       </Button>
                     ))}
                 </Grid.Row>
-                <Grid.Row centered columns={s.coverPhotos.length} style={{ padding: "1em" }} >
-                  {s.coverPhotos && s.coverPhotos.map(photo => (
-                    <Grid.Column key={photo} style={{ padding: ".1em" }}>
-                      <Image src={photo} />
-                    </Grid.Column>
-                  ))}
+                <Grid.Row>
+                  <Grid.Column>
+                    <Carousel showThumbs= {false} showStatus={false} centerMode centerSlidePercentage={25}>
+                      {s.coverPhotos &&
+                        s.coverPhotos.map(photo => (
+                            <img key={photo} src={photo} />
+                        ))}
+                    </Carousel>
+                  </Grid.Column>
                 </Grid.Row>
                 <GridRow centered>
-                  <Button color="black"  size="huge" onClick={() => history.push("/collection")}>
+                  <Button
+                    color="black"
+                    size="huge"
+                    onClick={() => history.push("/collection")}
+                  >
                     Enter Store
                     <Icon name="right arrow" />
                   </Button>
                 </GridRow>
-                <Grid.Row>
-
-                </Grid.Row>
+                <Grid.Row></Grid.Row>
               </Grid>
             )
         )}
