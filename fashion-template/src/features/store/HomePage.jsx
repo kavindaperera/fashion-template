@@ -47,7 +47,7 @@ const HomePage = ({ history, store, currentStore }) => {
                 </Grid.Row>
                 <GridRow centered>
                   <Button color="black"  size="huge" onClick={() => history.push("/collection")}>
-                    Get Started
+                    Enter Store
                     <Icon name="right arrow" />
                   </Button>
                 </GridRow>

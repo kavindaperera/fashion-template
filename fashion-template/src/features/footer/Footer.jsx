@@ -9,19 +9,30 @@ import {
 } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { withFirebase } from "react-redux-firebase";
+import { firestoreConnect } from "react-redux-firebase";
 import { NavLink, Link, withRouter } from "react-router-dom";
 
 const actions = {};
 
 const mapState = state => ({
   auth: state.firebase.auth,
-  profile: state.firebase.profile
+  profile: state.firebase.profile,
+  store: state.firestore.ordered.store,
+  loading: state.async.loading,
+  currentStore: "7dbDylC8CZTNBPcVPJyn"
+
 });
 
 class Footer extends Component {
+  
   render() {
+    const {store, currentStore ,loading} = this.props;
     return (
       <Segment inverted vertical style={{ padding: "5em 0em" }}>
+      {store &&
+        store.map(
+          s =>
+            s.id === currentStore && (
         <Container>
           <Grid  centered divided inverted stackable>
             <Grid.Row>
@@ -37,7 +48,7 @@ class Footer extends Component {
                 </List>
               </Grid.Column>
               <Grid.Column width={3}>
-                <Header inverted as="h4" content="Store Name Here" />
+                <Header inverted as="h4" content={s.storeName}/>
                 <List link inverted>
                   <List.Item as="a">About Us</List.Item>
                   <List.Item as="a">FAQ</List.Item>
@@ -55,10 +66,15 @@ class Footer extends Component {
               </Grid.Column>
             </Grid.Row>
           </Grid>
-        </Container>
+        </Container>))}
       </Segment>
     );
   }
 }
 
-export default withRouter(withFirebase(connect(mapState, actions)(Footer)));
+/*export default withRouter(withFirebase(connect(mapState, actions)(Footer)));*/
+
+export default connect(
+  mapState,
+  actions
+)(firestoreConnect([{ collection: "store" }])(Footer));
