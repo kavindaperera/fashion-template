@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Grid, Image } from "semantic-ui-react";
+import { Grid, Image, Label, GridRow, Button, Icon } from "semantic-ui-react";
 import { firestoreConnect } from "react-redux-firebase";
+import _ from "lodash";
 
 const mapState = state => ({
   store: state.firestore.ordered.store,
@@ -29,17 +30,27 @@ const HomePage = ({ history, store, currentStore }) => {
                     />
                   </Grid.Column>
                 </Grid.Row>
-                <Grid.Row
-                  centered
-                  columns={s.coverPhotos.length}
-                  style={{ padding: "1em" }}
-                >
-                  {s.coverPhotos.map(photo => (
+                <Grid.Row centered>
+                  {s.categories &&
+                    s.categories.map(category => (
+                      <Button size="large" color="black" key={category}>
+                        {_.capitalize(category)}
+                      </Button>
+                    ))}
+                </Grid.Row>
+                <Grid.Row centered columns={s.coverPhotos.length} style={{ padding: "1em" }} >
+                  {s.coverPhotos && s.coverPhotos.map(photo => (
                     <Grid.Column key={photo} style={{ padding: ".1em" }}>
-                      <Image src={photo}/>
+                      <Image src={photo} />
                     </Grid.Column>
                   ))}
                 </Grid.Row>
+                <GridRow centered>
+                  <Button color="black"  size="huge" onClick={() => history.push("/collection")}>
+                    Get Started
+                    <Icon name="right arrow" />
+                  </Button>
+                </GridRow>
               </Grid>
             )
         )}
