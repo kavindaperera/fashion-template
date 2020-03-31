@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Grid, Image, Menu, Label, Dropdown } from "semantic-ui-react";
+import { Grid,  Menu, Dropdown } from "semantic-ui-react";
 import ProductList from "../ProductList/ProductList";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import StickyBox from "react-sticky-box";
-import { Category } from "emoji-mart";
 
 const mapState = state => ({
   products: state.firestore.ordered.products,

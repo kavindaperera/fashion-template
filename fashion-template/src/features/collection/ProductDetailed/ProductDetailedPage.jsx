@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Grid, Menu, Label } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import ProductDetailedPhotoSlide from "./ProductDetailedPhotoSlide";
 import ProductPriceDetails from "./ProductPriceDetails";
 import StickyBox from "react-sticky-box";

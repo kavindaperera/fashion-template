@@ -19,6 +19,7 @@ const rootReducer = combineReducers ({
     toastr: toastrReducer,
     firebase: firebaseReducer,
     firestore: firestoreReducer
+    
 
 })
 

@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Grid, Image, Label, GridRow, Button, Icon } from "semantic-ui-react";
+import { Grid, Image, GridRow, Button, Icon } from "semantic-ui-react";
 import { firestoreConnect } from "react-redux-firebase";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import LoadingComponent from "../../app/layout/LoadingComponent"
 import { Carousel } from "react-responsive-carousel";
 import _ from "lodash";
 
@@ -14,7 +15,9 @@ const mapState = state => ({
 
 const actions = {};
 
-const HomePage = ({ history, store, currentStore }) => {
+const HomePage = ({ loading, history, store, currentStore }) => {
+  console.log(currentStore)
+  if (loading) return <LoadingComponent inverted={true} />;
   return (
     <div>
       {store &&
@@ -26,6 +29,7 @@ const HomePage = ({ history, store, currentStore }) => {
                   <Grid.Column>
                     <Image
                       onClick={() => history.push("/collection")}
+                      alt="a"
                       src={"/company.png"}
                       size="small"
                       centered
@@ -45,7 +49,7 @@ const HomePage = ({ history, store, currentStore }) => {
                     <Carousel showThumbs= {false} showStatus={false} centerMode centerSlidePercentage={25}>
                       {s.coverPhotos &&
                         s.coverPhotos.map(photo => (
-                            <img key={photo} src={photo} />
+                            <img alt="a" key={photo} src={photo} />
                         ))}
                     </Carousel>
                   </Grid.Column>

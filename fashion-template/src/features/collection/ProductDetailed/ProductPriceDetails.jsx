@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Item, Header, Button, Label, Dropdown } from "semantic-ui-react";
+import { Item, Header, Button, Label, Dropdown } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { addToCart } from "../../cart/cartActions";
 
@@ -54,13 +54,11 @@ const ItemDetailedInfo = ({ product, addToCart }) => {
             </Item>
           </Item.Content>
         </Item>
-        <Button onClick={addToCart} color="black">
+        <Button onClick={()=>addToCart(1,product)} color="black">
         Add to Bag
       </Button>
       <Item><p>{product.description}</p></Item>
       </Item.Group>
-      
-      
     </div>
   );
 };

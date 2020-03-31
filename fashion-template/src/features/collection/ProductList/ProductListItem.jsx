@@ -29,7 +29,7 @@ class ProductListItem extends Component {
           </h4>
         </div>
       )}
-      {product.discount && product.discount == 0 && <a>${product.price}</a>}
+      {product.discount && product.discount === 0 && <a>${product.price}</a>}
             <div>
               {product.colors && product.colors.length >1 && (
                 <div className="date">

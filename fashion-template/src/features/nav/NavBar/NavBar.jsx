@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {connect} from 'react-redux';
 import { withFirebase } from 'react-redux-firebase'
-import { Menu, Container} from "semantic-ui-react";
+import { Menu, Container, Dropdown} from "semantic-ui-react";
 import { NavLink, Link, withRouter } from "react-router-dom";
 import SignedOutMenu from "../Menus/SignedOutMenu";
 import SignedInMenu from "../Menus/SignedInMenu";
@@ -40,7 +40,19 @@ class NavBar extends Component {
           <Menu.Item as={Link} to="/" header>
             <img  src={"/company.png"} alt="logo" />
           </Menu.Item>
-        
+          <Menu.Menu position='right' >
+          <Menu.Item name='New' as={NavLink} to="/collection"></Menu.Item>
+          <Menu.Item  name='Men' as={Link} to="/"></Menu.Item>
+          <Menu.Item  name='Women' as={Link} to="/"></Menu.Item>
+          <Menu.Item  name='Brands' as={Link} to="/"></Menu.Item>
+          <Dropdown item simple text='Category'>
+          <Dropdown.Menu>
+            <Dropdown.Item>SubCategory</Dropdown.Item>
+            <Dropdown.Item>SubCategory</Dropdown.Item>
+            <Dropdown.Divider />
+            <Dropdown.Item>SubCategory</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown></Menu.Menu>
           {authenticated ? (
             <SignedInMenu profile={profile} signOut={this.handleSignedOut} />
           ) : (
