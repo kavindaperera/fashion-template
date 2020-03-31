@@ -15,9 +15,16 @@ class ProductListItem extends Component {
         <div className="content">
           <span className="description">{product.productName}</span>
           <div className="meta">
-            <span className="description">{product.price}</span>
+          {product.discount && product.discount > 0 && (
+        <div>
+          <h4>
+            <del style={{ color: "grey" }}>${product.price}</del><a style={{ color: "red" }} >${product.price - (product.price * product.discount) / 100}{" "}</a>
+          </h4>
+        </div>
+      )}
+      {product.discount && product.discount == 0 && <a>${product.price}</a>}
             <div>
-              {product.colors && (
+              {product.colors && product.colors.length >1 && (
                 <div className="date">
                   {product.colors.length} Colours Available
                 </div>

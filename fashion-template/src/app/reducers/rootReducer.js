@@ -7,10 +7,12 @@ import collectionReducer from '../../features/collection/collectionReducer'
 import modalsReducer from '../../features/modals/modalReducer'
 import authReducer from '../../features/auth/authReducer'
 import asyncReducer from '../../features/async/asyncReducer'
+import storeReducer from '../../features/store/storeReducer'
 
 const rootReducer = combineReducers ({
     form: FormReducer,
     products: collectionReducer,
+    store: storeReducer,
     modals: modalsReducer,
     auth: authReducer,
     async: asyncReducer,

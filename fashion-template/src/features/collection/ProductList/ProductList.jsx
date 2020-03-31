@@ -9,8 +9,8 @@ class ProductList extends Component {
     return (
       <div>
         <Card.Group itemsPerRow={3}>
-          {products && products.map(product => (
-            <ProductListItem key={product.id} product={product} />
+          {products && products.map(product => ( 
+            (product.store===" 7dbDylC8CZTNBPcVPJyn" && <ProductListItem key={product.id} product={product} />)
           ))}
         </Card.Group>
       </div>

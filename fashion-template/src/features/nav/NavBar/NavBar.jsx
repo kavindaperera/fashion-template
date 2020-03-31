@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import {connect} from 'react-redux';
 import { withFirebase } from 'react-redux-firebase'
-import { Menu, Container, Button } from "semantic-ui-react";
+import { Menu, Container} from "semantic-ui-react";
 import { NavLink, Link, withRouter } from "react-router-dom";
 import SignedOutMenu from "../Menus/SignedOutMenu";
 import SignedInMenu from "../Menus/SignedInMenu";
@@ -38,7 +38,7 @@ class NavBar extends Component {
       <Menu fixed="top">
         <Container fluid className="nav">
           <Menu.Item as={Link} to="/" header>
-            <img size = 'large' src="https://www.aritzia.com/on/demandware.static/Sites-Aritzia_INTL-Site/-/default/dw3a862a2a/images/aritzia_skin/aritzia_logo.svg" alt="logo" />
+            <img  src={"/company.png"} alt="logo" />
           </Menu.Item>
         
           {authenticated ? (
