@@ -7,7 +7,7 @@ export const addToCart = (quantity, product) =>{
     let newCartItem = createNewCartItem (quantity, product);
     try {
       let newOrder = await firestore.add(`cart`, newCartItem);
-      toastr.success('Success', 'Event has been created');
+      toastr.success('It\'s in the bag ', 'We\'ll hold it for an hour');
     } catch (error) {
       console.log(error)
       toastr.error('Oops', 'Something went wrong');
