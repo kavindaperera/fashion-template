@@ -19,7 +19,7 @@ const mapState = state => ({
   profile: state.firebase.profile,
   store: state.firestore.ordered.store,
   loading: state.async.loading,
-  currentStore: "7dbDylC8CZTNBPcVPJyn"
+  currentStore: state.store.currentStore
 
 });
 
@@ -28,7 +28,7 @@ class Footer extends Component {
   render() {
     const {store, currentStore ,loading} = this.props;
     return (
-      <Segment  inverted vertical style={{ padding: "5em 0em" }}>
+      <Segment stackable  inverted vertical style={{ padding: "5em 0em" }}>
       {store &&
         store.map(
           s =>

@@ -4,13 +4,13 @@ import { Card } from "semantic-ui-react";
 
 class ProductList extends Component {
   render() {
-    const { products } = this.props;
+    const { products, currentStore } = this.props;
 
     return (
       <div>
         <Card.Group itemsPerRow={3}>
           {products && products.map(product => ( 
-            (product.store===" 7dbDylC8CZTNBPcVPJyn" && product.visible && <ProductListItem key={product.id} product={product} />)
+            ( ((product.store).trim() === (currentStore).trim()) && product.visible && <ProductListItem key={product.id} product={product} />)
           ))}
         </Card.Group>
       </div>

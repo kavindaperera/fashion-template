@@ -10,13 +10,12 @@ import _ from "lodash";
 const mapState = state => ({
   store: state.firestore.ordered.store,
   loading: state.async.loading,
-  currentStore: "7dbDylC8CZTNBPcVPJyn"
+  currentStore: state.store.currentStore
 });
 
 const actions = {};
 
 const HomePage = ({ loading, history, store, currentStore }) => {
-  console.log(currentStore)
   if (loading) return <LoadingComponent inverted={true} />;
   return (
     <div>

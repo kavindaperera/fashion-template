@@ -10,7 +10,7 @@ const mapState = state => ({
   products: state.firestore.ordered.products,
   store: state.firestore.ordered.store,
   loading: state.async.loading,
-  currentStore: "7dbDylC8CZTNBPcVPJyn"
+  currentStore: state.store.currentStore
 });
 
 const actions = {};
@@ -47,13 +47,12 @@ class CollectionDashboard extends Component {
         <Grid stackable>
           <Grid.Column width={2}>
             <StickyBox offsetTop={70} offsetBottom={20}>
-              <Menu vertical>
+              <Menu borderless vertical>
                 <Menu.Item>
                   <Menu.Header>All Clothing</Menu.Header>
                 </Menu.Item>
                 <Menu.Item>
                   <Menu.Header>Womens</Menu.Header>
-
                   <Menu.Menu>
                     <Menu.Item
                       name="denim"
@@ -82,10 +81,8 @@ class CollectionDashboard extends Component {
                     />
                   </Menu.Menu>
                 </Menu.Item>
-
                 <Menu.Item>
                   <Menu.Header>Mens</Menu.Header>
-
                   <Menu.Menu>
                     <Menu.Item
                       name="denim"
@@ -111,10 +108,9 @@ class CollectionDashboard extends Component {
                 defaultValue={sortOptions[0].value}
               />
             </h5>
-            <ProductList products={products} />
+            <ProductList products={products} currentStore={currentStore} />
           </Grid.Column>
           <Grid.Row>
-            
           </Grid.Row>
         </Grid>
       </div>

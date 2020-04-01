@@ -1,5 +1,5 @@
 import React from "react";
-import { Item, Header, Button, Label, Dropdown } from "semantic-ui-react";
+import { Grid, Item, Header, Button, Label, Dropdown } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { addToCart } from "../../cart/cartActions";
 
@@ -19,46 +19,54 @@ const actions = {
 const ItemDetailedInfo = ({ product, addToCart }) => {
   return (
     <div>
-      <Item.Group relaxed='very'>
-        <Item>
-          <Item.Content>
-            <Header
-              size="huge"
-              content={product.productName}
-              style={{ color: "black" }}
-            />
-              {product.discount && product.discount > 0 && (
-                <div>
-                  <h2>
-                    <del style={{ color: "grey" }}>${product.price} {" "}</del>
-                    <a style={{ color: "red" }}>${product.price - (product.price * product.discount) / 100}{" "}
-                    </a>
-                  </h2>
-                </div>
-              )}
-              {product.discount && product.discount == 0 && (
-                <h2>${product.price}</h2>
-              )}
-
-            <div className="extra content">
-              <Dropdown placeholder="Size" search selection options={sizes} />
-            </div>
-
-            <Item>
-              {product.colors &&
-                product.colors.map(color => (
-                  <Label circular key={color}>
-                    {color}
-                  </Label>
-                ))}
-            </Item>
-          </Item.Content>
-        </Item>
-        <Button onClick={()=>addToCart(1,product)} color="black">
-        Add to Bag
-      </Button>
-      <Item><p>{product.description}</p></Item>
-      </Item.Group>
+      <Grid>
+        <Grid.Row verticalAlign='bottom' columns={2}>
+          <Grid.Column floated="left">
+            <p style={{ color: "black", fontSize: "20px", fontWeight: "1" }}>
+              {product.productName}
+            </p>
+          </Grid.Column>
+          <Grid.Column floated="right">
+            {product.discount && product.discount > 0 && (
+              <p>
+                <del
+                  style={{ color: "grey", fontSize: "20px", fontWeight: "1" }}
+                >
+                  ${product.price}{" "}
+                </del>
+                <a style={{ color: "red", fontSize: "20px", fontWeight: "1" }}>
+                  ${product.price - (product.price * product.discount) / 100}
+                </a>
+              </p>
+            )}
+            {product.discount && product.discount == 0 && (
+              <p style={{ color: "grey", fontSize: "20px", fontWeight: "1" }}>
+                ${product.price}
+              </p>
+            )}
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={2}>
+          <Grid.Column>
+          <Label.Group >
+            {product.colors &&
+              product.colors.map(color => (
+                <Label color='grey' size='medium' as={color} key={color}>
+                  {color}
+                </Label>
+              ))}</Label.Group>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            <Button.Group fluid>
+              <Button labelPosition='right' icon='bookmark outline'  onClick={() => addToCart(1, product)} color="black" content='Add to Bag'/>
+            </Button.Group>
+          </Grid.Column>
+        </Grid.Row>
+        <p> <strong>Product Description</strong> </p>
+        <p>{product.description}</p>
+      </Grid>
     </div>
   );
 };
