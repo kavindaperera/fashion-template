@@ -5,12 +5,20 @@ import { Grid,  Menu, Dropdown } from "semantic-ui-react";
 import ProductList from "../ProductList/ProductList";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import StickyBox from "react-sticky-box";
+import { getVisibleproducts } from '../../services';
+import { filterSort } from '../../filter/FilterActions';
+import Filter from '../../filter/Filter/Filter'
 
 const mapState = state => ({
+  /*products:getVisibleproducts(state.firestore.ordered.products, state.filters),*/
   products: state.firestore.ordered.products,
+  /*products:state.products,*/
   store: state.firestore.ordered.store,
   loading: state.async.loading,
-  currentStore: state.store.currentStore
+  currentStore: state.store.currentStore,
+  filters: state.filters,
+  filteredProducts: state.firestore.ordered.products,
+  
 });
 
 const actions = {};
@@ -33,13 +41,54 @@ const sortOptions = [
   }
 ];
 
+const sizes = [
+  { key: "xxs", text: "XXS", value: "xxs" },
+  { key: "xs", text: "XS", value: "xs" },
+  { key: "s", text: "S", value: "s" },
+  { key: "m", text: "M", value: "m" },
+  { key: "l", text: "L", value: "l" },
+  { key: "xl", text: "XL", value: "xl" },
+  { key: "xxl", text: "XXL", value: "xxl" }
+];
+
 class CollectionDashboard extends Component {
   state = {};
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
+  handleChangeSort = (e) => {
+    this.setState({sort: e});
+    this.listProducts();
+  }
+
+  listProducts= () => {
+    this.setState(state => {
+      if (state.sort !== ''){
+        this.props.products.sort((a,b)=>(state.sort==='lowest') ? (a.price > b.price ? 1 : -1) : (a.price < b.price ? 1 : -1))
+      } else {
+        this.props.products.sort((a,b)=>(a.id<b.id?1:-1));
+      }
+      if (state.category!==""){
+        return {
+          filteredProducts: this.props.products.filter(a=>
+            a.category.indexOf(state.category)>=0)
+        }
+      }
+
+      console.log(state.sort)
+      return {filteredProducts: this.props.products};
+    })
+  }
+
+  handleChangeCategory = (e) => {
+    this.setState({category: e});
+    this.listProducts();
+  }
+
   render() {
-    const { store, products, loading, currentStore } = this.props;
+    const { store, products, loading, currentStore, filteredProducts } = this.props;
     const { activeItem } = this.state;
 
+    console.log("xxxx",products)
     if (loading) return <LoadingComponent inverted={true} />;
 
     return (
@@ -100,14 +149,21 @@ class CollectionDashboard extends Component {
             </StickyBox>
           </Grid.Column>
           <Grid.Column width={14}>
-            <h5>
+          <Filter size={this.state.size} sort={this.state.sort} handleChangeSize={this.handleChangeSize} handleChangeSort={this.handleChangeSort} count={filteredProducts && filteredProducts.length} />
+            {/*<h5>
               {products && products.length} items sorted by:{" "}
               <Dropdown
                 inline
                 options={sortOptions}
                 defaultValue={sortOptions[0].value}
               />
-            </h5>
+              <select onChange={(e) => this.props.filterSort(e.target.value)}>
+                        <option value="">Sorting items</option>
+                        <option value="HighToLow">Price: High to Low</option>
+                        <option value="LowToHigh">Price: Low to High</option>
+                        <option value="Newest">Newest Items</option>
+                    </select>
+            </h5>*/}
             <ProductList products={products} currentStore={currentStore} />
           </Grid.Column>
           <Grid.Row>
@@ -120,7 +176,7 @@ class CollectionDashboard extends Component {
 
 export default connect(
   mapState,
-  actions
+  {filterSort}
 )(
   firestoreConnect([{ collection: "products" }, { collection: "store" }])(
     CollectionDashboard

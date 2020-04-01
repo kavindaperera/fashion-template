@@ -1,0 +1,2 @@
+export const SORT_BY = 'SORT_BY'
+export const FILTER_PRODUCT_BY_SIZE = 'FILTER_PRODUCT_BY_SIZE'

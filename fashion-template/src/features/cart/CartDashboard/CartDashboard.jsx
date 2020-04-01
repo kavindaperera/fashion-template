@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Grid, Menu, Dropdown, Item, Image } from "semantic-ui-react";
+import { Item} from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
-import StickyBox from "react-sticky-box";
 
 const mapState = state => ({
   cart: state.firestore.ordered.cart,

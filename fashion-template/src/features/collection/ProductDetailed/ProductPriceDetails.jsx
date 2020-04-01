@@ -51,7 +51,7 @@ const ItemDetailedInfo = ({ product, addToCart }) => {
           <Label.Group >
             {product.colors &&
               product.colors.map(color => (
-                <Label color='grey' size='medium' as={color} key={color}>
+                <Label color='grey' size='medium'  key={color}>
                   {color}
                 </Label>
               ))}</Label.Group>

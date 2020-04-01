@@ -23,7 +23,7 @@ const HomePage = ({ loading, history, store, currentStore }) => {
         store.map(
           s =>
             s.id === currentStore && (
-              <Grid className="main">
+              <Grid key={s.id} className="main">
                 <Grid.Row>
                   <Grid.Column>
                     <Image

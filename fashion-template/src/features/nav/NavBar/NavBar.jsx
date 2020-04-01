@@ -58,7 +58,7 @@ class NavBar extends Component {
   render() {
     const { auth, profile } = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
-    const { menuFixed, overlayFixed } = this.state
+    const { menuFixed } = this.state
     return (
 
 <Visibility
