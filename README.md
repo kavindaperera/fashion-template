@@ -7,4 +7,4 @@
 ### Product-Detailed
 ![3](fashion-template/screenshots/3.png)
 ### User-Settings
-![4](fashion-template/screenshots/4.png)
+![4](fashion-template/screenshots/5.png)
