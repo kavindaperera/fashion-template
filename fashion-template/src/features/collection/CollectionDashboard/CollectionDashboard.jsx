@@ -5,8 +5,6 @@ import { Grid,  Menu, Dropdown } from "semantic-ui-react";
 import ProductList from "../ProductList/ProductList";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import StickyBox from "react-sticky-box";
-import { getVisibleproducts } from '../../services';
-import { filterSort } from '../../filter/FilterActions';
 import Filter from '../../filter/Filter/Filter'
 
 const mapState = state => ({
@@ -68,7 +66,7 @@ class CollectionDashboard extends Component {
   listProducts= () => {
     this.setState(state => {
       if (state.sort !== ''){
-        this.props.products.sort((a,b)=>(state.sort==='lowest') ? (a.price > b.price ? 1 : -1) : (a.price < b.price ? 1 : -1))
+        this.props.products.sort((a,b)=>(state.sort==='lowest') ? ((a.price - (a.price * a.discount) / 100) > (b.price - (b.price * b.discount) / 100) ? 1 : -1) : ((a.price - (a.price * a.discount) / 100) < (b.price - (b.price * b.discount) / 100) ? 1 : -1))  
       } else {
         this.props.products.sort((a,b)=>(a.id<b.id?1:-1));
       }
@@ -82,7 +80,6 @@ class CollectionDashboard extends Component {
     })
   }
 
- 
 
   render() {
     const { store, products, loading, currentStore, filteredProducts } = this.props;
@@ -175,7 +172,7 @@ class CollectionDashboard extends Component {
 
 export default connect(
   mapState,
-  {filterSort}
+  actions
 )(
   firestoreConnect([{ collection: "products" }, { collection: "store" }])(
     CollectionDashboard

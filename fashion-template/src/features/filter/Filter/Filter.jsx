@@ -13,7 +13,8 @@ export default class Filter extends Component {
                         <option value="">Recommended</option>
                         <option value="highest">Price: High to Low</option>
                         <option value="lowest">Price: Low to High</option>
-                        <option value="Newest">Newest Items</option>
+                        <option value="new">New Arrivals</option>
+                        <option value="sale">On Sale</option>
                     </select>
                 </label>
                 <label>

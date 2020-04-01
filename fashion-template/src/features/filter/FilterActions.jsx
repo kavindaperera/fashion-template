@@ -1,9 +1,4 @@
-import { SORT_BY, FILTER_PRODUCT_BY_SIZE } from './FilterConstants';
-
-export const filterSort = (sort_by) => ({
-    type: SORT_BY,
-    sort_by
-});
+import {FILTER_PRODUCT_BY_SIZE } from './FilterConstants';
 
 export const filterProducts = (products, size) => (dispatch) => {
     return dispatch ({
