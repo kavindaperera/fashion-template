@@ -5,6 +5,6 @@
 ### Collection-Page
 ![2](fashion-template/screenshots/2.png)
 ### Product-Detailed
-![3](fashion-template/screenshots/3.png)
+![3](fashion-template/screenshots/5.png)
 ### User-Settings
-![4](fashion-template/screenshots/5.png)
+![4](fashion-template/screenshots/4.png)
