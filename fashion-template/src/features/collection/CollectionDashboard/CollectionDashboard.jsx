@@ -60,6 +60,11 @@ class CollectionDashboard extends Component {
     this.listProducts();
   }
 
+  handleChangeCategory = (e) => {
+    this.setState({category: e});
+    this.listProducts();
+  }
+
   listProducts= () => {
     this.setState(state => {
       if (state.sort !== ''){
@@ -69,26 +74,20 @@ class CollectionDashboard extends Component {
       }
       if (state.category!==""){
         return {
-          filteredProducts: this.props.products.filter(a=>
-            a.category.indexOf(state.category)>=0)
+          filteredProducts: this.props.products.filter(a =>
+            (a.category.indexOf(state.category)===0))
         }
       }
-
-      console.log(state.sort)
       return {filteredProducts: this.props.products};
     })
   }
 
-  handleChangeCategory = (e) => {
-    this.setState({category: e});
-    this.listProducts();
-  }
+ 
 
   render() {
     const { store, products, loading, currentStore, filteredProducts } = this.props;
     const { activeItem } = this.state;
 
-    console.log("xxxx",products)
     if (loading) return <LoadingComponent inverted={true} />;
 
     return (
@@ -149,7 +148,7 @@ class CollectionDashboard extends Component {
             </StickyBox>
           </Grid.Column>
           <Grid.Column width={14}>
-          <Filter size={this.state.size} sort={this.state.sort} handleChangeSize={this.handleChangeSize} handleChangeSort={this.handleChangeSort} count={filteredProducts && filteredProducts.length} />
+          <Filter size={this.state.size} sort={this.state.sort} handleChangeCategory={this.handleChangeCategory} handleChangeSort={this.handleChangeSort} count={filteredProducts && filteredProducts.length} />
             {/*<h5>
               {products && products.length} items sorted by:{" "}
               <Dropdown
