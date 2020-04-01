@@ -12,9 +12,7 @@ const actions = {
 };
 
 const mapState = state => ({
-  providerId:
-    state.firebase.auth.isLoaded &&
-    state.firebase.auth.providerData[0].providerId,
+  providerId: state.firebase.auth.isLoaded && state.firebase.auth.providerData[0].providerId,
   user: state.firebase.profile
 });
 
@@ -24,6 +22,7 @@ const SettingsDashboard = ({
   user,
   updateProfile
 }) => {
+  console.log(user)
   return (
     <Grid stackable columns={2}>
       <Grid.Column width={8}>

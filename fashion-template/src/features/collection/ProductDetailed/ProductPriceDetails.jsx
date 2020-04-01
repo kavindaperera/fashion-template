@@ -16,7 +16,7 @@ const sizes = [
 const actions = {
   addToCart
 };
-const ItemDetailedInfo = ({ product, addToCart }) => {
+const ItemDetailedInfo = ({ user, product,  addToCart }) => {
   return (
     <div>
       <Grid>

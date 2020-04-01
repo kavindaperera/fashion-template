@@ -21,23 +21,7 @@ const mapState = state => ({
 
 const actions = {};
 
-const sortOptions = [
-  {
-    key: "Recommended",
-    text: "Recommended",
-    value: "Recommended"
-  },
-  {
-    key: "Price: Low to High",
-    text: "Price: Low to High",
-    value: "Price: Low to High"
-  },
-  {
-    key: "Price: High to Low",
-    text: "Price: High to Low",
-    value: "Price: High to Low"
-  }
-];
+
 
 const sizes = [
   { key: "xxs", text: "XXS", value: "xxs" },
@@ -54,6 +38,7 @@ class CollectionDashboard extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   handleChangeSort = (e) => {
+    console.log(e);
     this.setState({sort: e});
     this.listProducts();
   }
@@ -73,13 +58,13 @@ class CollectionDashboard extends Component {
       if (state.category!==""){
         return {
           filteredProducts: this.props.products.filter(a =>
-            (a.category.indexOf(state.category)===0))
+            (a.category.indexOf(state.category)>=0) ),
         }
       }
       return {filteredProducts: this.props.products};
+
     })
   }
-
 
   render() {
     const { store, products, loading, currentStore, filteredProducts } = this.props;
@@ -90,6 +75,9 @@ class CollectionDashboard extends Component {
     return (
       <div>
         <Grid stackable>
+        <Grid.Row>
+        
+        </Grid.Row>
           <Grid.Column width={2}>
             <StickyBox offsetTop={70} offsetBottom={20}>
               <Menu borderless vertical>
@@ -146,20 +134,6 @@ class CollectionDashboard extends Component {
           </Grid.Column>
           <Grid.Column width={14}>
           <Filter size={this.state.size} sort={this.state.sort} handleChangeCategory={this.handleChangeCategory} handleChangeSort={this.handleChangeSort} count={filteredProducts && filteredProducts.length} />
-            {/*<h5>
-              {products && products.length} items sorted by:{" "}
-              <Dropdown
-                inline
-                options={sortOptions}
-                defaultValue={sortOptions[0].value}
-              />
-              <select onChange={(e) => this.props.filterSort(e.target.value)}>
-                        <option value="">Sorting items</option>
-                        <option value="HighToLow">Price: High to Low</option>
-                        <option value="LowToHigh">Price: Low to High</option>
-                        <option value="Newest">Newest Items</option>
-                    </select>
-            </h5>*/}
             <ProductList products={products} currentStore={currentStore} />
           </Grid.Column>
           <Grid.Row>
