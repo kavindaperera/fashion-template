@@ -1,28 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Grid,  Menu, Dropdown } from "semantic-ui-react";
+import { Grid, Header, Pagination } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import ProductList from "../ProductList/ProductList";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import StickyBox from "react-sticky-box";
-import Filter from '../../filter/Filter/Filter'
+import Filter from "../../filter/Filter/Filter";
+import { getProducts } from '../collectionAction';
 
 const mapState = state => ({
   /*products:getVisibleproducts(state.firestore.ordered.products, state.filters),*/
-  products: state.firestore.ordered.products,
-  /*products:state.products,*/
+  //products: state.firestore.ordered.products,
+  products:state.products,
   store: state.firestore.ordered.store,
   loading: state.async.loading,
-  currentStore: state.store.currentStore,
   filters: state.filters,
-  filteredProducts: state.firestore.ordered.products,
-  
+  filteredProducts: state.firestore.ordered.products
 });
 
-const actions = {};
-
-
+const actions = {
+  getProducts
+};
 
 const sizes = [
   { key: "xxs", text: "XXS", value: "xxs" },
@@ -34,118 +33,113 @@ const sizes = [
   { key: "xxl", text: "XXL", value: "xxl" }
 ];
 
-
-
 class CollectionDashboard extends Component {
-  state = {sortCategory: ""};
+
+  componentDidMount() {
+    this.props.getProducts();
+  }
+
+  state = { sortCategory: "" };
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
-  
 
-  handleChangeSort = (e) => {
+  handleChangeSort = e => {
     console.log(e);
-    this.setState({sort: e});
+    this.setState({ sort: e });
     this.listProducts();
-  }
+  };
 
-  handleChangeCategory = (e) => {
-    this.setState({category: e});
+  handleChangeCategory = e => {
+    this.setState({ category: e });
     this.listProducts();
-  }
+  };
 
-  listProducts= () => {
+  listProducts = () => {
     this.setState(state => {
-      if (state.sort !== ''){
-        this.props.products.sort((a,b)=>(state.sort==='lowest') ? ((a.price - (a.price * a.discount) / 100) > (b.price - (b.price * b.discount) / 100) ? 1 : -1) : ((a.price - (a.price * a.discount) / 100) < (b.price - (b.price * b.discount) / 100) ? 1 : -1))  
+      if (state.sort !== "") {
+        this.props.products.sort((a, b) =>
+          state.sort === "lowest"
+            ? a.price - (a.price * a.discount) / 100 >
+              b.price - (b.price * b.discount) / 100
+              ? 1
+              : -1
+            : a.price - (a.price * a.discount) / 100 <
+              b.price - (b.price * b.discount) / 100
+            ? 1
+            : -1
+        );
       } else {
-        this.props.products.sort((a,b)=>(a.id<b.id?1:-1));
+        this.props.products.sort((a, b) => (a.id < b.id ? 1 : -1));
       }
-      if (state.category!==""){
-         this.setState({sortCategory:state.category});
-          /*filteredProducts: this.props.products.filter(a =>
+      if (state.category !== "") {
+        this.setState({ sortCategory: state.category });
+        /*filteredProducts: this.props.products.filter(a =>
           (a.category.indexOf(state.category)>=0) ),*/
-      }else {
-        this.props.products.sort((a,b)=>(a,b));
+      } else {
+        this.props.products.sort((a, b) => (a, b));
       }
-      return {filteredProducts: this.props.products};
-
-    })
-  }
+      return { filteredProducts: this.props.products };
+    });
+  };
 
   render() {
-    const { store, products, loading, currentStore, filteredProducts } = this.props;
+    const {
+      store,
+      products,
+      loading,
+      filteredProducts
+    } = this.props;
     const { activeItem, sortCategory } = this.state;
 
+    console.log("STORE", { store });
 
     if (loading) return <LoadingComponent inverted={true} />;
 
     return (
       <div>
-        <Grid columns={2} >
+        <Grid centered columns={2}>
           <Grid.Column width={2}>
             <StickyBox offsetTop={70} offsetBottom={20}>
-              <Menu borderless vertical>
-                <Menu.Item>
-                  <Menu.Header>All Clothing</Menu.Header>
-                </Menu.Item>
-                <Menu.Item>
-                  <Menu.Header>Womens</Menu.Header>
-                  <Menu.Menu>
-                    <Menu.Item
-                      name="denim"
-                      active={activeItem === "denim"}
-                      onClick={this.handleItemClick}
-                    />
-                    <Menu.Item
-                      name="jackets & coats"
-                      active={activeItem === "jackets & coats"}
-                      onClick={this.handleItemClick}
-                    />
-                    <Menu.Item
-                      name="dresses"
-                      active={activeItem === "dresses"}
-                      onClick={this.handleItemClick}
-                    />
-                    <Menu.Item
-                      name="sweaters"
-                      active={activeItem === "sweaters"}
-                      onClick={this.handleItemClick}
-                    />
-                    <Menu.Item
-                      name="skirts"
-                      active={activeItem === "skirts"}
-                      onClick={this.handleItemClick}
-                    />
-                  </Menu.Menu>
-                </Menu.Item>
-                <Menu.Item>
-                  <Menu.Header>Mens</Menu.Header>
-                  <Menu.Menu>
-                    <Menu.Item
-                      name="denim"
-                      active={activeItem === "denim"}
-                      onClick={this.handleItemClick}
-                    />
-                    <Menu.Item
-                      name="jackets & coats"
-                      active={activeItem === "jackets & coats"}
-                      onClick={this.handleItemClick}
-                    />
-                  </Menu.Menu>
-                </Menu.Item>
-              </Menu>
+              <Header>MENU HERE</Header>
             </StickyBox>
           </Grid.Column>
           <Grid.Column width={14}>
-          <Filter size={this.state.size} sort={this.state.sort} handleChangeCategory={this.handleChangeCategory} handleChangeSort={this.handleChangeSort} count={filteredProducts && filteredProducts.length} />
-            <ProductList  products={products} sortCategory={sortCategory} currentStore={currentStore} />
+            <Filter
+              size={this.state.size}
+              sort={this.state.sort}
+              handleChangeCategory={this.handleChangeCategory}
+              handleChangeSort={this.handleChangeSort}
+              count={filteredProducts && filteredProducts.length}
+            />
+            <ProductList
+              products={products}
+              sortCategory={sortCategory}
+            />
           </Grid.Column>
           <Grid.Row>
+            <Pagination
+              defaultActivePage={1}
+              firstItem={null}
+              lastItem={null}
+              pointing
+              secondary
+              totalPages={3}
+            />
           </Grid.Row>
+          <Grid.Row></Grid.Row>
         </Grid>
       </div>
     );
   }
 }
+
+/*export default connect(
+  mapState,
+  actions
+)(
+  firestoreConnect([{ collection: "products" }, { collection: "store", where: [['storeId', '==', "7dbDylC8CZTNBPcVPJyn"]], }])(
+    CollectionDashboard
+  )
+);*/
 
 export default connect(
   mapState,

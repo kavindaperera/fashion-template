@@ -10,6 +10,7 @@ import CartDashboard from '../../features/cart/CartDashboard/CartDashboard'
 import ModalManager from '../../features/modals/ModalManager'
 import Footer from "../../features/footer/Footer";
 
+
 class App extends Component {
   render() {
     return (

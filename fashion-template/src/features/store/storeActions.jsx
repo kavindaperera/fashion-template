@@ -1,8 +1,9 @@
 import { toastr } from 'react-redux-toastr'
-import {FETCH_STORE} from "./storeConstants";
+import {FETCH_STORE,} from "./storeConstants";
 import {asyncActionStart,asyncActionFinish,asyncActionError
 } from "../async/asyncActions";
 import { fetchSampleData } from "../../app/data/mockApi";
+import firebase from '../../app/config/firebase'
 
 export const fetchStore = store => {
   return {
@@ -11,17 +12,3 @@ export const fetchStore = store => {
   };
 };
 
-
-export const loadStore = () => {
-  return async dispatch => {
-    try {
-      dispatch(asyncActionStart());
-      let store = await fetchSampleData();
-      dispatch(fetchStore(store));
-      dispatch(asyncActionFinish());
-    } catch (error) {
-      console.log(error);
-      dispatch(asyncActionError());
-    }
-  };
-};
