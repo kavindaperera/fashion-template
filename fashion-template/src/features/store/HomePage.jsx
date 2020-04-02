@@ -29,7 +29,7 @@ const HomePage = ({ loading, history, store, currentStore }) => {
                     <Image
                       onClick={() => history.push("/collection")}
                       alt="a"
-                      src={"/company.png"}
+                      src={s.storeLogo}
                       size="small"
                       centered
                     />

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Grid,  Menu, Dropdown } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import ProductList from "../ProductList/ProductList";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import StickyBox from "react-sticky-box";
@@ -33,9 +34,12 @@ const sizes = [
   { key: "xxl", text: "XXL", value: "xxl" }
 ];
 
+
+
 class CollectionDashboard extends Component {
-  state = {};
+  state = {sortCategory: ""};
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+  
 
   handleChangeSort = (e) => {
     console.log(e);
@@ -56,10 +60,11 @@ class CollectionDashboard extends Component {
         this.props.products.sort((a,b)=>(a.id<b.id?1:-1));
       }
       if (state.category!==""){
-        return {
-          filteredProducts: this.props.products.filter(a =>
-            (a.category.indexOf(state.category)>=0) ),
-        }
+         this.setState({sortCategory:state.category});
+          /*filteredProducts: this.props.products.filter(a =>
+          (a.category.indexOf(state.category)>=0) ),*/
+      }else {
+        this.props.products.sort((a,b)=>(a,b));
       }
       return {filteredProducts: this.props.products};
 
@@ -68,16 +73,14 @@ class CollectionDashboard extends Component {
 
   render() {
     const { store, products, loading, currentStore, filteredProducts } = this.props;
-    const { activeItem } = this.state;
+    const { activeItem, sortCategory } = this.state;
+
 
     if (loading) return <LoadingComponent inverted={true} />;
 
     return (
       <div>
-        <Grid stackable>
-        <Grid.Row>
-        
-        </Grid.Row>
+        <Grid columns={2} >
           <Grid.Column width={2}>
             <StickyBox offsetTop={70} offsetBottom={20}>
               <Menu borderless vertical>
@@ -134,7 +137,7 @@ class CollectionDashboard extends Component {
           </Grid.Column>
           <Grid.Column width={14}>
           <Filter size={this.state.size} sort={this.state.sort} handleChangeCategory={this.handleChangeCategory} handleChangeSort={this.handleChangeSort} count={filteredProducts && filteredProducts.length} />
-            <ProductList products={products} currentStore={currentStore} />
+            <ProductList  products={products} sortCategory={sortCategory} currentStore={currentStore} />
           </Grid.Column>
           <Grid.Row>
           </Grid.Row>

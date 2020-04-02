@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { Menu, Container, Dropdown, Visibility } from "semantic-ui-react";
+import { Menu, Container, Dropdown, Visibility, Button } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import _ from "lodash";
 
 const sortOptions = [
   {
@@ -10,12 +15,12 @@ const sortOptions = [
   {
     key: "Price: Low to High",
     text: "Price: Low to High",
-    value: "highest"
+    value: "lowest"
   },
   {
     key: "Price: High to Low",
     text: "Price: High to Low",
-    value: "lowest"
+    value: "highest"
   }
 ];
 
@@ -34,7 +39,15 @@ const fixedMenuStyle = {
   marginTop: "4em"
 };
 
-export default class Filter extends Component {
+const mapState = state => ({
+  store: state.firestore.ordered.store,
+  loading: state.async.loading,
+  currentStore: state.store.currentStore
+});
+
+const actions = {};
+
+class Filter extends Component {
   state = {
     menuFixed: false,
     overlayFixed: false
@@ -49,8 +62,10 @@ export default class Filter extends Component {
   };
 
   render() {
+    const { store, loading, currentStore } = this.props;
     const { menuFixed, value } = this.state;
     console.log(value);
+    if (loading) return <LoadingComponent inverted={true} />;
 
     return (
       <div>
@@ -59,13 +74,23 @@ export default class Filter extends Component {
           onBottomVisible={this.unStickTopMenu}
           once={false}
         >*/}
-        <Menu
+        {store &&
+        store.map(
+          s =>
+            s.id === currentStore && (
+        <Menu key={s.id}
           borderless
           fixed={menuFixed ? "top" : undefined}
           style={menuFixed ? fixedMenuStyle : menuStyle}
         >
           <Container fluid className="nav">
-            <Menu.Menu position="left"></Menu.Menu>
+          <Menu.Menu position="left" >
+          {s.categories &&
+                    s.categories.map(category => (
+                      <Button key={category} color='black' onClick={e =>this.props.handleChangeCategory(e.target.value)} value={category} >{_.capitalize(category)}</Button>
+                    ))}
+
+          </Menu.Menu>
             <Menu.Menu position="right">
               <Menu.Item>{this.props.count} items sorted by:</Menu.Item>
               <Menu.Item>
@@ -77,24 +102,18 @@ export default class Filter extends Component {
                   value={value}
                 />{" "}
               </Menu.Item>
-              <Menu.Item>
-                <select
-                  className="ui search dropdown"
-                  onChange={e =>
-                    this.props.handleChangeCategory(e.target.value)
-                  }
-                >
-                  <option value="">ALL</option>
-                  <option value="women">WOMEN</option>
-                  <option value="men">MEN</option>
-                  <option value="Newest">NEW</option>
-                </select>
-              </Menu.Item>
             </Menu.Menu>
           </Container>
-        </Menu>{" "}
-        {/*</Visibility>*/}
+        </Menu>
+
+        ))}
       </div>
     );
   }
 }
+
+
+export default connect(
+  mapState,
+  actions
+)(firestoreConnect([{ collection: "store" }])(Filter));
