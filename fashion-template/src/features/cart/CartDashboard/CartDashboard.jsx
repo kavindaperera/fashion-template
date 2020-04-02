@@ -5,6 +5,7 @@ import { Button, Icon, Item } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 
 const mapState = state => ({
+  auth : state.firebase.auth,
   cart: state.firestore.ordered.cart,
   loading: state.async.loading
 });
@@ -13,16 +14,15 @@ const actions = {};
 
 class CartDashboard extends Component {
   render() {
-    const { cart, loading } = this.props;
+    const { auth, cart, loading } = this.props;
 
     if (loading) return <LoadingComponent inverted={true} />;
 
     return (
       <div>
-        <h5>{cart && cart.length} items</h5>
         <Item.Group divided>
           {cart &&
-            cart.map(product => (
+            cart.map(product => ( product.uid===auth.uid && 
               <Item>
                 <Item.Image size="small" src={product.photoURL} />
                 <Item.Content>

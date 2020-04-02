@@ -6,7 +6,7 @@ import ProductPriceDetails from "./ProductPriceDetails";
 import StickyBox from "react-sticky-box";
 
 const mapState = (state, ownProps) => {
-  const user = state.firebase.profile;
+  const user = state.firebase.auth;
   const productId = ownProps.match.params.id;
   //const products = state.firestore.ordered.products;
   const products = state.products;
@@ -22,8 +22,6 @@ const mapState = (state, ownProps) => {
 };
 
 const ProductDetailedPage = ({ product, user }) => {
-  console.log(user)
-  console.log(product.id)
   return (
     
     <Grid>

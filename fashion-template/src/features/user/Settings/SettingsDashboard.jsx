@@ -12,17 +12,13 @@ const actions = {
 };
 
 const mapState = state => ({
+  auth: state.firebase.auth,
   providerId: state.firebase.auth.isLoaded && state.firebase.auth.providerData[0].providerId,
   user: state.firebase.profile
 });
 
-const SettingsDashboard = ({
-  updatePassword,
-  providerId,
-  user,
-  updateProfile
-}) => {
-  console.log(user)
+const SettingsDashboard = ({updatePassword,providerId, auth, user, updateProfile}) => {
+  console.log(auth.uid)
   return (
     <Grid stackable columns={2}>
       <Grid.Column width={8}>

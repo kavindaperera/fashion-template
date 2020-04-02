@@ -1,9 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches snapshot 1`] = `
+exports[`matches snapshot 1 1`] = `
 <div
   data-testid="button"
 >
+  Hi
   save
+</div>
+`;
+
+exports[`matches snapshot 2 1`] = `
+<div
+  data-testid="button"
+>
+  Hi
+  click me please
 </div>
 `;
