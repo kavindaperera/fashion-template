@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 
 
 export const objectToArray = (object) => {
@@ -15,7 +16,7 @@ export const createNewCartItem = (user, quantity, product) => {
     price: product.price,
     discount: product.discount,
     quantity: quantity,
-    created: Date.now()
+    created: moment().format('YYYY-MM-DD')
 
     }
   }
