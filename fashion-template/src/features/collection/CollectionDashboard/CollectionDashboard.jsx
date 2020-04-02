@@ -16,7 +16,7 @@ const mapState = state => ({
   store: state.firestore.ordered.store,
   loading: state.async.loading,
   filters: state.filters,
-  filteredProducts: state.firestore.ordered.products
+  filteredProducts: state.products
 });
 
 const actions = {

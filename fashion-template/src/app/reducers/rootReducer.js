@@ -21,7 +21,6 @@ const rootReducer = combineReducers ({
     firebase: firebaseReducer,
     firestore: firestoreReducer,
     filters: FilterReducer
-    
 
 })
 

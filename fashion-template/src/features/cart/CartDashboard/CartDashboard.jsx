@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Item} from "semantic-ui-react";
+import { Button, Icon, Item } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 
 const mapState = state => ({
@@ -29,10 +29,12 @@ class CartDashboard extends Component {
                   <h4 as="a">{product.productName}</h4>
                   <h5>{product.quantity}</h5>
                   <h5>
-                    <del style={{ color: "grey" }}>${product.price} {" "}</del>
-                    <a style={{ color: "red" }}>${product.price - (product.price * product.discount) / 100}{" "}
-                    </a>
+                    <del style={{ color: "grey" }}>${product.price} </del>
+                    <a style={{ color: "red" }}>${product.price - (product.price * product.discount) / 100}{" "}</a>
                   </h5>
+                  <Item.Extra>
+                    <Button color='black' circular floated='right' icon='trash alternate outline' />
+                  </Item.Extra>
                 </Item.Content>
               </Item>
             ))}

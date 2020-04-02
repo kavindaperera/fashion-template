@@ -7,6 +7,7 @@ class ProductListItem extends Component {
     const { product } = this.props;
 
     return (
+      
       <Card className="card" as={Link} to={`/product/${product.id}`}>
       {product.discount && product.discount > 0 && (
         <div>

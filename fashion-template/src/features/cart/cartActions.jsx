@@ -14,3 +14,4 @@ export const addToCart = (quantity, product) =>{
     }
   };
 };
+

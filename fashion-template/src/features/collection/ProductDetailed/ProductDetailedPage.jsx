@@ -8,7 +8,8 @@ import StickyBox from "react-sticky-box";
 const mapState = (state, ownProps) => {
   const user = state.firebase.profile;
   const productId = ownProps.match.params.id;
-  const products = state.firestore.ordered.products;
+  //const products = state.firestore.ordered.products;
+  const products = state.products;
 
   let product = {};
 
