@@ -4,12 +4,12 @@ const SignedOutMenu = ({signIn, register}) => {
   return (
     <Menu.Item position="right">
       <Button onClick={signIn} basic content="Login" />
-      <Button
+      {/*<Button
         onClick={register}
         basic
         content="Register"
         style={{ marginLeft: "0.5em" }}
-      />
+      />*/}
     </Menu.Item>
   );
 };

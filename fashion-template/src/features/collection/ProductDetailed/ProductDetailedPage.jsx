@@ -6,7 +6,6 @@ import ProductPriceDetails from "./ProductPriceDetails";
 import StickyBox from "react-sticky-box";
 
 const mapState = (state, ownProps) => {
-  const user = state.firebase.auth;
   const productId = ownProps.match.params.id;
   //const products = state.firestore.ordered.products;
   const products = state.products;
@@ -17,11 +16,11 @@ const mapState = (state, ownProps) => {
     product = products.filter(product => product.id === productId)[0];
   }
   return {
-    product, user
+    product
   };
 };
 
-const ProductDetailedPage = ({ product, user }) => {
+const ProductDetailedPage = ({ product}) => {
   return (
     
     <Grid>
@@ -32,7 +31,7 @@ const ProductDetailedPage = ({ product, user }) => {
       </Grid.Column>
       <Grid.Column width={4}>
         <StickyBox offsetTop={70} offsetBottom={20}>
-          <ProductPriceDetails user={user} product={product} />
+          <ProductPriceDetails product={product} />
         </StickyBox>
       </Grid.Column>
     </Grid>

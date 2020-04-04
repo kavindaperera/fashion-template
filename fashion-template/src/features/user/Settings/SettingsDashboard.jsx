@@ -18,7 +18,7 @@ const mapState = state => ({
 });
 
 const SettingsDashboard = ({updatePassword,providerId, auth, user, updateProfile}) => {
-  console.log(auth.uid)
+  console.log(user)
   return (
     <Grid stackable columns={2}>
       <Grid.Column width={8}>

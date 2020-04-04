@@ -16,7 +16,7 @@ const sizes = [
 const actions = {
   addToCart
 };
-const ItemDetailedInfo = ({ user, product,  addToCart }) => {
+const ItemDetailedInfo = ({ product,  addToCart }) => {
   return (
     <div>
       <Grid>
@@ -60,7 +60,7 @@ const ItemDetailedInfo = ({ user, product,  addToCart }) => {
         <Grid.Row columns={1}>
           <Grid.Column>
             <Button.Group fluid>
-              <Button labelPosition='right' icon='bookmark outline'  onClick={() => addToCart(user, 1, product)} color="black" content='Add to Bag'/>
+              <Button labelPosition='right' icon='bookmark outline'  onClick={() => addToCart( 1, product)} color="black" content='Add to Bag'/>
             </Button.Group>
           </Grid.Column>
         </Grid.Row>

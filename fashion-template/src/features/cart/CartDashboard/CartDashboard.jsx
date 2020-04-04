@@ -3,18 +3,34 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Button, Icon, Item } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
+import { queryAllByAltText } from "@testing-library/react";
 
 const mapState = state => ({
   auth : state.firebase.auth,
-  cart: state.firestore.ordered.cart,
-  loading: state.async.loading
+  profile: state.firebase.profile,
+  loading: state.async.loading,
+  user: state.firebase.profile,
+  cart: state.firestore.ordered.cart
 });
+
+const query = ({auth}) => {
+  return [
+    {
+      collection:'users',
+      doc: auth.uid,
+      subcollections:[{collection: 'storeCarts'}],
+      storeAs: 'cart'
+    }
+  ]
+}
 
 const actions = {};
 
 class CartDashboard extends Component {
+  
   render() {
-    const { auth, cart, loading } = this.props;
+    const { auth, user,  cart, loading } = this.props;
+    
 
     if (loading) return <LoadingComponent inverted={true} />;
 
@@ -22,15 +38,15 @@ class CartDashboard extends Component {
       <div>
         <Item.Group divided>
           {cart &&
-            cart.map(product => ( product.uid===auth.uid && 
+            cart.map(c => ( c.state == 'inCart' &&
               <Item>
-                <Item.Image size="small" src={product.photoURL} />
+                <Item.Image size="small" src={c.order.photoURL} />
                 <Item.Content>
-                  <h4 as="a">{product.productName}</h4>
-                  <h5>{product.quantity}</h5>
+                  <h4 as="a">{c.order.productName}</h4>
+                  <h5>{c.order.quantity}</h5>
                   <h5>
-                    <del style={{ color: "grey" }}>${product.price} </del>
-                    <a style={{ color: "red" }}>${product.price - (product.price * product.discount) / 100}{" "}</a>
+                    <del style={{ color: "grey" }}>${c.order.price} </del>
+                    <a style={{ color: "red" }}>${c.order.price - (c.order.price * c.order.discount) / 100}{" "}</a>
                   </h5>
                   <Item.Extra>
                     <Button color='black' circular floated='right' icon='trash alternate outline' />
@@ -48,4 +64,4 @@ class CartDashboard extends Component {
 export default connect(
   mapState,
   actions
-)(firestoreConnect([{ collection: "cart" }])(CartDashboard));
+)(firestoreConnect(auth => query(auth))(CartDashboard));
