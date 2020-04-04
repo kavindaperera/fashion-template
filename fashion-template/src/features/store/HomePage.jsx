@@ -3,19 +3,22 @@ import { connect } from "react-redux";
 import { Grid, Image, GridRow, Button, Icon } from "semantic-ui-react";
 import { firestoreConnect } from "react-redux-firebase";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { NavLink, Link } from "react-router-dom";
 import LoadingComponent from "../../app/layout/LoadingComponent"
 import { Carousel } from "react-responsive-carousel";
 import _ from "lodash";
 
-const mapState = state => ({
+const mapState = (state, ownProps) => ({
   store: state.firestore.ordered.store,
   loading: state.async.loading,
-  currentStore: state.store.currentStore
+  currentStore: ownProps.match.params.store,
+  param: ownProps.match.params
 });
 
 const actions = {};
 
-const HomePage = ({ loading, history, store, currentStore }) => {
+const HomePage = ({ loading, history, store, currentStore, param }) => {
+  console.log("from home page",param);
   if (loading) return <LoadingComponent inverted={true} />;
   return (
     <div>
@@ -27,9 +30,8 @@ const HomePage = ({ loading, history, store, currentStore }) => {
                 <Grid.Row>
                   <Grid.Column>
                     <Image
-                      onClick={() => history.push("/collection")}
+                      onClick={() => history.push(`/${currentStore}/collection/all`)}
                       alt="a"
-                      className="invertedlogo"
                       src={s.storeLogo}
                       size="small"
                       centered
@@ -39,7 +41,10 @@ const HomePage = ({ loading, history, store, currentStore }) => {
                 <Grid.Row centered>
                   {s.categories &&
                     s.categories.map(category => (
-                      <Button size="large" color="black" key={category}>
+                      <Button 
+                      as={NavLink}
+                      to={`/${currentStore}/collection/${category}`}
+                      size="large" color="black" key={category}>
                         {_.capitalize(category)}
                       </Button>
                     ))}
@@ -58,7 +63,7 @@ const HomePage = ({ loading, history, store, currentStore }) => {
                   <Button
                     color="black"
                     size="huge"
-                    onClick={() => history.push("/collection")}
+                    onClick={() => history.push(`/${currentStore}/collection/all`)}
                   >
                     Enter Store
                     <Icon name="right arrow" />
@@ -67,7 +72,7 @@ const HomePage = ({ loading, history, store, currentStore }) => {
                 <Grid.Row>
                 {s.specialPhotos &&
                         s.specialPhotos.map(photo => (
-                            <img style={{ marginTop: "2em" }} alt="a" key={photo} src={photo} />
+                            <Image fluid style={{ marginTop: "2em" }} alt="a" key={photo} src={photo} />
                         ))}
                 </Grid.Row>
                 <Grid.Row></Grid.Row>

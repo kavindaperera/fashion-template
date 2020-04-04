@@ -20,11 +20,12 @@ const actions = {
 };
 
 
-const mapState = (state) => ({
+const mapState = (state, ownProps) => ({
   auth: state.firebase.auth,
   profile: state.firebase.profile,
   store: state.firestore.ordered.store,
-  currentStore: state.store.currentStore,
+  currentStore: ownProps.match.params.store,
+  param: ownProps.match.params
 });
 
 const menuStyle = {
@@ -66,9 +67,10 @@ class NavBar extends Component {
   unStickTopMenu = () => this.setState({ menuFixed: false });
 
   render() {
-    const { auth, profile, store, currentStore } = this.props;
+    const { auth, profile, store, currentStore, param } = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
     const { menuFixed } = this.state;
+    console.log("from navbar",{param})
     return (
       <div>
         {store &&
@@ -76,10 +78,9 @@ class NavBar extends Component {
             (s) =>
               s.id === currentStore && (
                 <div>
-                  <Container  style={{ marginTop: "2em" }}>
+                  <Container as={Link} to={`/${currentStore}/`}  style={{ marginTop: "2em" }}>
                     <Image
                       alt="a"
-                      className="invertedlogo"
                       src={s.storeLogo}
                       size="small"
                       centered
@@ -97,19 +98,19 @@ class NavBar extends Component {
                       style={menuFixed ? fixedMenuStyle : menuStyle}
                     >
                       <Container fluid className="nav">
-                        <Menu.Item as={Link} to="/" header>
-                          <Image className="invertedlogo" size="tiny" src={s.storeLogo} alt="a"/>
+                        <Menu.Item as={Link} to={`/${currentStore}/`} header>
+                          <Image  size="tiny" src={s.storeLogo} alt="a"/>
                         </Menu.Item>
                         <Menu.Menu position="right">
                           <Menu.Item
                             name="All"
                             as={NavLink}
-                            to="/collection"
+                            to={`/${currentStore}/collection/all`} 
                           ></Menu.Item>
                           <Menu.Item
-                            name="Testing"
+                            name="Home"
                             as={Link}
-                            to="/"
+                            to={`/${currentStore}/`} 
                           ></Menu.Item>
                           <Menu.Item
                             name="Testing"

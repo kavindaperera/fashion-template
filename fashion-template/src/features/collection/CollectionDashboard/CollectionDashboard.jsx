@@ -5,16 +5,17 @@ import { Grid, Header, Pagination } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import ProductList from "../ProductList/ProductList";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
+import SideMenu from '../../slideMenu/SlideMenu/SideMenu'
 import StickyBox from "react-sticky-box";
 import Filter from "../../filter/Filter/Filter";
 
-const mapState = state => ({
-
+const mapState = (state, ownProps) => ({
   products: state.firestore.ordered.items,
   store: state.firestore.ordered.store,
   filters: state.filters,
   filteredProducts: state.firestore.ordered.items,
-  currentStore: state.store.currentStore
+  currentStore: ownProps.match.params.store,
+  category: ownProps.match.params.category
 });
 
 const actions = {
@@ -48,17 +49,12 @@ class CollectionDashboard extends Component {
     this.props.getProducts();
   }*/
 
-  state = { sortCategory: "" };
+  state = { };
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   handleChangeSort = e => {
     console.log(e);
     this.setState({ sort: e });
-    this.listProducts();
-  };
-
-  handleChangeCategory = e => {
-    this.setState({ category: e });
     this.listProducts();
   };
 
@@ -79,27 +75,15 @@ class CollectionDashboard extends Component {
       } else {
         this.props.products.sort((a, b) => (a.id < b.id ? 1 : -1));
       }
-      if (state.category !== "") {
-        this.setState({ sortCategory: state.category });
-        /*filteredProducts: this.props.products.filter(a =>
-          (a.category.indexOf(state.category)>=0) ),*/
-      } else {
-        this.props.products.sort((a, b) => (a, b));
-      }
       return { filteredProducts: this.props.products };
     });
   };
 
   render() {
-    const {
-      products,
- 
-      filteredProducts,
-      currentStore
-    } = this.props;
-    const { activeItem, sortCategory } = this.state;
-    console.log('XXX',{currentStore})
+    const { products, filteredProducts, currentStore, category} = this.props;
+    const { activeItem } = this.state;
 
+    console.log("from collection",category);
     //console.log("STORE", { store });
 
     if (!isLoaded(products) || isEmpty(products)) return <LoadingComponent inverted={true} />;
@@ -109,20 +93,21 @@ class CollectionDashboard extends Component {
         <Grid centered columns={2}>
           <Grid.Column width={2}>
             <StickyBox offsetTop={70} offsetBottom={20}>
-              <Header>MENU HERE</Header>
+              <SideMenu sortCategory={category} currentStore={currentStore}></SideMenu>
             </StickyBox>
           </Grid.Column>
           <Grid.Column width={14}>
             <Filter
               size={this.state.size}
               sort={this.state.sort}
+              currentStore={currentStore}
               handleChangeCategory={this.handleChangeCategory}
               handleChangeSort={this.handleChangeSort}
               count={filteredProducts && filteredProducts.length}
             />
             <ProductList
               products={products}
-              sortCategory={sortCategory}
+              sortCategory={category}
             />
           </Grid.Column>
           <Grid.Row>

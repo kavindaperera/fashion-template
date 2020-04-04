@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withFirestore } from 'react-redux-firebase'
 import { Grid } from "semantic-ui-react";
 import { firestoreConnect } from "react-redux-firebase";
 import ProductDetailedPhotoSlide from "./ProductDetailedPhotoSlide";
@@ -9,9 +10,8 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 
 const mapState = (state, ownProps) => {
   const productId = ownProps.match.params.id;
-  //const products = state.firestore.ordered.products;
   const products = state.firestore.ordered.items;
-  const currentStore = state.store.currentStore;
+  const currentStore = ownProps.match.params.store;
 
   let product = {};
 
@@ -20,8 +20,7 @@ const mapState = (state, ownProps) => {
   }
   return {
     product,
-    currentStore,
-    requesting: state.firestore.status.requesting
+    currentStore
   };
 };
 
@@ -37,14 +36,19 @@ const query = ({currentStore}) => {
   ]
 }
 
+
 class ProductDetailedPage extends Component {
+
+
+  async componentDidMount(){
+    const {firestore, match} = this.props;
+    await firestore.setListener(`collection/products/${match.params.id}`);
+  }
   render(){
 
-  const {product, requesting} = this.props;
-  const loading = Object.values(requesting).some(a => a===true)
-  console.log('loading', requesting);
+  const {product} = this.props;
 
-  if (loading) return <LoadingComponent inverted={true} />;
+  if (!product) return <LoadingComponent inverted={true} />;
 
   return (
     <Grid>
@@ -62,4 +66,4 @@ class ProductDetailedPage extends Component {
   );
 }};
 
-export default connect(mapState)(firestoreConnect(currentStore => query(currentStore))(ProductDetailedPage));
+export default withFirestore(connect(mapState)(firestoreConnect(currentStore => query(currentStore))(ProductDetailedPage)));

@@ -1,6 +1,13 @@
 import React, { Component } from "react";
-import { Menu, Container, Dropdown, Visibility, Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import {
+  Menu,
+  Container,
+  Dropdown,
+  Grid,
+  Visibility,
+  Button,
+} from "semantic-ui-react";
+import { NavLink, Link } from "react-router-dom";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
@@ -10,18 +17,18 @@ const sortOptions = [
   {
     key: "Recommended",
     text: "Recommended",
-    value: ""
+    value: "",
   },
   {
     key: "Price: Low to High",
     text: "Price: Low to High",
-    value: "lowest"
+    value: "lowest",
   },
   {
     key: "Price: High to Low",
     text: "Price: High to Low",
-    value: "highest"
-  }
+    value: "highest",
+  },
 ];
 
 const menuStyle = {
@@ -30,19 +37,18 @@ const menuStyle = {
   boxShadow: "none",
   marginBottom: "1em",
   marginTop: "1em",
-  transition: "box-shadow 0.5s ease, padding 0.5s ease"
+  transition: "box-shadow 0.5s ease, padding 0.5s ease",
 };
 
 const fixedMenuStyle = {
   backgroundColor: "#fff",
   border: "1px solid #fff",
-  marginTop: "4em"
+  marginTop: "4em",
 };
 
-const mapState = state => ({
+const mapState = (state, ownProps) => ({
   store: state.firestore.ordered.store,
   loading: state.async.loading,
-  currentStore: state.store.currentStore
 });
 
 const actions = {};
@@ -50,7 +56,7 @@ const actions = {};
 class Filter extends Component {
   state = {
     menuFixed: false,
-    overlayFixed: false
+    overlayFixed: false,
   };
 
   stickTopMenu = () => this.setState({ menuFixed: true });
@@ -62,7 +68,7 @@ class Filter extends Component {
   };
 
   render() {
-    const { store, loading, currentStore } = this.props;
+    const { store, loading } = this.props;
     const { menuFixed, value } = this.state;
     console.log(value);
     if (loading) return <LoadingComponent inverted={true} />;
@@ -75,43 +81,51 @@ class Filter extends Component {
           once={false}
         >*/}
         {store &&
-        store.map(
-          s =>
-            s.id === currentStore && (
-        <Menu key={s.id}
-          borderless
-          fixed={menuFixed ? "top" : undefined}
-          style={menuFixed ? fixedMenuStyle : menuStyle}
-        >
-          <Container fluid className="nav">
-          <Menu.Menu position="left" >
-          {s.categories &&
-                    s.categories.map(category => (
-                      <Button key={category} color='black' onClick={e =>this.props.handleChangeCategory(e.target.value)} value={category} >{_.capitalize(category)}</Button>
-                    ))}
-
-          </Menu.Menu>
-            <Menu.Menu position="right">
-              <Menu.Item>{this.props.count} items sorted by:</Menu.Item>
-              <Menu.Item>
-                <Dropdown
-                  placeholder={sortOptions[0].text}
-                  inline
-                  options={sortOptions}
-                  onChange={this.handleChange}
-                  value={value}
-                />{" "}
-              </Menu.Item>
-            </Menu.Menu>
-          </Container>
-        </Menu>
-
-        ))}
+          store.map(
+            (s) =>
+              s.id === this.props.currentStore && (
+                <Menu
+                  key={s.id}
+                  borderless
+                  fixed={menuFixed ? "top" : undefined}
+                  style={menuFixed ? fixedMenuStyle : menuStyle}
+                >
+                  <Container fluid className="nav">
+                    <Menu.Menu position="left">
+                    <Menu.Item>{this.props.count} styles available</Menu.Item>
+                   {/*} <Menu.Item>sorted by category:</Menu.Item>
+                      {s.categories &&
+                        s.categories.slice(0, 6).map((category) => (
+                          <Button
+                            color="black"
+                            value={category}
+                            as={NavLink}
+                            to={`/${this.props.currentStore}/collection/${category}`}
+                          >
+                            {_.capitalize(category)}{" "}
+                          </Button>
+                        ))}*/}
+                    </Menu.Menu>
+                    <Menu.Menu position="right">
+                      <Menu.Item>Sort By:</Menu.Item>
+                      <Menu.Item>
+                        <Dropdown
+                          placeholder={sortOptions[0].text}
+                          inline
+                          options={sortOptions}
+                          onChange={this.handleChange}
+                          value={value}
+                        />{" "}
+                      </Menu.Item>
+                    </Menu.Menu>
+                  </Container>
+                </Menu>
+              )
+          )}
       </div>
     );
   }
 }
-
 
 export default connect(
   mapState,

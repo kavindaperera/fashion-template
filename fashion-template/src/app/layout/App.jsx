@@ -17,19 +17,19 @@ class App extends Component {
       <div>
       <ModalManager/>
         <Switch>
-          <Route exact path={`/`} component={HomePage} />
+          <Route exact path={`/:store/`} component={HomePage} />
         </Switch>
         <Route
-          path="/(.+)"
+          path="/:store/(.+)"
           render={() => (
             <div>
               <NavBar />
               <Grid className="main">
                 <Switch>
-                <Route path={`/collection`}  component={CollectionDashboard} />
-                <Route path={`/product/:id`} component={ProductDetailedPage} />
-                <Route path={`/my-account`} component={SettingsDashboard} />
-                <Route path={`/cart`} component={CartDashboard} />
+                <Route path={`/:store/collection/product/:id`} component={ProductDetailedPage} />
+                <Route path={`/:store/collection/:category`}  component={CollectionDashboard} />
+                <Route path={`/:store/my-account`} component={SettingsDashboard} />
+                <Route path={`/:store/cart`} component={CartDashboard} />
                 </Switch>
               </Grid>
             </div>

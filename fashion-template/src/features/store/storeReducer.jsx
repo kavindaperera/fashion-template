@@ -4,8 +4,6 @@ import { FETCH_STORE } from "./storeConstants";
 
 
 const initialState = {
-  currentStore: "Yf2zTsC4IGCpufdop111",
-  
 }
 
 /*stores:  "7dbDylC8CZTNBPcVPJyn" , "Yf2zTsC4IGCpufdop111" */

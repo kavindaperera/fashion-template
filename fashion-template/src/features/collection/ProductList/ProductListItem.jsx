@@ -4,11 +4,11 @@ import { Card , Label, Image} from "semantic-ui-react";
 import { Link } from "react-router-dom";
 class ProductListItem extends Component {
   render() {
-    const { product } = this.props;
+    const { product} = this.props;
 
     return (
       
-      <Card className="card" as={Link} to={`/product/${product.id}`}>
+      <Card className="card" as={Link} to={`product/${product.id}`}>
       {product.discount && product.discount > 0 && (
         <div>
         <Label  circular color='red' floating >{"-"}
