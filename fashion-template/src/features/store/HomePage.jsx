@@ -29,6 +29,7 @@ const HomePage = ({ loading, history, store, currentStore }) => {
                     <Image
                       onClick={() => history.push("/collection")}
                       alt="a"
+                      className="invertedlogo"
                       src={s.storeLogo}
                       size="small"
                       centered
@@ -63,6 +64,12 @@ const HomePage = ({ loading, history, store, currentStore }) => {
                     <Icon name="right arrow" />
                   </Button>
                 </GridRow>
+                <Grid.Row>
+                {s.specialPhotos &&
+                        s.specialPhotos.map(photo => (
+                            <img style={{ marginTop: "2em" }} alt="a" key={photo} src={photo} />
+                        ))}
+                </Grid.Row>
                 <Grid.Row></Grid.Row>
               </Grid>
             )

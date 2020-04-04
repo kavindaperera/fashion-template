@@ -17,11 +17,11 @@ class ProductListItem extends Component {
         </div>
       )}
         <div className="ui slide masked reveal image">
-          <Image  alt='1' src={product.photoURL[0]} className="visible content"></Image>
-          <Image  alt='2' src={product.photoURL[1]} className="hidden content"></Image>
+          <Image  alt='1' src={product.photos[0]} className="visible content"></Image>
+          <Image  alt='2' src={product.photos[1]} className="hidden content"></Image>
         </div>
         <div className="content">
-          <span className="description">{product.productName}</span>
+          <span className="description">{product.name}</span>
           <div className="meta">
           {product.discount && product.discount > 0 && (
         <div>

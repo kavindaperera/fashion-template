@@ -85,8 +85,9 @@ body {
   margin-right: 5em;
 }
 
-.ui.footerlogo.image {
-    filter: invert(100%);
+.ui.invertedlogo.image {
+  color: rgb(0,0,0); 
+  mix-blend-mode: difference;
 }
 
 

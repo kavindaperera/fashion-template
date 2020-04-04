@@ -4,7 +4,7 @@ import { FETCH_STORE } from "./storeConstants";
 
 
 const initialState = {
-  currentStore: "7dbDylC8CZTNBPcVPJyn",
+  currentStore: "Yf2zTsC4IGCpufdop111",
   
 }
 

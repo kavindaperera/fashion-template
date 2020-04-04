@@ -55,7 +55,7 @@ class Footer extends Component {
               <Grid.Column width={7}>
               <Header inverted as="h4" content="Powered by" />
                 <Image
-                  className="footerlogo"
+                  className="invertedlogo"
                   src={"/company.png"}
                   size="medium"
                   as={Link} to={`/`}    

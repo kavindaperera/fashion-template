@@ -1,27 +1,36 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
+import { firestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
 import { Grid, Header, Pagination } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import ProductList from "../ProductList/ProductList";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import StickyBox from "react-sticky-box";
 import Filter from "../../filter/Filter/Filter";
-import { getProducts } from '../collectionAction';
 
 const mapState = state => ({
-  /*products:getVisibleproducts(state.firestore.ordered.products, state.filters),*/
-  //products: state.firestore.ordered.products,
-  products:state.products,
+
+  products: state.firestore.ordered.items,
   store: state.firestore.ordered.store,
-  loading: state.async.loading,
   filters: state.filters,
-  filteredProducts: state.products
+  filteredProducts: state.firestore.ordered.items,
+  currentStore: state.store.currentStore
 });
 
 const actions = {
-  getProducts
 };
+
+const query = ({currentStore}) => {
+  return [
+    {
+      collection:'store',
+      doc: currentStore,
+      subcollections:[{collection: 'items'}],
+      storeAs: 'items'
+    }
+  ]
+}
+
 
 const sizes = [
   { key: "xxs", text: "XXS", value: "xxs" },
@@ -35,9 +44,9 @@ const sizes = [
 
 class CollectionDashboard extends Component {
 
-  componentDidMount() {
+  /*componentDidMount() {
     this.props.getProducts();
-  }
+  }*/
 
   state = { sortCategory: "" };
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
@@ -83,16 +92,17 @@ class CollectionDashboard extends Component {
 
   render() {
     const {
-      store,
       products,
-      loading,
-      filteredProducts
+ 
+      filteredProducts,
+      currentStore
     } = this.props;
     const { activeItem, sortCategory } = this.state;
+    console.log('XXX',{currentStore})
 
-    console.log("STORE", { store });
+    //console.log("STORE", { store });
 
-    if (loading) return <LoadingComponent inverted={true} />;
+    if (!isLoaded(products) || isEmpty(products)) return <LoadingComponent inverted={true} />;
 
     return (
       <div>
@@ -145,7 +155,7 @@ export default connect(
   mapState,
   actions
 )(
-  firestoreConnect([{ collection: "products" }, { collection: "store" }])(
+  firestoreConnect(currentStore => query(currentStore))(
     CollectionDashboard
   )
 );

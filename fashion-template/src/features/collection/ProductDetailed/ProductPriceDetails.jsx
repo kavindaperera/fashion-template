@@ -23,7 +23,7 @@ const ItemDetailedInfo = ({ product,  addToCart }) => {
         <Grid.Row verticalAlign='bottom' columns={2}>
           <Grid.Column floated="left">
             <p style={{ color: "black", fontSize: "20px", fontWeight: "1" }}>
-              {product.productName}
+              {product.name}
             </p>
           </Grid.Column>
           <Grid.Column floated="right">

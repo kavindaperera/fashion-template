@@ -11,7 +11,7 @@ export const createNewCartItem = (user, quantity, product) => {
   return {
     uid: user.uid,
     username: user.displayName,
-    productName: product.productName,
+    productName: product.name,
     photoURL:product.photoURL[0],
     price: product.price,
     discount: product.discount,
