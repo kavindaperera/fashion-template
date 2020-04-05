@@ -13,24 +13,29 @@ const mapState = (state, ownProps) => ({
   /*store: state.firestore.ordered.store,*/
   loading: state.async.loading,
   currentStore: ownProps.match.params.store,
-  store: state.store[0],
+  store: state.firestore.data.selectedStore,
 });
 
-const actions = {getStore};
+const actions = {};
 
+const query = ({currentStore}) => {
+  return [
+    {
+      collection:'store',
+      doc: currentStore,
+      storeAs: 'selectedStore'
+    }
+  ]
+}
 
 
 class HomePage extends Component  {
-  async componentDidMount() {
-    this.props.getStore(this.props.currentStore);
-  }
-
 
 render (){
   const { loading, history, store, currentStore, } = this.props;
 
   console.log('home',store)
-
+  
   if (loading) return <LoadingComponent inverted={true} />;
 
   return (
@@ -97,4 +102,4 @@ render (){
 export default connect(
   mapState,
   actions
-)(firestoreConnect()(HomePage));
+)(firestoreConnect(currentStore => query(currentStore))(HomePage));

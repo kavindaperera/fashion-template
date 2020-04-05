@@ -9,22 +9,27 @@ import { getStore } from '../../store/storeActions'
 
 
 const mapState = (state, ownProps) => ({
-    store: state.store[0],
+    store: state.firestore.data.selectedStore,
     loading: state.async.loading,
     //category: ownProps.match.params
     currentStore: ownProps.match.params.store
   });
 
-  const actions = {getStore};
+  const actions = {};
 
+  /*const query = ({currentStore}) => {
+    return [
+      {
+        collection:'store',
+        doc: currentStore
+      }
+    ]
+  }*/
   
 
 class SideMenu extends Component {
   state = { activeItem: '' }
 
-  componentDidMount() {
-    this.props.getStore(this.props.currentStore);
-  }
 
   handleItemClick = (e,  {name} ) => this.setState({ activeItem: name })
 
@@ -64,4 +69,4 @@ class SideMenu extends Component {
 export default withRouter(withFirebase(connect(
     mapState,
     actions
-  )(firestoreConnect([{ collection: "store" }])(SideMenu))));
+  )(firestoreConnect()(SideMenu))));

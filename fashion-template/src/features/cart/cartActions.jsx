@@ -10,7 +10,7 @@ export const addToCart = (quantity, product) =>{
     if(user!==null){
       let newCartItem = createNewCartItem (user, quantity, product);
       try {
-        let newOrder = await firestore.add({
+         await firestore.add({
           collection: 'users',
           doc: user.uid,
           subcollections: [{collection: 'storeCarts'}]

@@ -7,7 +7,6 @@ import {
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import _ from "lodash";
 
 const sortOptions = [
   {
@@ -126,4 +125,4 @@ class Filter extends Component {
 export default connect(
   mapState,
   actions
-)(firestoreConnect([{ collection: "store" }])(Filter));
+)(firestoreConnect()(Filter));

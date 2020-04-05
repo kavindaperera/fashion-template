@@ -8,18 +8,17 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 import SideMenu from '../../slideMenu/SlideMenu/SideMenu'
 import StickyBox from "react-sticky-box";
 import Filter from "../../filter/Filter/Filter";
-import { getStore } from '../../store/storeActions'
 
 const mapState = (state, ownProps) => ({
   products: state.firestore.ordered.items,
-  store: state.store[0],
   filters: state.filters,
   filteredProducts: state.firestore.ordered.items,
   currentStore: ownProps.match.params.store,
-  category: ownProps.match.params.category
+  category: ownProps.match.params.category,
+  store: state.firestore.data.selectedStore,
 });
 
-const actions = { getStore };
+const actions = { };
 
 const query = ({currentStore}) => {
   return [
@@ -45,9 +44,6 @@ const sizes = [
 
 class CollectionDashboard extends Component {
 
-  async componentDidMount() {
-    this.props.getStore(this.props.currentStore);
-  }
   state = { };
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
@@ -84,7 +80,7 @@ class CollectionDashboard extends Component {
     const { store, products, filteredProducts, currentStore, category} = this.props;
     const { activeItem } = this.state;
 
-    console.log("sort by ",category);
+    console.log('collection',store)
 
     if (!isLoaded(products) || isEmpty(products)) return <LoadingComponent inverted={true} />;
 
@@ -97,7 +93,7 @@ class CollectionDashboard extends Component {
             </StickyBox>
           </Grid.Column>
           <Grid.Column width={14}>
-            <Filter
+           <Filter
               size={this.state.size}
               sort={this.state.sort}
               currentStore={currentStore}
@@ -105,7 +101,7 @@ class CollectionDashboard extends Component {
               handleChangeSort={this.handleChangeSort}
               count={filteredProducts && filteredProducts.length}
             />
-            {store && 
+            {store &&
             <ProductList
               products={products}
               sortCategory={category}

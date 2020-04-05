@@ -14,20 +14,29 @@ import SignedOutMenu from "../Menus/SignedOutMenu";
 import SignedInMenu from "../Menus/SignedInMenu";
 import { openModal } from "../../modals/modalActions";
 import "../../../index.css";
-import {getStore} from '../../store/storeActions'
 
 
 const actions = {
-  openModal,getStore
+  openModal
 };
 
 const mapState = (state, ownProps) => ({
   auth: state.firebase.auth,
   profile: state.firebase.profile,
-  store: state.store[0],
+  store: state.firestore.data.selectedStore,
   currentStore: ownProps.match.params.store,
   params: ownProps.match.params
 });
+
+const query = ({currentStore}) => {
+  return [
+    {
+      collection:'store',
+      doc: currentStore,
+      storeAs: 'selectedStore'
+    }
+  ]
+}
 
 const menuStyle = {
   border: "none",
@@ -44,11 +53,6 @@ const fixedMenuStyle = {
 };
 
 class NavBar extends Component {
-
-  async componentDidMount() {
-    this.props.getStore(this.props.currentStore);
-  }
-
 
   handleSignedIn = () => {
     this.props.openModal("LoginModal");
@@ -75,8 +79,7 @@ class NavBar extends Component {
     const { auth, profile, store, params, currentStore, storeX} = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
     const { menuFixed } = this.state;
-    console.log("nav_storeX",storeX)
-    console.log('nav_cs',currentStore)
+
     return (
       <div>
         {store &&
@@ -160,5 +163,5 @@ export default withRouter(
     connect(
       mapState,
       actions
-    )(firestoreConnect()(NavBar))
+    )(firestoreConnect(currentStore => query(currentStore))(NavBar))
 );

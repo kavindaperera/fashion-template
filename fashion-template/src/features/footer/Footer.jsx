@@ -10,24 +10,30 @@ import {
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { withFirebase } from "react-redux-firebase";
-import { NavLink, Link, withRouter } from "react-router-dom";
-import {getStore} from '../store/storeActions'
+import {  Link, withRouter } from "react-router-dom";
 
-const actions = {getStore};
+const actions = {};
 
 const mapState = (state, ownProps) => ({
   auth: state.firebase.auth,
   profile: state.firebase.profile,
-  store: state.store[0],
+  store: state.firestore.data.selectedStore,
   currentStore: ownProps.match.params.store
 
 });
 
+/*const query = ({currentStore}) => {
+  return [
+    {
+      collection:'store',
+      doc: currentStore
+    }
+  ]
+}*/
+
+
 class Footer extends Component {
 
-  componentDidMount() {
-    this.props.getStore(this.props.currentStore);
-  }
   render() {
     const {store, currentStore } = this.props;
     return (
@@ -83,6 +89,6 @@ export default withRouter(
     connect(
       mapState,
       actions
-    )(firestoreConnect([{ collection: "store" }])(Footer))
+    )(firestoreConnect()(Footer))
   )
 );

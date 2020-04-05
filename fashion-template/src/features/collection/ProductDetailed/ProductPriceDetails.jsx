@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Item, Header, Button, Label, Dropdown } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { addToCart } from "../../cart/cartActions";
-import PriceTag  from '../../pricetag/PriceTag';
+import PriceTagLarge  from '../../pricetag/PriceTagLarge';
 
 const sizes = [
   { key: "xxs", text: "XXS", value: "xxs" },
@@ -28,7 +28,7 @@ const ItemDetailedInfo = ({ product, currency,  addToCart }) => {
             </p>
           </Grid.Column>
           <Grid.Column floated="right">
-          <PriceTag currency={currency} price= {product.price} discount= {product.discount} ></PriceTag>
+          <PriceTagLarge currency={currency} price= {product.price} discount= {product.discount} ></PriceTagLarge>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row columns={2}>

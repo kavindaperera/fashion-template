@@ -13,7 +13,7 @@ const mapState = (state, ownProps) => {
   const productId = ownProps.match.params.id;
   const products = state.firestore.ordered.items;
   const currentStore = ownProps.match.params.store;
-  const store = state.store[0];
+  const store = state.firestore.data.selectedStore;
 
   let product = {};
 
@@ -27,7 +27,7 @@ const mapState = (state, ownProps) => {
   };
 };
 
-const actions = { getStore };
+const actions = {};
 
 const query = ({currentStore}) => {
   return [
@@ -48,17 +48,18 @@ class ProductDetailedPage extends Component {
     const {firestore, match} = this.props;
     let product = await firestore.get(`store/${this.props.currentStore}/items/${match.params.id}`);
     console.log('item', match.params.id)
-    console.log('check existence: ',product)
+    console.log('check existence: ',product.exists)
     if (!product.exists) {
       toastr.error('Not Found', 'This is item is not available');
       this.props.history.push(`/${this.props.currentStore}/error`);
     }
     await firestore.setListener(`collection/products/${match.params.id}`);
-    await this.props.getStore(this.props.currentStore);
   }
   render(){
 
   const {product, store} = this.props;
+  console.log('detailed',store);
+  console.log('detailed',product)
 
   if (!product.name) return <LoadingComponent inverted={true} />;
 
