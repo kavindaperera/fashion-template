@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { withFirebase } from "react-redux-firebase";
+
 import {
   Menu,
   Container,
@@ -76,7 +76,7 @@ class NavBar extends Component {
   unStickTopMenu = () => this.setState({ menuFixed: false });
 
   render() {
-    const { auth, profile, store, params, currentStore, storeX} = this.props;
+    const { auth, profile, store,  currentStore,} = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
     const { menuFixed } = this.state;
 

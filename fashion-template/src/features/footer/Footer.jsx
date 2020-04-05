@@ -18,7 +18,6 @@ const mapState = (state, ownProps) => ({
   auth: state.firebase.auth,
   profile: state.firebase.profile,
   store: state.firestore.data.selectedStore,
-  currentStore: ownProps.match.params.store
 
 });
 
@@ -35,7 +34,7 @@ const mapState = (state, ownProps) => ({
 class Footer extends Component {
 
   render() {
-    const {store, currentStore } = this.props;
+    const {store,} = this.props;
     return (
       <Segment  inverted vertical style={{ padding: "5em 0em" }}>
       {store &&
@@ -71,7 +70,7 @@ class Footer extends Component {
                 /><p>© 2020-2021 TUSK TM. All rights reserved.</p>
               </Grid.Column>
               <Grid.Column>
-              <table border="0" cellpadding="10" cellspacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="https://www.paypal.com/webapps/mpp/paypal-popup" title="How PayPal Works" onclick="javascript:window.open('https://www.paypal.com/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"><img src="https://www.paypalobjects.com/digitalassets/c/website/marketing/na/us/logo-center/9_bdg_secured_by_pp_2line.png" border="0" alt="Secured by PayPal"></img></a></td></tr></table>
+              <table border="0" cellPadding="10" cellSpacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="https://www.paypal.com/webapps/mpp/paypal-popup" title="How PayPal Works" onClick="javascript:window.open('https://www.paypal.com/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;"><img src="https://www.paypalobjects.com/digitalassets/c/website/marketing/na/us/logo-center/9_bdg_secured_by_pp_2line.png" border="0" alt="Secured by PayPal"></img></a></td></tr></table>
               </Grid.Column>
             </Grid.Row>
           </Grid>

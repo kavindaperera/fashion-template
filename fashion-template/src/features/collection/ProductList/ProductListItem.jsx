@@ -6,10 +6,9 @@ import PriceTag  from '../../pricetag/PriceTag'
 
 class ProductListItem extends Component {
   render() {
-    const { product, currency} = this.props;
+    const { product, store} = this.props;
 
     return (
-      
       <Card className="card" as={Link} to={`product/${product.id}`}>
       {product.discount && product.discount > 0 && (
         <div>
@@ -25,7 +24,7 @@ class ProductListItem extends Component {
         <div className="content">
           <span className="description">{product.name}</span>
           <div className="meta">
-          <PriceTag currency={currency} price= {product.price} discount= {product.discount} ></PriceTag>
+          <PriceTag currency={store.currency.symbol} price= {product.price} discount= {product.discount} ></PriceTag>
             <div>
               {product.colors && product.colors.length >1 && (
                 <div className="date">

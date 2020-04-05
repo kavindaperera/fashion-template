@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Item, Header, Button, Label, Dropdown } from "semantic-ui-react";
+import { Grid, Button, Label } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { addToCart } from "../../cart/cartActions";
 import PriceTagLarge  from '../../pricetag/PriceTagLarge';

@@ -3,11 +3,10 @@ import { connect } from "react-redux";
 import { Grid, Image, GridRow, Button, Icon } from "semantic-ui-react";
 import { firestoreConnect } from "react-redux-firebase";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink,} from "react-router-dom";
 import LoadingComponent from "../../app/layout/LoadingComponent"
 import { Carousel } from "react-responsive-carousel";
 import _ from "lodash";
-import {getStore} from './storeActions'
 
 const mapState = (state, ownProps) => ({
   /*store: state.firestore.ordered.store,*/

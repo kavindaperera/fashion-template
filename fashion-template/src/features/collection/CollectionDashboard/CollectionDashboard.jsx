@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
-import { Grid, Header, Pagination } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Grid, Pagination } from "semantic-ui-react";
 import ProductList from "../ProductList/ProductList";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import SideMenu from '../../slideMenu/SlideMenu/SideMenu'
@@ -78,7 +77,6 @@ class CollectionDashboard extends Component {
 
   render() {
     const { store, products, filteredProducts, currentStore, category} = this.props;
-    const { activeItem } = this.state;
 
     console.log('collection',store)
 
@@ -105,7 +103,7 @@ class CollectionDashboard extends Component {
             <ProductList
               products={products}
               sortCategory={category}
-              currency = {store.currency.symbol}
+              store = {store}
             /> }
           </Grid.Column>
           <Grid.Row>
