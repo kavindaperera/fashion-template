@@ -25,7 +25,7 @@ const query = ({currentStore}) => {
       collection:'store',
       doc: currentStore,
       subcollections:[{collection: 'items'}],
-      storeAs: 'items'
+      storeAs: 'items',
     }
   ]
 }

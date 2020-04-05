@@ -42,7 +42,7 @@ const fixedMenuStyle = {
 };
 
 const mapState = (state, ownProps) => ({
-  store: state.firestore.ordered.store,
+  store: state.firestore.data.selectedStore,
   loading: state.async.loading,
 });
 
@@ -75,12 +75,8 @@ class Filter extends Component {
           onBottomVisible={this.unStickTopMenu}
           once={false}
         >*/}
-        {store &&
-          store.map(
-            (s) =>
-              s.id === this.props.currentStore && (
+        
                 <Menu
-                  key={s.id}
                   borderless
                   fixed={menuFixed ? "top" : undefined}
                   style={menuFixed ? fixedMenuStyle : menuStyle}
@@ -115,8 +111,6 @@ class Filter extends Component {
                     </Menu.Menu>
                   </Container>
                 </Menu>
-              )
-          )}
       </div>
     );
   }

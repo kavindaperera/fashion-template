@@ -22,6 +22,7 @@ const mapState = (state, ownProps) => {
   }
   return {
     product,
+    products,
     currentStore,
     store
   };
@@ -45,14 +46,7 @@ class ProductDetailedPage extends Component {
 
 
   async componentDidMount(){
-    const {firestore, match} = this.props;
-    let product = await firestore.get(`store/${this.props.currentStore}/items/${match.params.id}`);
-    console.log('item', match.params.id)
-    console.log('check existence: ',product.exists)
-    if (!product.exists) {
-      toastr.error('Not Found', 'This is item is not available');
-      this.props.history.push(`/${this.props.currentStore}/error`);
-    }
+    const {firestore, match,} = this.props;
     await firestore.setListener(`collection/products/${match.params.id}`);
   }
   render(){
