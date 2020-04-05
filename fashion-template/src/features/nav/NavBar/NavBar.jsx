@@ -14,18 +14,19 @@ import SignedOutMenu from "../Menus/SignedOutMenu";
 import SignedInMenu from "../Menus/SignedInMenu";
 import { openModal } from "../../modals/modalActions";
 import "../../../index.css";
+import {getStore} from '../../store/storeActions'
+
 
 const actions = {
-  openModal,
+  openModal,getStore
 };
-
 
 const mapState = (state, ownProps) => ({
   auth: state.firebase.auth,
   profile: state.firebase.profile,
-  store: state.firestore.ordered.store,
+  store: state.store[0],
   currentStore: ownProps.match.params.store,
-  param: ownProps.match.params
+  params: ownProps.match.params
 });
 
 const menuStyle = {
@@ -43,6 +44,12 @@ const fixedMenuStyle = {
 };
 
 class NavBar extends Component {
+
+  async componentDidMount() {
+    this.props.getStore(this.props.currentStore);
+  }
+
+
   handleSignedIn = () => {
     this.props.openModal("LoginModal");
   };
@@ -61,27 +68,23 @@ class NavBar extends Component {
     overlayFixed: false,
   };
 
-  
-
   stickTopMenu = () => this.setState({ menuFixed: true });
   unStickTopMenu = () => this.setState({ menuFixed: false });
 
   render() {
-    const { auth, profile, store, currentStore, param } = this.props;
+    const { auth, profile, store, params, currentStore, storeX} = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
     const { menuFixed } = this.state;
-    console.log("from navbar",{param})
+    console.log("nav_storeX",storeX)
+    console.log('nav_cs',currentStore)
     return (
       <div>
         {store &&
-          store.map(
-            (s) =>
-              s.id === currentStore && (
                 <div>
                   <Container as={Link} to={`/${currentStore}/`}  style={{ marginTop: "2em" }}>
                     <Image
                       alt="a"
-                      src={s.storeLogo}
+                      src={store.storeLogo}
                       size="small"
                       centered
                     />
@@ -99,7 +102,7 @@ class NavBar extends Component {
                     >
                       <Container fluid className="nav">
                         <Menu.Item as={Link} to={`/${currentStore}/`} header>
-                          <Image  size="tiny" src={s.storeLogo} alt="a"/>
+                          <Image  size="tiny" src={store.storeLogo} alt="a"/>
                         </Menu.Item>
                         <Menu.Menu position="right">
                           <Menu.Item
@@ -133,6 +136,7 @@ class NavBar extends Component {
                         </Menu.Menu>
                         {authenticated ? (
                           <SignedInMenu
+                            currentStore={currentStore}
                             profile={profile}
                             signOut={this.handleSignedOut}
                           />
@@ -146,18 +150,15 @@ class NavBar extends Component {
                     </Menu>
                   </Visibility>
                 </div>
-              )
-          )}
+        }
       </div>
     );
   }
 }
 
 export default withRouter(
-  withFirebase(
     connect(
       mapState,
       actions
-    )(firestoreConnect([{ collection: "store" }])(NavBar))
-  )
+    )(firestoreConnect()(NavBar))
 );

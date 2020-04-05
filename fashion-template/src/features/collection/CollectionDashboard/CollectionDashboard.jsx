@@ -8,18 +8,18 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 import SideMenu from '../../slideMenu/SlideMenu/SideMenu'
 import StickyBox from "react-sticky-box";
 import Filter from "../../filter/Filter/Filter";
+import { getStore } from '../../store/storeActions'
 
 const mapState = (state, ownProps) => ({
   products: state.firestore.ordered.items,
-  store: state.firestore.ordered.store,
+  store: state.store[0],
   filters: state.filters,
   filteredProducts: state.firestore.ordered.items,
   currentStore: ownProps.match.params.store,
   category: ownProps.match.params.category
 });
 
-const actions = {
-};
+const actions = { getStore };
 
 const query = ({currentStore}) => {
   return [
@@ -45,10 +45,9 @@ const sizes = [
 
 class CollectionDashboard extends Component {
 
-  /*componentDidMount() {
-    this.props.getProducts();
-  }*/
-
+  async componentDidMount() {
+    this.props.getStore(this.props.currentStore);
+  }
   state = { };
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
@@ -79,12 +78,13 @@ class CollectionDashboard extends Component {
     });
   };
 
+
+
   render() {
-    const { products, filteredProducts, currentStore, category} = this.props;
+    const { store, products, filteredProducts, currentStore, category} = this.props;
     const { activeItem } = this.state;
 
-    console.log("from collection",category);
-    //console.log("STORE", { store });
+    console.log("sort by ",category);
 
     if (!isLoaded(products) || isEmpty(products)) return <LoadingComponent inverted={true} />;
 
@@ -105,10 +105,12 @@ class CollectionDashboard extends Component {
               handleChangeSort={this.handleChangeSort}
               count={filteredProducts && filteredProducts.length}
             />
+            {store && 
             <ProductList
               products={products}
               sortCategory={category}
-            />
+              currency = {store.currency.symbol}
+            /> }
           </Grid.Column>
           <Grid.Row>
             <Pagination
@@ -127,14 +129,6 @@ class CollectionDashboard extends Component {
   }
 }
 
-/*export default connect(
-  mapState,
-  actions
-)(
-  firestoreConnect([{ collection: "products" }, { collection: "store", where: [['storeId', '==', "7dbDylC8CZTNBPcVPJyn"]], }])(
-    CollectionDashboard
-  )
-);*/
 
 export default connect(
   mapState,

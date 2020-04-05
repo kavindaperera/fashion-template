@@ -5,9 +5,9 @@ import {asyncActionStart,asyncActionFinish,asyncActionError
 import firebase from '../../app/config/firebase'
 
 
-export const getProducts = () => 
+export const getProducts = (storeId) => 
   async (dispatch, getState) => {
-    let store = "7dbDylC8CZTNBPcVPJyn";
+    let store = storeId;
     const firestore = firebase.firestore();
     const productsQuery = firestore.collection('products').where('store','==',store);
     try {
@@ -18,11 +18,11 @@ export const getProducts = () =>
         let product = {...querySnap.docs[i].data(), id: querySnap.docs[i].id};
         products.push(product);
       }
-      console.log("XXXX",products)
+      console.log("action",products)
       dispatch({type: FETCH_PRODUCTS, payload: {products}})
       dispatch(asyncActionFinish());
     } catch (error) {
-      console.log(error)
+      console.log("ERROR_ERROR_ERROR_ERROR",error)
       dispatch(asyncActionError())
     }
   }

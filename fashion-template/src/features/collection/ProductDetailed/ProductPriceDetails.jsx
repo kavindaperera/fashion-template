@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, Item, Header, Button, Label, Dropdown } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { addToCart } from "../../cart/cartActions";
+import PriceTag  from '../../pricetag/PriceTag';
 
 const sizes = [
   { key: "xxs", text: "XXS", value: "xxs" },
@@ -16,7 +17,7 @@ const sizes = [
 const actions = {
   addToCart
 };
-const ItemDetailedInfo = ({ product,  addToCart }) => {
+const ItemDetailedInfo = ({ product, currency,  addToCart }) => {
   return (
     <div>
       <Grid>
@@ -27,23 +28,7 @@ const ItemDetailedInfo = ({ product,  addToCart }) => {
             </p>
           </Grid.Column>
           <Grid.Column floated="right">
-            {product.discount && product.discount > 0 && (
-              <p>
-                <del
-                  style={{ color: "grey", fontSize: "20px", fontWeight: "1" }}
-                >
-                  ${product.price}{" "}
-                </del>
-                <a style={{ color: "red", fontSize: "20px", fontWeight: "1" }}>
-                  ${product.price - (product.price * product.discount) / 100}
-                </a>
-              </p>
-            )}
-            {product.discount && product.discount == 0 && (
-              <p style={{ color: "grey", fontSize: "20px", fontWeight: "1" }}>
-                ${product.price}
-              </p>
-            )}
+          <PriceTag currency={currency} price= {product.price} discount= {product.discount} ></PriceTag>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row columns={2}>

@@ -2,9 +2,11 @@
 import React, { Component } from "react";
 import { Card , Label, Image} from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import PriceTag  from '../../pricetag/PriceTag'
+
 class ProductListItem extends Component {
   render() {
-    const { product} = this.props;
+    const { product, currency} = this.props;
 
     return (
       
@@ -23,14 +25,7 @@ class ProductListItem extends Component {
         <div className="content">
           <span className="description">{product.name}</span>
           <div className="meta">
-          {product.discount && product.discount > 0 && (
-        <div>
-          <h4>
-            <del style={{ color: "grey" }}>${product.price}</del><a style={{ color: "red" }} >${product.price - (product.price * product.discount) / 100}{" "}</a>
-          </h4>
-        </div>
-      )}
-      {product.discount && product.discount == 0 && <a>${product.price}</a>}
+          <PriceTag currency={currency} price= {product.price} discount= {product.discount} ></PriceTag>
             <div>
               {product.colors && product.colors.length >1 && (
                 <div className="date">

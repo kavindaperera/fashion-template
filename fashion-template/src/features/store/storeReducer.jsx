@@ -3,18 +3,14 @@ import { FETCH_STORE } from "./storeConstants";
 
 
 
-const initialState = {
-}
+const initialState = [];
 
 /*stores:  "7dbDylC8CZTNBPcVPJyn" , "Yf2zTsC4IGCpufdop111" */
 
 export const fetchStore = (state, payload) => {
-  return payload.store
+  return payload.currentStore
 }
-
-
 
 export default createReducer(initialState, {
     [FETCH_STORE]: fetchStore,
-
 })

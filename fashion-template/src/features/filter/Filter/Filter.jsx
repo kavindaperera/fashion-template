@@ -3,11 +3,7 @@ import {
   Menu,
   Container,
   Dropdown,
-  Grid,
-  Visibility,
-  Button,
 } from "semantic-ui-react";
-import { NavLink, Link } from "react-router-dom";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";

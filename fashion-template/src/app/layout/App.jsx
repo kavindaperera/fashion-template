@@ -9,7 +9,7 @@ import HomePage from "../../features/store/HomePage";
 import CartDashboard from '../../features/cart/CartDashboard/CartDashboard'
 import ModalManager from '../../features/modals/ModalManager'
 import Footer from "../../features/footer/Footer";
-
+import NotFound from '../../features/pages/NotFound'
 
 class App extends Component {
   render() {
@@ -30,12 +30,14 @@ class App extends Component {
                 <Route path={`/:store/collection/:category`}  component={CollectionDashboard} />
                 <Route path={`/:store/my-account`} component={SettingsDashboard} />
                 <Route path={`/:store/cart`} component={CartDashboard} />
+                <Route path={`/:store/error`} component={NotFound} />
                 </Switch>
               </Grid>
+              <Footer/>
             </div>
           )}
         />
-        <Footer/>
+        {/*<Footer/>*/}
       </div>
     );
   }

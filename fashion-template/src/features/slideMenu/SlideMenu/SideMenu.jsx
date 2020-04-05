@@ -1,23 +1,30 @@
 import React, { Component } from 'react'
 import { Menu } from 'semantic-ui-react'
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, withRouter } from "react-router-dom";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { connect } from "react-redux";
 import { withFirebase, firestoreConnect } from "react-redux-firebase";
 import _ from "lodash";
+import { getStore } from '../../store/storeActions'
 
 
 const mapState = (state, ownProps) => ({
-    store: state.firestore.ordered.store,
+    store: state.store[0],
     loading: state.async.loading,
     //category: ownProps.match.params
+    currentStore: ownProps.match.params.store
   });
 
-  const actions = {};
+  const actions = {getStore};
 
+  
 
 class SideMenu extends Component {
   state = { activeItem: '' }
+
+  componentDidMount() {
+    this.props.getStore(this.props.currentStore);
+  }
 
   handleItemClick = (e,  {name} ) => this.setState({ activeItem: name })
 
@@ -35,27 +42,26 @@ class SideMenu extends Component {
           as={NavLink}
           to={`/${this.props.currentStore}/collection/all`}
         />
-        {store && store.map(s => s.id === this.props.currentStore &&
-         (s.categories &&
-         s.categories.map(category =>
-
+        {store &&
+         (store.categories && 
+         store.categories.map(category => 
          <Menu.Item
-          name= {category}
+          name= {category.name}
           active={activeItem === {sortCategory}}
           onClick={this.handleItemClick}
           as={NavLink}
-          to={`/${this.props.currentStore}/collection/${category}`}
+          to={`/${this.props.currentStore}/collection/${category.name}`}
         />
          ))
-        )}
- 
+        }
+
       </Menu>
     )
   }
 }
 
 
-export default withFirebase(connect(
+export default withRouter(withFirebase(connect(
     mapState,
     actions
-  )(firestoreConnect([{ collection: "store" }])(SideMenu)));
+  )(firestoreConnect([{ collection: "store" }])(SideMenu))));
