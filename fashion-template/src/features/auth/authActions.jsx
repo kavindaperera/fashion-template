@@ -44,10 +44,11 @@ export const registerUser = (user) =>
     }
   }
 
-export const socialLogin = (selectedProvider) =>
+export const socialLogin = (selectedProvider, currentStore) =>
   async (dispatch, getState, {getFirebase, getFirestore}) => {
     const firebase = getFirebase();
     const firestore = getFirestore();
+
     try {
       dispatch(closeModal());
       let user = await firebase.login({
@@ -59,6 +60,25 @@ export const socialLogin = (selectedProvider) =>
           displayName: user.profile.displayName,
           photoURL: user.profile.avatarUrl,
           createdAt: firestore.FieldValue.serverTimestamp()
+        })
+      }
+      let buyerAccount = await firestore.get({
+        collection:'Stores',
+        doc:currentStore,
+        subcollections:[{collection:'Buyers', doc: user.user.uid }]
+      });
+      console.log('account:',buyerAccount)
+      console.log('current:',currentStore)
+      console.log('user:',user.user.uid)
+      if (!buyerAccount.data()){
+        await firestore.set({
+          collection:'Stores',
+          doc:currentStore,
+          subcollections:[{collection:'Buyers', doc: user.user.uid }]
+        },
+        {
+          displayName: user.profile.displayName,
+          createdAt: firestore.FieldValue.serverTimestamp(),
         })
       }
     } catch (error) {

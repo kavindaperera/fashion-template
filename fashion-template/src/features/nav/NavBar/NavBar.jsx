@@ -31,7 +31,7 @@ const mapState = (state, ownProps) => ({
 const query = ({currentStore}) => {
   return [
     {
-      collection:'store',
+      collection:'Stores',
       doc: currentStore,
       storeAs: 'selectedStore'
     }
@@ -45,10 +45,11 @@ const menuStyle = {
   marginBottom: "1em",
   marginTop: "4em",
   transition: "box-shadow s ease, padding 0.5s ease",
+  backgroundColor: "#fff",
 };
 
 const fixedMenuStyle = {
-  backgroundColor: "#fff",
+  backgroundColor: "#fdfdfd",
   border: "1px solid #fff",
 };
 
@@ -59,8 +60,9 @@ class NavBar extends Component {
   };
 
   handleSignedOut = () => {
-    this.props.firebase.logout();
-    this.props.history.push("/");
+    this.props.firebase.logout();    
+    console.log('signingout from:',this.props.currentStore)
+    this.props.history.push(`/${this.props.currentStore}/`);
   };
 
   handleRegister = () => {
@@ -87,7 +89,7 @@ class NavBar extends Component {
                   <Container as={Link} to={`/${currentStore}/`}  style={{ marginTop: "2em" }}>
                     <Image
                       alt="a"
-                      src={store.storeLogo}
+                      src={store.storeCustomization.logo}
                       size="small"
                       centered
                     />
@@ -105,7 +107,7 @@ class NavBar extends Component {
                     >
                       <Container fluid className="nav">
                         <Menu.Item as={Link} to={`/${currentStore}/`} header>
-                          <Image  size="tiny" src={store.storeLogo} alt="a"/>
+                          <Image  size="tiny" src={store.storeCustomization.logo} alt="a"/>
                         </Menu.Item>
                         <Menu.Menu position="right">
                           <Menu.Item
@@ -147,6 +149,7 @@ class NavBar extends Component {
                           <SignedOutMenu
                             signIn={this.handleSignedIn}
                             register={this.handleRegister}
+                            currentStore={currentStore}
                           />
                         )}
                       </Container>

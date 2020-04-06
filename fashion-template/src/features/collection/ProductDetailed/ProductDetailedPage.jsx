@@ -33,9 +33,9 @@ const actions = {};
 const query = ({currentStore}) => {
   return [
     {
-      collection:'store',
+      collection:'Stores',
       doc: currentStore,
-      subcollections:[{collection: 'items'}],
+      subcollections:[{collection: 'Items'}],
       storeAs: 'items'
     }
   ]

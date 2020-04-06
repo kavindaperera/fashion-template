@@ -20,7 +20,7 @@ const actions = {};
 const query = ({currentStore}) => {
   return [
     {
-      collection:'store',
+      collection:'Stores',
       doc: currentStore,
       storeAs: 'selectedStore'
     }
@@ -38,7 +38,7 @@ render (){
   if (loading) return <LoadingComponent inverted={true} />;
 
   return (
-    <div>
+    <div className="masthead ">
       {store &&
               <Grid key={store.id} className="main">
                 <Grid.Row>
@@ -46,7 +46,7 @@ render (){
                     <Image
                       onClick={() => history.push(`/${currentStore}/collection/all`)}
                       alt="a"
-                      src={store.storeLogo}
+                      src={store.storeCustomization.logo}
                       size="small"
                       centered
                     />
@@ -66,8 +66,8 @@ render (){
                 <Grid.Row>
                   <Grid.Column>
                     <Carousel showThumbs= {false} showStatus={false} centerMode centerSlidePercentage={25}>
-                      {store.coverPhotos &&
-                        store.coverPhotos.map(photo => (
+                      {store.storeCustomization.coverPhotos &&
+                        store.storeCustomization.coverPhotos.map(photo => (
                             <img alt="a" key={photo} src={photo} />
                         ))}
                     </Carousel>

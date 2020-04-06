@@ -6,15 +6,15 @@ import { login, socialLogin } from '../authActions';
 import SocialLogin from '../SocialLogin/SocialLogin';
 
 const actions = {
-  login, 
+  login,
   socialLogin
 }
 
-const LoginForm = ({login, socialLogin, handleSubmit, error}) => {
+const LoginForm = ({login, socialLogin, handleSubmit, error,currentStore}) => {
   return (
     <Form onSubmit={handleSubmit(login)} error size="large">
       <Segment>
-        <SocialLogin socialLogin={socialLogin}/>
+        <SocialLogin socialLogin={socialLogin} currentStore={currentStore}/>
       </Segment>
     </Form>
   );
