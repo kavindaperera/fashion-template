@@ -1,67 +1,69 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Button, Icon, Item } from "semantic-ui-react";
+import { Grid, Image, Button,Icon, Header } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { queryAllByAltText } from "@testing-library/react";
+import StickyBox from "react-sticky-box";
 
-const mapState = state => ({
-  auth : state.firebase.auth,
+const mapState = (state) => ({
+  auth: state.firebase.auth,
   profile: state.firebase.profile,
   loading: state.async.loading,
-  user: state.firebase.profile,
-  cart: state.firestore.ordered.cart
 });
-
-const query = ({auth}) => {
-  return [
-    {
-      collection:'users',
-      doc: auth.uid,
-      subcollections:[{collection: 'storeCarts'}],
-      storeAs: 'cart'
-    }
-  ]
-}
 
 const actions = {};
 
 class CartDashboard extends Component {
-  
   render() {
-    const { auth, user,  cart, loading } = this.props;
-    
+    const { auth, loading } = this.props;
 
     if (loading) return <LoadingComponent inverted={true} />;
 
     return (
-      <div>
-        <Item.Group divided>
-          {cart &&
-            cart.map(c => ( c.state == 'inCart' &&
-              <Item>
-                <Item.Image size="small" src={c.order.photoURL} />
-                <Item.Content>
-                  <h4 as="a">{c.order.productName}</h4>
-                  <h5>{c.order.quantity}</h5>
-                  <h5>
-                    <del style={{ color: "grey" }}>${c.order.price} </del>
-                    <a style={{ color: "red" }}>${c.order.price - (c.order.price * c.order.discount) / 100}{" "}</a>
-                  </h5>
-                  <Item.Extra>
-                    <Button color='black' circular floated='right' icon='trash alternate outline' />
-                  </Item.Extra>
-                </Item.Content>
-              </Item>
-            ))}
-        </Item.Group>
-        <h1> </h1>
-      </div>
+      <Grid columns={2}>
+        <Grid.Row>
+          <Grid.Column width={12}>
+          <Header as="h3">My Bag</Header>
+            <Grid.Row>
+              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+            </Grid.Row>
+            <Grid.Row>
+              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+            </Grid.Row>
+            <Grid.Row>
+              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+            </Grid.Row>
+            <Grid.Row>
+              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+            </Grid.Row>
+            <Grid.Row>
+              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+            </Grid.Row>
+            <Grid.Row>
+              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+            </Grid.Row>
+            <Grid.Row>
+              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+            </Grid.Row>
+            <Grid.Row>
+              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+            </Grid.Row>
+            <Grid.Row>
+              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+            </Grid.Row>
+          </Grid.Column>
+          <Grid.Column width={4}>
+            <StickyBox offsetTop={70} offsetBottom={20}>
+              <Header as="h3">Order Summary</Header>
+              <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
+              <Button secondary fluid size="huge">Checkout<Icon name="" /></Button>
+            </StickyBox>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     );
   }
 }
 
-export default connect(
-  mapState,
-  actions
-)(firestoreConnect(auth => query(auth))(CartDashboard));
+export default connect(mapState, actions)(firestoreConnect()(CartDashboard));

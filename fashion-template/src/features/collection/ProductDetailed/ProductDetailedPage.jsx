@@ -8,12 +8,13 @@ import ProductDetailedPhotoSlide from "./ProductDetailedPhotoSlide";
 import ProductPriceDetails from "./ProductPriceDetails";
 import StickyBox from "react-sticky-box";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
-import { getStore } from '../../store/storeActions'
+
 const mapState = (state, ownProps) => {
   const productId = ownProps.match.params.id;
   const products = state.firestore.ordered.items;
   const currentStore = ownProps.match.params.store;
   const store = state.firestore.data.selectedStore;
+  const config = state.firestore.data.config;
 
   let product = {};
 
@@ -24,7 +25,8 @@ const mapState = (state, ownProps) => {
     product,
     products,
     currentStore,
-    store
+    store,
+    config
   };
 };
 
@@ -51,9 +53,20 @@ class ProductDetailedPage extends Component {
   }
   render(){
 
-  const {product, store} = this.props;
-  console.log('detailed',store);
-  console.log('detailed',product)
+  const {product, store,config} = this.props;
+
+  //getting store currency
+  if (config && store) {
+    const currencies = config.currencies;
+    const storeCurrency = store.currency;
+    var value;
+    var currency;
+    Object.keys(currencies).forEach(function(key) {
+    value = currencies[key];
+    if (key==storeCurrency){ currency=value}
+    });
+  }
+
 
   if (!product.name) return <LoadingComponent inverted={true} />;
 
@@ -66,8 +79,8 @@ class ProductDetailedPage extends Component {
       </Grid.Column>
       <Grid.Column width={4}>
         <StickyBox offsetTop={70} offsetBottom={20}>
-        {store && 
-          <ProductPriceDetails currency={store.currency.symbol} product={product} />}
+        {store &&
+          <ProductPriceDetails currency={currency} product={product} />}
         </StickyBox>
       </Grid.Column>
     </Grid>

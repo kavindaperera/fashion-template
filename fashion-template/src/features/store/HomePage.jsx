@@ -66,8 +66,8 @@ render (){
                 <Grid.Row>
                   <Grid.Column>
                     <Carousel showThumbs= {false} showStatus={false} centerMode centerSlidePercentage={25}>
-                      {store.storeCustomization.coverPhotos &&
-                        store.storeCustomization.coverPhotos.map(photo => (
+                      {store.storeCustomization.coverPhotos.carousel &&
+                        store.storeCustomization.coverPhotos.carousel.map(photo => (
                             <img alt="a" key={photo} src={photo} />
                         ))}
                     </Carousel>
@@ -84,8 +84,8 @@ render (){
                   </Button>
                 </GridRow>
                 <Grid.Row>
-                {store.specialPhotos &&
-                  store.specialPhotos.map(photo => (
+                {store.storeCustomization.coverPhotos.banners &&
+                  store.storeCustomization.coverPhotos.banners.map(photo => (
                             <Image fluid style={{ marginTop: "2em" }} alt="a" key={photo} src={photo} />
                         ))}
                 </Grid.Row>

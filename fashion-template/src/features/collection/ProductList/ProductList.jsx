@@ -1,12 +1,22 @@
 import React, { Component } from "react";
 import ProductListItem from './ProductListItem'
 import { Card } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+
+
+
+const actions = {};
+
+const mapState = (state) => ({
+  config: state.firestore.data.config,
+});
 
 class ProductList extends Component {
 
   
   render() {
-    const { products, sortCategory, store } = this.props;
+    const { products, sortCategory, store, currency } = this.props;
 
     //Function to sort by Category Index
     const categories = store.categories;
@@ -16,10 +26,10 @@ class ProductList extends Component {
       <div>
         <Card.Group itemsPerRow={3}>
           { (sortCategory!=="") && products && products.map(product => ( 
-            (  product.visible && (product.category===(sortByIndex)) && <ProductListItem key={product.id}  product={product} store={store} />)
+            (  product.visible && (product.category===(sortByIndex)) && <ProductListItem key={product.id}  product={product} store={store} currency={currency} />)
           ))}
           { (sortCategory==="all") && products && products.map(product => ( 
-            (  product.visible && <ProductListItem key={product.id} product={product}  store={store}/>)
+            (  product.visible && <ProductListItem key={product.id} product={product}  store={store} currency={currency}/>)
           ))}
         </Card.Group>
       </div>
@@ -27,4 +37,4 @@ class ProductList extends Component {
   }
 }
 
-export default ProductList;
+export default (ProductList);

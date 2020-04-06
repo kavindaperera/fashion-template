@@ -1,9 +1,9 @@
 import React from "react";
 
-function PriceTag({ currency, price, discount }) {
+function PriceTag({ currency, price, discount, discountActive }) {
   return (
     <div data-testid="price-tag">
-      { discount  &&  discount > 0 && (
+      { discountActive  &&  discount > 0 && (
           <p>
             <del style={{ color: "grey" }}>
               {currency}
@@ -16,7 +16,7 @@ function PriceTag({ currency, price, discount }) {
           </p>
       )}
 
-      { discount  && discount == 0 && (
+      { (!discountActive || discount == 0) && (
         <p>
           {currency}
           {price}

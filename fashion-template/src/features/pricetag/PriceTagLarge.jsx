@@ -10,7 +10,7 @@ function PriceTagLarge({ currency, price, discount }) {
               {price}
             </del>
             <a style={{ color: "red" }}>
-              {currency}
+             {"   "} {currency}
               { price - (price * discount) / 100}
             </a>
           </h2>

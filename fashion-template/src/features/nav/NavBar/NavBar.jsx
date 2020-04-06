@@ -25,6 +25,7 @@ const mapState = (state, ownProps) => ({
   profile: state.firebase.profile,
   store: state.firestore.data.selectedStore,
   currentStore: ownProps.match.params.store,
+  config: state.firestore.data.config,
   params: ownProps.match.params
 });
 
@@ -34,6 +35,10 @@ const query = ({currentStore}) => {
       collection:'Stores',
       doc: currentStore,
       storeAs: 'selectedStore'
+    },{
+      collection:'Config',
+      doc: 'config_main',
+      storeAs: 'config'
     }
   ]
 }
@@ -45,11 +50,11 @@ const menuStyle = {
   marginBottom: "1em",
   marginTop: "4em",
   transition: "box-shadow s ease, padding 0.5s ease",
-  backgroundColor: "#fff",
+  backgroundColor: "#f5f5f5",
 };
 
 const fixedMenuStyle = {
-  backgroundColor: "#fdfdfd",
+  backgroundColor: "#f5f5f5",
   border: "1px solid #fff",
 };
 
@@ -78,9 +83,23 @@ class NavBar extends Component {
   unStickTopMenu = () => this.setState({ menuFixed: false });
 
   render() {
-    const { auth, profile, store,  currentStore,} = this.props;
+    const { auth, profile, store,  currentStore, config} = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
     const { menuFixed } = this.state;
+
+
+    //getting store currency
+    if (config && store) {
+      const currencies = config.currencies;
+      const storeCurrency = store.currency;
+      var value;
+      var currency;
+      Object.keys(currencies).forEach(function(key) {
+      value = currencies[key];
+      if (key==storeCurrency){ currency=value}
+      });
+    }
+
 
     return (
       <div>
@@ -111,7 +130,7 @@ class NavBar extends Component {
                         </Menu.Item>
                         <Menu.Menu position="right">
                           <Menu.Item
-                            name="All"
+                            name="Clothing"
                             as={NavLink}
                             to={`/${currentStore}/collection/all`} 
                           ></Menu.Item>

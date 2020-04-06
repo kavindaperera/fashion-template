@@ -7,6 +7,7 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 import SideMenu from '../../slideMenu/SlideMenu/SideMenu'
 import StickyBox from "react-sticky-box";
 import Filter from "../../filter/Filter/Filter";
+import moment from 'moment';
 
 const mapState = (state, ownProps) => ({
   products: state.firestore.ordered.items,
@@ -15,6 +16,7 @@ const mapState = (state, ownProps) => ({
   currentStore: ownProps.match.params.store,
   category: ownProps.match.params.category,
   store: state.firestore.data.selectedStore,
+  config: state.firestore.data.config,
 });
 
 const actions = { };
@@ -52,22 +54,29 @@ class CollectionDashboard extends Component {
     this.listProducts();
   };
 
+  checkDiscountStatus = (product) => {
+    const dateNow = moment().format('X');
+    const startDate = product.discount.startDate.seconds;
+    const endDate = product.discount.endDate.seconds;
+    return (startDate < dateNow && dateNow < endDate)
+  }
+
   listProducts = () => {
     this.setState(state => {
       if (state.sort !== "") {
         this.props.products.sort((a, b) =>
           state.sort === "lowest"
-            ? a.price - (a.price * a.discount) / 100 >
-              b.price - (b.price * b.discount) / 100
+            ? a.basePrice - (a.basePrice * a.discount.percentage) / 100 >
+              b.basePrice - (b.basePrice * b.discount.percentage) / 100
               ? 1
               : -1
-            : a.price - (a.price * a.discount) / 100 <
-              b.price - (b.price * b.discount) / 100
+            : a.basePrice - (a.basePrice * a.discount.percentage) / 100 <
+              b.basePrice - (b.basePrice * b.discount.percentage) / 100
             ? 1
             : -1
         );
       } else {
-        this.props.products.sort((a, b) => (a.id < b.id ? 1 : -1));
+        this.props.products.sort((a, b) => ((a.rating.totalRating/a.rating.ratingCount) < (b.rating.totalRating/b.rating.ratingCount) ? 1 : -1));
       }
       return { filteredProducts: this.props.products };
     });
@@ -76,9 +85,22 @@ class CollectionDashboard extends Component {
 
 
   render() {
-    const { store, products, filteredProducts, currentStore, category} = this.props;
+    const { store, products, filteredProducts, currentStore, category,config} = this.props;
 
-    console.log('collection',store)
+    console.log('collection',products)
+
+     //getting store currency
+     if (config && store) {
+      const currencies = config.currencies;
+      const storeCurrency = store.currency;
+      var value;
+      var currency;
+      Object.keys(currencies).forEach(function(key) {
+      value = currencies[key];
+      if (key==storeCurrency){ currency=value}
+      });
+    }
+
 
     if (!isLoaded(products) || isEmpty(products)) return <LoadingComponent inverted={true} />;
 
@@ -104,6 +126,7 @@ class CollectionDashboard extends Component {
               products={products}
               sortCategory={category}
               store = {store}
+              currency = {currency}
             /> }
           </Grid.Column>
           <Grid.Row>
