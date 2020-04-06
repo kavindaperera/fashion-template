@@ -79,10 +79,14 @@ export const socialLogin = (selectedProvider, currentStore) =>
         {
           displayName: user.profile.displayName,
           createdAt: firestore.FieldValue.serverTimestamp(),
-        })
+        });
+        toastr.light('New User', `Welcome to our store, ${user.user.displayName} !`)
+      }else{
+        toastr.light('Hello', `Welcome to our the Store`)
       }
     } catch (error) {
       console.log(error)
+      toastr.error('Error', error)
     }
   }
 

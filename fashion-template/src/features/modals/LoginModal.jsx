@@ -7,13 +7,13 @@ import { firestoreConnect } from 'react-redux-firebase';
 
 const actions = {closeModal};
 
-const mapState = (state) => ({
-    store: state.firestore.data.selectedStore,
+const mapState = (state, ownProps) => ({
+    store: state.modals.modalProps,
   });
 class LoginModal extends Component {
     render() {
         const {store} = this.props;
-        console.log(store.storeId)
+        console.log(store)
 
         return (
             <Modal
@@ -25,7 +25,7 @@ class LoginModal extends Component {
                 </Modal.Header>
                 <Modal.Content>
                     <Modal.Description>
-                        <LoginForm currentStore={store.storeId} />
+                        <LoginForm currentStore={store} />
                     </Modal.Description>
                 </Modal.Content>
             </Modal>

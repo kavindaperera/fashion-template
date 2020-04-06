@@ -56,11 +56,11 @@ const fixedMenuStyle = {
 class NavBar extends Component {
 
   handleSignedIn = () => {
-    this.props.openModal("LoginModal");
+    this.props.openModal("LoginModal",this.props.currentStore);
   };
 
   handleSignedOut = () => {
-    this.props.firebase.logout();    
+    this.props.firebase.logout();
     console.log('signingout from:',this.props.currentStore)
     this.props.history.push(`/${this.props.currentStore}/`);
   };
@@ -149,7 +149,6 @@ class NavBar extends Component {
                           <SignedOutMenu
                             signIn={this.handleSignedIn}
                             register={this.handleRegister}
-                            currentStore={currentStore}
                           />
                         )}
                       </Container>
