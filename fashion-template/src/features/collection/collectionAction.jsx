@@ -26,3 +26,41 @@ export const getProducts = (storeId) =>
       dispatch(asyncActionError())
     }
   }
+
+  export const getSubItems = (itemId,storeId) =>
+    async (dispatch, getState) => {
+      dispatch(asyncActionStart());
+      const firestore = firebase.firestore();
+      console.log('ids',itemId,storeId)
+      const subItems = [];
+      const itemQuery = firestore.collection('Stores').doc(storeId).collection('Items').doc(itemId);
+      console.log('1',itemQuery);
+      try{ 
+        dispatch(asyncActionStart());
+        let itemQuerySnap = await itemQuery.get()
+        console.log('2',itemQuerySnap)
+        const subItemQuery = firebase.collection('Stores').doc(storeId).collection('SubItems').where('item','==',itemQuery);
+        let subItemQuerySnap = await subItemQuery.get()
+        console.log('3',subItemQuerySnap)
+
+      } catch (error){
+        console.log("ERROR_ERROR_ERROR_ERROR",error)
+        dispatch(asyncActionError())
+      }
+
+      /*docRef.get().then(doc => {
+        if (doc.exists){
+          firebase.collection('Stores').doc(storeId).collection('SubItems').where('item','==',docRef).get().then(querySnapshot => {
+            querySnapshot.forEach(docu => {
+              let subItem = docu.data(); //data of subitem
+              if (subItem.item){subItem.item.get().then(res => {
+                subItem.item = res.data();
+                subItems.push(subItem);
+                console.log('subItems',subItems)
+              })}
+            })
+          })
+        }
+      }) */
+
+    }

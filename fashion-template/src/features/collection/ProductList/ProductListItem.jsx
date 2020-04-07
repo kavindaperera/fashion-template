@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import { Card , Label, Image, Rating} from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link,Route } from "react-router-dom";
 import PriceTag  from '../../pricetag/PriceTag'
 import moment from 'moment';
+
 
 
 
@@ -32,7 +33,8 @@ class ProductListItem extends Component {
     }*/
 
     return (
-      <Card className="card" as={Link} to={`product/${product.id}`}>
+      
+      <Card className="card" as={Link} to={`product/${product.id}`} >
       {discountActive && product.discount.percentage > 0 && (
         <div>
         <Label  circular color='red' floating >{"-"}

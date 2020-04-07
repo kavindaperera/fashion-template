@@ -8,6 +8,7 @@ import ProductDetailedPhotoSlide from "./ProductDetailedPhotoSlide";
 import ProductPriceDetails from "./ProductPriceDetails";
 import StickyBox from "react-sticky-box";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
+import { getSubItems } from '../collectionAction'
 
 const mapState = (state, ownProps) => {
   const productId = ownProps.match.params.id;
@@ -26,11 +27,11 @@ const mapState = (state, ownProps) => {
     products,
     currentStore,
     store,
-    config
+    config,
   };
 };
 
-const actions = {};
+const actions = {getSubItems};
 
 const query = ({currentStore}) => {
   return [
@@ -50,10 +51,13 @@ class ProductDetailedPage extends Component {
   async componentDidMount(){
     const {firestore, match,} = this.props;
     await firestore.setListener(`collection/products/${match.params.id}`);
+    await this.props.getSubItems(`${match.params.id}`,`${match.params.store}`);
   }
+
   render(){
 
-  const {product, store,config} = this.props;
+  const {product, store, config} = this.props;
+
 
   //getting store currency
   if (config && store) {
