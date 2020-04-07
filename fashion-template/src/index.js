@@ -39,9 +39,9 @@ if (module.hot) {
   });
 }
 
-store.firebaseAuthIsReady.then(() => {
+/*store.firebaseAuthIsReady.then(() => {
   render();
-});
+});*/
 
 render();
 

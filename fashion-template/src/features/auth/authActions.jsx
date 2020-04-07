@@ -55,29 +55,30 @@ export const socialLogin = (selectedProvider, currentStore) =>
         provider: selectedProvider,
         type: 'popup'
       })
-      if (user.additionalUserInfo.isNewUser) {
+      /*if (user.additionalUserInfo.isNewUser) {
         await firestore.set(`users/${user.user.uid}`, {
           displayName: user.profile.displayName,
           photoURL: user.profile.avatarUrl,
           createdAt: firestore.FieldValue.serverTimestamp()
         })
-      }
+      }*/
       let buyerAccount = await firestore.get({
         collection:'Stores',
         doc:currentStore,
         subcollections:[{collection:'Buyers', doc: user.user.uid }]
       });
-      console.log('account:',buyerAccount)
-      console.log('current:',currentStore)
-      console.log('user:',user.user.uid)
-      if (!buyerAccount.data()){
+      //console.log('account:',buyerAccount)
+      //console.log('current:',currentStore)
+      //console.log('user:',user.user.uid)
+      if (!buyerAccount.data()){  //Checking whether new user
         await firestore.set({
           collection:'Stores',
           doc:currentStore,
           subcollections:[{collection:'Buyers', doc: user.user.uid }]
         },
-        {
+        { avatarUrl: user.profile.avatarUrl,
           displayName: user.profile.displayName,
+          email: user.profile.email,
           createdAt: firestore.FieldValue.serverTimestamp(),
         });
         toastr.light('New User', `Welcome to our store, ${user.user.displayName} !`)

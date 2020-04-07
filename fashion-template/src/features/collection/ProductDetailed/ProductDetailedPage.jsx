@@ -16,6 +16,7 @@ const mapState = (state, ownProps) => {
   const currentStore = ownProps.match.params.store;
   const store = state.firestore.data.selectedStore;
   const config = state.firestore.data.config;
+  const subItems = state.products;
 
   let product = {};
 
@@ -27,7 +28,7 @@ const mapState = (state, ownProps) => {
     products,
     currentStore,
     store,
-    config,
+    config,subItems
   };
 };
 
@@ -56,8 +57,7 @@ class ProductDetailedPage extends Component {
 
   render(){
 
-  const {product, store, config} = this.props;
-
+  const {product, store, config, subItems} = this.props;
 
   //getting store currency
   if (config && store) {
@@ -83,8 +83,8 @@ class ProductDetailedPage extends Component {
       </Grid.Column>
       <Grid.Column width={4}>
         <StickyBox offsetTop={70} offsetBottom={20}>
-        {store &&
-          <ProductPriceDetails currency={currency} product={product} />}
+        {subItems && store &&
+          <ProductPriceDetails currency={currency} product={product} subItems={subItems} />}
         </StickyBox>
       </Grid.Column>
     </Grid>

@@ -39,17 +39,6 @@ class BasicPage extends Component {
                       />
                     </Form.Group>
                     <Field
-                        width={8}
-                        name='dateOfBirth'
-                        component={DateInput}
-                        placeholder='Date of Birth'
-                        dateFormat='YYYY-MM-DD'
-                        showYearDropdown={true}
-                        showMonthDropdown={true}
-                        dropdownMode='select'
-                        maxDate={moment().subtract(18,'years')}
-                    />
-                    <Field
                         name='phoneNumber'
                         placeholder='Phone Number'
                         type='text'

@@ -4,16 +4,9 @@ import { connect } from "react-redux";
 import { addToCart } from "../../cart/cartActions";
 import PriceTagLarge  from '../../pricetag/PriceTagLarge';
 import { render } from "enzyme";
+import VariantSelector from "./VariantSelector";
 
-const sizes = [
-  { key: "xxs", text: "XXS", value: "xxs" },
-  { key: "xs", text: "XS", value: "xs" },
-  { key: "s", text: "S", value: "s" },
-  { key: "m", text: "M", value: "m" },
-  { key: "l", text: "L", value: "l" },
-  { key: "xl", text: "XL", value: "xl" },
-  { key: "xxl", text: "XXL", value: "xxl" }
-];
+
 
 const actions = {
   addToCart
@@ -21,6 +14,7 @@ const actions = {
 
 
 class ItemDetailedInfo extends Component {
+
 
   state = { activeIndex: 0 }
 
@@ -34,7 +28,7 @@ class ItemDetailedInfo extends Component {
 
   render() {
 
-    const { product, currency, addToCart } = this.props;
+    const { product, currency, addToCart, subItems } = this.props;
 
     const { activeIndex } = this.state
 
@@ -47,7 +41,7 @@ class ItemDetailedInfo extends Component {
               {product.name}
             </p>
         </Grid.Row>
-        <Grid.Row> 
+        <Grid.Row>
         <PriceTagLarge currency={currency} price= {product.basePrice} discount= {product.discount.percentage} ></PriceTagLarge>
         </Grid.Row>
         <Grid.Row >
@@ -63,9 +57,10 @@ class ItemDetailedInfo extends Component {
         </Grid.Row>
         <Grid.Row columns={1}>
           <Grid.Column>
-            <Button.Group fluid>
+          <VariantSelector initialValues={subItems} />
+           {/*} <Button.Group fluid>
               <Button labelPosition='right' icon='bookmark outline'  onClick={() => addToCart( 1, product)} color="black" content='Add to Bag'/>
-            </Button.Group>
+            </Button.Group>*/}
           </Grid.Column>
         </Grid.Row>
         <p> <strong>Product Description</strong> </p>

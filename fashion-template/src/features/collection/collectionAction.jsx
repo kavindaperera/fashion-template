@@ -1,11 +1,11 @@
 import { toastr } from 'react-redux-toastr'
-import {FETCH_PRODUCTS} from "./collectionConstants";
+import {FETCH_PRODUCTS, FETCH_SUBITEMS} from "./collectionConstants";
 import {asyncActionStart,asyncActionFinish,asyncActionError
 } from "../async/asyncActions";
 import firebase from '../../app/config/firebase'
 
 
-export const getProducts = (storeId) => 
+/*export const getProducts = (storeId) => 
   async (dispatch, getState) => {
     let store = storeId;
     const firestore = firebase.firestore();
@@ -25,7 +25,7 @@ export const getProducts = (storeId) =>
       console.log("ERROR_ERROR_ERROR_ERROR",error)
       dispatch(asyncActionError())
     }
-  }
+  }*/
 
   export const getSubItems = (itemId,storeId) =>
     async (dispatch, getState) => {
@@ -34,14 +34,20 @@ export const getProducts = (storeId) =>
       console.log('ids',itemId,storeId)
       const subItems = [];
       const itemQuery = firestore.collection('Stores').doc(storeId).collection('Items').doc(itemId);
-      console.log('1',itemQuery);
-      try{ 
+      try{
         dispatch(asyncActionStart());
         let itemQuerySnap = await itemQuery.get()
-        console.log('2',itemQuerySnap)
-        const subItemQuery = firebase.collection('Stores').doc(storeId).collection('SubItems').where('item','==',itemQuery);
+        const subItemQuery = firestore.collection('Stores').doc(storeId).collection('SubItems').where('item','==',itemQuery);
         let subItemQuerySnap = await subItemQuery.get()
-        console.log('3',subItemQuerySnap)
+        subItemQuerySnap.forEach(doc => {
+          let subItem = doc.data();
+          if (subItem.item){subItem.item.get().then(res => {
+            subItem.item = res.data();
+            subItems.push(subItem);
+          })}
+        })
+        dispatch({type: FETCH_SUBITEMS, payload: {subItems}})
+        dispatch(asyncActionFinish());
 
       } catch (error){
         console.log("ERROR_ERROR_ERROR_ERROR",error)

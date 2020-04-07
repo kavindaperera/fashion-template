@@ -14,7 +14,6 @@ const ProductDetailedPhotoSlide = ({ product }) => {
           {product.photos &&
             product.photos.map(photo => (
               <div><Image key={photo} src={photo.url} /></div>
-              
             ))}
         </Grid.Column>
       </Grid>
