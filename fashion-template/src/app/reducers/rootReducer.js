@@ -12,7 +12,7 @@ import FilterReducer from '../../features/filter/FilterReducer';
 
 const rootReducer = combineReducers ({
     form: FormReducer,
-    products: collectionReducer,
+    collection: collectionReducer,
     store: storeReducer,
     modals: modalsReducer,
     auth: authReducer,

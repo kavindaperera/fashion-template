@@ -1,5 +1,5 @@
 import { toastr } from 'react-redux-toastr'
-import {FETCH_PRODUCTS, FETCH_SUBITEMS} from "./collectionConstants";
+import { FETCH_PRODUCTS, FETCH_SUBITEMS , GET_CURRENCY }  from "./collectionConstants";
 import {asyncActionStart,asyncActionFinish,asyncActionError
 } from "../async/asyncActions";
 import firebase from '../../app/config/firebase'
@@ -27,13 +27,14 @@ import firebase from '../../app/config/firebase'
     }
   }*/
 
-  export const getSubItems = (itemId,storeId) =>
+  /*export const getSubItems = (itemId,storeId) =>
     async (dispatch, getState) => {
       dispatch(asyncActionStart());
       const firestore = firebase.firestore();
       console.log('ids',itemId,storeId)
       const subItems = [];
       const itemQuery = firestore.collection('Stores').doc(storeId).collection('Items').doc(itemId);
+
       try{
         dispatch(asyncActionStart());
         let itemQuerySnap = await itemQuery.get()
@@ -53,20 +54,58 @@ import firebase from '../../app/config/firebase'
         console.log("ERROR_ERROR_ERROR_ERROR",error)
         dispatch(asyncActionError())
       }
+  }*/
 
-      /*docRef.get().then(doc => {
-        if (doc.exists){
-          firebase.collection('Stores').doc(storeId).collection('SubItems').where('item','==',docRef).get().then(querySnapshot => {
-            querySnapshot.forEach(docu => {
-              let subItem = docu.data(); //data of subitem
-              if (subItem.item){subItem.item.get().then(res => {
-                subItem.item = res.data();
-                subItems.push(subItem);
-                console.log('subItems',subItems)
-              })}
-            })
-          })
-        }
-      }) */
 
-    }
+export const getSubItems = (item,store) =>
+  async (dispatch, getState) => {
+    try{
+      dispatch(asyncActionStart());
+    const firestore = firebase.firestore();
+    const subItemRefs = item.subItems;
+    const subItems = [];
+    const subItemIds = [];
+    subItemRefs.map(subItem => {
+      subItemIds.push(subItem.id)
+  })
+    subItemIds.map(id => {
+      const subItemQuery = firestore.collection('Stores').doc(store).collection('SubItems').doc(id);
+      let getDoc = subItemQuery.get()
+      .then(doc => {
+        subItems.push(doc.data());
+    })
+  })
+  console.log(subItems)
+  dispatch({type: FETCH_SUBITEMS, payload: {subItems}})
+  dispatch(asyncActionFinish());
+
+}catch(error){
+  console.log("ERROR_ERROR_ERROR_ERROR",error)
+        dispatch(asyncActionError())
+}
+}
+
+
+export const getCurrency = (config,store) =>
+  async (dispatch, getState) => {
+  try{
+    dispatch(asyncActionStart());
+    let symbol = 'X';
+    const currencies = config.currencies;
+    const storeCurrency = store.currency;
+    console.log(currencies, storeCurrency );
+    var value;
+    Object.keys(currencies).forEach(function(key) {
+      value = currencies[key];
+      if (key==storeCurrency){ symbol=value}
+    });
+
+    dispatch({type: GET_CURRENCY, payload: {symbol}})
+    dispatch(asyncActionFinish());
+
+  }catch(error){
+  console.log("ERROR_ERROR_ERROR_ERROR",error)
+        dispatch(asyncActionError())
+}
+}
+

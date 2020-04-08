@@ -13,11 +13,13 @@ import { NavLink, Link, withRouter } from "react-router-dom";
 import SignedOutMenu from "../Menus/SignedOutMenu";
 import SignedInMenu from "../Menus/SignedInMenu";
 import { openModal } from "../../modals/modalActions";
+import {getCurrency}from '../../collection/collectionAction'
 import "../../../index.css";
 
 
 const actions = {
-  openModal
+  openModal,
+  getCurrency
 };
 
 const mapState = (state, ownProps) => ({
@@ -59,6 +61,11 @@ const fixedMenuStyle = {
 };
 
 class NavBar extends Component {
+
+
+  async componentDidMount(){
+    this.props.getCurrency(this.props.config, this.props.store);
+  }
 
   handleSignedIn = () => {
     this.props.openModal("LoginModal",this.props.currentStore);

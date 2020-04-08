@@ -16,7 +16,7 @@ const mapState = (state, ownProps) => {
   const currentStore = ownProps.match.params.store;
   const store = state.firestore.data.selectedStore;
   const config = state.firestore.data.config;
-  const subItems = state.products;
+  //const subItems = state.products;
 
   let product = {};
 
@@ -28,11 +28,12 @@ const mapState = (state, ownProps) => {
     products,
     currentStore,
     store,
-    config,subItems
+    config,
+    /*subItems*/
   };
 };
 
-const actions = {getSubItems};
+const actions = {};
 
 const query = ({currentStore}) => {
   return [
@@ -50,17 +51,22 @@ class ProductDetailedPage extends Component {
 
 
   async componentDidMount(){
-    const {firestore, match,} = this.props;
+    const {firestore, match} = this.props;
     await firestore.setListener(`collection/products/${match.params.id}`);
-    await this.props.getSubItems(`${match.params.id}`,`${match.params.store}`);
+  }
+
+
+  async componentWillUnmount() {
+    const { firestore, match } = this.props;
+    await firestore.unsetListener(`collection/products/${match.params.id}`);
   }
 
   render(){
 
-  const {product, store, config, subItems} = this.props;
+  const {product, currentStore, store, config} = this.props;
 
   //getting store currency
-  if (config && store) {
+  /*if (config && store) {
     const currencies = config.currencies;
     const storeCurrency = store.currency;
     var value;
@@ -69,7 +75,11 @@ class ProductDetailedPage extends Component {
     value = currencies[key];
     if (key==storeCurrency){ currency=value}
     });
-  }
+  }*/
+
+  //console.log('product',product)
+  //console.log('subitem',product.subItems[0].id)
+
 
 
   if (!product.name) return <LoadingComponent inverted={true} />;
@@ -83,8 +93,8 @@ class ProductDetailedPage extends Component {
       </Grid.Column>
       <Grid.Column width={4}>
         <StickyBox offsetTop={70} offsetBottom={20}>
-        {subItems && store &&
-          <ProductPriceDetails currency={currency} product={product} subItems={subItems} />}
+        { store && product &&
+          <ProductPriceDetails currentStore={currentStore}  product={product} />}
         </StickyBox>
       </Grid.Column>
     </Grid>

@@ -1,2 +1,3 @@
 export const FETCH_PRODUCTS = "FETCH_PRODUCTS";
 export const FETCH_SUBITEMS = "FETCH_SUBITEMS";
+export const GET_CURRENCY = "GET_CURRENCY";

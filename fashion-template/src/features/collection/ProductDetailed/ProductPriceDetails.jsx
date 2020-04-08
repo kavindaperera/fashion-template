@@ -5,11 +5,20 @@ import { addToCart } from "../../cart/cartActions";
 import PriceTagLarge  from '../../pricetag/PriceTagLarge';
 import { render } from "enzyme";
 import VariantSelector from "./VariantSelector";
+import _ from "lodash";
+import { getSubItems, getCurrency } from '../collectionAction'
+import { firestoreConnect } from "react-redux-firebase";
 
+
+const mapState = (state, ownProps) => ({
+  subItems: state.collection.subItems,
+  symbol: state.collection.symbol,
+});
 
 
 const actions = {
-  addToCart
+  addToCart,
+  getSubItems
 };
 
 
@@ -26,23 +35,28 @@ class ItemDetailedInfo extends Component {
     this.setState({ activeIndex: newIndex })
   }
 
+  async componentDidMount(){
+    this.props.getSubItems(this.props.product, this.props.currentStore);
+  }
+
   render() {
 
-    const { product, currency, addToCart, subItems } = this.props;
+    const { product, addToCart , subItems, symbol } = this.props;
 
     const { activeIndex } = this.state
+    console.log('subItems',subItems)
+    console.log('symbol', symbol)
 
   return (
     <div>
     {product &&
       <Grid centered>
         <Grid.Row textAlign='center'>
-            <p style={{ color: "black", fontSize: "20px", fontWeight: "1" }}>
-              {product.name}
+            <p style={{ color: "black", fontSize: "2rem", fontWeight: "10", fontFamily: 'sans-serif' }}>{_.upperCase(product.name)}
             </p>
         </Grid.Row>
         <Grid.Row>
-        <PriceTagLarge currency={currency} price= {product.basePrice} discount= {product.discount.percentage} ></PriceTagLarge>
+        <PriceTagLarge currency={symbol} price= {product.basePrice} discount= {product.discount.percentage} ></PriceTagLarge>
         </Grid.Row>
         <Grid.Row >
           <Grid.Column>
@@ -57,14 +71,18 @@ class ItemDetailedInfo extends Component {
         </Grid.Row>
         <Grid.Row columns={1}>
           <Grid.Column>
-          <VariantSelector initialValues={subItems} />
+
+
+          <VariantSelector  />
            {/*} <Button.Group fluid>
               <Button labelPosition='right' icon='bookmark outline'  onClick={() => addToCart( 1, product)} color="black" content='Add to Bag'/>
             </Button.Group>*/}
           </Grid.Column>
         </Grid.Row>
-        <p> <strong>Product Description</strong> </p>
-        <p>{product.description}</p>
+        <Grid.Row >
+          <p> <strong>Product Description</strong> </p>
+          <p>{product.description}</p>
+        </Grid.Row>
         <Accordion styled fluid>
           {product.attributes && product.attributes.map((a, index) => ( 
             <div>
@@ -86,4 +104,4 @@ class ItemDetailedInfo extends Component {
   );}
 };
 
-export default connect(null, actions)(ItemDetailedInfo);
+export default connect(mapState, actions)(firestoreConnect()(ItemDetailedInfo));

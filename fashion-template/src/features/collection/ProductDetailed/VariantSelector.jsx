@@ -32,10 +32,9 @@ class VariantSelector extends Component {
     render() {
 
         const {pristine, submitting, handleSubmit, initialValues} = this.props;
-        console.log("initialValues",initialValues)
+        //console.log("initialValues",initialValues)
 
         return (
-            <Segment>
                 <Form onSubmit={this.props.handleSubmit(this.onFormSubmit)}>
                 <Field
                 name="size"
@@ -56,7 +55,7 @@ class VariantSelector extends Component {
                     <Button labelPosition='right' icon='bookmark outline'  disabled={pristine || submitting} size='large' color='black' content='Add to Bag'/>
                     </Button.Group>
                 </Form>
-            </Segment>
+
         );
     }
 }

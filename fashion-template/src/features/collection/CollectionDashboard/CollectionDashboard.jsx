@@ -17,6 +17,7 @@ const mapState = (state, ownProps) => ({
   category: ownProps.match.params.category,
   store: state.firestore.data.selectedStore,
   config: state.firestore.data.config,
+  symbol: state.collection.symbol,
 });
 
 const actions = { };
@@ -85,12 +86,12 @@ class CollectionDashboard extends Component {
 
 
   render() {
-    const { store, products, filteredProducts, currentStore, category,config} = this.props;
+    const { store, products, filteredProducts, currentStore, category,config, symbol} = this.props;
 
     console.log('collection',products)
 
      //getting store currency
-     if (config && store) {
+     /*if (config && store) {
       const currencies = config.currencies;
       const storeCurrency = store.currency;
       var value;
@@ -99,7 +100,7 @@ class CollectionDashboard extends Component {
       value = currencies[key];
       if (key==storeCurrency){ currency=value}
       });
-    }
+    }*/
 
 
     if (!isLoaded(products) || isEmpty(products)) return <LoadingComponent inverted={true} />;
@@ -126,7 +127,7 @@ class CollectionDashboard extends Component {
               products={products}
               sortCategory={category}
               store = {store}
-              currency = {currency}
+              currency = {symbol}
             /> }
           </Grid.Column>
           <Grid.Row>
