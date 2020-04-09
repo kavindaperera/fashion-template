@@ -41,7 +41,7 @@ class ItemDetailedInfo extends Component {
 
   render() {
 
-    const { product, addToCart , subItems, symbol } = this.props;
+    const { product, addToCart , subItems, symbol, discountActive } = this.props;
 
     const { activeIndex } = this.state
     console.log('subItems',subItems)
@@ -56,7 +56,7 @@ class ItemDetailedInfo extends Component {
             </p>
         </Grid.Row>
         <Grid.Row>
-        <PriceTagLarge currency={symbol} price= {product.basePrice} discount= {product.discount.percentage} ></PriceTagLarge>
+        <PriceTagLarge currency={symbol} price= {product.basePrice} discount= {product.discount.percentage} discountActive={discountActive} ></PriceTagLarge>
         </Grid.Row>
         <Grid.Row >
           <Grid.Column>

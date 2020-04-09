@@ -9,6 +9,7 @@ import ProductPriceDetails from "./ProductPriceDetails";
 import StickyBox from "react-sticky-box";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { getSubItems } from '../collectionAction'
+import moment from 'moment';
 
 const mapState = (state, ownProps) => {
   const productId = ownProps.match.params.id;
@@ -65,24 +66,19 @@ class ProductDetailedPage extends Component {
 
   const {product, currentStore, store, config} = this.props;
 
-  //getting store currency
-  /*if (config && store) {
-    const currencies = config.currencies;
-    const storeCurrency = store.currency;
-    var value;
-    var currency;
-    Object.keys(currencies).forEach(function(key) {
-    value = currencies[key];
-    if (key==storeCurrency){ currency=value}
-    });
-  }*/
-
-  //console.log('product',product)
-  //console.log('subitem',product.subItems[0].id)
 
 
 
   if (!product.name) return <LoadingComponent inverted={true} />;
+
+  
+   //checking Discount Status
+   const dateNow = moment().format('X');
+   const startDate = product.discount.startDate.seconds;
+   const endDate = product.discount.endDate.seconds;
+   const discountActive = (startDate < dateNow && dateNow < endDate)
+   const rating = (product.rating.totalRating / product.rating.ratingCount);
+ 
 
   return (
     <Grid>
@@ -92,9 +88,9 @@ class ProductDetailedPage extends Component {
         </div>
       </Grid.Column>
       <Grid.Column width={4}>
-        <StickyBox offsetTop={70} offsetBottom={20}>
+        <StickyBox offsetTop={70} offsetBottom={30}>
         { store && product &&
-          <ProductPriceDetails currentStore={currentStore}  product={product} />}
+          <ProductPriceDetails currentStore={currentStore}  product={product} discountActive={discountActive} />}
         </StickyBox>
       </Grid.Column>
     </Grid>

@@ -34,16 +34,6 @@ const query = ({currentStore}) => {
 }
 
 
-const sizes = [
-  { key: "xxs", text: "XXS", value: "xxs" },
-  { key: "xs", text: "XS", value: "xs" },
-  { key: "s", text: "S", value: "s" },
-  { key: "m", text: "M", value: "m" },
-  { key: "l", text: "L", value: "l" },
-  { key: "xl", text: "XL", value: "xl" },
-  { key: "xxl", text: "XXL", value: "xxl" }
-];
-
 class CollectionDashboard extends Component {
 
   state = { };
@@ -86,21 +76,9 @@ class CollectionDashboard extends Component {
 
 
   render() {
-    const { store, products, filteredProducts, currentStore, category,config, symbol} = this.props;
+    const { store, products, filteredProducts, currentStore, category, config, symbol} = this.props;
 
     console.log('collection',products)
-
-     //getting store currency
-     /*if (config && store) {
-      const currencies = config.currencies;
-      const storeCurrency = store.currency;
-      var value;
-      var currency;
-      Object.keys(currencies).forEach(function(key) {
-      value = currencies[key];
-      if (key==storeCurrency){ currency=value}
-      });
-    }*/
 
 
     if (!isLoaded(products) || isEmpty(products)) return <LoadingComponent inverted={true} />;

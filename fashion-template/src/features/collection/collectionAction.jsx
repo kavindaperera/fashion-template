@@ -60,7 +60,7 @@ import firebase from '../../app/config/firebase'
 export const getSubItems = (item,store) =>
   async (dispatch, getState) => {
     try{
-      dispatch(asyncActionStart());
+    dispatch(asyncActionStart());
     const firestore = firebase.firestore();
     const subItemRefs = item.subItems;
     const subItems = [];

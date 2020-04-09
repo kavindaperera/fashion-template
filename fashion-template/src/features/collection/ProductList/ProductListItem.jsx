@@ -17,23 +17,10 @@ class ProductListItem extends Component {
     const startDate = product.discount.startDate.seconds;
     const endDate = product.discount.endDate.seconds;
     const discountActive = (startDate < dateNow && dateNow < endDate)
-
     const rating = (product.rating.totalRating / product.rating.ratingCount);
-    //getting store currency
-   /* if (config && store) {
-      const currencies = config.currencies;
-      const storeCurrency = store.currency;
-      var value;
-      var currency;
-      Object.keys(currencies).forEach(function(key) {
-      value = currencies[key];
-      if (key==storeCurrency){ currency=value}
-      });
-      console.log('store currency symbol:', currency)
-    }*/
+
 
     return (
-      
       <Card className="card" as={Link} to={`product/${product.id}`} >
       {discountActive && product.discount.percentage > 0 && (
         <div>

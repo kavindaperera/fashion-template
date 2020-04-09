@@ -1,9 +1,10 @@
 import React from "react";
 
-function PriceTagLarge({ currency, price, discount }) {
+function PriceTagLarge({ currency, price, discount, discountActive }) {
+  console.log(discountActive)
   return (
     <div data-testid="price-tag">
-      { discount  &&  discount > 0 && (
+      { discountActive  &&  discount > 0 && (
           <h2>
             <del style={{ color: "grey" }}>
               {currency}
@@ -16,7 +17,7 @@ function PriceTagLarge({ currency, price, discount }) {
           </h2>
       )}
 
-      { discount  && discount == 0 && (
+      { (!discountActive || discount == 0)  && (
         <h1>
           {currency}
           {price}
