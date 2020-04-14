@@ -93,7 +93,6 @@ export const getCurrency = (config,store) =>
     let symbol = 'X';
     const currencies = config.currencies;
     const storeCurrency = store.currency;
-    console.log(currencies, storeCurrency );
     var value;
     Object.keys(currencies).forEach(function(key) {
       value = currencies[key];
@@ -102,10 +101,9 @@ export const getCurrency = (config,store) =>
 
     dispatch({type: GET_CURRENCY, payload: {symbol}})
     dispatch(asyncActionFinish());
-
-  }catch(error){
-  console.log("ERROR_ERROR_ERROR_ERROR",error)
+  } catch(error){
+        console.log("ERROR_Currency",error)
         dispatch(asyncActionError())
-}
+  }
 }
 

@@ -12,12 +12,14 @@ class ProductListItem extends Component {
   render() {
     const { product, store, currency} = this.props;
 
-    //checking Discount Status
-    const dateNow = moment().format('X');
-    const startDate = product.discount.startDate.seconds;
-    const endDate = product.discount.endDate.seconds;
-    const discountActive = (startDate < dateNow && dateNow < endDate)
-    const rating = (product.rating.totalRating / product.rating.ratingCount);
+      //checking Discount Status
+      const dateNow = moment().format('X');
+      const startDate = product.discount.startDate.seconds;
+      const endDate = product.discount.endDate.seconds;
+      const discountActive = (startDate < dateNow && dateNow < endDate)
+      const rating = (product.rating.totalRating / product.rating.ratingCount);
+
+
 
 
     return (

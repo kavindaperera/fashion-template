@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Button, Label, Accordion, Icon, AccordionPanel } from "semantic-ui-react";
+import { Grid,Card, Label, Accordion, Icon, AccordionPanel, Select } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { addToCart } from "../../cart/cartActions";
 import PriceTagLarge  from '../../pricetag/PriceTagLarge';
@@ -22,6 +22,7 @@ const actions = {
 };
 
 
+
 class ItemDetailedInfo extends Component {
 
 
@@ -35,17 +36,25 @@ class ItemDetailedInfo extends Component {
     this.setState({ activeIndex: newIndex })
   }
 
-  async componentDidMount(){
-    this.props.getSubItems(this.props.product, this.props.currentStore);
-  }
+  /*async componentDidMount(){
+    if (this.props.product.subItems){
+      this.props.getSubItems(this.props.product, this.props.currentStore);
+    }
+  }*/
 
   render() {
 
-    const { product, addToCart , subItems, symbol, discountActive } = this.props;
+    const { product, addToCart ,  symbol, discountActive } = this.props;
 
     const { activeIndex } = this.state
-    console.log('subItems',subItems)
     console.log('symbol', symbol)
+    
+    let variants = product.variants;
+    let subItems = product.subItems;
+    console.log('subItems',subItems)
+
+
+
 
   return (
     <div>
@@ -71,9 +80,17 @@ class ItemDetailedInfo extends Component {
         </Grid.Row>
         <Grid.Row columns={1}>
           <Grid.Column>
-
-
-          <VariantSelector  />
+          {/*<Card.Group itemsPerRow={3}>
+          { subItems && subItems.map(subItem => ( 
+            <Card>
+              <Card.Content description={subItem.price}/>
+              <Card.Content description={subItem.stock}/>
+              <Card.Content description={subItem.variants[0]}/>
+              <Card.Content description={subItem.variants[1]}/>
+            </Card>
+            ))}
+            </Card.Group>*/}
+          <VariantSelector variants={variants} />
            {/*} <Button.Group fluid>
               <Button labelPosition='right' icon='bookmark outline'  onClick={() => addToCart( 1, product)} color="black" content='Add to Bag'/>
             </Button.Group>*/}
@@ -84,8 +101,8 @@ class ItemDetailedInfo extends Component {
           <p>{product.description}</p>
         </Grid.Row>
         <Accordion styled fluid>
-          {product.attributes && product.attributes.map((a, index) => ( 
-            <div>
+          {product.attributes && product.attributes.map((a, index) => (
+            <div key={index}>
             <Accordion.Title
             key={a.title}
             active={activeIndex === index}

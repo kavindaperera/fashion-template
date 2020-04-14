@@ -69,9 +69,7 @@ class Footer extends Component {
                   target="_blank"
                 /><p>© 2020-2021 TUSK TM. All rights reserved.</p>
               </Grid.Column>
-              <Grid.Column>
-              <table border="0" cellPadding="10" cellSpacing="0" align="center"><tr><td align="center"></td></tr><tr><td align="center"><a href="https://www.paypal.com/" title="How PayPal Works" ><img src="https://www.paypalobjects.com/digitalassets/c/website/marketing/na/us/logo-center/9_bdg_secured_by_pp_2line.png" border="0" alt="Secured by PayPal"></img></a></td></tr></table>
-              </Grid.Column>
+
             </Grid.Row>
           </Grid>
         </Container>

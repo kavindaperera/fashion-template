@@ -31,25 +31,31 @@ class VariantSelector extends Component {
 
     render() {
 
-        const {pristine, submitting, handleSubmit, initialValues} = this.props;
-        //console.log("initialValues",initialValues)
+        const {pristine, submitting, handleSubmit, initialValues, variants} = this.props;
+        
 
         return (
                 <Form onSubmit={this.props.handleSubmit(this.onFormSubmit)}>
-                <Field
-                name="size"
-                type="text"
-                component={SelectInput}
-                options={sizes}
-                placeholder="size"
-              />
-              <Field
-                name="color"
-                type="text"
-                component={SelectInput}
-                options={colors}
-                placeholder="color"
-              />
+                {variants && variants.map(variant=>{
+                  let title = variant.title;
+                  let attributes = variant.attributes;
+                  let map = [];
+                  // eslint-disable-next-line no-lone-blocks
+                  {attributes && attributes.map(a => {
+                    let att = a.attribute;
+                    let array = {key:att, text:att, value:att};
+                    map.push(array)
+                  })};
+                  return (
+                    <Field
+                      name={title}
+                      type="text"
+                      component={SelectInput}
+                      options={map}
+                      placeholder={title}
+                    />
+                  );
+                  })}
                     <Divider/>
                     <Button.Group fluid>
                     <Button labelPosition='right' icon='bookmark outline'  disabled={pristine || submitting} size='large' color='black' content='Add to Bag'/>
