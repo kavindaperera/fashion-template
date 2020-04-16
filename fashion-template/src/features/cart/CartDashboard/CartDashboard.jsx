@@ -5,6 +5,7 @@ import { Grid, Image, Button,Icon, Header } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { queryAllByAltText } from "@testing-library/react";
 import StickyBox from "react-sticky-box";
+import OrderSummary from '../OrderSummary/OrderSummary'
 
 const mapState = (state) => ({
   auth: state.firebase.auth,
@@ -55,9 +56,7 @@ class CartDashboard extends Component {
           </Grid.Column>
           <Grid.Column width={4}>
             <StickyBox offsetTop={70} offsetBottom={20}>
-              <Header as="h3">Order Summary</Header>
-              <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
-              <Button secondary fluid size="huge">Checkout<Icon name="" /></Button>
+              <OrderSummary/>
             </StickyBox>
           </Grid.Column>
         </Grid.Row>

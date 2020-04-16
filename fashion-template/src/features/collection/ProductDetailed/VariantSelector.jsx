@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import {Segment, Form, Header, Divider, Button} from 'semantic-ui-react';
 import {Field, reduxForm} from 'redux-form';
-import SelectInput from '../../../app/common/form/SelectInput'
-
-
-
+import SelectInput from '../../../app/common/form/SelectInput';
+import TextInput from '../../../app/common/form/TextInput';
 
 const sizes = [
     { key: "xxs", text: "XXS", value: "xxs" },
@@ -27,16 +25,15 @@ class VariantSelector extends Component {
 
     onFormSubmit = values => {
         console.log(values)
-      };
+    };
 
     render() {
 
-        const {pristine, submitting, handleSubmit, initialValues, variants} = this.props;
-        
+        const {pristine, submitting, stock, handleSubmit, initialValues, variants} = this.props;
 
         return (
                 <Form onSubmit={this.props.handleSubmit(this.onFormSubmit)}>
-                {variants && variants.map(variant=>{
+                {variants && variants.map((variant, i)=>{
                   let title = variant.title;
                   let attributes = variant.attributes;
                   let map = [];
@@ -48,7 +45,8 @@ class VariantSelector extends Component {
                   })};
                   return (
                     <Field
-                      name={title}
+                      key={variant.title}
+                      name={i}
                       type="text"
                       component={SelectInput}
                       options={map}
@@ -58,7 +56,7 @@ class VariantSelector extends Component {
                   })}
                     <Divider/>
                     <Button.Group fluid>
-                    <Button labelPosition='right' icon='bookmark outline'  disabled={pristine || submitting} size='large' color='black' content='Add to Bag'/>
+                    <Button labelPosition='right' icon='bookmark outline'  disabled={pristine || submitting || !stock} size='large' color='black' content='Add to Bag'/>
                     </Button.Group>
                 </Form>
 
@@ -66,4 +64,4 @@ class VariantSelector extends Component {
     }
 }
 
-export default reduxForm({form: 'variantForm', enableReinitialize: true, destroyOnUnmount: false})(VariantSelector);
+export default reduxForm({form: 'variantForm', enableReinitialize: true, destroyOnUnmount: false })(VariantSelector);

@@ -17,7 +17,6 @@ const mapState = (state, ownProps) => {
   const currentStore = ownProps.match.params.store;
   const store = state.firestore.data.selectedStore;
   const config = state.firestore.data.config;
-  //const subItems = state.products;
 
   let product = {};
 
@@ -30,7 +29,6 @@ const mapState = (state, ownProps) => {
     currentStore,
     store,
     config,
-    /*subItems*/
   };
 };
 

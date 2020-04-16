@@ -6,21 +6,20 @@ import PriceTagLarge  from '../../pricetag/PriceTagLarge';
 import { render } from "enzyme";
 import VariantSelector from "./VariantSelector";
 import _ from "lodash";
-import { getSubItems, getCurrency } from '../collectionAction'
+import { getCurrency } from '../collectionAction'
 import { firestoreConnect } from "react-redux-firebase";
 
 
 const mapState = (state, ownProps) => ({
   subItems: state.collection.subItems,
   symbol: state.collection.symbol,
+  selectedVariant: state.form.variantForm
 });
 
 
 const actions = {
-  addToCart,
-  getSubItems
+  addToCart
 };
-
 
 
 class ItemDetailedInfo extends Component {
@@ -36,6 +35,7 @@ class ItemDetailedInfo extends Component {
     this.setState({ activeIndex: newIndex })
   }
 
+
   /*async componentDidMount(){
     if (this.props.product.subItems){
       this.props.getSubItems(this.props.product, this.props.currentStore);
@@ -44,16 +44,24 @@ class ItemDetailedInfo extends Component {
 
   render() {
 
-    const { product, addToCart ,  symbol, discountActive } = this.props;
+    const { product, addToCart, selectedVariant,  symbol, discountActive } = this.props;
 
     const { activeIndex } = this.state
-    console.log('symbol', symbol)
-    
+  
+    console.log('selectedVariant:', selectedVariant);
+
     let variants = product.variants;
     let subItems = product.subItems;
-    console.log('subItems',subItems)
+    let displayPrice = null;
+    let stock = null;
 
-
+    selectedVariant && selectedVariant.values && subItems.map((s,i)=> {
+      if (_.isEqual(selectedVariant.values, s.variants)){
+        console.log('details:',s)
+        displayPrice = s.price
+        stock = s.stock
+      }
+    });
 
 
   return (
@@ -65,7 +73,10 @@ class ItemDetailedInfo extends Component {
             </p>
         </Grid.Row>
         <Grid.Row>
-        <PriceTagLarge currency={symbol} price= {product.basePrice} discount= {product.discount.percentage} discountActive={discountActive} ></PriceTagLarge>
+        <PriceTagLarge currency={symbol} displayPrice={displayPrice} price= {product.basePrice} discount= {product.discount.percentage} discountActive={discountActive} ></PriceTagLarge>
+        </Grid.Row>
+        <Grid.Row>
+          <a>{stock} in stock</a>
         </Grid.Row>
         <Grid.Row >
           <Grid.Column>
@@ -80,20 +91,7 @@ class ItemDetailedInfo extends Component {
         </Grid.Row>
         <Grid.Row columns={1}>
           <Grid.Column>
-          {/*<Card.Group itemsPerRow={3}>
-          { subItems && subItems.map(subItem => ( 
-            <Card>
-              <Card.Content description={subItem.price}/>
-              <Card.Content description={subItem.stock}/>
-              <Card.Content description={subItem.variants[0]}/>
-              <Card.Content description={subItem.variants[1]}/>
-            </Card>
-            ))}
-            </Card.Group>*/}
-          <VariantSelector variants={variants} />
-           {/*} <Button.Group fluid>
-              <Button labelPosition='right' icon='bookmark outline'  onClick={() => addToCart( 1, product)} color="black" content='Add to Bag'/>
-            </Button.Group>*/}
+          <VariantSelector stock={stock} variants={variants} />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row >

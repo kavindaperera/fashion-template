@@ -57,7 +57,7 @@ import firebase from '../../app/config/firebase'
   }*/
 
 
-export const getSubItems = (item,store) =>
+/*export const getSubItems = (item,store) =>
   async (dispatch, getState) => {
     try{
     dispatch(asyncActionStart());
@@ -83,7 +83,7 @@ export const getSubItems = (item,store) =>
   console.log("ERROR_ERROR_ERROR_ERROR",error)
         dispatch(asyncActionError())
 }
-}
+}*/
 
 
 export const getCurrency = (config,store) =>
