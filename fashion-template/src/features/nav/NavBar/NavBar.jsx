@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-
 import {
   Menu,
   Container,
@@ -15,7 +14,7 @@ import SignedInMenu from "../Menus/SignedInMenu";
 import { openModal } from "../../modals/modalActions";
 import {getCurrency}from '../../collection/collectionAction'
 import "../../../index.css";
-
+import CurrencyFlag from 'react-currency-flags';
 
 const actions = {
   openModal,
@@ -59,6 +58,7 @@ const fixedMenuStyle = {
   backgroundColor: "#f5f5f5",
   border: "1px solid #fff",
 };
+
 
 class NavBar extends Component {
 
@@ -137,26 +137,16 @@ class NavBar extends Component {
                         </Menu.Item>
                         <Menu.Menu position="right">
                           <Menu.Item
-                            name="Clothing"
-                            as={NavLink}
-                            to={`/${currentStore}/collection/all`} 
-                          ></Menu.Item>
-                          <Menu.Item
                             name="Home"
                             as={Link}
                             to={`/${currentStore}/`} 
                           ></Menu.Item>
                           <Menu.Item
-                            name="Testing"
-                            as={Link}
-                            to="/"
+                            name="Clothing"
+                            as={NavLink}
+                            to={`/${currentStore}/collection/all`} 
                           ></Menu.Item>
-                          <Menu.Item
-                            name="Testing"
-                            as={Link}
-                            to="/"
-                          ></Menu.Item>
-                          <Dropdown item simple as={Link} to="/" text="Testing">
+                          <Dropdown item simple as={Link} to="/" text="Categories">
                             <Dropdown.Menu>
                               <Dropdown.Item>SubCategory</Dropdown.Item>
                               <Dropdown.Item>SubCategory</Dropdown.Item>
@@ -177,6 +167,9 @@ class NavBar extends Component {
                             register={this.handleRegister}
                           />
                         )}
+                        <Menu.Item>
+                        <CurrencyFlag currency={store.currency} size="lg" />
+                        </Menu.Item>
                       </Container>
                     </Menu>
                   </Visibility>

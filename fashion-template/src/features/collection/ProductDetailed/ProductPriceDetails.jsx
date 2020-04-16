@@ -8,6 +8,7 @@ import VariantSelector from "./VariantSelector";
 import _ from "lodash";
 import { getCurrency } from '../collectionAction'
 import { firestoreConnect } from "react-redux-firebase";
+import StockTag from "../../stocktag/StockTag";
 
 
 const mapState = (state, ownProps) => ({
@@ -47,8 +48,6 @@ class ItemDetailedInfo extends Component {
     const { product, addToCart, selectedVariant,  symbol, discountActive } = this.props;
 
     const { activeIndex } = this.state
-  
-    console.log('selectedVariant:', selectedVariant);
 
     let variants = product.variants;
     let subItems = product.subItems;
@@ -57,7 +56,6 @@ class ItemDetailedInfo extends Component {
 
     selectedVariant && selectedVariant.values && subItems.map((s,i)=> {
       if (_.isEqual(selectedVariant.values, s.variants)){
-        console.log('details:',s)
         displayPrice = s.price
         stock = s.stock
       }
@@ -76,7 +74,7 @@ class ItemDetailedInfo extends Component {
         <PriceTagLarge currency={symbol} displayPrice={displayPrice} price= {product.basePrice} discount= {product.discount.percentage} discountActive={discountActive} ></PriceTagLarge>
         </Grid.Row>
         <Grid.Row>
-          <a>{stock} in stock</a>
+          <StockTag stock={stock} selectedVariant={selectedVariant} />
         </Grid.Row>
         <Grid.Row >
           <Grid.Column>

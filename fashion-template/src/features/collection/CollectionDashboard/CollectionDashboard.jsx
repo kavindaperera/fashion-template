@@ -55,7 +55,7 @@ class CollectionDashboard extends Component {
   listProducts = () => {
     this.setState(state => {
       if (state.sort !== "") {
-        this.props.products.sort((a, b) =>
+        this.props.products.sort((a, b) => 
           state.sort === "lowest"
             ? a.basePrice - (a.basePrice * a.discount.percentage) / 100 >
               b.basePrice - (b.basePrice * b.discount.percentage) / 100
@@ -66,8 +66,8 @@ class CollectionDashboard extends Component {
             ? 1
             : -1
         );
-      } else {
-        this.props.products.sort((a, b) => ((a.rating.totalRating/a.rating.ratingCount) < (b.rating.totalRating/b.rating.ratingCount) ? 1 : -1));
+      } else { 
+        this.props.products.sort((a, b) => ( a.rating && b.rating && (a.rating.totalRating/a.rating.ratingCount) < (b.rating.totalRating/b.rating.ratingCount) ? 1 : -1));
       }
       return { filteredProducts: this.props.products };
     });
