@@ -11,6 +11,7 @@ import { firestoreConnect } from "react-redux-firebase";
 import StockTag from "../../stocktag/StockTag";
 
 
+
 const mapState = (state, ownProps) => ({
   subItems: state.collection.subItems,
   symbol: state.collection.symbol,
@@ -67,7 +68,7 @@ class ItemDetailedInfo extends Component {
     {product &&
       <Grid centered>
         <Grid.Row textAlign='center'>
-            <p style={{ color: "black", fontSize: "2rem", fontWeight: "10", fontFamily: 'sans-serif' }}>{_.upperCase(product.name)}
+            <p style={{ color: "grey", fontSize: "2rem", fontFamily: 'sans-serif' }}>{_.upperCase(product.name)}
             </p>
         </Grid.Row>
         <Grid.Row>
@@ -89,7 +90,7 @@ class ItemDetailedInfo extends Component {
         </Grid.Row>
         <Grid.Row columns={1}>
           <Grid.Column>
-          <VariantSelector stock={stock} variants={variants} />
+          <VariantSelector stock={stock} variants={variants} product={product}/>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row >

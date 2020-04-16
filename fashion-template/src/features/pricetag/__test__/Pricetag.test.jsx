@@ -15,21 +15,21 @@ it("renders without crashing", ()=>{
 
 
 it("renders button correctly",()=>{
-    const {getByTestId} = render(<PriceTag currency='$' price={100} discount="50"></PriceTag>)
+    const {getByTestId} = render(<PriceTag currency='$' price={100} discountActive={true} discount="50"></PriceTag>)
     expect(getByTestId('price-tag')).toHaveTextContent("$100$50")
 });
 
 it("renders button correctly",()=>{
-    const {getByTestId} = render(<PriceTag currency='$' price={100} discount="0"></PriceTag>)
+    const {getByTestId} = render(<PriceTag currency='$' price={100} discountActive={true} discount="0"></PriceTag>)
     expect(getByTestId('price-tag')).toHaveTextContent("$100")
 });
 
 it('matches snapshot 1', ()=>{
-    const tree = renderer.create(<PriceTag currency='$' price={100} discount="50"></PriceTag>).toJSON();
+    const tree = renderer.create(<PriceTag currency='$' price={100} discountActive={true} discount="50"></PriceTag>).toJSON();
     expect(tree).toMatchSnapshot();
 })
 
 it('matches snapshot 2', ()=>{
-    const tree = renderer.create(<PriceTag currency='$' price={100} discount="0"></PriceTag>).toJSON();
+    const tree = renderer.create(<PriceTag currency='$' price={100} discountActive={true} discount="0"></PriceTag>).toJSON();
     expect(tree).toMatchSnapshot();
 })

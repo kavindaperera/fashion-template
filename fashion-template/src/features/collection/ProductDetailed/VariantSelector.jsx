@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {Segment, Form, Header, Divider, Button} from 'semantic-ui-react';
+import {Icon, Form, Header, Divider, Button} from 'semantic-ui-react';
 import {Field, reduxForm} from 'redux-form';
 import SelectInput from '../../../app/common/form/SelectInput';
 import TextInput from '../../../app/common/form/TextInput';
+import { toastr } from 'react-redux-toastr'
 
 const sizes = [
     { key: "xxs", text: "XXS", value: "xxs" },
@@ -20,11 +21,18 @@ const sizes = [
   ];
 
 
+  const toastrOptions = {
+    timeOut: 3000,
+    icon: (<Icon  circular name='shopping bag' size='big' />),
+    progressBar: true,
+  }
+
 class VariantSelector extends Component {
 
 
     onFormSubmit = values => {
-        console.log(values)
+        console.log(values);
+        toastr.success('Added To Bag', 'Don’t miss out: Items in your bag are not reserved until payment is complete', toastrOptions)
     };
 
     render() {
@@ -64,4 +72,4 @@ class VariantSelector extends Component {
     }
 }
 
-export default reduxForm({form: 'variantForm', enableReinitialize: true, destroyOnUnmount: false })(VariantSelector);
+export default reduxForm({form: 'variantForm', enableReinitialize: true, destroyOnUnmount: true })(VariantSelector);
