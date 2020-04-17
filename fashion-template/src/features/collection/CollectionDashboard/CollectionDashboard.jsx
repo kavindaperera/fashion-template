@@ -45,6 +45,8 @@ class CollectionDashboard extends Component {
     this.listProducts();
   };
 
+  
+
   checkDiscountStatus = (product) => {
     const dateNow = moment().format('X');
     const startDate = product.discount.startDate.seconds;

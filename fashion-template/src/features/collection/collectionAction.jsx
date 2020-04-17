@@ -5,6 +5,34 @@ import {asyncActionStart,asyncActionFinish,asyncActionError
 import firebase from '../../app/config/firebase'
 
 
+
+export const getCurrency = (config,store) =>
+  async (dispatch, getState) => {
+    
+  try{
+    dispatch(asyncActionStart());
+    let symbol = 'X';
+    let currencies = config.currencies;
+    const storeCurrency = store.currency;
+    var value;
+    Object.keys(currencies).forEach(function(key) {
+      value = currencies[key];
+      if (key==storeCurrency){ symbol=value}
+    });
+    console.log('currency set:',symbol)
+    dispatch({type: GET_CURRENCY, payload: {symbol}})
+    dispatch(asyncActionFinish());
+  } catch(error){
+        console.log("ERROR_Currency",error)
+        dispatch(asyncActionError())
+  }
+}
+
+
+
+
+
+
 /*export const getProducts = (storeId) => 
   async (dispatch, getState) => {
     let store = storeId;
@@ -86,24 +114,4 @@ import firebase from '../../app/config/firebase'
 }*/
 
 
-export const getCurrency = (config,store) =>
-  async (dispatch, getState) => {
-  try{
-    dispatch(asyncActionStart());
-    let symbol = 'X';
-    const currencies = config.currencies;
-    const storeCurrency = store.currency;
-    var value;
-    Object.keys(currencies).forEach(function(key) {
-      value = currencies[key];
-      if (key==storeCurrency){ symbol=value}
-    });
-
-    dispatch({type: GET_CURRENCY, payload: {symbol}})
-    dispatch(asyncActionFinish());
-  } catch(error){
-        console.log("ERROR_Currency",error)
-        dispatch(asyncActionError())
-  }
-}
 

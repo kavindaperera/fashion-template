@@ -64,7 +64,14 @@ class NavBar extends Component {
 
 
   async componentDidMount(){
-    this.props.getCurrency(this.props.config, this.props.store);
+    try{
+      const config = await this.props.config;
+      const store = await this.props.store;
+      this.props.getCurrency(config, store);
+    } catch (error){
+      console.log('CMOUNT',error)
+    }
+    
   }
 
   handleSignedIn = () => {
@@ -180,9 +187,4 @@ class NavBar extends Component {
   }
 }
 
-export default withRouter(
-    connect(
-      mapState,
-      actions
-    )(firestoreConnect(currentStore => query(currentStore))(NavBar))
-);
+export default withRouter(connect( mapState,actions)(firestoreConnect(currentStore => query(currentStore))(NavBar)));

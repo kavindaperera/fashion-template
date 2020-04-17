@@ -6,7 +6,7 @@ exports[`matches snapshot 1 1`] = `
 >
   <div>
     <div
-      className="ui green big label"
+      className="ui green big basic label"
       onClick={[Function]}
     >
       <i
@@ -26,7 +26,7 @@ exports[`matches snapshot 1 2`] = `
 >
   <div>
     <div
-      className="ui red big label"
+      className="ui red big basic label"
       onClick={[Function]}
     >
       <i

@@ -6,12 +6,6 @@ import { firestoreConnect } from "react-redux-firebase";
 
 
 
-const actions = {};
-
-const mapState = (state) => ({
-  config: state.firestore.data.config,
-});
-
 class ProductList extends Component {
 
   

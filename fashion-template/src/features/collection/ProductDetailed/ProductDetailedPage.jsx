@@ -8,7 +8,6 @@ import ProductDetailedPhotoSlide from "./ProductDetailedPhotoSlide";
 import ProductPriceDetails from "./ProductPriceDetails";
 import StickyBox from "react-sticky-box";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
-import { getSubItems } from '../collectionAction'
 import moment from 'moment';
 
 const mapState = (state, ownProps) => {

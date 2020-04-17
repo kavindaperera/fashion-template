@@ -6,13 +6,9 @@ const initialState = {
   symbol: '$',
 }
 
-
-
 export const getCurrency = (state, payload) => {
   return {...state, symbol:payload.symbol}
 }
-
-
 
 export default createReducer(initialState, {
     [GET_CURRENCY]: getCurrency,
