@@ -1,43 +1,33 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import {Icon, Form, Header, Divider, Button} from 'semantic-ui-react';
 import {Field, reduxForm} from 'redux-form';
 import SelectInput from '../../../app/common/form/SelectInput';
 import TextInput from '../../../app/common/form/TextInput';
 import { toastr } from 'react-redux-toastr'
-
-const sizes = [
-    { key: "xxs", text: "XXS", value: "xxs" },
-    { key: "xs", text: "XS", value: "xs" },
-    { key: "s", text: "S", value: "s" },
-    { key: "m", text: "M", value: "m" },
-    { key: "l", text: "L", value: "l" },
-    { key: "xl", text: "XL", value: "xl" },
-    { key: "xxl", text: "XXL", value: "xxl" }
-  ];
-
-  const colors = [
-    { key: "red", text: "Red", value: "red" },
-    { key: "blue", text: "Blue", value: "blue" },
-  ];
+import { addToCart } from '../../cart/cartActions'
 
 
-  const toastrOptions = {
-    timeOut: 3000,
-    icon: (<Icon  circular name='shopping bag' size='big' />),
-    progressBar: true,
-  }
+const mapState = (state, ownProps) =>({
+  //ownProps:ownProps.match.params
+})
+
+const actions = {
+  addToCart
+};
+
 
 class VariantSelector extends Component {
 
 
     onFormSubmit = values => {
         console.log(values);
-        toastr.success('Added To Bag', 'Don’t miss out: Items in your bag are not reserved until payment is complete', toastrOptions)
+        this.props.addToCart(this.props.product,this.props.subItemIndex, this.props.displayPrice,this.props.currentStore);
     };
 
     render() {
 
-        const {pristine, submitting, stock, handleSubmit, initialValues, variants} = this.props;
+        const {pristine, submitting, stock, product, handleSubmit, initialValues, variants} = this.props;
 
         return (
                 <Form onSubmit={this.props.handleSubmit(this.onFormSubmit)}>
@@ -72,4 +62,4 @@ class VariantSelector extends Component {
     }
 }
 
-export default reduxForm({form: 'variantForm', enableReinitialize: true, destroyOnUnmount: true })(VariantSelector);
+export default connect(mapState, actions)(reduxForm({form: 'variantForm', enableReinitialize: true, destroyOnUnmount: true })(VariantSelector));

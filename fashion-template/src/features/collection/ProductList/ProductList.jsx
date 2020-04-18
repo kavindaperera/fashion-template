@@ -18,7 +18,7 @@ class ProductList extends Component {
     const sortByIndex = sortCategoryIndex.sort()[0]
     return (
       <div>
-        <Card.Group itemsPerRow={3}>
+        <Card.Group itemsPerRow={4}>
           { (sortCategory!=="") && products && products.map(product => ( 
             (  product.visible && (product.category===(sortByIndex)) && <ProductListItem key={product.id}  product={product} store={store} currency={currency} />)
           ))}

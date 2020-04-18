@@ -62,19 +62,22 @@ class ProductDetailedPage extends Component {
   render(){
 
   const {product, currentStore, store, config} = this.props;
-
-
-
+  let discountActive = false;
+  let discount = 0;  
+  
 
   if (!product.name) return <LoadingComponent inverted={true} />;
 
   
    //checking Discount Status
-   const dateNow = moment().format('X');
-   const startDate = product.discount.startDate.seconds;
-   const endDate = product.discount.endDate.seconds;
-   const discountActive = (startDate < dateNow && dateNow < endDate)
-   const rating = (product.rating.totalRating / product.rating.ratingCount);
+   if(product.discount!=null){
+    const dateNow = moment().format('X');
+    const startDate = product.discount.startDate.seconds;
+    const endDate = product.discount.endDate.seconds;
+    discountActive = (startDate < dateNow && dateNow < endDate)
+    discount = product.discount.percentage
+    }
+
  
 
   return (
@@ -87,7 +90,7 @@ class ProductDetailedPage extends Component {
       <Grid.Column width={4}>
         <StickyBox offsetTop={70} offsetBottom={30}>
         { store && product &&
-          <ProductPriceDetails currentStore={currentStore}  product={product} discountActive={discountActive} />}
+          <ProductPriceDetails currentStore={currentStore}  product={product} discountActive={discountActive}  discount={discount}/>}
         </StickyBox>
       </Grid.Column>
     </Grid>

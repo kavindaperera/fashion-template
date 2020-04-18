@@ -7,16 +7,13 @@ export const objectToArray = (object) => {
   }
 }
 
-export const createNewCartItem = (user, quantity, product) => {
+export const createNewCartItem = (item,subItem,price) => {
   return {
-    uid: user.uid,
-    username: user.displayName,
-    productName: product.name,
-    photoURL:product.photoURL[0],
-    price: product.price,
-    discount: product.discount,
-    quantity: quantity,
-    created: moment().format('YYYY-MM-DD')
+    item: item.id,
+    subItem: subItem,
+    price: price,
+    quantity: 1,
+    added: moment().format('YYYY-MM-DD')
 
     }
   }

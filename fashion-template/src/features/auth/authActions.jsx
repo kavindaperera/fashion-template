@@ -78,6 +78,7 @@ export const socialLogin = (selectedProvider, currentStore) =>
         },
         { avatarUrl: user.profile.avatarUrl,
           displayName: user.profile.displayName,
+          cart:[],
           email: user.profile.email,
           createdAt: firestore.FieldValue.serverTimestamp(),
         });

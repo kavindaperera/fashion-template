@@ -4,14 +4,14 @@ import 'firebase/auth';
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCYnzL0jsdr0eErI74VedANNoseVfYsIkI",
-    authDomain: "electronics-template.firebaseapp.com",
-    databaseURL: "https://electronics-template.firebaseio.com",
-    projectId: "electronics-template",
-    storageBucket: "electronics-template.appspot.com",
-    messagingSenderId: "807802334387",
-    appId: "1:807802334387:web:49c900401304a6063294c6",
-    measurementId: "G-FH221XRGNM"
+    apiKey: "AIzaSyDgLsvomzUN0uBvH-QvBjfp_yvBPgeSuR8",
+    authDomain: "ecom-cse.firebaseapp.com",
+    databaseURL: "https://ecom-cse.firebaseio.com",
+    projectId: "ecom-cse",
+    storageBucket: "ecom-cse.appspot.com",
+    messagingSenderId: "535828749873",
+    appId: "1:535828749873:web:9573bbfb53bfdda483bf10",
+    measurementId: "G-YJ8SS26M4K"
 }
 
 firebase.initializeApp(firebaseConfig);

@@ -57,6 +57,7 @@ class CollectionDashboard extends Component {
   listProducts = () => {
     this.setState(state => {
       if (state.sort !== "") {
+
         this.props.products.sort((a, b) => 
           state.sort === "lowest"
             ? a.basePrice - (a.basePrice * a.discount.percentage) / 100 >

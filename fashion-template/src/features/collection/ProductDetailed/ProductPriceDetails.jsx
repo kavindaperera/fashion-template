@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Grid,Card, Label, Accordion, Icon, AccordionPanel, Select } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { addToCart } from "../../cart/cartActions";
 import PriceTagLarge  from '../../pricetag/PriceTagLarge';
 import { render } from "enzyme";
 import VariantSelector from "./VariantSelector";
@@ -15,12 +14,11 @@ import StockTag from "../../stocktag/StockTag";
 const mapState = (state, ownProps) => ({
   subItems: state.collection.subItems,
   symbol: state.collection.symbol,
-  selectedVariant: state.form.variantForm
+  selectedVariant: state.form.variantForm,
 });
 
 
 const actions = {
-  addToCart
 };
 
 
@@ -46,7 +44,7 @@ class ItemDetailedInfo extends Component {
 
   render() {
 
-    const { product, addToCart, selectedVariant,  symbol, discountActive } = this.props;
+    const { currentStore, product, discount, productId, addToCart, selectedVariant,  symbol, discountActive } = this.props;
 
     const { activeIndex } = this.state
 
@@ -54,11 +52,14 @@ class ItemDetailedInfo extends Component {
     let subItems = product.subItems;
     let displayPrice = null;
     let stock = null;
+    let subItemIndex = null;
 
     selectedVariant && selectedVariant.values && subItems.map((s,i)=> {
       if (_.isEqual(selectedVariant.values, s.variants)){
+        subItemIndex = i
         displayPrice = s.price
         stock = s.stock
+        console.log('selected subitem:', subItemIndex);
       }
     });
 
@@ -72,7 +73,7 @@ class ItemDetailedInfo extends Component {
             </p>
         </Grid.Row>
         <Grid.Row>
-        <PriceTagLarge currency={symbol} displayPrice={displayPrice} price= {product.basePrice} discount= {product.discount.percentage} discountActive={discountActive} ></PriceTagLarge>
+        <PriceTagLarge currency={symbol} displayPrice={displayPrice} price= {product.basePrice} discount= {discount} discountActive={discountActive} ></PriceTagLarge>
         </Grid.Row>
         <Grid.Row>
           <StockTag stock={stock} selectedVariant={selectedVariant} />
@@ -90,7 +91,7 @@ class ItemDetailedInfo extends Component {
         </Grid.Row>
         <Grid.Row columns={1}>
           <Grid.Column>
-          <VariantSelector stock={stock} variants={variants} product={product}/>
+          <VariantSelector stock={stock} variants={variants} product={product} subItemIndex={subItemIndex} displayPrice={displayPrice} currentStore={currentStore}/>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row >
