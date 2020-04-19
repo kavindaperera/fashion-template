@@ -15,6 +15,7 @@ import { openModal } from "../../modals/modalActions";
 import {getCurrency}from '../../collection/collectionAction'
 import "../../../index.css";
 import CurrencyFlag from 'react-currency-flags';
+import _ from "lodash";
 
 const actions = {
   openModal,
@@ -153,12 +154,21 @@ class NavBar extends Component {
                             as={NavLink}
                             to={`/${currentStore}/collection/all`} 
                           ></Menu.Item>
-                          <Dropdown item simple as={Link} to="/" text="Categories">
+                          <Dropdown item simple  text="Categories">
                             <Dropdown.Menu>
-                              <Dropdown.Item>SubCategory</Dropdown.Item>
-                              <Dropdown.Item>SubCategory</Dropdown.Item>
-                              <Dropdown.Divider />
-                              <Dropdown.Item>SubCategory</Dropdown.Item>
+                            <Dropdown.Item
+                                as={NavLink}
+                                to={`/${currentStore}/collection/all`}
+                              >All</Dropdown.Item>
+                              
+                            {store.categories && store.categories.map(category => ( 
+                              <Dropdown.Item
+                                key={category.name}
+                                as={NavLink}
+                                to={`/${currentStore}/collection/${category.name}`}
+                              >{_.capitalize(category.name)}</Dropdown.Item>
+                              ))}
+
                             </Dropdown.Menu>
                           </Dropdown>
                         </Menu.Menu>

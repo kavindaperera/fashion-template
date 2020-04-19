@@ -6,7 +6,6 @@ import { Card, Label, Image, Rating } from "semantic-ui-react";
 import { Link, Route } from "react-router-dom";
 import PriceTag from "../../pricetag/PriceTag";
 import moment from "moment";
-import LazyLoad from "react-lazyload";
 
 class ProductListItem extends Component {
   render() {

@@ -3,7 +3,7 @@ import {
   Image,
   Grid,
 } from "semantic-ui-react";
-
+import { Carousel } from "react-responsive-carousel";
 
 
 const ProductDetailedPhotoSlide = ({ product }) => {
@@ -11,9 +11,15 @@ const ProductDetailedPhotoSlide = ({ product }) => {
     <div>
       <Grid >
         <Grid.Column >
-          {product.photos &&
+        {/*<Carousel swipeable={true} showThumbs= {false} showStatus={false} centerMode centerSlidePercentage={100}>
+        {product.photos &&
             product.photos.map((photo,i) => (
-              <div key={i} ><Image fluid src={photo.url} /></div>
+              <Image key={i} fluid src={photo.url} />
+            ))}
+                    </Carousel>*/}
+                    {product.photos &&
+            product.photos.map((photo,i) => (
+              <Image key={i} fluid src={photo.url} />
             ))}
         </Grid.Column>
       </Grid>

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Table, Image, Button, Icon, Header } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { removeFromCart } from '../cartActions'
-
+import { NavLink, Link, withRouter } from "react-router-dom";
 
 const actions = {
   removeFromCart
@@ -33,20 +33,22 @@ class CartListItem extends Component {
     if (!selectedItem && !selectedSubItem) return <LoadingComponent inverted={true} />;
 
     return (
-      <Table.Row>
-        <Table.Cell width={3}>
+      <Table.Row /**/>
+        <Table.Cell width={3}>       
             <Image
               src={selectedItem.photos[0].url}
               rounded
-              size="small"
+              size="medium"
+              /**/
             />
         </Table.Cell>
         <Table.Cell width={3} textAlign='left' verticalAlign='top'>{selectedItem.name}</Table.Cell>
         <Table.Cell width={3} textAlign='left'  verticalAlign='top'>{symbol}{selectedSubItem.price}</Table.Cell>
         <Table.Cell width={3} textAlign='left'  verticalAlign='top'>{selectedSubItem.variants.map((v,i)=>(
             <div key={i}>{v}</div>
-        ))}</Table.Cell>
-        <Table.Cell width={3} textAlign='left'  verticalAlign='top'><h5>QTY-+</h5></Table.Cell>
+        ))}<a href={`/${currentStore}/collection/product/${selectedItem.id}`} >Edit</a></Table.Cell>
+        <Table.Cell width={3} textAlign='left'  verticalAlign='top'>
+        </Table.Cell>
         <Table.Cell width={3} textAlign='right' verticalAlign='top'>
             <Button onClick={this.handleItemDelete(item,currentStore)} circular basic  icon='delete' />
         </Table.Cell>

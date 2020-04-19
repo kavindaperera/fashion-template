@@ -38,23 +38,24 @@ class CartDashboard extends Component {
       cartItems = user.cart;
     }
     //console.log(cartItems)
+
+
+
     if (loading) return <LoadingComponent inverted={true} />;
+
 
     return (
       <Grid columns={2}>
-        <Grid.Row>
-          <Grid.Column width={12}>
+      <Grid.Row>
+          <Grid.Column width={10}>
             <Header as="h3">My Bag</Header>
-          </Grid.Column>
-          <Grid.Column>
             <CartList currentStore={currentStore} symbol={symbol} cartItems={cartItems}/>
           </Grid.Column>
           <Grid.Column width={4}>
             <StickyBox offsetTop={70} offsetBottom={20}>
-              <OrderSummary />
+              <OrderSummary symbol={symbol}  cartItems={cartItems} />
             </StickyBox>
-          </Grid.Column>
-        </Grid.Row>
+          </Grid.Column></Grid.Row>
       </Grid>
     );
   }
