@@ -10,7 +10,7 @@ class ProductList extends Component {
 
   
   render() {
-    const { products, sortCategory, store, currency } = this.props;
+    const { products, sortCategory, store, currency, enableRating } = this.props;
 
     //Function to sort by Category Index
     const categories = store.categories;
@@ -20,10 +20,10 @@ class ProductList extends Component {
       <div>
         <Card.Group itemsPerRow={4}>
           { (sortCategory!=="") && products && products.map(product => ( 
-            (  product.visible && (product.category===(sortByIndex)) && <ProductListItem key={product.id}  product={product} store={store} currency={currency} />)
+            (  product.visible && (product.category===(sortByIndex)) && <ProductListItem enableRating={enableRating} key={product.id}  product={product} store={store} currency={currency} />)
           ))}
           { (sortCategory==="all") && products && products.map(product => ( 
-            (  product.visible && <ProductListItem key={product.id} product={product}  store={store} currency={currency}/>)
+            (  product.visible && <ProductListItem enableRating={enableRating} key={product.id} product={product}  store={store} currency={currency}/>)
           ))}
         </Card.Group>
       </div>

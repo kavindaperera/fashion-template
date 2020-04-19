@@ -44,18 +44,18 @@
     "redux-form": "^8.3.1",
     "redux-thunk": "^2.3.0",
     "revalidate": "^1.2.0",
-    "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.82.5",
     "styled-components": "^5.1.0",
     "uuid": "^3.3.2",
     "webfontloader": "^1.6.28"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject"
   },
+
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -72,11 +72,14 @@
     ]
   },
   "devDependencies": {
+    "@craco/craco": "^5.6.4",
+    "@semantic-ui-react/craco-less": "^1.2.1",
     "@testing-library/react": "^9.5.0",
     "enzyme": "^3.11.0",
     "jest-dom": "^4.0.0",
     "jest-enzyme": "^7.1.2",
     "redux-devtools-extension": "^2.13.8",
+    "semantic-ui-less": "^2.4.1",
     "source-map-explorer": "^2.4.0"
   }
 }

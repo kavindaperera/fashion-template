@@ -63,17 +63,8 @@ const fixedMenuStyle = {
 
 class NavBar extends Component {
 
+  
 
-  async componentDidMount(){
-    try{
-      const config = await this.props.config;
-      const store = await this.props.store;
-      this.props.getCurrency(config, store);
-    } catch (error){
-      console.log('CMOUNT',error)
-    }
-    
-  }
 
   handleSignedIn = () => {
     this.props.openModal("LoginModal",this.props.currentStore);
@@ -98,13 +89,13 @@ class NavBar extends Component {
   unStickTopMenu = () => this.setState({ menuFixed: false });
 
   render() {
-    const { auth, profile, store,  currentStore, config} = this.props;
+    const { auth, profile, store,  currentStore, config, getCurrency} = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
     const { menuFixed } = this.state;
 
-
     //getting store currency
     if (config && store) {
+      getCurrency(config,store); 
       const currencies = config.currencies;
       const storeCurrency = store.currency;
       var value;

@@ -69,7 +69,7 @@ class ItemDetailedInfo extends Component {
     {product &&
       <Grid centered>
         <Grid.Row textAlign='center'>
-            <p style={{ color: "grey", fontSize: "2rem", fontFamily: 'sans-serif' }}>{_.upperCase(product.name)}
+            <p style={{ color: "grey", fontSize: "2rem" }}>{_.upperCase(product.name)}
             </p>
         </Grid.Row>
         <Grid.Row>

@@ -1,0 +1,14 @@
+/*******************************
+     User Global Variables
+*******************************/
+
+@primaryColor: #002f4e;
+@pageBackground: #eff0f1;
+
+/*-------------------
+     Fonts
+--------------------*/
+
+@headerFont        : 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@pageFont          : 'Raleway', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@googleFontFamily  : 'Lato:400italic,400|Raleway:400,700';

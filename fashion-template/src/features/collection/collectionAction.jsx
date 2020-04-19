@@ -8,7 +8,7 @@ import firebase from '../../app/config/firebase'
 
 export const getCurrency = (config,store) =>
   async (dispatch, getState) => {
-    
+    //console.log(config,store)
   try{
     dispatch(asyncActionStart());
     let symbol = 'X';

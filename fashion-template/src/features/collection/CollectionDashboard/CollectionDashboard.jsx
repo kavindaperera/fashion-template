@@ -69,9 +69,11 @@ class CollectionDashboard extends Component {
             ? 1
             : -1
         );
-      } else { 
+      } else {
+        //this.props.products.sort((a, b) => ( a.category && b.category && (a.category) < (b.category) ? 1 : -1));
         this.props.products.sort((a, b) => ( a.rating && b.rating && (a.rating.totalRating/a.rating.ratingCount) < (b.rating.totalRating/b.rating.ratingCount) ? 1 : -1));
       }
+      
       return { filteredProducts: this.props.products };
     });
   };
@@ -81,8 +83,12 @@ class CollectionDashboard extends Component {
   render() {
     const { store, products, filteredProducts, currentStore, category, config, symbol} = this.props;
 
-    console.log('collection',products)
 
+    let enableRating = false;
+
+    if (store){
+      enableRating = store.enableRating;
+    }
 
     if (!isLoaded(products) || isEmpty(products)) return <LoadingComponent inverted={true} />;
 
@@ -109,6 +115,7 @@ class CollectionDashboard extends Component {
               sortCategory={category}
               store = {store}
               currency = {symbol}
+              enableRating={enableRating}
             /> }
           </Grid.Column>
           <Grid.Row>

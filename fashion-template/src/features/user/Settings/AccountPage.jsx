@@ -53,7 +53,7 @@ const Account = ({ error, invalid, submitting, handleSubmit, updatePassword, pro
       <div>
         <Header color="teal" sub content="Facebook Account" />
         <p>Please visit Facebook to update your account settings</p>
-        <Button type="button" color="facebook">
+        <Button type="button"  color="facebook">
           <Icon name="facebook" />
           Go to Facebook
         </Button>

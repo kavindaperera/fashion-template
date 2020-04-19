@@ -20,7 +20,7 @@ const query = ({ currentStore,item }) => {
     },
   ];
 };
-
+// 
 class CartList extends Component {
   render() {
       const {symbol, cartItems, currentStore,mainItems} = this.props
@@ -32,6 +32,16 @@ class CartList extends Component {
           {cartItems && cartItems.map((item,i)=> (
             <CartListItem key={i} item={item} mainItems={mainItems} symbol={symbol} currentStore={currentStore} index={i}/>
           ))}
+          {cartItems && cartItems.length==0 && (
+            <Table.Row>
+                <Table.Cell width={3} textAlign='left' verticalAlign='top'>
+                  You haven't put any items in your bag.
+                  <br></br>
+                  <a href={`/${currentStore}/collection/all`}>Start Shopping</a>
+                </Table.Cell>
+              </Table.Row>
+          )}
+
           </Table.Body>
         </Table>
       </div>

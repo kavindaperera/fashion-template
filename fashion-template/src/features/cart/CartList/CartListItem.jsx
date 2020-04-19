@@ -33,7 +33,7 @@ class CartListItem extends Component {
     if (!selectedItem && !selectedSubItem) return <LoadingComponent inverted={true} />;
 
     return (
-      <Table.Row /**/>
+      <Table.Row >
         <Table.Cell width={3}>       
             <Image
               src={selectedItem.photos[0].url}

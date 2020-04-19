@@ -9,7 +9,7 @@ import moment from "moment";
 
 class ProductListItem extends Component {
   render() {
-    const { product, store, currency } = this.props;
+    const { product, store, currency, enableRating } = this.props;
     let discountActive = false;
     let discount = 0;
     const rating = product.rating.totalRating / product.rating.ratingCount;
@@ -93,7 +93,8 @@ class ProductListItem extends Component {
               discountActive={discountActive}
             ></PriceTag>
             <div>
-              <Rating clearable defaultRating={rating} maxRating={5} />
+            {enableRating && <Rating clearable defaultRating={rating} maxRating={5} /> }
+
             </div>
           </div>
         </div>

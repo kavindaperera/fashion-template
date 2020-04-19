@@ -45,17 +45,18 @@ class CartDashboard extends Component {
 
 
     return (
-      <Grid columns={2}>
+      <Grid  divided='vertically' columns={2}>
+      <Grid.Row><Header as="h3">My Bag</Header></Grid.Row>
       <Grid.Row>
-          <Grid.Column width={10}>
-            <Header as="h3">My Bag</Header>
+          <Grid.Column  width={10}>
             <CartList currentStore={currentStore} symbol={symbol} cartItems={cartItems}/>
           </Grid.Column>
           <Grid.Column width={4}>
             <StickyBox offsetTop={70} offsetBottom={20}>
               <OrderSummary symbol={symbol}  cartItems={cartItems} />
             </StickyBox>
-          </Grid.Column></Grid.Row>
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
     );
   }
