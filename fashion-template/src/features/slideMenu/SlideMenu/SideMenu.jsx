@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu } from 'semantic-ui-react'
+import { Menu, Container } from 'semantic-ui-react'
 import { NavLink,  withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";

@@ -1,6 +1,8 @@
 import React from "react";
 
 function PriceTag({ currency, price, discount, discountActive }) {
+  
+
   return (
     <div data-testid="price-tag">
       { discountActive  &&  discount > 0 && (

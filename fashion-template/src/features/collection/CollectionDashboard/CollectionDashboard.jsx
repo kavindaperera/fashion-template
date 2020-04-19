@@ -73,7 +73,6 @@ class CollectionDashboard extends Component {
         //this.props.products.sort((a, b) => ( a.category && b.category && (a.category) < (b.category) ? 1 : -1));
         this.props.products.sort((a, b) => ( a.rating && b.rating && (a.rating.totalRating/a.rating.ratingCount) < (b.rating.totalRating/b.rating.ratingCount) ? 1 : -1));
       }
-      
       return { filteredProducts: this.props.products };
     });
   };
@@ -93,8 +92,8 @@ class CollectionDashboard extends Component {
     if (!isLoaded(products) || isEmpty(products)) return <LoadingComponent inverted={true} />;
 
     return (
-      <div>
-        <Grid centered columns={2}>
+
+        <Grid>
           <Grid.Column width={2}>
             <StickyBox offsetTop={70} offsetBottom={20}>
               <SideMenu sortCategory={category} currentStore={currentStore}></SideMenu>
@@ -118,7 +117,7 @@ class CollectionDashboard extends Component {
               enableRating={enableRating}
             /> }
           </Grid.Column>
-          <Grid.Row>
+        { /* <Grid.Row>
             <Pagination
               defaultActivePage={1}
               firstItem={null}
@@ -128,9 +127,9 @@ class CollectionDashboard extends Component {
               totalPages={3}
             />
           </Grid.Row>
-          <Grid.Row></Grid.Row>
+          <Grid.Row></Grid.Row>*/}
         </Grid>
-      </div>
+
     );
   }
 }

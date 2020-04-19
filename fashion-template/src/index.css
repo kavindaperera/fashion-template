@@ -37,10 +37,10 @@ body {
   padding: 1em 0 !important;
 } */
 
-.masthead .ui.menu .ui.button,
+/*.masthead .ui.menu .ui.button,
 .ui.menu a.ui.inverted.button {
   margin-left: 0.5em;
-}
+}*/
 
 /*.masthead h1.ui.header {
   font-size: 10em;
@@ -56,9 +56,9 @@ body {
   padding: 5em 0;
 } */
 
-.secondary.inverted.pointing.menu {
+/*.secondary.inverted.pointing.menu {
   border: none;
-}
+}*/
 
 /*end home page styles*/
 
@@ -96,7 +96,7 @@ body {
   background-color: #f5f5f5;
 }
 
-.masthead .ui.menu .ui.button,
+/*.masthead .ui.menu .ui.button,
 .ui.menu a.ui.inverted.button {
   margin-left: 0.5em;
 }
@@ -107,7 +107,7 @@ body {
 
 .ui.menu:not(.vertical) .item>.button {
   margin-left: 0.5em;
-}
+}*/
 
 /*chat comments*/
 
