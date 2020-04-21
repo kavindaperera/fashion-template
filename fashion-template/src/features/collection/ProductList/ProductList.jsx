@@ -8,10 +8,8 @@ import { firestoreConnect } from "react-redux-firebase";
 
 class ProductList extends Component {
 
-  
   render() {
     const { products, sortCategory, store, currency, enableRating } = this.props;
-
     //Function to sort by Category Index
     const categories = store.categories;
     const sortCategoryIndex = categories.map((category, index) =>  { if(category.name==sortCategory){ return index; } } )

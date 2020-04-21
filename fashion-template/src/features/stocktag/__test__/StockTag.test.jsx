@@ -25,7 +25,7 @@ it("renders button correctly",()=>{
 
 it("renders button correctly",()=>{
     const {getByTestId} = render(<StockTag stock={null}></StockTag>)
-    expect(getByTestId('stock-tag')).toHaveTextContent("")
+    expect(getByTestId('stock-tag')).toHaveTextContent("This item is not available")
 });
 
 it('matches snapshot 1', ()=>{

@@ -14,11 +14,11 @@ function PriceTagLarge({
         <div data-testid="price-tag">
           {discountActive && discount > 0 && (
             <h2>
-              <del style={{ color: "grey" }}>
+              <del style={{ color: "grey", fontFamily: "Lato"  }}>
                 {currency}
                 {displayPrice}
               </del>
-              <a style={{ color: "red" }}>
+              <a style={{ color: "red" , fontFamily: "Lato" }}>
                 {"   "} {currency}
                 {displayPrice - (displayPrice * discount) / 100}
               </a>
@@ -36,11 +36,11 @@ function PriceTagLarge({
         <div data-testid="price-tag">
           {discountActive && discount > 0 && (
             <h2>
-              <del style={{ color: "grey" }}>
+              <del style={{ color: "grey", fontFamily: "Lato"  }}>
                 {currency}
                 {price}
               </del>
-              <a style={{ color: "red" }}>
+              <a style={{ color: "red", fontFamily: "Lato"  }}>
                 {"   "} {currency}
                 {price - (price * discount) / 100}
               </a>

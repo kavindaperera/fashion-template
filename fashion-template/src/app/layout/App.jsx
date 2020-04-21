@@ -10,6 +10,8 @@ import CartDashboard from '../../features/cart/CartDashboard/CartDashboard'
 import ModalManager from '../../features/modals/ModalManager'
 import Footer from "../../features/footer/Footer";
 import NotFound from '../../features/pages/NotFound'
+import TestComponent from '../../features/testarea/TestComponent';
+import ChatButton from '../../features/button/ChatButton'
 
 class App extends Component {
   render() {
@@ -23,10 +25,12 @@ class App extends Component {
           path="/:store/(.+)"
           render={() => (
             <div>
+              {/*<ChatButton/>*/}
               <NavBar />
               <Grid className="main">
                 <Switch>
                 <Route path={`/:store/collection/product/:id`} component={ProductDetailedPage} />
+                <Route path="/:store/test" component={TestComponent} />
                 <Route path={`/:store/collection/:category`}  component={CollectionDashboard} />
                 <Route path={`/:store/my-account`} component={SettingsDashboard} />
                 <Route path={`/:store/cart`} component={CartDashboard} />

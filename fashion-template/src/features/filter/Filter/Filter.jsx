@@ -24,6 +24,16 @@ const sortOptions = [
     text: "Price: High to Low",
     value: "highest",
   },
+  {
+    key: "Name: A-Z Order",
+    text: "Name: A-Z Order",
+    value: "atoz",
+  },
+  {
+    key: "Name: Z-A Order",
+    text: "Name: Z-A Order",
+    value: "ztoa",
+  },
 ];
 
 const menuStyle = {

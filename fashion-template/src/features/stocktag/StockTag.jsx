@@ -15,7 +15,7 @@ function StockTag({ stock, selectedVariant }) {
           </Label>
         )}
       </div>
-    ): (<p></p>)
+    ): ("")
     }
     </div>
   );

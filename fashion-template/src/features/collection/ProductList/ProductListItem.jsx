@@ -7,12 +7,17 @@ import { Link, Route } from "react-router-dom";
 import PriceTag from "../../pricetag/PriceTag";
 import moment from "moment";
 
+
 class ProductListItem extends Component {
   render() {
     const { product, store, currency, enableRating } = this.props;
     let discountActive = false;
     let discount = 0;
-    const rating = product.rating.totalRating / product.rating.ratingCount;
+    let rating = product.rating.totalRating / product.rating.ratingCount;
+    if (isNaN(rating) ){
+      rating=0
+    }
+    console.log(rating)
 
     //checking Discount Status
     if (product.discount != null) {
@@ -51,7 +56,7 @@ class ProductListItem extends Component {
           </div>
         )}
 
-        {/*if only 1 product image is available*/}     
+        {/*if only 1 product image is available*/}
         {product.photos[0] && !product.photos[1] && (
           <div className="ui slide masked reveal image">
             <Image
@@ -93,7 +98,8 @@ class ProductListItem extends Component {
               discountActive={discountActive}
             ></PriceTag>
             <div>
-            {enableRating && <Rating clearable defaultRating={rating} maxRating={5} /> }
+            {enableRating && rating>0 && <Rating clearable defaultRating={rating} maxRating={5} /> }
+            {enableRating && rating==0 && <p style={{ color: "red" }}>still not rated</p> }
 
             </div>
           </div>

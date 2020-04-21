@@ -1,16 +1,16 @@
 import React from "react";
 
-function PriceTag({ currency, price, discount, discountActive }) {
+function PriceTagCart({ currency, price, discount, discountActive }) {
 
   return (
     <div data-testid="price-tag">
       { discountActive  &&  discount > 0 && (
           <p>
-            <del style={{ color: "grey", fontFamily: "Lato"  }}>
+            <del style={{ color: "grey", fontFamily: "Lato" }}>
               {currency}
               {price}
             </del>
-            <a style={{ color: "red", fontFamily: "Lato"  }}>
+            <a style={{ color: "red" , fontFamily: "Lato" }}>
               {currency}
               { price - (price * discount) / 100}
             </a>
@@ -18,7 +18,7 @@ function PriceTag({ currency, price, discount, discountActive }) {
       )}
 
       { (!discountActive || discount == 0) && (
-        <p style={{ color: "grey", fontFamily: "Lato"  }}>
+        <p>
           {currency}
           {price}
         </p>
@@ -27,4 +27,4 @@ function PriceTag({ currency, price, discount, discountActive }) {
   );
 }
 
-export default PriceTag;
+export default PriceTagCart;
