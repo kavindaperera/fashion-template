@@ -99,7 +99,7 @@ class ProductListItem extends Component {
             ></PriceTag>
             <div>
             {enableRating && rating>0 && <Rating clearable defaultRating={rating} maxRating={5} /> }
-            {enableRating && rating==0 && <p style={{ color: "red" }}>still not rated</p> }
+            {enableRating && rating==0 && <p style={{ color: "grey" }}>still not rated</p> }
 
             </div>
           </div>

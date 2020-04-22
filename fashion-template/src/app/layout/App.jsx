@@ -25,7 +25,6 @@ class App extends Component {
           path="/:store/(.+)"
           render={() => (
             <div>
-              {/*<ChatButton/>*/}
               <NavBar />
               <Grid className="main">
                 <Switch>
@@ -41,7 +40,6 @@ class App extends Component {
             </div>
           )}
         />
-        {/*<Footer/>*/}
       </div>
     );
   }

@@ -13,9 +13,9 @@ const actions = {
 const LoginForm = ({login, socialLogin, handleSubmit, error,currentStore}) => {
   return (
     <Form onSubmit={handleSubmit(login)} error size="large">
-      <Segment>
-        <SocialLogin socialLogin={socialLogin} currentStore={currentStore}/>
-      </Segment>
+
+        <SocialLogin  socialLogin={socialLogin} currentStore={currentStore}/>
+
     </Form>
   );
 };

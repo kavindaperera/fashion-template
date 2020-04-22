@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { toastr } from "react-redux-toastr";
 import { withFirestore } from "react-redux-firebase";
-import { Grid, Button } from "semantic-ui-react";
+import { Grid, Button,Breadcrumb } from "semantic-ui-react";
 import { firestoreConnect } from "react-redux-firebase";
 import ProductDetailedPhotoSlide from "./ProductDetailedPhotoSlide";
 import ProductPriceDetails from "./ProductPriceDetails";
 import StickyBox from "react-sticky-box";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import moment from "moment";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import _ from "lodash";
+
 
 const mapState = (state, ownProps) => {
   const productId = ownProps.match.params.id;
@@ -73,8 +74,23 @@ class ProductDetailedPage extends Component {
       discount = product.discount.percentage;
     }
 
+    const categories = store.categories;
+    const currentCategoryIndex = product.category;
+    const sortCategoryIndex = categories.map((category, index) =>  { if(index==currentCategoryIndex){ return category.name; } } )
+    const currentCategory= sortCategoryIndex.sort()[0]
+    console.log(currentCategory)
+
     return (
       <Grid>
+      <Grid.Row>
+        <Breadcrumb>
+          <Breadcrumb.Section title="Back to Cothing" style={{color:'grey'}} as={Link} to={`/${currentStore}/collection/all`}>Clothing</Breadcrumb.Section>
+          <Breadcrumb.Divider icon='right chevron'/>
+          <Breadcrumb.Section title={`Back to ${_.capitalize(currentCategory)}`} style={{color:'grey'}}  as={Link} to={`/${currentStore}/collection/${currentCategory}`}>{_.capitalize(currentCategory)}</Breadcrumb.Section>
+          <Breadcrumb.Divider style={{color:'grey'}} icon='right chevron'/>
+          <Breadcrumb.Section >{product.name}</Breadcrumb.Section>
+        </Breadcrumb>
+      </Grid.Row>
       <Grid.Row>
         <Grid.Column width={8}>
           <div>

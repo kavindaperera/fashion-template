@@ -19,7 +19,7 @@ const ProductDetailedPhotoSlide = ({ product }) => {
                     </Carousel>*/}
                     {product.photos &&
             product.photos.map((photo,i) => (
-              <Image key={i} fluid src={photo.url} />
+              <Image key={i} style={{marginBottom:'5rem'}} fluid src={photo.url} />
             ))}
         </Grid.Column>
       </Grid>

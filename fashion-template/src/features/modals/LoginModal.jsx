@@ -18,13 +18,14 @@ class LoginModal extends Component {
         return (
             <Modal
                 size='mini'
+                centered
                 open={true}
                 onClose={this.props.closeModal}>
-                <Modal.Header>
+                <Modal.Header >
                     Login
                 </Modal.Header>
                 <Modal.Content>
-                    <Modal.Description>
+                    <Modal.Description style={{marginTop:'2rem', marginBottom:'2rem', marginLeft:'2rem', marginRight:'2rem'}}>
                         <LoginForm currentStore={store} />
                     </Modal.Description>
                 </Modal.Content>
