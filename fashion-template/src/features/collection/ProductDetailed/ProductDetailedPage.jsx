@@ -1,14 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { toastr } from 'react-redux-toastr'
-import { withFirestore } from 'react-redux-firebase'
-import { Grid } from "semantic-ui-react";
+import { toastr } from "react-redux-toastr";
+import { withFirestore } from "react-redux-firebase";
+import { Grid, Button } from "semantic-ui-react";
 import { firestoreConnect } from "react-redux-firebase";
 import ProductDetailedPhotoSlide from "./ProductDetailedPhotoSlide";
 import ProductPriceDetails from "./ProductPriceDetails";
 import StickyBox from "react-sticky-box";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
-import moment from 'moment';
+import moment from "moment";
+import { NavLink } from "react-router-dom";
+import _ from "lodash";
 
 const mapState = (state, ownProps) => {
   const productId = ownProps.match.params.id;
@@ -20,7 +22,7 @@ const mapState = (state, ownProps) => {
   let product = {};
 
   if (productId && products) {
-    product = products.filter(product => product.id === productId)[0];
+    product = products.filter((product) => product.id === productId)[0];
   }
   return {
     product,
@@ -33,68 +35,92 @@ const mapState = (state, ownProps) => {
 
 const actions = {};
 
-const query = ({currentStore}) => {
+const query = ({ currentStore }) => {
   return [
     {
-      collection:'Stores',
+      collection: "Stores",
       doc: currentStore,
-      subcollections:[{collection: 'Items'}],
-      storeAs: 'items'
-    }
-  ]
-}
-
+      subcollections: [{ collection: "Items" }],
+      storeAs: "items",
+    },
+  ];
+};
 
 class ProductDetailedPage extends Component {
-
-
-  async componentDidMount(){
-    const {firestore, match} = this.props;
+  async componentDidMount() {
+    const { firestore, match } = this.props;
     await firestore.setListener(`collection/products/${match.params.id}`);
   }
-
 
   async componentWillUnmount() {
     const { firestore, match } = this.props;
     await firestore.unsetListener(`collection/products/${match.params.id}`);
   }
 
-  render(){
+  render() {
+    const { product, currentStore, store, config } = this.props;
+    let discountActive = false;
+    let discount = 0;
 
-  const {product, currentStore, store, config} = this.props;
-  let discountActive = false;
-  let discount = 0;  
-  
+    if (!product.name) return <LoadingComponent inverted={true} />;
 
-  if (!product.name) return <LoadingComponent inverted={true} />;
-
-  
-   //checking Discount Status
-   if(product.discount!=null){
-    const dateNow = moment().format('X');
-    const startDate = product.discount.startDate.seconds;
-    const endDate = product.discount.endDate.seconds;
-    discountActive = (startDate < dateNow && dateNow < endDate)
-    discount = product.discount.percentage
+    //checking Discount Status
+    if (product.discount != null) {
+      const dateNow = moment().format("X");
+      const startDate = product.discount.startDate.seconds;
+      const endDate = product.discount.endDate.seconds;
+      discountActive = startDate < dateNow && dateNow < endDate;
+      discount = product.discount.percentage;
     }
 
- 
+    return (
+      <Grid>
+      <Grid.Row>
+        <Grid.Column width={8}>
+          <div>
+            <ProductDetailedPhotoSlide product={product} />
+          </div>
+        </Grid.Column>
+        <Grid.Column width={4}>
+          <StickyBox offsetTop={70} offsetBottom={30}>
+            {store && product && (
+              <ProductPriceDetails
+                currentStore={currentStore}
+                product={product}
+                discountActive={discountActive}
+                discount={discount}
+              />
+            )}
+          </StickyBox>
+        </Grid.Column>
+        </Grid.Row>
+        <Grid.Row style={{marginTop:'8rem' , marginBottom:'6rem'}} >
+        <Grid.Column textAlign='center'>
+              <Grid.Row ><h3 style={{ color:'grey', marginBottom:'1rem'}} >Shop More</h3></Grid.Row>
+              <Grid.Row >
+          {store.categories &&
+            store.categories.map((category) => (
+              <Button basic
+                as={NavLink}
+                to={`/${currentStore}/collection/${category.name}`}
+                size="large"
+                color="grey"
+                key={category.name}
+              >
+                {_.capitalize(category.name)}
+              </Button>
+            ))}</Grid.Row></Grid.Column>
+        </Grid.Row>
+      </Grid>
+    );
+  }
+}
 
-  return (
-    <Grid>
-      <Grid.Column width={8}>
-        <div>
-          <ProductDetailedPhotoSlide product={product} />
-        </div>
-      </Grid.Column>
-      <Grid.Column width={4}>
-        <StickyBox offsetTop={70} offsetBottom={30}>
-        { store && product &&
-          <ProductPriceDetails currentStore={currentStore}  product={product} discountActive={discountActive}  discount={discount}/>}
-        </StickyBox>
-      </Grid.Column>
-    </Grid>
-  );
-}};
-
-export default withFirestore(connect(mapState,actions)(firestoreConnect(currentStore => query(currentStore))(ProductDetailedPage)));
+export default withFirestore(
+  connect(
+    mapState,
+    actions
+  )(
+    firestoreConnect((currentStore) => query(currentStore))(ProductDetailedPage)
+  )
+);

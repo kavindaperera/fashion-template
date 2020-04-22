@@ -55,7 +55,7 @@ render (){
                 <Grid.Row centered>
                   {store.categories &&
                     store.categories.map(category => (
-                      <Button 
+                      <Button
                       as={NavLink}
                       to={`/${currentStore}/collection/${category.name}`}
                       size="large" color="black" key={category.name}>

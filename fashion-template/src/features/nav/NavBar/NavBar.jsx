@@ -176,7 +176,7 @@ class NavBar extends Component {
                           />
                         )}
                         <Menu.Item>
-                        <CurrencyFlag currency={store.currency} size="lg" />
+                        <CurrencyFlag title={store.currency} currency={store.currency} size="lg" />
                         </Menu.Item>
                       </Container>
                     </Menu>
