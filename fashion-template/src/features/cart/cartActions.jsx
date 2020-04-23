@@ -123,9 +123,45 @@ export const removeFromCart = (item,currentStore) =>{
 };
 
 
-export const editItemQuantity = () => {
+export const editItemQuantity = (index, currentStore) => {
   return async (dispatch, getState, { getFirebase, getFirestore }) => {
-  console.log("changing quantity")
-  }
+    const firestore = firebase.firestore();
+    const fb = getFirebase();
+    const user = fb.auth().currentUser;
+    const toastrOptions = {
+      timeOut: 6000,
+      icon: (<Icon  circular name='shopping bag' size='big' />),
+      progressBar: true,
+    }
+    console.log(user.uid,index, currentStore)
 
+    if(user!==null){
+        return firestore
+          .collection('Stores')
+          .doc(currentStore)
+          .collection('Buyers')
+          .doc(user.uid)
+          .get()
+          .then(dataSnapshot => {
+            let cart = dataSnapshot.get('cart')
+            return cart ? cart :[]
+          })
+          .then( cart => {
+            cart[index].quantity += 1;
+            console.log(cart)
+            return firestore
+              .collection('Stores')
+              .doc(currentStore)
+              .collection('Buyers')
+              .doc(user.uid)
+              .update({'cart' : cart})
+          })
+          .then( () => {
+            toastr.success('Item Quantity Changed')
+          })
+          .catch((error) => {
+            toastr.error("error", error.message)
+          })
+    }
+  }
 }

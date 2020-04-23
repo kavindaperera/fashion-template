@@ -21,8 +21,8 @@ class CartListItem extends Component {
     this.props.removeFromCart(item, currentStore);
   };
 
-  handleChange = (value) => {
-    this.props.editItemQuantity();
+  handleChange = (index, currentStore) => {
+    this.props.editItemQuantity(index, currentStore);
   };
 
   render() {
@@ -38,7 +38,7 @@ class CartListItem extends Component {
     } = this.props;
 
 
-    console.log(item);
+    console.log(index);
 
     let subItemId = null;
     let selectedItem = null;
@@ -47,15 +47,16 @@ class CartListItem extends Component {
     let discountActive = false;
     let discount = 0;
     let stock = 0;
-    let qty = 1;
+  
 
     if (item && mainItems) {
       subItemId = item.subItem;
       selectedItem = mainItems.filter((product) => product.id === item.item)[0];
       selectedSubItem = selectedItem.subItems[subItemId];
       stock = selectedSubItem.stock;
-      qty = item.quantity;
     }
+
+
 
     let quantity = [];
 
@@ -118,8 +119,8 @@ class CartListItem extends Component {
         </Table.Cell>
         <Table.Cell width={3} textAlign="left" verticalAlign="top">
               <Button size="mini" icon='minus' onClick={()=>this.handleChange()} />
-              <Label basic size="medium" >{qty}</Label>
-              <Button size="mini" icon='plus' onClick={()=>this.handleChange()} />
+              <Label basic size="medium" >{item.quantity}</Label>
+              <Button size="mini" icon='plus' onClick={()=>this.handleChange(index, currentStore)} />
         </Table.Cell>
         <Table.Cell width={3} textAlign="right" verticalAlign="top">
           <Button
