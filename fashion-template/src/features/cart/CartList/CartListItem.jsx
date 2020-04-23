@@ -1,41 +1,68 @@
 import React, { Component } from "react";
-import { connect } from 'react-redux';
-import { Table, Image, Button, Icon, Header } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { Table, Image, Button, Label, Icon, Form } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
-import { removeFromCart } from '../cartActions'
+import SelectInput from "../../../app/common/form/SelectInput";
+import { removeFromCart } from "../cartActions";
 import { NavLink, Link, withRouter } from "react-router-dom";
-import PriceTagCart from '../../pricetag/PriceTagCart'
+import PriceTagCart from "../../pricetag/PriceTagCart";
 import moment from "moment";
-
+import {editItemQuantity} from '../../cart/cartActions'
 
 const actions = {
-  removeFromCart
+  removeFromCart,
+  editItemQuantity
 };
 
 class CartListItem extends Component {
 
 
-  handleItemDelete = (item,currentStore) => async () => {
-      this.props.removeFromCart(item,currentStore);
-  }
+  handleItemDelete = (item, currentStore) => async () => {
+    this.props.removeFromCart(item, currentStore);
+  };
+
+  handleChange = (value) => {
+    this.props.editItemQuantity();
+  };
+
   render() {
-    const { symbol, item, mainItems, currentStore, index} = this.props;
+    const {
+      pristine,
+      submitting,
+      handleSubmit,
+      symbol,
+      item,
+      mainItems,
+      currentStore,
+      index,
+    } = this.props;
+
+
+    console.log(item);
 
     let subItemId = null;
     let selectedItem = null;
     let selectedSubItem = null;
 
-
     let discountActive = false;
     let discount = 0;
+    let stock = 0;
+    let qty = 1;
 
-
-    if (item && mainItems ) {
+    if (item && mainItems) {
       subItemId = item.subItem;
-      selectedItem = mainItems.filter(product => product.id === item.item)[0];
-      selectedSubItem = selectedItem.subItems[subItemId]
+      selectedItem = mainItems.filter((product) => product.id === item.item)[0];
+      selectedSubItem = selectedItem.subItems[subItemId];
+      stock = selectedSubItem.stock;
+      qty = item.quantity;
     }
 
+    let quantity = [];
+
+    for (var i = 1; i <= stock; i++) {
+      let x = { key: i, text: i, value: i };
+      quantity.push(x);
+    }
 
     //checking Discount Status
     if (selectedItem.discount != null) {
@@ -46,39 +73,61 @@ class CartListItem extends Component {
       discount = selectedItem.discount.percentage;
     }
 
-    if (!selectedItem && !selectedSubItem) return <LoadingComponent inverted={true} />;
+    if (!selectedItem && !selectedSubItem)
+      return <LoadingComponent inverted={true} />;
 
     return (
-      <Table.Row >
-        <Table.Cell width={3} >
-            {selectedItem.photos[0] && <Image
-              src={selectedItem.photos[0].url || "/assets/product_list_image.png"}
+      <Table.Row>
+        <Table.Cell width={3}>
+          {selectedItem.photos[0] && (
+            <Image
+              src={
+                selectedItem.photos[0].url || "/assets/product_list_image.png"
+              }
               rounded
               size="medium"
-            />}
+            />
+          )}
 
-            {!selectedItem.photos[0] && <Image
+          {!selectedItem.photos[0] && (
+            <Image
               src={"/assets/product_list_image.png"}
               rounded
               size="medium"
-            />}
+            />
+          )}
         </Table.Cell>
-        <Table.Cell width={3} textAlign='left' verticalAlign='top'>{selectedItem.name}</Table.Cell>
-        <Table.Cell width={3} textAlign='left'  verticalAlign='top'>
-            <PriceTagCart
-              currency={symbol}
-              price={selectedSubItem.price}
-              discount={discount}
-              discountActive={discountActive}
-            ></PriceTagCart>
+        <Table.Cell width={3} textAlign="left" verticalAlign="top">
+          {selectedItem.name}
         </Table.Cell>
-        <Table.Cell width={3} textAlign='left'  verticalAlign='top'>{selectedSubItem.variants.map((v,i)=>(
+        <Table.Cell width={3} textAlign="left" verticalAlign="top">
+          <PriceTagCart
+            currency={symbol}
+            price={selectedSubItem.price}
+            discount={discount}
+            discountActive={discountActive}
+          ></PriceTagCart>
+        </Table.Cell>
+        <Table.Cell width={3} textAlign="left" verticalAlign="top">
+          {selectedSubItem.variants.map((v, i) => (
             <div key={i}>{v}</div>
-        ))}<a href={`/${currentStore}/collection/product/${selectedItem.id}`} >Edit</a></Table.Cell>
-        <Table.Cell width={3} textAlign='left'  verticalAlign='top'>
+          ))}
+          <a href={`/${currentStore}/collection/product/${selectedItem.id}`}>
+            Edit
+          </a>
         </Table.Cell>
-        <Table.Cell width={3} textAlign='right' verticalAlign='top'>
-            <Button onClick={this.handleItemDelete(item,currentStore)} circular basic  icon='delete' />
+        <Table.Cell width={3} textAlign="left" verticalAlign="top">
+              <Button size="mini" icon='minus' onClick={()=>this.handleChange()} />
+              <Label basic size="medium" >{qty}</Label>
+              <Button size="mini" icon='plus' onClick={()=>this.handleChange()} />
+        </Table.Cell>
+        <Table.Cell width={3} textAlign="right" verticalAlign="top">
+          <Button
+            onClick={this.handleItemDelete(item, currentStore)}
+            circular
+            basic
+            icon="delete"
+          />
         </Table.Cell>
       </Table.Row>
     );

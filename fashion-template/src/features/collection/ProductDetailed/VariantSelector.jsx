@@ -29,6 +29,15 @@ class VariantSelector extends Component {
 
         const {pristine, submitting, stock, product, handleSubmit, initialValues, variants} = this.props;
 
+        let quantity = [];
+
+        for (var i = 1; i <= stock; i++){
+          let x = {key:i, text:i, value:i};
+            quantity.push(x)
+        }
+        console.log("qty",quantity)
+
+
         return (
                 <Form onSubmit={this.props.handleSubmit(this.onFormSubmit)}>
                 {variants && variants.map((variant, i)=>{
@@ -52,6 +61,13 @@ class VariantSelector extends Component {
                     />
                   );
                   })}
+                  {/*<Field
+                      name="quantity"
+                      type="number"
+                      component={SelectInput}
+                      options={quantity}
+                      placeholder="quantity"
+                    />*/}
                     <Divider/>
                     <Button.Group fluid>
                     <Button labelPosition='right' icon='bookmark outline'  disabled={pristine || submitting || !stock} size='large' color='black' content='Add to Bag'/>

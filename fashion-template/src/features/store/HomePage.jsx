@@ -86,7 +86,7 @@ render (){
                 <Grid.Row>
                 {store.storeCustomization.coverPhotos.banners &&
                   store.storeCustomization.coverPhotos.banners.map(photo => (
-                            <Image fluid style={{ marginTop: "2em" }} alt="a" key={photo} src={photo || "/assets/banner.png"} />
+                            <Image fluid style={{ marginTop: ".2rem" }} alt="a" key={photo} src={photo || "/assets/banner.png"} />
                         ))}
                 </Grid.Row>
                 <Grid.Row></Grid.Row>

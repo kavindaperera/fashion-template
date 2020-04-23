@@ -7,6 +7,7 @@ import {
   Dropdown,
   Visibility,
   Image,
+  Search
 } from "semantic-ui-react";
 import { NavLink, Link, withRouter } from "react-router-dom";
 import SignedOutMenu from "../Menus/SignedOutMenu";
@@ -163,6 +164,7 @@ class NavBar extends Component {
                             </Dropdown.Menu>
                           </Dropdown>
                         </Menu.Menu>
+                        <Menu.Menu position="right">
                         {authenticated ? (
                           <SignedInMenu
                             currentStore={currentStore}
@@ -178,6 +180,7 @@ class NavBar extends Component {
                         <Menu.Item>
                         <CurrencyFlag title={store.currency} currency={store.currency} size="lg" />
                         </Menu.Item>
+                        </Menu.Menu>
                       </Container>
                     </Menu>
                   </Visibility>

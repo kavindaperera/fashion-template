@@ -7,7 +7,7 @@ function PriceTagLarge({
   discount,
   discountActive,
 }) {
-  console.log(discountActive);
+  //console.log(discountActive);
   return (
     <div>
       {displayPrice ? (

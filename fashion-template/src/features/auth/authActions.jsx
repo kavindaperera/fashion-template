@@ -48,28 +48,18 @@ export const socialLogin = (selectedProvider, currentStore) =>
   async (dispatch, getState, {getFirebase, getFirestore}) => {
     const firebase = getFirebase();
     const firestore = getFirestore();
-
     try {
       dispatch(closeModal());
       let user = await firebase.login({
         provider: selectedProvider,
         type: 'popup'
       })
-      /*if (user.additionalUserInfo.isNewUser) {
-        await firestore.set(`users/${user.user.uid}`, {
-          displayName: user.profile.displayName,
-          photoURL: user.profile.avatarUrl,
-          createdAt: firestore.FieldValue.serverTimestamp()
-        })
-      }*/
       let buyerAccount = await firestore.get({
         collection:'Stores',
         doc:currentStore,
         subcollections:[{collection:'Buyers', doc: user.user.uid }]
       });
-      //console.log('account:',buyerAccount)
-      //console.log('current:',currentStore)
-      //console.log('user:',user.user.uid)
+
       if (!buyerAccount.data()){  //Checking whether new user
         await firestore.set({
           collection:'Stores',
@@ -88,7 +78,7 @@ export const socialLogin = (selectedProvider, currentStore) =>
       }
     } catch (error) {
       console.log(error)
-      toastr.error('Error', error)
+      toastr.error('Error', 'Error Occured While Login, Try Again!')
     }
   }
 
