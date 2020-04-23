@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Table, Image, Button, Label, Icon, Form } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import SelectInput from "../../../app/common/form/SelectInput";
-import { removeFromCart } from "../cartActions";
+import { removeFromCart, incrementQty, decrementQty } from "../cartActions";
 import { NavLink, Link, withRouter } from "react-router-dom";
 import PriceTagCart from "../../pricetag/PriceTagCart";
 import moment from "moment";
@@ -11,7 +11,8 @@ import {editItemQuantity} from '../../cart/cartActions'
 
 const actions = {
   removeFromCart,
-  editItemQuantity
+  incrementQty,
+  decrementQty
 };
 
 class CartListItem extends Component {
@@ -21,8 +22,13 @@ class CartListItem extends Component {
     this.props.removeFromCart(item, currentStore);
   };
 
-  handleChange = (index, currentStore) => {
-    this.props.editItemQuantity(index, currentStore);
+  handleIncrementQty = (index, currentStore) => {
+    this.props.incrementQty(index, currentStore);
+  };
+
+  handleDecrementQty = (index, currentStore) => {
+    this.props.decrementQty(index, currentStore);
+    
   };
 
   render() {
@@ -74,8 +80,8 @@ class CartListItem extends Component {
       discount = selectedItem.discount.percentage;
     }
 
-    if (!selectedItem && !selectedSubItem)
-      return <LoadingComponent inverted={true} />;
+    if (!selectedItem || !selectedSubItem ){
+      return <LoadingComponent inverted={true} />;}
 
     return (
       <Table.Row>
@@ -118,9 +124,10 @@ class CartListItem extends Component {
           </a>
         </Table.Cell>
         <Table.Cell width={3} textAlign="left" verticalAlign="top">
-              <Button size="mini" icon='minus' onClick={()=>this.handleChange()} />
+              <Button size="mini"  disabled={item.quantity==1} icon='minus' onClick={()=>this.handleDecrementQty(index, currentStore)} />
               <Label basic size="medium" >{item.quantity}</Label>
-              <Button size="mini" icon='plus' onClick={()=>this.handleChange(index, currentStore)} />
+              <Button size="mini" disabled={stock==item.quantity} icon='plus' onClick={()=>this.handleIncrementQty(index, currentStore)} />
+              {(stock==item.quantity) && <Label color="red" basic size="medium" >Out of Stock</Label>}
         </Table.Cell>
         <Table.Cell width={3} textAlign="right" verticalAlign="top">
           <Button

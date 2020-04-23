@@ -123,7 +123,7 @@ export const removeFromCart = (item,currentStore) =>{
 };
 
 
-export const editItemQuantity = (index, currentStore) => {
+export const incrementQty = (index, currentStore) => {
   return async (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = firebase.firestore();
     const fb = getFirebase();
@@ -158,6 +158,54 @@ export const editItemQuantity = (index, currentStore) => {
           })
           .then( () => {
             toastr.success('Item Quantity Changed')
+            window.location.reload(false);
+          })
+          .catch((error) => {
+            toastr.error("error", error.message)
+          })
+    }
+  }
+}
+
+
+export const decrementQty = (index, currentStore) => {
+  return async (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = firebase.firestore();
+    const fb = getFirebase();
+    const user = fb.auth().currentUser;
+    const toastrOptions = {
+      timeOut: 6000,
+      icon: (<Icon  circular name='shopping bag' size='big' />),
+      progressBar: true,
+    }
+    console.log(user.uid,index, currentStore)
+
+    if(user!==null){
+        return firestore
+          .collection('Stores')
+          .doc(currentStore)
+          .collection('Buyers')
+          .doc(user.uid)
+          .get()
+          .then(dataSnapshot => {
+            let cart = dataSnapshot.get('cart')
+            return cart ? cart :[]
+          })
+          .then( cart => {
+            if(cart[index].quantity>1){
+            cart[index].quantity -= 1;
+          }
+            console.log(cart)
+            return firestore
+              .collection('Stores')
+              .doc(currentStore)
+              .collection('Buyers')
+              .doc(user.uid)
+              .update({'cart' : cart})
+          })
+          .then( () => {
+            toastr.success('Item Quantity Changed')
+            window.location.reload(false);
           })
           .catch((error) => {
             toastr.error("error", error.message)

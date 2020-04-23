@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Table, Image, Button, Icon, Header } from "semantic-ui-react";
 import CartListItem from "./CartListItem";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
 
 const mapState = (state, ownProps) => ({
   mainItems: state.firestore.ordered.items,
@@ -24,6 +25,9 @@ const query = ({ currentStore,item }) => {
 class CartList extends Component {
   render() {
       const {symbol, cartItems, currentStore,mainItems} = this.props
+
+      if (!cartItems ){
+        return <LoadingComponent inverted={true} />;}
 
     return (
       <div>
