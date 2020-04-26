@@ -10,4 +10,8 @@
 ### Product-Detailed
 ![3](fashion-template/screenshots/8.png)
 ### Cart
-![4](fashion-template/screenshots/10.png)
+![4](fashion-template/screenshots/12.png)
+### My Account
+![5](fashion-template/screenshots/13.png)
+### Product Detailed Page
+![6](fashion-template/screenshots/14.png)
