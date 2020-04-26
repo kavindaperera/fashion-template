@@ -2,7 +2,8 @@ import { toastr } from 'react-redux-toastr';
 import React from 'react';
 import { createNewCartItem } from '../../app/common/util/helpers';
 import {Icon,} from 'semantic-ui-react';
-import firebase from '../../app/config/firebase'
+import firebase from '../../app/config/firebase';
+import moment from "moment";
 
 /*export const addToCart = (item,subItem,price,currentStore) =>{
   return async (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -129,7 +130,7 @@ export const incrementQty = (index, currentStore) => {
     const fb = getFirebase();
     const user = fb.auth().currentUser;
     const toastrOptions = {
-      timeOut: 6000,
+      timeOut: 1000,
       icon: (<Icon  circular name='shopping bag' size='big' />),
       progressBar: true,
     }
@@ -157,7 +158,7 @@ export const incrementQty = (index, currentStore) => {
               .update({'cart' : cart})
           })
           .then( () => {
-            toastr.success('Item Quantity Changed')
+            toastr.light('Item Quantity Changed',toastrOptions)
             window.location.reload(false);
           })
           .catch((error) => {
@@ -174,7 +175,7 @@ export const decrementQty = (index, currentStore) => {
     const fb = getFirebase();
     const user = fb.auth().currentUser;
     const toastrOptions = {
-      timeOut: 6000,
+      timeOut: 1000,
       icon: (<Icon  circular name='shopping bag' size='big' />),
       progressBar: true,
     }
@@ -204,7 +205,7 @@ export const decrementQty = (index, currentStore) => {
               .update({'cart' : cart})
           })
           .then( () => {
-            toastr.success('Item Quantity Changed')
+            toastr.light('Item Quantity Changed',toastrOptions)
             window.location.reload(false);
           })
           .catch((error) => {
@@ -212,4 +213,36 @@ export const decrementQty = (index, currentStore) => {
           })
     }
   }
+}
+
+
+export const getCartTotal = (cartItems,items) => {
+  console.log("xxxxxxxxxx")
+  let total = 0;
+      for (var i=0; i<cartItems.length; i++){
+        let cartItem = cartItems[i]
+        let discountActive = false;
+        let discount = 0;
+        items && items.forEach(item => {
+          if(item.id==cartItem.item){
+            if (item.discount != null) {
+            const dateNow = moment().format("X");
+            const startDate = item.discount.startDate.seconds;
+            const endDate = item.discount.endDate.seconds;
+            discountActive = startDate < dateNow && dateNow < endDate;
+            discount = item.discount.percentage;}
+
+            let subItems=item.subItems;
+            subItems.forEach((subItem,i) => {
+                if(i==cartItem.subItem){
+                  if(discountActive && discount > 0){
+                    total += ((subItem.price * cartItem.quantity)*((100-discount)/100))
+                  }else{
+                    total += ((subItem.price * cartItem.quantity))
+                  }
+                }
+            })
+          }}
+          )
+      } return(total);
 }

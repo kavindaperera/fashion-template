@@ -1,8 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { Grid } from "semantic-ui-react";
 import BasicPage from "./BasicPage";
 import AccountPage from "./AccountPage";
+import SettingsNav from './SettingsNav';
 import { updatePassword } from "../../auth/authActions";
 import { updateProfile } from "../userActions";
 
@@ -11,21 +13,26 @@ const actions = {
   updateProfile
 };
 
-const mapState = state => ({
+const mapState = (state,ownProps) => ({
   auth: state.firebase.auth,
   providerId: state.firebase.auth.isLoaded && state.firebase.auth.providerData[0].providerId,
-  user: state.firebase.profile
+  user: state.firebase.profile,
+  currentStore: ownProps.match.params.store,
 });
 
-const SettingsDashboard = ({updatePassword,providerId, auth, user, updateProfile}) => {
-  console.log(user)
+const SettingsDashboard = ({updatePassword,providerId, auth, user, updateProfile,currentStore}) => {
+  console.log(currentStore)
   return (
-    <Grid stackable columns={2}>
-      <Grid.Column width={8}>
-        <BasicPage updateProfile={updateProfile} initialValues={user} />
+    <Grid columns={2}>
+    <Grid.Column width={4}>
+        <SettingsNav currentStore={currentStore}/>
       </Grid.Column>
-      <Grid.Column width={8}>
-        <AccountPage updatePassword={updatePassword} providerId={providerId} />
+      <Grid.Column >
+        <Switch>
+          <Redirect exact from={`/${currentStore}/my-account`} to={`/${currentStore}/my-account/edit-profile`} />
+          <Route path={`/${currentStore}/my-account/edit-profile`} render={() => <BasicPage updateProfile={updateProfile} initialValues={user}/>} />
+          <Route path={`/${currentStore}/my-account/edit-profile-facebook`} render={() => <AccountPage providerId={providerId} />}/>
+        </Switch>
       </Grid.Column>
     </Grid>
   );

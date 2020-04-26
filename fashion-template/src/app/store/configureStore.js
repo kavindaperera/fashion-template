@@ -8,7 +8,7 @@ import firebase from '../config/firebase';
 
 const rrfConfig = {
   userProfile: 'users',
-  //attachAuthIsReady: true,
+  attachAuthIsReady: true,
   //useFirestoreForProfile: false,
   updateProfileOnLogin: false
 };

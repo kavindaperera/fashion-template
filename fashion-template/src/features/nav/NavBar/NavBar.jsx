@@ -93,6 +93,7 @@ class NavBar extends Component {
     const { auth, profile, store,  currentStore, config, getCurrency} = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
     const { menuFixed } = this.state;
+    console.log("AUTH_NAV",auth)
 
     //getting store currency
     if (config && store) {

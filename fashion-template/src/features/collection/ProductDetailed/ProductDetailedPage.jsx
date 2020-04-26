@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { toastr } from "react-redux-toastr";
+import { compose } from 'redux';
 import { withFirestore } from "react-redux-firebase";
 import { Grid, Button,Breadcrumb } from "semantic-ui-react";
 import { firestoreConnect } from "react-redux-firebase";
@@ -50,6 +51,8 @@ const query = ({ currentStore }) => {
 class ProductDetailedPage extends Component {
   async componentDidMount() {
     const { firestore, match } = this.props;
+    let product = await firestore.get(`Stores/${match.params.store}/items/${match.params.id}`);
+    console.log(product)
     await firestore.setListener(`collection/products/${match.params.id}`);
   }
 
@@ -63,10 +66,10 @@ class ProductDetailedPage extends Component {
     let discountActive = false;
     let discount = 0;
 
-    if (!product.name) return <LoadingComponent inverted={true} />;
+    if (product && !product.name) {return <LoadingComponent inverted={true} />} ;
 
     //checking Discount Status
-    if (product.discount != null) {
+    if (product && product.discount != null) {
       const dateNow = moment().format("X");
       const startDate = product.discount.startDate.seconds;
       const endDate = product.discount.endDate.seconds;
@@ -74,13 +77,17 @@ class ProductDetailedPage extends Component {
       discount = product.discount.percentage;
     }
 
+    let currentCategory = ""
+
+    if(product){
     const categories = store.categories;
     const currentCategoryIndex = product.category;
     const sortCategoryIndex = categories.map((category, index) =>  { if(index==currentCategoryIndex){ return category.name; } } )
-    const currentCategory= sortCategoryIndex.sort()[0]
-    console.log(currentCategory)
+    currentCategory= sortCategoryIndex.sort()[0]
+  }
 
     return (
+      
       <Grid>
       <Grid.Row>
         <Breadcrumb>
@@ -127,16 +134,11 @@ class ProductDetailedPage extends Component {
               </Button>
             ))}</Grid.Row></Grid.Column>
         </Grid.Row>
-      </Grid>
+      </Grid> 
     );
   }
 }
 
-export default withFirestore(
-  connect(
-    mapState,
-    actions
-  )(
-    firestoreConnect((currentStore) => query(currentStore))(ProductDetailedPage)
-  )
-);
+export default compose( withFirestore, connect(mapState, actions), firestoreConnect((currentStore) => query(currentStore)))(ProductDetailedPage);
+
+//export default withFirestore(connect(mapState,actions)(firestoreConnect((currentStore) => query(currentStore))(ProductDetailedPage)));

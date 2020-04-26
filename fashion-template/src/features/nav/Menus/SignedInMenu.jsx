@@ -9,6 +9,7 @@ const SignedInMenu = ({signOut, profile, currentStore}) => {
       <Dropdown pointing="top left" text={profile.displayName}>
         <Dropdown.Menu>
           <Dropdown.Item as={Link} to={`/${currentStore}/cart`} text="My Bag" icon="shopping bag" />
+          <Dropdown.Item as={Link} to={`/${currentStore}/my-account/order-history`} text="Order History" icon="list alternate outline" />
           <Dropdown.Item text="My Profile" icon="user" />
           <Dropdown.Item as={Link} to={`/${currentStore}/my-account`} text="My Account" icon="settings" />
           <Dropdown.Item onClick={signOut} text="Sign Out" icon="power" />

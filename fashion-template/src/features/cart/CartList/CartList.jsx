@@ -33,6 +33,7 @@ class CartList extends Component {
       <div>
         <Table basic="very"  collapsing>
           <Table.Body>
+          {/*cartItems && cartItems.length==0 && <LoadingComponent inverted={true} />*/}
           {cartItems && cartItems.map((item,i)=> (
             <CartListItem key={i} item={item} mainItems={mainItems} symbol={symbol} currentStore={currentStore} index={i}/>
           ))}

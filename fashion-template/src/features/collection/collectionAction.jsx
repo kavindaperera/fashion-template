@@ -19,7 +19,6 @@ export const getCurrency = (config,store) =>
       value = currencies[key];
       if (key==storeCurrency){ symbol=value}
     });
-    console.log('currency set:',symbol)
     dispatch({type: GET_CURRENCY, payload: {symbol}})
     dispatch(asyncActionFinish());
   } catch(error){

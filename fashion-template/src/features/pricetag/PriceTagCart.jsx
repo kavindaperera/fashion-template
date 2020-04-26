@@ -18,7 +18,7 @@ function PriceTagCart({ currency, price, discount, discountActive }) {
       )}
 
       { (!discountActive || discount == 0) && (
-        <p>
+        <p style={{ color: "grey", fontFamily: "Lato" }}>
           {currency}
           {price}
         </p>

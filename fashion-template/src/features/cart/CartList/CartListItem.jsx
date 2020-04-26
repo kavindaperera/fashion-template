@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Table, Image, Button, Label, Icon, Form } from "semantic-ui-react";
+import { Table, Image, Button, Label, Icon, Message } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import SelectInput from "../../../app/common/form/SelectInput";
 import { removeFromCart, incrementQty, decrementQty } from "../cartActions";
@@ -72,7 +72,7 @@ class CartListItem extends Component {
     }
 
     //checking Discount Status
-    if (selectedItem.discount != null) {
+    if (selectedItem && selectedItem.discount != null) {
       const dateNow = moment().format("X");
       const startDate = selectedItem.discount.startDate.seconds;
       const endDate = selectedItem.discount.endDate.seconds;
@@ -104,7 +104,7 @@ class CartListItem extends Component {
             />
           )}
         </Table.Cell>
-        <Table.Cell width={3} textAlign="left" verticalAlign="top">
+        <Table.Cell width={3} textAlign="left" verticalAlign="top"  title={selectedItem.id}>
           {selectedItem.name}
         </Table.Cell>
         <Table.Cell width={3} textAlign="left" verticalAlign="top">
@@ -127,7 +127,11 @@ class CartListItem extends Component {
               <Button size="mini"  disabled={item.quantity==1} icon='minus' onClick={()=>this.handleDecrementQty(index, currentStore)} />
               <Label basic size="medium" >{item.quantity}</Label>
               <Button size="mini" disabled={stock==item.quantity} icon='plus' onClick={()=>this.handleIncrementQty(index, currentStore)} />
+
               {(stock==item.quantity) && <Label color="red" basic size="medium" >Out of Stock</Label>}
+
+              {(stock<item.quantity) && <Message size='mini' icon="warning" error header="Selected Quantity No Longer available"  content="change quantity please"/>}
+              
         </Table.Cell>
         <Table.Cell width={3} textAlign="right" verticalAlign="top">
           <Button

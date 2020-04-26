@@ -37,7 +37,7 @@ class CartDashboard extends Component {
     if (user) {
       cartItems = user.cart;
     }
-    //console.log(cartItems)
+    console.log(cartItems.length)
 
 
 
@@ -52,9 +52,11 @@ class CartDashboard extends Component {
             <CartList currentStore={currentStore} symbol={symbol} cartItems={cartItems}/>
           </Grid.Column>
           <Grid.Column width={4}>
+          {cartItems &&  cartItems.length>0 && (
             <StickyBox offsetTop={70} offsetBottom={20}>
-              <OrderSummary symbol={symbol}  cartItems={cartItems} />
+             <OrderSummary symbol={symbol} currentStore={currentStore}  cartItems={cartItems} />
             </StickyBox>
+            )}
           </Grid.Column>
         </Grid.Row>
       </Grid>
