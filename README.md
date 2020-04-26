@@ -7,8 +7,6 @@
 ![1](fashion-template/screenshots/9.png)
 ### Collection-Page
 ![2](fashion-template/screenshots/11.png)
-### Product-Detailed
-![3](fashion-template/screenshots/8.png)
 ### Cart
 ![4](fashion-template/screenshots/12.png)
 ### My Account
