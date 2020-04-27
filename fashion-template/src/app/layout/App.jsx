@@ -32,7 +32,7 @@ class App extends Component {
                 <Route path="/:store/test" component={TestComponent} />
                 <Route path={`/:store/collection/:category`}  component={CollectionDashboard} />
                 <Route path={`/:store/my-account`} component={UserIsAuthenticated(SettingsDashboard)} />
-                <Route path={`/:store/cart`} component={CartDashboard} />
+                <Route path={`/:store/cart`} component={UserIsAuthenticated(CartDashboard)} />
                 <Route path={`/:store/error`} component={NotFound} />
                 </Switch>
               </Grid>

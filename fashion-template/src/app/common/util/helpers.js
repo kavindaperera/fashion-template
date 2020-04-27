@@ -17,3 +17,28 @@ export const createNewCartItem = (item,subItem,price) => {
 
     }
   }
+
+export const createNewOrderItem = (cartItem, item, subItem)  => {
+  let price = 0;
+  let discountActive = false;
+  let discount = 0;
+  if (item.discount!=null){
+    const dateNow = moment().format("X");
+    const startDate = item.discount.startDate.seconds;
+    const endDate = item.discount.endDate.seconds;
+    discountActive = startDate < dateNow && dateNow < endDate;
+    discount = item.discount.percentage;
+  }
+  if(discountActive && discount > 0){
+    price += ((subItem.price)*((100-discount)/100))
+  }else{
+    price += ((subItem.price))
+  }
+
+  return {
+    item: cartItem.item,
+    noOfItems: cartItem.quantity,
+    subItemId: cartItem.subItem,
+    unitPrice: price
+  }
+}

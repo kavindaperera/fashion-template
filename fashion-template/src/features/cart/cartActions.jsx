@@ -223,6 +223,7 @@ export const getCartTotal = (cartItems,items) => {
         let cartItem = cartItems[i]
         let discountActive = false;
         let discount = 0;
+        // eslint-disable-next-line no-loop-func
         items && items.forEach(item => {
           if(item.id==cartItem.item){
             if (item.discount != null) {

@@ -4,8 +4,7 @@ import PaypalBtn from 'react-paypal-checkout';
 import { toastr } from 'react-redux-toastr'
 
 
-
-export default class Checkout extends Component {
+class Checkout extends Component {
 
     render() {
 
@@ -20,6 +19,7 @@ export default class Checkout extends Component {
         const onSuccess = (payment) => {
             // Congratulation, it came here means everything's fine!
             console.log("The payment was succeeded!", payment);
+            
             toastr.light('The payment was succeeded!', "Visit Orders page to view progress",toastrOptions)
         }
 
@@ -66,3 +66,8 @@ export default class Checkout extends Component {
         );
     }
 }
+
+
+
+
+export default Checkout;
