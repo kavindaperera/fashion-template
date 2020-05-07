@@ -7,6 +7,7 @@ import { queryAllByAltText } from "@testing-library/react";
 import StickyBox from "react-sticky-box";
 import OrderSummary from "../OrderSummary/OrderSummary";
 import CartList from "../CartList/CartList";
+import { getCart } from '../cartActions'
 
 const mapState = (state, ownProps) => ({
   auth: state.firebase.auth,
@@ -15,9 +16,10 @@ const mapState = (state, ownProps) => ({
   currentStore: ownProps.match.params.store,
   user: state.firestore.data.user,
   symbol: state.collection.symbol,
+  cartItems: state.cart.cart
 });
 
-const actions = {};
+const actions = {getCart};
 
 const query = ({ currentStore, auth }) => {
   return [
@@ -32,17 +34,15 @@ const query = ({ currentStore, auth }) => {
 
 class CartDashboard extends Component {
   render() {
-    const { auth, loading, user, symbol, currentStore } = this.props;
-    let cartItems = []
+    const { auth, loading, user, symbol, currentStore, cartItems, getCart } = this.props;
+
+
     if (user) {
-      cartItems = user.cart;
+      getCart(user);
+      console.log('dashboard_1',cartItems)
     }
-    console.log(cartItems.length)
 
-
-
-    if (loading) return <LoadingComponent inverted={true} />;
-
+    if (!cartItems) return <LoadingComponent inverted={true} />;
 
     return (
       <Grid  divided='vertically' columns={2}>

@@ -7,6 +7,7 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 
 const mapState = (state, ownProps) => ({
   mainItems: state.firestore.ordered.items,
+  loading: state.async.loading
 });
 
 const actions = {};
@@ -21,13 +22,12 @@ const query = ({ currentStore,item }) => {
     },
   ];
 };
-// 
+
 class CartList extends Component {
   render() {
-      const {symbol, cartItems, currentStore,mainItems} = this.props
+      const {symbol, cartItems, currentStore,mainItems,loading} = this.props
 
-      if (!cartItems ){
-        return <LoadingComponent inverted={true} />;}
+      if (loading) return <LoadingComponent inverted={true} />;
 
     return (
       <div>

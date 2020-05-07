@@ -28,7 +28,6 @@ class CartListItem extends Component {
 
   handleDecrementQty = (index, currentStore) => {
     this.props.decrementQty(index, currentStore);
-    
   };
 
   render() {
@@ -131,7 +130,6 @@ class CartListItem extends Component {
               {(stock==item.quantity) && <Label color="red" basic size="medium" >Out of Stock</Label>}
 
               {(stock<item.quantity) && <Message size='mini' icon="warning" error header="Selected Quantity No Longer available"  content="change quantity please"/>}
-              
         </Table.Cell>
         <Table.Cell width={3} textAlign="right" verticalAlign="top">
           <Button

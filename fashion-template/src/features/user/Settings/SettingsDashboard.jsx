@@ -7,6 +7,7 @@ import AccountPage from "./AccountPage";
 import SettingsNav from './SettingsNav';
 import { updatePassword } from "../../auth/authActions";
 import { updateProfile } from "../userActions";
+import OrdersDashboard from "../../orders/OrdersDashboard/OrdersDashboard";
 
 const actions = {
   updatePassword,
@@ -32,6 +33,7 @@ const SettingsDashboard = ({updatePassword,providerId, auth, user, updateProfile
           <Redirect exact from={`/${currentStore}/my-account`} to={`/${currentStore}/my-account/edit-profile`} />
           <Route path={`/${currentStore}/my-account/edit-profile`} render={() => <BasicPage updateProfile={updateProfile} initialValues={user}/>} />
           <Route path={`/${currentStore}/my-account/edit-profile-facebook`} render={() => <AccountPage providerId={providerId} />}/>
+          <Route path={`/${currentStore}/my-account/order-history`} render={() => <OrdersDashboard />}/>
         </Switch>
       </Grid.Column>
     </Grid>

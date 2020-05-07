@@ -29,5 +29,3 @@ export const getCartTotal = (cartItems,items) => {
             )
         } return(total);
   }
-  
-  

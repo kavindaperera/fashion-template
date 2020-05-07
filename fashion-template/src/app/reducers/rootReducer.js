@@ -9,6 +9,7 @@ import authReducer from '../../features/auth/authReducer'
 import asyncReducer from '../../features/async/asyncReducer'
 import storeReducer from '../../features/store/storeReducer'
 import FilterReducer from '../../features/filter/FilterReducer';
+import cartReducer from '../../features/cart/cartReducer'
 
 const rootReducer = combineReducers ({
     form: FormReducer,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers ({
     toastr: toastrReducer,
     firebase: firebaseReducer,
     firestore: firestoreReducer,
-    filters: FilterReducer
+    filters: FilterReducer,
+    cart: cartReducer
 
 })
 
