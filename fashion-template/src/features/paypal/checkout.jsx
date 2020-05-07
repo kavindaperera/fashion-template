@@ -1,14 +1,21 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from "react-redux";
 import {Icon,} from 'semantic-ui-react';
 import PaypalBtn from 'react-paypal-checkout';
 import { toastr } from 'react-redux-toastr'
+import { placeOrder } from '../cart/cartActions';
 
+
+
+const actions = {
+    placeOrder
+  };
 
 class Checkout extends Component {
 
     render() {
 
-        const { currency, total } = this.props;
+        const { currency, total, cartItems, currentStore } = this.props;
 
         const toastrOptions = {
             timeOut: 6000,
@@ -19,7 +26,7 @@ class Checkout extends Component {
         const onSuccess = (payment) => {
             // Congratulation, it came here means everything's fine!
             console.log("The payment was succeeded!", payment);
-            
+            this.props.placeOrder(cartItems, currentStore);
             toastr.light('The payment was succeeded!', "Visit Orders page to view progress",toastrOptions)
         }
 
@@ -70,4 +77,4 @@ class Checkout extends Component {
 
 
 
-export default Checkout;
+export default connect(null, actions)(Checkout);

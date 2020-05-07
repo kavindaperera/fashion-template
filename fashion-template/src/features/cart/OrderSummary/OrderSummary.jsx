@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card, Container, Button, Icon, Table } from "semantic-ui-react";
-import { getCartTotal } from '../cartActions'
+import { getCartTotal } from '../../services/index'
 import Checkout from '../../paypal/checkout'
 
 
@@ -57,7 +57,7 @@ class OrderSummary extends Component {
             <Table.Row>
             <Table.Cell>
                 {/*<Button labelPosition='right' disabled={subtotal==0} fluid icon='paypal'   size='large' color='black' content='Checkout' />*/}
-                <Checkout currency={currency} total={subtotal}/>
+                <Checkout currency={currency} total={subtotal} cartItems={cartItems} currentStore={currentStore} />
             </Table.Cell>
             </Table.Row>
           </Table.Cell>

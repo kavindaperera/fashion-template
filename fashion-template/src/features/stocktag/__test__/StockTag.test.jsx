@@ -13,19 +13,19 @@ it("renders without crashing", ()=>{
     ReactDOM.render(<StockTag></StockTag>,div)
 });
 
-it("renders button correctly",()=>{
+it("renders stock tag correctly",()=>{
     const {getByTestId} = render(<StockTag stock={10}></StockTag>)
     expect(getByTestId('stock-tag')).toHaveTextContent("10 items in stock")
 });
 
-it("renders button correctly",()=>{
+it("renders stock tag correctly",()=>{
     const {getByTestId} = render(<StockTag stock={0}></StockTag>)
     expect(getByTestId('stock-tag')).toHaveTextContent("Out of Stock")
 });
 
-it("renders button correctly",()=>{
+it("renders stock tag correctly",()=>{
     const {getByTestId} = render(<StockTag stock={null}></StockTag>)
-    expect(getByTestId('stock-tag')).toHaveTextContent("This item is not available")
+    expect(getByTestId('stock-tag')).toHaveTextContent("")
 });
 
 it('matches snapshot 1', ()=>{

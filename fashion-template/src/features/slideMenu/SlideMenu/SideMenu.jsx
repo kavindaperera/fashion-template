@@ -17,15 +17,6 @@ const mapState = (state, ownProps) => ({
 
   const actions = {};
 
-  /*const query = ({currentStore}) => {
-    return [
-      {
-        collection:'store',
-        doc: currentStore
-      }
-    ]
-  }*/
-  
 
 class SideMenu extends Component {
   state = { activeItem: '' }

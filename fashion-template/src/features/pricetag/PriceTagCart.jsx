@@ -3,7 +3,7 @@ import React from "react";
 function PriceTagCart({ currency, price, discount, discountActive }) {
 
   return (
-    <div data-testid="price-tag">
+    <div data-testid="price-tag-cart">
       { discountActive  &&  discount > 0 && (
           <p>
             <del style={{ color: "grey", fontFamily: "Lato" }}>

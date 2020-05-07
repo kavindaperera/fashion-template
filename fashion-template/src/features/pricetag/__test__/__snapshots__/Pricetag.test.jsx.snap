@@ -9,6 +9,7 @@ exports[`matches snapshot 1 1`] = `
       style={
         Object {
           "color": "grey",
+          "fontFamily": "Lato",
         }
       }
     >
@@ -19,6 +20,7 @@ exports[`matches snapshot 1 1`] = `
       style={
         Object {
           "color": "red",
+          "fontFamily": "Lato",
         }
       }
     >
@@ -33,7 +35,63 @@ exports[`matches snapshot 2 1`] = `
 <div
   data-testid="price-tag"
 >
+  <p
+    style={
+      Object {
+        "color": "grey",
+        "fontFamily": "Lato",
+      }
+    }
+  >
+    $
+    100
+  </p>
+</div>
+`;
+
+exports[`matches snapshot 3 1`] = `
+<div
+  data-testid="price-tag-cart"
+>
   <p>
+    <del
+      style={
+        Object {
+          "color": "grey",
+          "fontFamily": "Lato",
+        }
+      }
+    >
+      $
+      100
+    </del>
+    <a
+      style={
+        Object {
+          "color": "red",
+          "fontFamily": "Lato",
+        }
+      }
+    >
+      $
+      50
+    </a>
+  </p>
+</div>
+`;
+
+exports[`matches snapshot 4 1`] = `
+<div
+  data-testid="price-tag-cart"
+>
+  <p
+    style={
+      Object {
+        "color": "grey",
+        "fontFamily": "Lato",
+      }
+    }
+  >
     $
     100
   </p>
