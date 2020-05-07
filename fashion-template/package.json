@@ -58,7 +58,7 @@
     "test": "craco test",
     "eject": "craco eject",
     "analyze": "source-map-explorer build/static/js/main.*",
-    "deploy": "npm run build && firebase deploy"
+    "deploy": "npm run build && firebase deploy --only hosting:fashion-shopr"
   },
   "eslintConfig": {
     "extends": "react-app"

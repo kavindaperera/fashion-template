@@ -17,7 +17,6 @@ class ProductListItem extends Component {
     if (isNaN(rating) ){
       rating=0
     }
-    console.log(rating)
 
     //checking Discount Status
     if (product.discount != null) {

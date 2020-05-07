@@ -40,7 +40,6 @@ class CollectionDashboard extends Component {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   handleChangeSort = e => {
-    console.log(e);
     this.setState({ sort: e });
     this.listProducts();
   };
@@ -92,7 +91,6 @@ class CollectionDashboard extends Component {
 
   render() {
     const { store, products, filteredProducts, currentStore, category, config, symbol} = this.props;
-
 
     let enableRating = false;
 

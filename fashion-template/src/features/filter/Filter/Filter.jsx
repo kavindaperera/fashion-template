@@ -75,16 +75,11 @@ class Filter extends Component {
   render() {
     const { store, loading } = this.props;
     const { menuFixed, value } = this.state;
-    console.log(value);
     if (loading) return <LoadingComponent inverted={true} />;
 
     return (
       <div>
-        {/*<Visibility
-          onBottomPassed={this.stickTopMenu}
-          onBottomVisible={this.unStickTopMenu}
-          once={false}
-        >*/}
+
         
                 <Menu
                   borderless
@@ -94,18 +89,7 @@ class Filter extends Component {
                   <Container fluid className="nav">
                     <Menu.Menu position="left">
                     <Menu.Item>{this.props.count} styles available</Menu.Item>
-                   {/*} <Menu.Item>sorted by category:</Menu.Item>
-                      {s.categories &&
-                        s.categories.slice(0, 6).map((category) => (
-                          <Button
-                            color="black"
-                            value={category}
-                            as={NavLink}
-                            to={`/${this.props.currentStore}/collection/${category}`}
-                          >
-                            {_.capitalize(category)}{" "}
-                          </Button>
-                        ))}*/}
+
                     </Menu.Menu>
                     <Menu.Menu position="right">
                       <Menu.Item>Sort By:</Menu.Item>
