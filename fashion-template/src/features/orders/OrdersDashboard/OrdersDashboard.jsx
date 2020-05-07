@@ -7,7 +7,7 @@ class OrdersDashboard extends Component {
     return (
       <Grid divided="vertically" columns={2}>
         <Grid.Row>
-          <Header as="h3">My Bag</Header>
+          <Header as="h3">My Orders</Header>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column width={10}></Grid.Column>
