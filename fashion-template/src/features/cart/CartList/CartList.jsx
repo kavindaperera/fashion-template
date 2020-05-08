@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Table, Image, Button, Icon, Header } from "semantic-ui-react";
+import { Table,} from "semantic-ui-react";
 import CartListItem from "./CartListItem";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 

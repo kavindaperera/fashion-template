@@ -90,7 +90,7 @@ class CollectionDashboard extends Component {
 
 
   render() {
-    const { store, products, filteredProducts, currentStore, category, config, symbol} = this.props;
+    const { store, products, filteredProducts, currentStore, category, symbol} = this.props;
 
     let enableRating = false;
 

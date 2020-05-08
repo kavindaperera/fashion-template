@@ -10,6 +10,7 @@ import asyncReducer from '../../features/async/asyncReducer'
 import storeReducer from '../../features/store/storeReducer'
 import FilterReducer from '../../features/filter/FilterReducer';
 import cartReducer from '../../features/cart/cartReducer'
+import ordersReducer from '../../features/orders/ordersReducer'
 
 const rootReducer = combineReducers ({
     form: FormReducer,
@@ -22,7 +23,8 @@ const rootReducer = combineReducers ({
     firebase: firebaseReducer,
     firestore: firestoreReducer,
     filters: FilterReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    orders: ordersReducer
 
 })
 

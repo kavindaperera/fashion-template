@@ -56,33 +56,37 @@ export const addToCart = (item,subItem,price,currentStore) =>{
   }
 }}
 
-export const placeOrder = (cart, currentStore, items) => {
+export const placeOrder = (cart, currentStore, items, details) => {
   return async (dispatch, getState, {getFirebase, getFirestore}) => {
     const firestore = getFirestore();
     const fb = getFirebase();
     const user = fb.auth().currentUser;
     let orderItems= []
     //let NewOrderItem = createNewCartItem (cartItem, item, subItem);
-    if (user!==null && items){
+    if (user!==null && items && details){
       dispatch(asyncActionStart());
+      const orderId = details.id
+      const address = details.purchase_units[0].shipping
+      const amount = details.purchase_units[0].amount
       cart.forEach((cartItem) => {
         let subItemId = cartItem.subItem;
         let selectedItem = items.filter((product) => product.id === cartItem.item)[0];
         let selectedSubItem = selectedItem.subItems[subItemId];
         let NewOrderItem = createNewOrderItem (cartItem, selectedItem, selectedSubItem);
         orderItems.push(NewOrderItem)
-        console.log("data")
       })
       return firestore.set({
         collection:'Stores',
         doc:currentStore,
-        subcollections:[{collection:'Orders', doc:`temp_${user.uid}`}]
+        subcollections:[{collection:'Orders', doc:orderId}]
       },
       { buyer: user.uid,
         orderItems: orderItems,
-        date: moment().format('YYYY-MM-DD')
+        date: moment().format(),
+        orderState: 0,
+        shippingAddress: address,
+        totalPrice: amount
       }).then(
-        console.log(orderItems)
       ).then(
         dispatch(asyncActionFinish())
       )
@@ -222,4 +226,5 @@ export const getCart = (user) =>
   async (dispatch, getState) => {
     const cart = user.cart;
     dispatch({type: GET_CART, payload: {cart}})
+    console.log(cart)
 }

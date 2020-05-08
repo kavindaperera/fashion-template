@@ -21,8 +21,7 @@ const mapState = (state,ownProps) => ({
   currentStore: ownProps.match.params.store,
 });
 
-const SettingsDashboard = ({updatePassword,providerId, auth, user, updateProfile,currentStore}) => {
-  console.log(currentStore)
+const SettingsDashboard = ({loading, providerId, auth, user, updateProfile,currentStore}) => {
   return (
     <Grid columns={2}>
     <Grid.Column width={4}>
@@ -33,7 +32,7 @@ const SettingsDashboard = ({updatePassword,providerId, auth, user, updateProfile
           <Redirect exact from={`/${currentStore}/my-account`} to={`/${currentStore}/my-account/edit-profile`} />
           <Route path={`/${currentStore}/my-account/edit-profile`} render={() => <BasicPage updateProfile={updateProfile} initialValues={user}/>} />
           <Route path={`/${currentStore}/my-account/edit-profile-facebook`} render={() => <AccountPage providerId={providerId} />}/>
-          <Route path={`/${currentStore}/my-account/order-history`} render={() => <OrdersDashboard />}/>
+          <Route path={`/${currentStore}/my-account/order-history`} render={() => <OrdersDashboard currentStore={currentStore} user={user} />}/>
         </Switch>
       </Grid.Column>
     </Grid>

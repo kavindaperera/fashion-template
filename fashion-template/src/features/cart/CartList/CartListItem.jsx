@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Table, Image, Button, Label, Icon, Message } from "semantic-ui-react";
+import { Table, Image, Button, Label, Message } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
-import SelectInput from "../../../app/common/form/SelectInput";
 import { removeFromCart, incrementQty, decrementQty } from "../cartActions";
-import { NavLink, Link, withRouter } from "react-router-dom";
 import PriceTagCart from "../../pricetag/PriceTagCart";
 import moment from "moment";
-import {editItemQuantity} from '../../cart/cartActions'
 
 const actions = {
   removeFromCart,
@@ -32,9 +29,6 @@ class CartListItem extends Component {
 
   render() {
     const {
-      pristine,
-      submitting,
-      handleSubmit,
       symbol,
       item,
       mainItems,
@@ -42,8 +36,6 @@ class CartListItem extends Component {
       index,
     } = this.props;
 
-
-    console.log(index);
 
     let subItemId = null;
     let selectedItem = null;

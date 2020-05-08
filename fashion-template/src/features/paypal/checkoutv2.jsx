@@ -19,19 +19,19 @@ class CheckoutX extends Component {
     return (
       <PayPalButton
         createOrder={(data, actions) => {
-          this.props.placeOrder(cartItems, currentStore, items)
+          console.log('reserving stock')
           return actions.order.create({
             purchase_units: [
               {
                 amount: {
                   currency_code: currency,
-                  value: "0.01",
+                  value: total,
                 },
               },
             ],
-            // application_context: {
-            //   shipping_preference: "NO_SHIPPING" // default is "GET_FROM_FILE"
-            // }
+             application_context: {
+              shipping_preference: "GET_FROM_FILE" // default is "GET_FROM_FILE"
+             }
           });
         }}
 
@@ -44,10 +44,12 @@ class CheckoutX extends Component {
 
         onSuccess={(details) => {
           console.log(details);
+          details && this.props.placeOrder(cartItems, currentStore, items, details) && console.log("deleting from cart")
         }}
 
         onCancel={(data) => {
           console.log("payment canceled")
+          console.log('replacing stock')
           console.log(data);
         }}
 

@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {Icon, Form, Header, Divider, Button} from 'semantic-ui-react';
+import { Form, Divider, Button} from 'semantic-ui-react';
 import {Field, reduxForm} from 'redux-form';
 import SelectInput from '../../../app/common/form/SelectInput';
-import TextInput from '../../../app/common/form/TextInput';
-import { toastr } from 'react-redux-toastr'
 import { addToCart } from '../../cart/cartActions'
 
 
@@ -27,7 +25,7 @@ class VariantSelector extends Component {
 
     render() {
 
-        const {pristine, submitting, stock, product, handleSubmit, initialValues, variants} = this.props;
+        const {pristine, submitting, stock, variants} = this.props;
 
         let quantity = [];
 

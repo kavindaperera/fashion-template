@@ -73,7 +73,7 @@ class Filter extends Component {
   };
 
   render() {
-    const { store, loading } = this.props;
+    const { loading } = this.props;
     const { menuFixed, value } = this.state;
     if (loading) return <LoadingComponent inverted={true} />;
 

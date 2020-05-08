@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import ProductListItem from './ProductListItem'
 import { Card } from "semantic-ui-react";
-import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
-
 
 
 class ProductList extends Component {

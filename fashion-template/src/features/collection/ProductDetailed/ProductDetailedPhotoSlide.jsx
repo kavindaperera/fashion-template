@@ -3,7 +3,7 @@ import {
   Image,
   Grid,
 } from "semantic-ui-react";
-import { Carousel } from "react-responsive-carousel";
+//import { Carousel } from "react-responsive-carousel";
 
 
 const ProductDetailedPhotoSlide = ({ product }) => {

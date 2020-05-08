@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
-import { Grid, Table, Image, Button, Icon, Header } from "semantic-ui-react";
+import { Grid, Header } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
-import { queryAllByAltText } from "@testing-library/react";
 import StickyBox from "react-sticky-box";
 import OrderSummary from "../OrderSummary/OrderSummary";
 import CartList from "../CartList/CartList";
@@ -34,7 +33,7 @@ const query = ({ currentStore, auth }) => {
 
 class CartDashboard extends Component {
   render() {
-    const { auth, loading, user, symbol, currentStore, cartItems, getCart } = this.props;
+    const { user, symbol, currentStore, cartItems, getCart } = this.props;
 
 
     if (user) {
