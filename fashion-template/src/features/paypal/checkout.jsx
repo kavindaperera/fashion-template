@@ -54,7 +54,7 @@ class Checkout extends Component {
             'size':'medium',
             'shape':'rect',
             'color':'black',
-            'fundingicons' : true
+            'fundingicons' : true,
         };
 
         return (

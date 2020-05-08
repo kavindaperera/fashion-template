@@ -52,7 +52,6 @@ class CartListItem extends Component {
     let discountActive = false;
     let discount = 0;
     let stock = 0;
-  
 
     if (item && mainItems) {
       subItemId = item.subItem;

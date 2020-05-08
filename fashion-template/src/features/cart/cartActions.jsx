@@ -56,18 +56,36 @@ export const addToCart = (item,subItem,price,currentStore) =>{
   }
 }}
 
-export const placeOrder = (cart, currentStore) => {
+export const placeOrder = (cart, currentStore, items) => {
   return async (dispatch, getState, {getFirebase, getFirestore}) => {
-    //const firestore = firestore.firestore();
+    const firestore = getFirestore();
     const fb = getFirebase();
     const user = fb.auth().currentUser;
-    console.log(cart);
-    console.log(currentStore)
+    let orderItems= []
     //let NewOrderItem = createNewCartItem (cartItem, item, subItem);
-    if (user!==null){
-      console.log(user)
-      console.log(cart);
-      console.log(currentStore)
+    if (user!==null && items){
+      dispatch(asyncActionStart());
+      cart.forEach((cartItem) => {
+        let subItemId = cartItem.subItem;
+        let selectedItem = items.filter((product) => product.id === cartItem.item)[0];
+        let selectedSubItem = selectedItem.subItems[subItemId];
+        let NewOrderItem = createNewOrderItem (cartItem, selectedItem, selectedSubItem);
+        orderItems.push(NewOrderItem)
+        console.log("data")
+      })
+      return firestore.set({
+        collection:'Stores',
+        doc:currentStore,
+        subcollections:[{collection:'Orders', doc:"12345"}]
+      },
+      { buyer: user.uid,
+        orderItems: orderItems,
+        date: moment().format('YYYY-MM-DD')
+      }).then(
+        console.log(orderItems)
+      ).then(
+        dispatch(asyncActionFinish())
+      )
     }
   }
 }

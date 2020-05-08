@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Card, Container, Button, Icon, Table } from "semantic-ui-react";
 import { getCartTotal, getStockAvailability } from '../../services/index'
 import Checkout from '../../paypal/checkout'
+import CheckoutX from '../../paypal/checkoutv2'
 
 
 const mapState = (state, ownProps) => ({
@@ -37,9 +38,9 @@ class OrderSummary extends Component {
             <Table.Row>
                 <Table.HeaderCell>Order Summary</Table.HeaderCell>
                 {cartItems && cartItems.length>1 &&
-                <Table.Cell textAlign='left' >{cartItems.length}{" items"}</Table.Cell>}
+                <Table.Cell textAlign='left' >{cartItems.length}{" styles"}</Table.Cell>}
                 {cartItems && cartItems.length===1 &&
-                <Table.Cell textAlign='left' >{cartItems.length}{" item"}</Table.Cell>}
+                <Table.Cell textAlign='left' >{cartItems.length}{" style"}</Table.Cell>}
                 {cartItems && cartItems.length===0 &&
                 <Table.Cell textAlign='left' >{""}</Table.Cell>}
             </Table.Row>
@@ -58,7 +59,8 @@ class OrderSummary extends Component {
 
             <Table.Row>
             <Table.Cell>
-                {availability && <Checkout currency={currency} total={subtotal} cartItems={cartItems} currentStore={currentStore} />}
+                <Button basic fluid disabled={!availability}><CheckoutX currency={currency} total={subtotal} cartItems={cartItems} currentStore={currentStore} /></Button>
+                {/* <Checkout currency={currency} total={subtotal} cartItems={cartItems} currentStore={currentStore} />*/}
             </Table.Cell>
             </Table.Row>
           </Table.Cell>
