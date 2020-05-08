@@ -39,7 +39,6 @@ class CartDashboard extends Component {
 
     if (user) {
       getCart(user);
-      console.log('dashboard_1',cartItems)
     }
 
     if (!cartItems) return <LoadingComponent inverted={true} />;

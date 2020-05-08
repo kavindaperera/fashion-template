@@ -29,3 +29,23 @@ export const getCartTotal = (cartItems,items) => {
             )
         } return(total);
   }
+
+
+export const getStockAvailability = (cartItems, items) => {
+  let availability = true
+  //console.log(cartItems, items)
+  items && cartItems && cartItems.forEach((cartItem) => {
+    let subItemId = cartItem.subItem;
+    let cartQty = cartItem.quantity;
+    let selectedItem = items.filter((product) => product.id == cartItem.item)[0];
+    let selectedSubItem = selectedItem.subItems[subItemId];
+    let stock = selectedSubItem.stock;
+    if (stock == 0){
+      availability = false
+    }
+    else if (cartQty>stock){
+      availability = false
+    }
+  })
+  return (availability)
+}

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card, Container, Button, Icon, Table } from "semantic-ui-react";
-import { getCartTotal } from '../../services/index'
+import { getCartTotal, getStockAvailability } from '../../services/index'
 import Checkout from '../../paypal/checkout'
 
 
@@ -10,14 +10,16 @@ const mapState = (state, ownProps) => ({
   store: state.firestore.data.selectedStore,
 });
 
-const actions = {getCartTotal};
+const actions = {getCartTotal, getStockAvailability};
 
 
 class OrderSummary extends Component {
   render() {
-    const { cartItems, symbol, items,currentStore, store } = this.props;
+    const { cartItems, symbol, items, currentStore, store } = this.props;
 
     const subtotal = getCartTotal(cartItems, items,currentStore)
+    const availability = getStockAvailability(cartItems, items)
+    console.log(availability)
 
     let currency = null;
 
@@ -56,8 +58,7 @@ class OrderSummary extends Component {
 
             <Table.Row>
             <Table.Cell>
-                {/*<Button labelPosition='right' disabled={subtotal==0} fluid icon='paypal'   size='large' color='black' content='Checkout' />*/}
-                <Checkout currency={currency} total={subtotal} cartItems={cartItems} currentStore={currentStore} />
+                {availability && <Checkout currency={currency} total={subtotal} cartItems={cartItems} currentStore={currentStore} />}
             </Table.Cell>
             </Table.Row>
           </Table.Cell>

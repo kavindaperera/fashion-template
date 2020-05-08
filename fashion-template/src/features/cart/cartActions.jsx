@@ -63,6 +63,7 @@ export const placeOrder = (cart, currentStore) => {
     const user = fb.auth().currentUser;
     console.log(cart);
     console.log(currentStore)
+    //let NewOrderItem = createNewCartItem (cartItem, item, subItem);
     if (user!==null){
       console.log(user)
       console.log(cart);

@@ -29,6 +29,7 @@ class CartList extends Component {
 
       if (loading) return <LoadingComponent inverted={true} />;
 
+
     return (
       <div>
         <Table basic="very"  collapsing>

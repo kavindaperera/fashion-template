@@ -32,8 +32,6 @@ class HomePage extends Component  {
 
 render (){
   const { loading, history, store, currentStore, } = this.props;
-
-  console.log('home',store)
   
   if (loading) return <LoadingComponent inverted={true} />;
 
