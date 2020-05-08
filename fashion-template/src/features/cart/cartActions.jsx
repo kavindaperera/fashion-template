@@ -76,7 +76,7 @@ export const placeOrder = (cart, currentStore, items) => {
       return firestore.set({
         collection:'Stores',
         doc:currentStore,
-        subcollections:[{collection:'Orders', doc:"12345"}]
+        subcollections:[{collection:'Orders', doc:`temp_${user.uid}`}]
       },
       { buyer: user.uid,
         orderItems: orderItems,

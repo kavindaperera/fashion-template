@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Card, Container, Button, Icon, Table } from "semantic-ui-react";
+import { Card, Container, Button, Segment, Table } from "semantic-ui-react";
 import { getCartTotal, getStockAvailability } from '../../services/index'
 import Checkout from '../../paypal/checkout'
 import CheckoutX from '../../paypal/checkoutv2'

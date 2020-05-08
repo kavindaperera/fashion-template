@@ -34,11 +34,20 @@ class CheckoutX extends Component {
             // }
           });
         }}
+
+        style={ {
+          'color' : 'blue',
+          'shape' : 'rect',
+          'layout' : 'horizontal',
+          'tagline' : 'false'
+          }}
+
         onSuccess={(details) => {
           console.log(details);
         }}
 
         onCancel={(data) => {
+          console.log("payment canceled")
           console.log(data);
         }}
 
