@@ -27,7 +27,7 @@ export const getCartTotal = (cartItems,items) => {
               })
             }}
             )
-        } return(total);
+        } return(total.toFixed(2));
   }
 
 
