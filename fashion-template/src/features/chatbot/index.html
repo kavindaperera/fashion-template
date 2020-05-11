@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  Webchat
+  <div id="webchat"/>
+<script src="https://storage.googleapis.com/mrbot-cdn/webchat-latest.js"></script>
+// Or you can replace latest with a specific version
+<script>
+  WebChat.default.init({
+    selector: "#webchat",
+    initPayload: '/get_started{"store": "b4ArRwRQRKRX64HV4CK9yrPBXQD2"}',
+    customData: {"language": "en"}, // arbitrary custom data. Stay minimal as this will be added to the socket
+    socketUrl: "https://rasa.shopr.cf",
+    socketPath: "/socket.io/",
+    title: "Welcome",
+    subtitle: "Subtitle",
+  })
+</script>
+</body>
+</html>

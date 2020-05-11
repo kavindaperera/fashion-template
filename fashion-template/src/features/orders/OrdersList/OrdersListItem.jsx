@@ -60,9 +60,6 @@ export default class OrdersListItem extends Component {
                 </Table.Cell>
                 <Table.Cell width={6} textAlign="left" verticalAlign="top">
                   {name}
-                  <br />
-                  <br />
-                  {price}x{qty}
                 </Table.Cell>
                 <Table.Cell width={6} textAlign="left" verticalAlign="top">
                   {price}x{qty}
