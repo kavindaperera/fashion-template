@@ -35,6 +35,7 @@ class Footer extends Component {
 
   render() {
     const {store,} = this.props;
+    //console.log(store.id)
     return (
       <Segment  inverted vertical style={{ padding: "5em 0em" }}>
       {store &&

@@ -17,6 +17,7 @@ import {getCurrency}from '../../collection/collectionAction'
 import "../../../index.css";
 import CurrencyFlag from 'react-currency-flags';
 import _ from "lodash";
+import ChatButton from "../../button/ChatButton";
 
 const actions = {
   openModal,
@@ -112,6 +113,7 @@ class NavBar extends Component {
       <div>
         {store &&
                 <div>
+                {/*<ChatButton storeId={currentStore} />*/}
                   <Container as={Link} to={`/${currentStore}/`}  style={{ marginTop: "2em" }}>
                     <Image
                       alt="a"

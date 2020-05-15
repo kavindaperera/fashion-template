@@ -11,7 +11,7 @@ export default class OrdersListItem extends Component {
         <Table.Row className="active">
           <Table.Cell
             style={{ color: "black", fontFamily: "Lato", fontSize: "1rem" }}
-            width={10}
+            width={3}
             textAlign="left"
             verticalAlign="top"
           >
@@ -21,7 +21,7 @@ export default class OrdersListItem extends Component {
             Order ID : {order.id}
           </Table.Cell>
           <Table.Cell
-            width={6}
+            width={3}
             textAlign="left"
             verticalAlign="top"
             style={{ color: "black", fontFamily: "Lato", fontSize: "1rem" }}

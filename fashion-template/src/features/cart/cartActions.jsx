@@ -73,6 +73,8 @@ export const placeOrder = (cart, currentStore, items, details) => {
         let selectedSubItem = selectedItem.subItems[subItemId];
         let NewOrderItem = createNewOrderItem (cartItem, selectedItem, selectedSubItem);
         orderItems.push(NewOrderItem)
+        dispatch(addToPurchases(user.uid, cartItem, selectedSubItem ,currentStore))
+        dispatch(removeFromCart(cartItem, currentStore))
       })
       return firestore.set({
         collection:'Stores',
@@ -89,8 +91,33 @@ export const placeOrder = (cart, currentStore, items, details) => {
       }).then(
       ).then(
         dispatch(asyncActionFinish())
-      )
+      ).catch((error) => {
+        console.log(error)
+        toastr.light("Error");
+      })
     }
+  }
+}
+
+
+export const addToPurchases = (userId, cartItem, subItem, currentStore) => {
+  return async (gistpacth, getState, { getFirebase, getFirestore}) => {
+    const firestore = firebase.firestore();
+    const fs = getFirestore();
+    return firestore 
+      .collection('Stores')
+      .doc(currentStore)
+      .collection('Items')
+      .doc(cartItem.item)
+      .collection('Purchases')
+      .doc()
+      .set({
+        buyer: userId,
+        date: fs.Timestamp.fromDate(new Date()),
+        noOfItems: cartItem.quantity,
+        subItem: cartItem.subItem,
+        unitPrice: subItem.price
+      })
   }
 }
 
@@ -114,7 +141,7 @@ export const removeFromCart = (item,currentStore) =>{
         {
           cart:firebase.firestore.FieldValue.arrayRemove(item),
         });
-        toastr.warning('Item Removed', toastrOptions)
+        toastr.light('Item Removed', toastrOptions)
      } catch (error) {
        console.log(error)
        toastr.error('Oops', 'Something went wrong');

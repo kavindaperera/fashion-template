@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { Grid } from "semantic-ui-react";
+import StickyBox from "react-sticky-box";
 import BasicPage from "./BasicPage";
 import AccountPage from "./AccountPage";
 import SettingsNav from './SettingsNav';
@@ -23,11 +24,9 @@ const mapState = (state,ownProps) => ({
 
 const SettingsDashboard = ({loading, providerId, auth, user, updateProfile,currentStore}) => {
   return (
-    <Grid columns={2}>
-    <Grid.Column width={4}>
-        <SettingsNav currentStore={currentStore}/>
-      </Grid.Column>
-      <Grid.Column >
+    <Grid divided='vertically' columns={2}>
+    <Grid.Row>
+      <Grid.Column width={12} >
         <Switch>
           <Redirect exact from={`/${currentStore}/my-account`} to={`/${currentStore}/my-account/edit-profile`} />
           <Route path={`/${currentStore}/my-account/edit-profile`} render={() => <BasicPage updateProfile={updateProfile} initialValues={user}/>} />
@@ -35,6 +34,12 @@ const SettingsDashboard = ({loading, providerId, auth, user, updateProfile,curre
           <Route path={`/${currentStore}/my-account/order-history`} render={() => <OrdersDashboard currentStore={currentStore} user={user} />}/>
         </Switch>
       </Grid.Column>
+      <Grid.Column width={4}>
+      <StickyBox offsetTop={70} offsetBottom={20}>
+        <SettingsNav currentStore={currentStore}/>
+        </StickyBox>
+      </Grid.Column>
+      </Grid.Row>
     </Grid>
   );
 };

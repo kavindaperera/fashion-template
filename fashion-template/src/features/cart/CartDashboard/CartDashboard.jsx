@@ -46,7 +46,7 @@ class CartDashboard extends Component {
       <Grid  divided='vertically' columns={2}>
       <Grid.Row><Header as="h3">My Bag</Header></Grid.Row>
       <Grid.Row>
-          <Grid.Column  width={10}>
+          <Grid.Column  width={11}>
             <CartList currentStore={currentStore} symbol={symbol} cartItems={cartItems}/>
           </Grid.Column>
           <Grid.Column width={4}>
