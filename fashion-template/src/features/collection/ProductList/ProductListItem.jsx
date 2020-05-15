@@ -28,7 +28,7 @@ class ProductListItem extends Component {
     }
 
     return (
-      <Card className="card" as={Link} to={`product/${product.id}`}>
+      <Card className="card" title={product.name} as={Link} to={`product/${product.id}`}>
         {discountActive && product.discount.percentage > 0 && (
           <div>
             <Label circular color="red" floating>
