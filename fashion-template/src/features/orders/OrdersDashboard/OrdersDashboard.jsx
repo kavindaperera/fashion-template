@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Header } from "semantic-ui-react";
+import { Grid, Header, Table } from "semantic-ui-react";
 import { connect } from "react-redux";
 import OrdersList from '../OrdersList/OrdersList';
 import { getOrderHistory } from '../ordersAction'
@@ -20,15 +20,14 @@ class OrdersDashboard extends Component {
   render() {
     const { orders, currentStore} = this.props;
     return (
-      <Grid divided="vertically" columns={2}>
+      <Grid divided="vertically">
         <Grid.Row>
           <Header as="h3">My Orders</Header>
         </Grid.Row>
         <Grid.Row>
-          <Grid.Column width={10}>
+        <Table  collapsing>
             {orders && <OrdersList orders={orders} currentStore={currentStore}/>}
-          </Grid.Column>
-          <Grid.Column width={4}></Grid.Column>
+            </Table>
         </Grid.Row>
       </Grid>
     );

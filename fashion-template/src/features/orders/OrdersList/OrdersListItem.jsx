@@ -8,7 +8,7 @@ export default class OrdersListItem extends Component {
 
     return (
       <Table.Row>
-        <Table.Row className="active">
+        <Table.Row  style={{backgroundColor:'#dfe6e9'}}>
           <Table.Cell
             style={{ color: "black", fontFamily: "Lato", fontSize: "1rem" }}
             width={3}

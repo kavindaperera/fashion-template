@@ -113,7 +113,7 @@ class NavBar extends Component {
       <div>
         {store &&
                 <div>
-                {/*<ChatButton storeId={currentStore} />*/}
+                <ChatButton storeId={currentStore} />
                   <Container as={Link} to={`/${currentStore}/`}  style={{ marginTop: "2em" }}>
                     <Image
                       alt="a"

@@ -73,7 +73,9 @@ export const placeOrder = (cart, currentStore, items, details) => {
         let selectedSubItem = selectedItem.subItems[subItemId];
         let NewOrderItem = createNewOrderItem (cartItem, selectedItem, selectedSubItem);
         orderItems.push(NewOrderItem)
+        console.log('xxx')
         dispatch(addToPurchases(user.uid, cartItem, selectedSubItem ,currentStore))
+        console.log('xxx')
         dispatch(removeFromCart(cartItem, currentStore))
       })
       return firestore.set({

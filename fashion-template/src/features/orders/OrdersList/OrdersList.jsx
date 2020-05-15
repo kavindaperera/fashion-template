@@ -23,13 +23,11 @@ class OrdersList extends Component {
   render() {
     const { orders, mainItems } = this.props;
     return (
-        <Table  collapsing>
             <Table.Body>
             {orders && orders.map((order, i) => (
             <OrdersListItem key={i} order={order} items={mainItems}/>
         ))}
             </Table.Body>
-        </Table>
     );
   }
 }

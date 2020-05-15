@@ -1,13 +1,10 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
-export default class ChatButton extends Component {
+export default class ChatButton extends PureComponent {
 
-    /*componentDidMount() {
-      const script = document.createElement('script');
-      script.async = true;
-      script.src = 'https://storage.googleapis.com/mrbot-cdn/webchat-latest.js';
-      document.body.appendChild(script);
-        WebChat.default.init({
+    componentDidMount() {
+      if ( typeof WebChat !== 'undefined'){
+        window.WebChat.default.init({
           selector: '#webchat',
           initPayload: `/get_started{"store": "${this.props.storeId}"}`,
           customData: { language: 'en' },
@@ -16,7 +13,8 @@ export default class ChatButton extends Component {
           title: 'Title',
           subtitle: 'Subtitle',
         });
-      }*/
+      }
+   }
 
 
     render() {

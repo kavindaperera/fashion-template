@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Grid, Image, GridRow, Button, Icon } from "semantic-ui-react";
+import { Grid, Image, GridRow, Button, Icon, Header } from "semantic-ui-react";
 import { firestoreConnect } from "react-redux-firebase";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { NavLink,} from "react-router-dom";
@@ -41,13 +41,16 @@ render (){
               <Grid key={store.id} className="main">
                 <Grid.Row>
                   <Grid.Column>
-                    <Image
+                    {store.storeCustomization.logo && <Image
                       onClick={() => history.push(`/${currentStore}/collection/all`)}
                       alt="a"
                       src={store.storeCustomization.logo}
                       size="small"
                       centered
-                    />
+                    />}
+                    {!store.storeCustomization.logo && <Header as='h2' icon textAlign='center'>
+                                                          <Header.Content>{store.storeName}</Header.Content>
+                                                      </Header>}
                   </Grid.Column>
                 </Grid.Row>
                 <Grid.Row centered>
@@ -66,7 +69,7 @@ render (){
                     <Carousel swipeable={true} showThumbs= {false} showStatus={false} centerMode centerSlidePercentage={25}>
                       {store.storeCustomization.coverPhotos.carousel && 
                         store.storeCustomization.coverPhotos.carousel.map(photo => (
-                            <img alt="a" key={photo} src={photo} />
+                            <img alt="a" key={photo} src={photo || "/assets/product_list_image.png"} />
                         ))}
                     </Carousel>
                   </Grid.Column>
