@@ -11,6 +11,7 @@ import ModalManager from '../../features/modals/ModalManager'
 import Footer from "../../features/footer/Footer";
 import NotFound from '../../features/pages/NotFound'
 import TestComponent from '../../features/testarea/TestComponent';
+import OrderDetailedPage from '../../features/orders/OrderDetailed/OrderDetailedPage'
 import { UserIsAuthenticated } from '../../features/auth/authWrapper'
 
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
                 <Route path="/:store/test" component={TestComponent} />
                 <Route path={`/:store/collection/:category`}  component={CollectionDashboard} />
                 <Route path={`/:store/my-account`} component={UserIsAuthenticated(SettingsDashboard)} />
+                <Route path={`/:store/order-detailed/:id`} component={UserIsAuthenticated(OrderDetailedPage)} />
                 <Route path={`/:store/cart`} component={UserIsAuthenticated(CartDashboard)} />
                 <Route path={`/:store/error`} component={NotFound} />
                 </Switch>

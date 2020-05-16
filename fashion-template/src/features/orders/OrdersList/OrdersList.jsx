@@ -21,11 +21,11 @@ const query = ({ currentStore }) => {
 
 class OrdersList extends Component {
   render() {
-    const { orders, mainItems } = this.props;
+    const { orders, mainItems, symbol } = this.props;
     return (
             <Table.Body>
             {orders && orders.map((order, i) => (
-            <OrdersListItem key={i} order={order} items={mainItems}/>
+            <OrdersListItem key={i} order={order} symbol={symbol} items={mainItems}/>
         ))}
             </Table.Body>
     );

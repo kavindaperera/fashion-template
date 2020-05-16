@@ -16,6 +16,7 @@ export const getOrderHistory = (auth, currentStore) => {
                 .collection('Stores')
                 .doc(currentStore)
                 .collection('Orders')
+                .where('buyer', '==', auth.uid)
                 .get()
                 .then(dataSnapshot => {
                     let orders = dataSnapshot
@@ -23,9 +24,8 @@ export const getOrderHistory = (auth, currentStore) => {
                 })
                 .then(orders => {
                     orders.forEach(order => {
-                        if(order.get('buyer') == auth.uid){
+                            console.log(order)
                             orderHistory.push(order.data())
-                        }
                     })
                 }).then( () => {
                     dispatch({type: GET_ORDER_HISTORY , payload: {orderHistory} })
