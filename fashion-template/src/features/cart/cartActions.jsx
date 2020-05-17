@@ -73,9 +73,7 @@ export const placeOrder = (cart, currentStore, items, details) => {
         let selectedSubItem = selectedItem.subItems[subItemId];
         let NewOrderItem = createNewOrderItem (cartItem, selectedItem, selectedSubItem);
         orderItems.push(NewOrderItem)
-        console.log('xxx')
         dispatch(addToPurchases(user.uid, cartItem, selectedSubItem ,currentStore))
-        console.log('xxx')
         dispatch(removeFromCart(cartItem, currentStore))
       })
       return firestore.set({
@@ -100,6 +98,25 @@ export const placeOrder = (cart, currentStore, items, details) => {
     }
   }
 }
+
+//TODO
+export const decrementStock = (cart, currentStore, items, ) => {
+  return async (dispatch, getState, {getFirebase, getFirestore}) => {
+    const firestore = getFirestore();
+    const fb = getFirebase();
+    const user = fb.auth().currentUser;
+  }
+}
+
+//TODO
+export const incrementStock = (cart, currentStore, items, ) => {
+  return async (dispatch, getState, {getFirebase, getFirestore}) => {
+    const firestore = getFirestore();
+    const fb = getFirebase();
+    const user = fb.auth().currentUser;
+  }
+}
+
 
 
 export const addToPurchases = (userId, cartItem, subItem, currentStore) => {

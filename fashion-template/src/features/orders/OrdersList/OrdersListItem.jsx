@@ -5,16 +5,16 @@ import moment from "moment";
 
 export default class OrdersListItem extends Component {
   render() {
-    const { order, items, symbol } = this.props;
+    const { order, items, symbol, currentStore } = this.props;
 
-    if (order){
+    if (order) {
       let orderStates = order.orderState;
-      console.log(orderStates)
+      console.log(orderStates);
     }
 
     return (
       <Table.Row>
-        <Table.Row  style={{backgroundColor:'#f5f5f5'}}>
+        <Table.Row style={{ backgroundColor: "#f5f5f5" }}>
           <Table.Cell
             style={{ color: "black", fontFamily: "Lato", fontSize: "1rem" }}
             width={3}
@@ -33,29 +33,39 @@ export default class OrdersListItem extends Component {
             style={{ color: "black", fontFamily: "Lato", fontSize: "1rem" }}
           >
             Order Amount:
-            <a style={{ color: "red", fontFamily: "Lato"  }}>{symbol}
-            {order.totalPrice}
+            <a style={{ color: "red", fontFamily: "Lato" }}>
+              {symbol}
+              {order.totalPrice}
             </a>
           </Table.Cell>
+          <Table.Cell
+            width={3}
+            textAlign="right"
+            verticalAlign="top"
+          ></Table.Cell>
           <Table.Cell width={3} textAlign="right" verticalAlign="top">
-
-          </Table.Cell>
-          <Table.Cell width={3} textAlign="right" verticalAlign="top">
-            <Button circular basic as={Link} to={`../order-detailed/${order.id}`}>
+            <Button
+              circular
+              basic
+              as={Link}
+              to={`../order-detailed/${order.id}`}
+            >
               view
             </Button>
           </Table.Cell>
         </Table.Row>
-        {order && items &&
+        {order &&
+          items &&
           order.orderItems.map((item) => {
-            let qty = (item.noOfItems);
-            let price = (item.unitPrice);
+            let qty = item.noOfItems;
+            let price = item.unitPrice;
             let subItemId = item.subItemId;
             let mainItem = items.filter((product) => product.id === item.item);
+            //console.log('xxx', mainItem)
             let url = mainItem[0].photos[0].thumbnail;
             let name = mainItem[0].name;
             let subItem = mainItem[0].subItems[subItemId];
-            
+
             return (
               <Table.Row>
                 <Table.Cell width={3}>
@@ -67,18 +77,24 @@ export default class OrdersListItem extends Component {
                 </Table.Cell>
                 <Table.Cell width={6} textAlign="left" verticalAlign="top">
                   {name}
-                  <br/>
-                  <br/>
+                  <br />
+                  <br />
                   {subItem.variants.map((v, i) => (
                     <div key={i}>{v}</div>
                   ))}
+                  <a href={`/${currentStore}/collection/product/${mainItem[0].id}`}>
+                    View Item
+                  </a>
                 </Table.Cell>
                 <Table.Cell width={6} textAlign="left" verticalAlign="top">
-                  {symbol}{price}x{qty}
+                  {symbol}
+                  {price}x{qty}
                 </Table.Cell>
-                <Table.Cell width={3} textAlign="left" verticalAlign="top">
-                  
-                </Table.Cell>
+                <Table.Cell
+                  width={3}
+                  textAlign="left"
+                  verticalAlign="top"
+                ></Table.Cell>
               </Table.Row>
             );
           })}

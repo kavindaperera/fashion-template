@@ -3,23 +3,25 @@ import {Step, Grid } from 'semantic-ui-react'
 
 export default class OrderDetailedStep extends Component {
     render() {
+
+      const {state} = this.props;
         return (
             <Step.Group ordered>
-          <Step completed>
+          <Step active={false} completed={true}>
             <Step.Content>
-              <Step.Title>Shipping</Step.Title>
-              <Step.Description>Choose your shipping options</Step.Description>
+              <Step.Title>Pay Success</Step.Title>
+              <Step.Description></Step.Description>
             </Step.Content>
           </Step>
-          <Step completed>
+          <Step active={true} completed={false}>
             <Step.Content>
-              <Step.Title>Billing</Step.Title>
-              <Step.Description>Enter billing information</Step.Description>
+              <Step.Title>Shipment</Step.Title>
+              <Step.Description></Step.Description>
             </Step.Content>
           </Step>
-          <Step active>
+          <Step active={false} completed={false}>
             <Step.Content>
-              <Step.Title>Confirm Order</Step.Title>
+              <Step.Title>Order Complete</Step.Title>
             </Step.Content>
           </Step>
         </Step.Group>
