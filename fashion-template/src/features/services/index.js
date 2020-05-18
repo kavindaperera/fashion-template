@@ -1,4 +1,5 @@
 import moment from "moment";
+import { Category } from "emoji-mart";
 
 export const getCartTotal = (cartItems,items) => {
     let total = 0;
@@ -49,3 +50,10 @@ export const getStockAvailability = (cartItems, items) => {
   })
   return (availability)
 }
+
+
+export const getItemCount = (items, sortCategory, categories) => {
+
+}
+
+
