@@ -44,7 +44,6 @@ class CollectionDashboard extends Component {
     this.listProducts();
   };
 
-  
 
   checkDiscountStatus = (product) => {
     const dateNow = moment().format('X');
@@ -93,12 +92,34 @@ class CollectionDashboard extends Component {
     const { store, products, filteredProducts, currentStore, category, symbol} = this.props;
 
     let enableRating = false;
+    let availability = true;
 
     if (store){
       enableRating = store.enableRating;
     }
 
-    if (!isLoaded(products) || isEmpty(products)) return <LoadingComponent inverted={true} />;
+    if (store && (store.categories) ){
+
+      const categories = store.categories;
+
+      let count = 0
+      if (category=='all'){
+        count += 1
+      }
+      categories.map(c => {
+        if (c.name == category){
+          count += 1
+        }
+      })
+      if (count==0){
+        availability=false
+      }
+
+    }
+
+    if (!isLoaded(products) || isEmpty(products) || !availability) return <LoadingComponent inverted={true} />;
+
+
 
     return (
 
@@ -116,8 +137,9 @@ class CollectionDashboard extends Component {
               handleChangeCategory={this.handleChangeCategory}
               handleChangeSort={this.handleChangeSort}
               count={filteredProducts && filteredProducts.length}
+              availability = {availability}
             />
-            {store &&
+            {store && availability &&
             <ProductList
               products={products}
               sortCategory={category}

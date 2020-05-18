@@ -73,7 +73,7 @@ class Filter extends Component {
   };
 
   render() {
-    const { loading } = this.props;
+    const { loading, availability } = this.props;
     const { menuFixed, value } = this.state;
     if (loading) return <LoadingComponent inverted={true} />;
 
@@ -88,7 +88,7 @@ class Filter extends Component {
                 >
                   <Container fluid className="nav">
                     <Menu.Menu position="left">
-                    <Menu.Item>{this.props.count} styles available</Menu.Item>
+                      <Menu.Item>{this.props.count} styles available</Menu.Item>
 
                     </Menu.Menu>
                     <Menu.Menu position="right">

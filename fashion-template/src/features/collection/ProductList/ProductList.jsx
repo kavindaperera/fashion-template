@@ -13,13 +13,14 @@ class ProductList extends Component {
     const sortByIndex = sortCategoryIndex.sort()[0]
     return (
       <div>
-        <Card.Group itemsPerRow={4}>
-          { (sortCategory!=="") && products && products.map(product => ( 
+        <Card.Group itemsPerRow={3}>
+          { (sortCategory!=="") && products && products.map(product => (
             (  product.visible && (product.category===(sortByIndex)) && <ProductListItem enableRating={enableRating} key={product.id}  product={product} store={store} currency={currency} />)
           ))}
-          { (sortCategory==="all") && products && products.map(product => ( 
+          { (sortCategory==="all") && products && products.map(product => (
             (  product.visible && <ProductListItem enableRating={enableRating} key={product.id} product={product}  store={store} currency={currency}/>)
           ))}
+
         </Card.Group>
       </div>
     );
