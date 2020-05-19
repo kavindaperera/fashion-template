@@ -9,7 +9,6 @@ export default class OrdersListItem extends Component {
 
     if (order) {
       let orderStates = order.orderState;
-      console.log(orderStates);
     }
 
     return (

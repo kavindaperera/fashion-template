@@ -73,8 +73,8 @@ export const placeOrder = (cart, currentStore, items, details) => {
         let selectedSubItem = selectedItem.subItems[subItemId];
         let NewOrderItem = createNewOrderItem (cartItem, selectedItem, selectedSubItem);
         orderItems.push(NewOrderItem)
-        dispatch(addToPurchases(user.uid, cartItem, selectedSubItem ,currentStore))
-        dispatch(removeFromCart(cartItem, currentStore))
+        //dispatch(addToPurchases(user.uid, cartItem, selectedSubItem ,currentStore))
+        //dispatch(removeFromCart(cartItem, currentStore))
       })
       return firestore.set({
         collection:'Stores',
@@ -88,7 +88,15 @@ export const placeOrder = (cart, currentStore, items, details) => {
         orderState: [{date: firestore.Timestamp.fromDate(new Date()) , stateId: 0}],
         shippingAddress: address,
         totalPrice: amount
-      }).then(
+      })
+      .then( () =>
+      cart.forEach((cartItem) => {
+        let subItemId = cartItem.subItem;
+        let selectedItem = items.filter((product) => product.id === cartItem.item)[0];
+        let selectedSubItem = selectedItem.subItems[subItemId];
+        dispatch(addToPurchases(user.uid, cartItem, selectedSubItem ,currentStore))
+        dispatch(removeFromCart(cartItem, currentStore))
+      })
       ).then(
         dispatch(asyncActionFinish())
       ).catch((error) => {
@@ -102,20 +110,75 @@ export const placeOrder = (cart, currentStore, items, details) => {
 //TODO
 export const decrementStock = (cart, currentStore, items, ) => {
   return async (dispatch, getState, {getFirebase, getFirestore}) => {
-    const firestore = getFirestore();
+    console.log('reserving running')
+    const firestore = firebase.firestore();
+    const batch = firestore.batch();
     const fb = getFirebase();
     const user = fb.auth().currentUser;
+    if (user!==null && items ){
+      dispatch(asyncActionStart());
+      cart.map((cartItem) => {
+        let selectedItem = items.filter((product) => product.id === cartItem.item)[0];
+        let subItems = selectedItem.subItems;
+        console.log(subItems)
+        const newStock = subItems[cartItem.subItem].stock - cartItem.quantity;
+        subItems[cartItem.subItem].stock = newStock;
+        console.log(subItems)
+
+        const itemDocRef = firestore
+          .collection('Stores')
+          .doc(currentStore)
+          .collection('Items')
+          .doc(cartItem.item);
+        batch.update(itemDocRef, {subItems})
+      });
+      batch.commit()
+      .then(() => {
+        dispatch(asyncActionFinish())
+      })
+      .catch((error => {
+        dispatch(asyncActionError())
+      }))
+    }
   }
 }
 
 //TODO
 export const incrementStock = (cart, currentStore, items, ) => {
   return async (dispatch, getState, {getFirebase, getFirestore}) => {
-    const firestore = getFirestore();
+    console.log('replacing running')
+    const firestore = firebase.firestore();
+    const batch = firestore.batch();
     const fb = getFirebase();
     const user = fb.auth().currentUser;
+    if (user!==null && items ){
+      dispatch(asyncActionStart());
+      cart.map((cartItem) => {
+        let selectedItem = items.filter((product) => product.id === cartItem.item)[0];
+        let subItems = selectedItem.subItems;
+        console.log(subItems)
+        const newStock = subItems[cartItem.subItem].stock + cartItem.quantity;
+        subItems[cartItem.subItem].stock = newStock;
+        console.log(subItems)
+
+        const itemDocRef = firestore
+          .collection('Stores')
+          .doc(currentStore)
+          .collection('Items')
+          .doc(cartItem.item);
+        batch.update(itemDocRef, {subItems})
+      });
+      batch.commit()
+      .then(() => {
+        dispatch(asyncActionFinish())
+      })
+      .catch((error => {
+        dispatch(asyncActionError())
+      }))
+    }
   }
 }
+
 
 
 

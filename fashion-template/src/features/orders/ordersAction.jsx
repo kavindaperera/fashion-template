@@ -10,7 +10,6 @@ export const getOrderHistory = (auth, currentStore) => {
         dispatch(asyncActionStart());
         const firestore = firebase.firestore();
         let orderHistory = []
-        console.log(auth.uid, currentStore)
         if(auth && currentStore){
             return firestore
                 .collection('Stores')
@@ -24,7 +23,6 @@ export const getOrderHistory = (auth, currentStore) => {
                 })
                 .then(orders => {
                     orders.forEach(order => {
-                            console.log(order)
                             orderHistory.push(order.data())
                     })
                 }).then( () => {

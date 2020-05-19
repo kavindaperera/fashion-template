@@ -22,6 +22,9 @@ const query = ({ currentStore }) => {
 class OrdersList extends Component {
   render() {
     const { orders, mainItems, symbol, currentStore } = this.props;
+    if(orders){
+      orders.sort((a,b) => a.date.seconds < b.date.seconds ? 1 : -1)
+    }
     return (
             <Table.Body>
             {orders && orders.map((order, i) => (

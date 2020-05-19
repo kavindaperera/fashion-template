@@ -3,6 +3,7 @@ import { PayPalButton } from "react-paypal-button-v2";
 import { connect } from "react-redux";
 import {Icon,} from 'semantic-ui-react';
 import { placeOrder } from "../cart/cartActions";
+import {decrementStock, incrementStock} from '../cart/cartActions'
 import { toastr } from 'react-redux-toastr'
 
 const mapState = (state, ownProps) => ({
@@ -12,6 +13,8 @@ const mapState = (state, ownProps) => ({
 
 const actions = {
   placeOrder,
+  decrementStock,
+  incrementStock
 };
 
 class CheckoutX extends Component {
@@ -27,7 +30,7 @@ class CheckoutX extends Component {
     return (
       <PayPalButton
         createOrder={(data, actions) => {
-          console.log('reserving stock')
+          this.props.decrementStock(cartItems, currentStore, items)
           return actions.order.create({
             purchase_units: [
               {
@@ -58,7 +61,7 @@ class CheckoutX extends Component {
 
         onCancel={(data) => { // User pressed "cancel" or close Paypal's popup!
           console.log("payment canceled")
-          console.log('replacing stock')
+          this.props.incrementStock(cartItems, currentStore, items)
           console.log(data);
           toastr.error('The payment was cancelled!', "The payment was cancelled!")
         }}
