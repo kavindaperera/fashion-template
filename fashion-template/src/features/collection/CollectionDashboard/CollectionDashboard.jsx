@@ -57,13 +57,13 @@ class CollectionDashboard extends Component {
       if (state.sort !== "") {
         this.props.products.sort((a, b) => 
           state.sort === "lowest"
-            ?  a.basePrice - (a.basePrice * a.discount.percentage) / 100 >b.basePrice - (b.basePrice * b.discount.percentage) / 100
+            ?  a.basePrice > b.basePrice 
             ? 1 : -1
             : {}
         );
         this.props.products.sort((a, b) => 
           state.sort === "highest"
-            ?  a.basePrice - (a.basePrice * a.discount.percentage) / 100 < b.basePrice - (b.basePrice * b.discount.percentage) / 100
+            ?  a.basePrice  < b.basePrice 
             ? 1 : -1
             : {}
         );

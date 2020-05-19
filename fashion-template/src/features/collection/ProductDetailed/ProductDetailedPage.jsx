@@ -66,6 +66,7 @@ class ProductDetailedPage extends Component {
     let discountActive = false;
     let discount = 0;
 
+
     if (product && !product.name) {return <LoadingComponent inverted={true} />} ;
 
     //checking Discount Status
@@ -87,7 +88,7 @@ class ProductDetailedPage extends Component {
   }
 
     return (
-      
+      <div>{product &&
       <Grid>
       <Grid.Row>
         <Breadcrumb>
@@ -134,7 +135,9 @@ class ProductDetailedPage extends Component {
               </Button>
             ))}</Grid.Row></Grid.Column>
         </Grid.Row>
-      </Grid> 
+      </Grid> }
+      
+      {(!product) && <LoadingComponent inverted={true} />} </div>
     );
   }
 }

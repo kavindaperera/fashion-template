@@ -8,6 +8,27 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 
+{/*const sortOptions = [
+  {
+    key: "Recommended",
+    text: "Recommended",
+    value: "",
+  },
+  {
+    key: "Name: A-Z Order",
+    text: "Name: A-Z Order",
+    value: "atoz",
+  },
+  {
+    key: "Name: Z-A Order",
+    text: "Name: Z-A Order",
+    value: "ztoa",
+  },
+];*/}
+
+
+
+
 const sortOptions = [
   {
     key: "Recommended",
@@ -35,6 +56,8 @@ const sortOptions = [
     value: "ztoa",
   },
 ];
+
+
 
 const menuStyle = {
   border: "none",

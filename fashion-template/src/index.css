@@ -77,6 +77,25 @@ body {
   ) !important;
 }
 
+.ui.search .results.transition.visible{
+  width: 400px;
+  display: inline;
+
+}
+
+.ui.search .result {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.ui.search .result .ui.large.image.searchImage{
+  background-color: rgb(184, 70, 70);
+  height: 50%;
+  width: 100px;
+
+}
+
+
 .ui.main.grid,
 .main.segment {
   margin-top: 7em;

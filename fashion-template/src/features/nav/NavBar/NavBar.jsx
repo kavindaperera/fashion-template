@@ -7,7 +7,8 @@ import {
   Dropdown,
   Visibility,
   Image,
-  Search
+  Search,
+  MenuHeader
 } from "semantic-ui-react";
 import { NavLink, Link, withRouter } from "react-router-dom";
 import SignedOutMenu from "../Menus/SignedOutMenu";
@@ -18,6 +19,7 @@ import "../../../index.css";
 import CurrencyFlag from 'react-currency-flags';
 import _ from "lodash";
 import ChatButton from "../../button/ChatButton";
+import SearchBar from '../../searchbar/SearchBar'
 
 const actions = {
   openModal,
@@ -30,7 +32,8 @@ const mapState = (state, ownProps) => ({
   store: state.firestore.data.selectedStore,
   currentStore: ownProps.match.params.store,
   config: state.firestore.data.config,
-  params: ownProps.match.params
+  params: ownProps.match.params,
+  items: state.firestore.ordered.items,
 });
 
 const query = ({currentStore}) => {
@@ -43,6 +46,11 @@ const query = ({currentStore}) => {
       collection:'Config',
       doc: 'config_main',
       storeAs: 'config'
+    },{
+      collection: "Stores",
+      doc: currentStore,
+      subcollections: [{ collection: "Items" }],
+      storeAs: "items",
     }
   ]
 }
@@ -91,7 +99,7 @@ class NavBar extends Component {
   unStickTopMenu = () => this.setState({ menuFixed: false });
 
   render() {
-    const { auth, profile, store,  currentStore, config, getCurrency} = this.props;
+    const { auth, profile, store,  currentStore, config, items, getCurrency} = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
     const { menuFixed } = this.state;
 
@@ -148,13 +156,13 @@ class NavBar extends Component {
                             as={NavLink}
                             to={`/${currentStore}/collection/all`} 
                           ></Menu.Item>
+
                           <Dropdown item simple  text="Categories">
                             <Dropdown.Menu>
                             <Dropdown.Item
                                 as={NavLink}
                                 to={`/${currentStore}/collection/all`}
                               >All</Dropdown.Item>
-                              
                             {store.categories && store.categories.map(category => ( 
                               <Dropdown.Item
                                 key={category.name}
@@ -166,7 +174,9 @@ class NavBar extends Component {
                             </Dropdown.Menu>
                           </Dropdown>
                         </Menu.Menu>
-                        <Menu.Menu position="right">
+                        <Menu.Menu position="right" >
+                        <Menu.Item style={{margin: '0', padding:'0', border: '0px'}}>
+                        <SearchBar items={items} currency={store.currency}currentStore={currentStore}/></Menu.Item>
                         {authenticated ? (
                           <SignedInMenu
                             currentStore={currentStore}

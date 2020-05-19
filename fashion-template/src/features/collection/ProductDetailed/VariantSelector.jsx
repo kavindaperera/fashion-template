@@ -33,7 +33,8 @@ class VariantSelector extends Component {
           let x = {key:i, text:i, value:i};
             quantity.push(x)
         }
-        console.log("qty",quantity)
+        //console.log("qty",quantity)
+        console.log(variants.length)
 
 
         return (
@@ -68,7 +69,7 @@ class VariantSelector extends Component {
                     />*/}
                     <Divider/>
                     <Button.Group fluid>
-                    <Button labelPosition='right' icon='bookmark outline'  disabled={pristine || submitting || !stock} size='large' color='black' content='Add to Bag'/>
+                    <Button labelPosition='right' icon='bookmark outline'  disabled={pristine || submitting || !stock } size='large' color='black' content='Add to Bag'/>
                     </Button.Group>
                 </Form>
 
