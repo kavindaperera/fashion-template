@@ -1,24 +1,16 @@
 import React, { Component } from 'react';
+import { Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import SearchStandard from './SearchStandard'
-import { firestoreConnect } from "react-redux-firebase";
+import { openModal } from '../modals/modalActions'
 
 const mapState = (state, ownProps) => ({
   currentStore: ownProps.match.params.store,
-  items: state.firestore.ordered.items,
 });
 
-
-const query = ({ currentStore }) => {
-  return [
-    {
-      collection: "Stores",
-      doc: currentStore,
-      subcollections: [{ collection: "Items" }],
-      storeAs: "items",
-    },
-  ];
+const actions = {
+  openModal,
 };
+
 
 
 class TestComponent extends Component {
@@ -26,20 +18,17 @@ class TestComponent extends Component {
 
   render() {
 
-    const { items, currentStore } = this.props;
-      return (
-        <div className="main">
-          <SearchStandard items={items} currentStore={currentStore}/>
-        </div>
-      );
+    const {  openModal, currentStore} = this.props;
+    return (
+      <div>
+        <h1>Test Area</h1>
+        <Button onClick={() => openModal('ReviewModal', {currentstore: currentStore})} color="teal" content="Open Modal" />
+        <br />
+        <br />
+
+      </div>
+    );
   }
 }
 
-export default connect(
-  mapState,
-  null
-)(
-  firestoreConnect((currentStore) => query(currentStore))(
-    (TestComponent)
-  )
-);
+export default connect(mapState, actions)(TestComponent);

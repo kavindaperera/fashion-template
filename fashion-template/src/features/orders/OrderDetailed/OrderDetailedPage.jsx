@@ -5,6 +5,7 @@ import { withFirestore } from "react-redux-firebase";
 import { Breadcrumb, Grid, Segment, Tab, Header } from "semantic-ui-react";
 import { NavLink, Link } from "react-router-dom";
 import OrderDetailedStep from "./OrderDetailedStep";
+import OrderDetailedItemList from './OrderDetailedItemList'
 import { firestoreConnect } from "react-redux-firebase";
 import moment from "moment";
 
@@ -13,12 +14,14 @@ const mapState = (state, ownProps) => {
   const currentStore = ownProps.match.params.store;
   const order = state.firestore.data.order;
   const config = state.firestore.data.config;
+  const symbol = state.collection.symbol;
 
   return {
     orderId,
     currentStore,
     order,
     config,
+    symbol
   };
 };
 
@@ -36,7 +39,8 @@ const query = ({ currentStore, orderId }) => {
 
 class OrderDetailedPage extends Component {
   render() {
-    const { orderId, currentStore, order, config } = this.props;
+    const { orderId, currentStore, order, config ,symbol} = this.props;
+    //console.log(symbol)
 
     let orderStates = null;
     let orderStatesX = null;
@@ -69,7 +73,7 @@ class OrderDetailedPage extends Component {
 
     const panes = [
       {
-        menuItem: "Order",
+        menuItem: "Shipping Information",
         render: () => (
           <Tab.Pane attached={false}>
             <p>
@@ -132,7 +136,7 @@ class OrderDetailedPage extends Component {
         </Grid.Row>
 
         <Grid centered>
-          <Grid.Column width={16}>
+          <Grid.Column width={10}>
             <Grid.Row></Grid.Row>
             {currentOrderState != null ? (
               <Segment
@@ -156,7 +160,9 @@ class OrderDetailedPage extends Component {
 
             <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
           </Grid.Column>
-          <Grid.Column width={4}></Grid.Column>
+          <Grid.Column width={6}>
+            {order &&  <OrderDetailedItemList order={order[orderId]} currentStore={currentStore} symbol={symbol} />}
+          </Grid.Column>
           <Grid.Row></Grid.Row>
         </Grid>
       </Grid>
