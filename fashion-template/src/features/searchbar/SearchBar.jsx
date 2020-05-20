@@ -1,20 +1,10 @@
 import _ from 'lodash'
-import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { Search, Grid, Header, Segment, Item, Image, Card} from 'semantic-ui-react'
+import { Search, Grid,  Image,} from 'semantic-ui-react'
 
 const initialState = { isLoading: false, results: [], value: '' }
 
 const resultRenderer = ({ id, basePrice, name, photos }) => <div><Image className='searchImage' src= {photos[0].thumbnail}  size='large' ></Image><span>{name}</span></div>
-
-
-
-
-{/* 
-resultRenderer.propTypes = {
-  title: PropTypes.string,
-  description: PropTypes.string,
-}*/}
 
 
 export default class SearchBar extends Component {
@@ -40,7 +30,6 @@ export default class SearchBar extends Component {
 
   render() {
     const { isLoading, value, results } = this.state
-    const { items, currentStore, currency } = this.props;
     console.log(this.state.results)
     return (
       <Grid>

@@ -158,7 +158,7 @@ class NavBar extends Component {
                           ></Menu.Item>
 
                           <Dropdown item simple  text="Categories">
-                            <Dropdown.Menu>
+                            <Dropdown.Menu className = 'categories'>
                             <Dropdown.Item
                                 as={NavLink}
                                 to={`/${currentStore}/collection/all`}

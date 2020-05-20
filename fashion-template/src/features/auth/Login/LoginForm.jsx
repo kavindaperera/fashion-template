@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Form, Segment} from 'semantic-ui-react';
+import { Form,} from 'semantic-ui-react';
 import { reduxForm } from 'redux-form';
 import { login, socialLogin } from '../authActions';
 import SocialLogin from '../SocialLogin/SocialLogin';

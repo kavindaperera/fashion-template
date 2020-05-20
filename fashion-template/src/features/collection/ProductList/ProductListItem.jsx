@@ -1,16 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
 import { Card, Label, Image, Rating } from "semantic-ui-react";
-import { Link, Route } from "react-router-dom";
+import { Link,  } from "react-router-dom";
 import PriceTag from "../../pricetag/PriceTag";
 import moment from "moment";
 
 
 class ProductListItem extends Component {
   render() {
-    const { product, store, currency, enableRating } = this.props;
+    const { product,  currency, enableRating } = this.props;
     let discountActive = false;
     let discount = 0;
     let rating = product.rating.totalRating / product.rating.ratingCount;

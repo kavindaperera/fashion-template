@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Card, Image, Button } from "semantic-ui-react";
 import { firestoreConnect } from "react-redux-firebase";
 import { openModal } from '../../modals/modalActions';
-import { Link, Route } from "react-router-dom";
 
 const mapState = (state, ownProps) => ({
   items: state.firestore.ordered.items,
@@ -34,13 +33,10 @@ class OrderDetailedItemList extends Component {
         {order &&
           items &&
           order.orderItems.map((item) => {
-            let qty = item.noOfItems;
-            let price = item.unitPrice;
             let subItemId = item.subItemId;
             let mainItem = items.filter((product) => product.id === item.item);
             let url = mainItem[0].photos[0].thumbnail;
             let name = mainItem[0].name;
-            let subItem = mainItem[0].subItems[subItemId];
 
             return (
               <Card className='orderdetail'>

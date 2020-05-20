@@ -186,3 +186,9 @@ body {
 .ui.basic.button.paypal-button {
   box-shadow: 0px 0px 0px 0px rgba(34, 36, 38, 0.15) inset !important;
 }
+
+
+.ui.dropdown .menu.transition.categories{
+  width: 250px !important;
+  z-index: 1000
+}

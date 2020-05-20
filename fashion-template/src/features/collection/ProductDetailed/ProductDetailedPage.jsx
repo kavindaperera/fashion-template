@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { toastr } from "react-redux-toastr";
 import { compose } from 'redux';
 import { withFirestore } from "react-redux-firebase";
 import { Grid, Button,Breadcrumb } from "semantic-ui-react";
@@ -62,7 +61,7 @@ class ProductDetailedPage extends Component {
   }
 
   render() {
-    const { product, currentStore, store, config } = this.props;
+    const { product, currentStore, store, } = this.props;
     let discountActive = false;
     let discount = 0;
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Form, Segment, Button, Label, Divider } from "semantic-ui-react";
+import { Form, Button, Label,} from "semantic-ui-react";
 import { Field, reduxForm } from "redux-form";
 import {
   composeValidators,
@@ -14,8 +14,7 @@ import { closeModal } from "../modals/modalActions";
 import { shareReview } from '../review/reviewAction'
 
 const actions = {
-  closeModal,
-  shareReview 
+  shareReview
 };
 
 const validate = combineValidators({

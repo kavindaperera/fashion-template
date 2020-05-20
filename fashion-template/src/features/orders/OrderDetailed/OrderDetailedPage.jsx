@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withFirestore } from "react-redux-firebase";
-import { Breadcrumb, Grid, Segment, Tab, Header } from "semantic-ui-react";
-import { NavLink, Link } from "react-router-dom";
-import OrderDetailedStep from "./OrderDetailedStep";
+import { Breadcrumb, Grid, Segment, Tab, } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import OrderDetailedItemList from './OrderDetailedItemList'
 import { firestoreConnect } from "react-redux-firebase";
 import moment from "moment";
