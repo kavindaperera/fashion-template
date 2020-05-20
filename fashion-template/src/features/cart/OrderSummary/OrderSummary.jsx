@@ -59,7 +59,7 @@ class OrderSummary extends Component {
 
             <Table.Row>
             <Table.Cell>
-                <Button basic fluid disabled={!availability}><CheckoutX currency={currency} total={subtotal} cartItems={cartItems} currentStore={currentStore} /></Button>
+                <Button className='paypal-button' basic fluid disabled={!availability}><CheckoutX currency={currency} total={subtotal} cartItems={cartItems} currentStore={currentStore} /></Button>
                 {/* <Checkout currency={currency} total={subtotal} cartItems={cartItems} currentStore={currentStore} />*/}
             </Table.Cell>
             </Table.Row>
