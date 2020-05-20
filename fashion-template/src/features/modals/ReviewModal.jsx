@@ -9,17 +9,17 @@ const actions = {
 }
 
 const mapState = (state, ownProps) => ({
-  store: state.modals.modalProps,
+  data: state.modals.modalProps,
 });
 
-const ReviewModel = ({closeModal, store}) => {
-  console.log(store)
+const ReviewModel = ({closeModal, data}) => {
+  
   return (
     <Modal size='mini' closeIcon="close" open={true} onClose={closeModal}>
       <Modal.Header>Leave Review</Modal.Header>
       <Modal.Content>
         <Modal.Description>
-          <ReviewForm/>
+          <ReviewForm data={data} />
         </Modal.Description>
       </Modal.Content>
     </Modal>

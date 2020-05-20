@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card, Image, Button } from "semantic-ui-react";
 import { firestoreConnect } from "react-redux-firebase";
-import { openModal } from '../../modals/modalActions'
+import { openModal } from '../../modals/modalActions';
+import { Link, Route } from "react-router-dom";
+
 const mapState = (state, ownProps) => ({
   items: state.firestore.ordered.items,
 });
@@ -50,7 +52,7 @@ class OrderDetailedItemList extends Component {
                 </Card.Content>
 
                 <Card.Content textAlign="center">
-                  <Button onClick={() => openModal('ReviewModal', {currentstore: currentStore, item: item.item})} color="teal">Leave Review</Button>
+                  <Button onClick={() => openModal('ReviewModal', {currentStore: currentStore, item: item.item})} color="teal">Leave Review</Button>
                 </Card.Content>
               </Card>
             );

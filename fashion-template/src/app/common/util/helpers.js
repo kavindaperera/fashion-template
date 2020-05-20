@@ -42,3 +42,12 @@ export const createNewOrderItem = (cartItem, item, subItem)  => {
     unitPrice: price
   }
 }
+
+
+export const createNewReviewObj = (buyer, review) =>{
+  return {
+    buyer: buyer.uid,
+    rating: review.rating,
+    comment: review.comment
+  }
+}
