@@ -28,7 +28,7 @@ class OrderDetailedItemList extends Component {
     console.log(order);
 
     return (
-      <Card.Group itemsPerRow={2}>
+      <Card.Group className='group-orderdetail' itemsPerRow={2}>
         {order &&
           items &&
           order.orderItems.map((item) => {
@@ -41,7 +41,7 @@ class OrderDetailedItemList extends Component {
             let subItem = mainItem[0].subItems[subItemId];
 
             return (
-              <Card>
+              <Card className='orderdetail'>
                 <Image src={url} wrapped ui={false} />
                 <Card.Content textAlign="center">
                   <Card.Meta>

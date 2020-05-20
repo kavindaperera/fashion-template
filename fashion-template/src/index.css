@@ -77,6 +77,8 @@ body {
   ) !important;
 }
 
+/* Search Menu*/
+
 .ui.search .results.transition.visible{
   width: 400px;
   display: inline;
@@ -89,7 +91,7 @@ body {
 }
 
 .ui.search .result .ui.large.image.searchImage{
-  background-color: rgb(184, 70, 70);
+  background-color: rgb(151, 151, 151);
   height: 50%;
   width: 100px;
 
@@ -154,3 +156,22 @@ body {
 .capitalize { text-transform: capitalize; }
 
 
+/*order details card*/
+.ui.two.cards.group-orderdetail{
+  width: 500px !important
+
+}
+
+
+.ui.card.orderdetail{
+  width: auto
+}
+
+
+
+/*Collections Page*/
+
+.ui.three.cards.group-collection{
+  width: 1540px !important
+
+}
