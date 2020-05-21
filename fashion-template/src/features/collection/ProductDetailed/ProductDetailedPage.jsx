@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from 'redux';
 import { withFirestore } from "react-redux-firebase";
-import { Grid, Button,Breadcrumb } from "semantic-ui-react";
+import { Grid, Button,Breadcrumb, Image } from "semantic-ui-react";
 import { firestoreConnect } from "react-redux-firebase";
 import ProductDetailedPhotoSlide from "./ProductDetailedPhotoSlide";
 import ProductPriceDetails from "./ProductPriceDetails";
@@ -11,6 +11,7 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 import moment from "moment";
 import { NavLink, Link } from "react-router-dom";
 import _ from "lodash";
+import ProductComments from "./ProductComments";
 
 
 const mapState = (state, ownProps) => {
@@ -51,7 +52,6 @@ class ProductDetailedPage extends Component {
   async componentDidMount() {
     const { firestore, match } = this.props;
     let product = await firestore.get(`Stores/${match.params.store}/items/${match.params.id}`);
-    console.log(product)
     await firestore.setListener(`collection/products/${match.params.id}`);
   }
 
@@ -61,9 +61,10 @@ class ProductDetailedPage extends Component {
   }
 
   render() {
-    const { product, currentStore, store, } = this.props;
+    const { product, currentStore, store} = this.props;
     let discountActive = false;
     let discount = 0;
+    let reviews = null;
 
 
     if (product && !product.name) {return <LoadingComponent inverted={true} />} ;
@@ -84,7 +85,11 @@ class ProductDetailedPage extends Component {
     const currentCategoryIndex = product.category;
     const sortCategoryIndex = categories.map((category, index) =>  { if(index==currentCategoryIndex){ return category.name; } } )
     currentCategory= sortCategoryIndex.sort()[0]
-  }
+    }
+
+    if (product){
+      reviews = (product.reviews)
+    }
 
     return (
       <div>{product &&
@@ -107,12 +112,16 @@ class ProductDetailedPage extends Component {
         <Grid.Column width={4}>
           <StickyBox offsetTop={70} offsetBottom={30}>
             {store && product && (
+              <div>
               <ProductPriceDetails
                 currentStore={currentStore}
                 product={product}
                 discountActive={discountActive}
                 discount={discount}
+                reviews={reviews}
               />
+              <ProductComments reviews={reviews}/>
+              </div>
             )}
           </StickyBox>
         </Grid.Column>
@@ -132,10 +141,11 @@ class ProductDetailedPage extends Component {
               >
                 {_.capitalize(category.name)}
               </Button>
-            ))}</Grid.Row></Grid.Column>
+            ))}</Grid.Row>
+
+            </Grid.Column>
         </Grid.Row>
       </Grid> }
-      
       {(!product) && <LoadingComponent inverted={true} />} </div>
     );
   }

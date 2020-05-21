@@ -23,7 +23,6 @@ export const shareReview = (review, item, currentStore) => {
         if(user!==null && review ){
             dispatch(asyncActionStart());
             let reviewObj = createNewReviewObj(user, review)
-            console.log(reviewObj)
             return firestore
                 .collection('Stores')
                 .doc(currentStore)

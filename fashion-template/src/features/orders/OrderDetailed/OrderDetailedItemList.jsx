@@ -26,7 +26,6 @@ const actions = {
 class OrderDetailedItemList extends Component {
   render() {
     const { items, openModal,  currentStore, order } = this.props;
-    console.log(order);
 
     return (
       <Card.Group className='group-orderdetail' itemsPerRow={2}>

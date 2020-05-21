@@ -44,7 +44,7 @@ class ItemDetailedInfo extends Component {
 
   render() {
 
-    const { currentStore, product, discount, productId, addToCart, selectedVariant,  symbol, discountActive } = this.props;
+    const { currentStore, product, discount, productId, addToCart, selectedVariant,  symbol, discountActive, reviews } = this.props;
 
     const { activeIndex } = this.state
 
@@ -59,7 +59,6 @@ class ItemDetailedInfo extends Component {
         subItemIndex = i
         displayPrice = s.price
         stock = s.stock
-        console.log('selected subitem:', subItemIndex);
       }
     });
 
@@ -114,6 +113,8 @@ class ItemDetailedInfo extends Component {
             </Accordion.Content></div>
           ))}
         </Accordion>
+        <Grid.Row>
+        </Grid.Row>
       </Grid>}
     </div>
   );}
