@@ -54,7 +54,7 @@ class CheckoutX extends Component {
           }}
 
         onSuccess={(details) => { // Congratulation, it came here means everything's fine!
-          console.log(details);
+          //console.log(details);
           details && this.props.placeOrder(cartItems, currentStore, items, details) && console.log("deleting from cart") 
           toastr.light('The payment was succeeded!', "Visit Orders page to view progress",toastrOptions)
         }}
@@ -62,12 +62,12 @@ class CheckoutX extends Component {
         onCancel={(data) => { // User pressed "cancel" or close Paypal's popup!
           console.log("payment canceled")
           this.props.incrementStock(cartItems, currentStore, items)
-          console.log(data);
+          //console.log(data);
           toastr.error('The payment was cancelled!', "The payment was cancelled!")
         }}
 
         onError={(details) => { // The main Paypal's script cannot be loaded or somethings block the loading of that script!
-          console.log(details);
+          //console.log(details);
           toastr.light('Server Error!', "somethings block the loading of paypal!")
         }}
 

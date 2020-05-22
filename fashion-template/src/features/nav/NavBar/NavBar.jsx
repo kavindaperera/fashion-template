@@ -7,8 +7,6 @@ import {
   Dropdown,
   Visibility,
   Image,
-  Search,
-  MenuHeader
 } from "semantic-ui-react";
 import { NavLink, Link, withRouter } from "react-router-dom";
 import SignedOutMenu from "../Menus/SignedOutMenu";

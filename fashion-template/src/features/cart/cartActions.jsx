@@ -18,7 +18,7 @@ export const addToCart = (item,subItem,price,currentStore) =>{
     }
     if(user!==null){
       let newCartItem = createNewCartItem (item,subItem,price);
-      console.log(newCartItem);
+      //console.log(newCartItem);
         return firestore 
           .collection('Stores')
           .doc(currentStore)
@@ -335,5 +335,5 @@ export const getCart = (user) =>
   async (dispatch, getState) => {
     const cart = user.cart;
     dispatch({type: GET_CART, payload: {cart}})
-    console.log(cart)
+    //console.log(cart)
 }

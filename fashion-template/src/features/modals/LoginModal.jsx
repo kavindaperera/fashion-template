@@ -13,8 +13,6 @@ const mapState = (state, ownProps) => ({
 class LoginModal extends Component {
     render() {
         const {store} = this.props;
-        console.log(store)
-
         return (
             <Modal
                 size='mini'

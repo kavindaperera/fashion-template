@@ -181,6 +181,22 @@ body {
 
 }
 
+
+.ui.slide.masked.reveal.image{
+  object-fit: cover;
+  height: 660px !important
+}
+
+.ui.image.visible.content{
+  object-fit: cover;
+  height: 660px !important
+}
+
+.ui.image.hidden.content{
+  object-fit: cover;
+  height: 660px !important
+}
+
 /* paypal-button */
 
 .ui.basic.button.paypal-button {

@@ -19,14 +19,14 @@ class OrderSummary extends Component {
 
     const subtotal = getCartTotal(cartItems, items,currentStore)
     const availability = getStockAvailability(cartItems, items)
-    console.log(availability)
+    //console.log(availability)
 
     let currency = null;
 
     if(store){
       currency = store.currency;
     }
-    console.log("CURRENCY:", currency)
+    //console.log("CURRENCY:", currency)
 
 
     return (

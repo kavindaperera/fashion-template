@@ -19,7 +19,6 @@ class VariantSelector extends Component {
 
 
     onFormSubmit = values => {
-        console.log(values);
         this.props.addToCart(this.props.product,this.props.subItemIndex, this.props.displayPrice,this.props.currentStore);
     };
 
@@ -33,8 +32,7 @@ class VariantSelector extends Component {
           let x = {key:i, text:i, value:i};
             quantity.push(x)
         }
-        //console.log("qty",quantity)
-        console.log(variants.length)
+
 
 
         return (
