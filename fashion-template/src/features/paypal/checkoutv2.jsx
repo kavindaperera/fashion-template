@@ -67,7 +67,8 @@ class CheckoutX extends Component {
         }}
 
         onError={(details) => { // The main Paypal's script cannot be loaded or somethings block the loading of that script!
-          //console.log(details);
+          console.log('Server Error');
+          this.props.incrementStock(cartItems, currentStore, items)
           toastr.light('Server Error!', "somethings block the loading of paypal!")
         }}
 

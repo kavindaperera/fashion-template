@@ -6,7 +6,7 @@ import {
   Container,
   Dropdown,
   Visibility,
-  Image,
+  Image, Icon
 } from "semantic-ui-react";
 import { NavLink, Link, withRouter } from "react-router-dom";
 import SignedOutMenu from "../Menus/SignedOutMenu";
@@ -115,6 +115,7 @@ class NavBar extends Component {
     }
 
 
+
     return (
       <div>
         {store &&
@@ -175,6 +176,7 @@ class NavBar extends Component {
                         <Menu.Menu position="right" >
                         <Menu.Item style={{margin: '0', padding:'0', border: '0px'}}>
                         <SearchBar items={items} currency={store.currency}currentStore={currentStore}/></Menu.Item>
+                        <Menu.Item title="My Bag" as={Link} to={`/${currentStore}/cart`}><Icon  name="shopping bag" size='large' /></Menu.Item>
                         {authenticated ? (
                           <SignedInMenu
                             currentStore={currentStore}

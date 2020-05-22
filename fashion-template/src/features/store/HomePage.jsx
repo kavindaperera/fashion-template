@@ -60,16 +60,16 @@ render (){
                       as={NavLink}
                       to={`/${currentStore}/collection/${category.name}`}
                       size="large" color="black" key={category.name}>
-                        {_.capitalize(category.name)}
+                        {_.startCase(category.name)}
                       </Button>
                     ))}
                 </Grid.Row>
                 <Grid.Row>
                   <Grid.Column>
-                    <Carousel swipeable={true} showThumbs= {false} showStatus={false} centerMode centerSlidePercentage={25}>
+                    <Carousel className='carousel-home' swipeable={true} showThumbs= {false} showStatus={false} centerMode centerSlidePercentage={25}>
                       {store.storeCustomization.coverPhotos.carousel && 
                         store.storeCustomization.coverPhotos.carousel.map(photo => (
-                            <img alt="a" key={photo} src={photo || "/assets/product_list_image.png"} />
+                            <img class='carousel-image' alt="a" key={photo} src={photo || "/assets/product_list_image.png"} />
                         ))}
                     </Carousel>
                   </Grid.Column>

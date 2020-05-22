@@ -181,6 +181,7 @@ body {
 
 }
 
+/*product list item image*/
 
 .ui.slide.masked.reveal.image{
   object-fit: cover;
@@ -207,4 +208,12 @@ body {
 .ui.dropdown .menu.transition.categories{
   width: 250px !important;
   z-index: 1000
+}
+
+
+/*carousel images*/
+
+.carousel-image{
+  object-fit: cover;
+  height: 620px !important
 }

@@ -139,7 +139,7 @@ class ProductDetailedPage extends Component {
                 color="grey"
                 key={category.name}
               >
-                {_.capitalize(category.name)}
+                {_.startCase(category.name)}
               </Button>
             ))}</Grid.Row>
 
