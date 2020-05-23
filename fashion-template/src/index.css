@@ -192,7 +192,6 @@ body {
 
 
 
-
 /*product list item image*/
 
 .ui.slide.masked.reveal.image{
@@ -217,21 +216,18 @@ body {
     object-fit: cover;
     height: 300px !important
   }
-  
+
   .ui.image.visible.content{
     object-fit: cover;
     height: 300px !important
   }
-  
+
   .ui.image.hidden.content{
     object-fit: cover;
     height: 300px !important
   }
 
 }
-
-
-
 
 
 /* paypal-button */
@@ -252,4 +248,18 @@ body {
 .carousel-image{
   object-fit: cover;
   height: 620px !important
+}
+
+
+/*Discount Label*/
+
+.ui.red.circular.floating.label{
+  line-height: 2em;
+  min-width: 4em;
+  min-height: 4em;
+  left:98%;
+  top: -1.1rem;
+  z-index: 10;
+  font: 1em 'Lato';
+  padding-top: 1.2rem !important;
 }
