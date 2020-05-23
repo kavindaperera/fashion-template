@@ -6,22 +6,24 @@ import {
   Container,
   Dropdown,
   Visibility,
-  Image, Icon
+  Image,
+  Icon,
 } from "semantic-ui-react";
 import { NavLink, Link, withRouter } from "react-router-dom";
 import SignedOutMenu from "../Menus/SignedOutMenu";
 import SignedInMenu from "../Menus/SignedInMenu";
 import { openModal } from "../../modals/modalActions";
-import {getCurrency}from '../../collection/collectionAction'
+import { getCurrency } from "../../collection/collectionAction";
 import "../../../index.css";
-import CurrencyFlag from 'react-currency-flags';
+import CurrencyFlag from "react-currency-flags";
 import _ from "lodash";
 import ChatButton from "../../button/ChatButton";
-import SearchBar from '../../searchbar/SearchBar'
+import SearchBar from "../../searchbar/SearchBar";
+import { Helmet } from "react-helmet";
 
 const actions = {
   openModal,
-  getCurrency
+  getCurrency,
 };
 
 const mapState = (state, ownProps) => ({
@@ -34,24 +36,26 @@ const mapState = (state, ownProps) => ({
   items: state.firestore.ordered.items,
 });
 
-const query = ({currentStore}) => {
+const query = ({ currentStore }) => {
   return [
     {
-      collection:'Stores',
+      collection: "Stores",
       doc: currentStore,
-      storeAs: 'selectedStore'
-    },{
-      collection:'Config',
-      doc: 'config_main',
-      storeAs: 'config'
-    },{
+      storeAs: "selectedStore",
+    },
+    {
+      collection: "Config",
+      doc: "config_main",
+      storeAs: "config",
+    },
+    {
       collection: "Stores",
       doc: currentStore,
       subcollections: [{ collection: "Items" }],
       storeAs: "items",
-    }
-  ]
-}
+    },
+  ];
+};
 
 const menuStyle = {
   border: "none",
@@ -68,19 +72,14 @@ const fixedMenuStyle = {
   border: "1px solid #fff",
 };
 
-
 class NavBar extends Component {
-
-  
-
-
   handleSignedIn = () => {
-    this.props.openModal("LoginModal",this.props.currentStore);
+    this.props.openModal("LoginModal", this.props.currentStore);
   };
 
   handleSignedOut = () => {
     this.props.firebase.logout();
-    console.log('signingout from:',this.props.currentStore)
+    console.log("signingout from:", this.props.currentStore);
     this.props.history.push(`/${this.props.currentStore}/`);
   };
 
@@ -97,110 +96,157 @@ class NavBar extends Component {
   unStickTopMenu = () => this.setState({ menuFixed: false });
 
   render() {
-    const { auth, profile, store,  currentStore, config, items, getCurrency} = this.props;
+    const {
+      auth,
+      profile,
+      store,
+      currentStore,
+      config,
+      items,
+      getCurrency,
+    } = this.props;
     const authenticated = auth.isLoaded && !auth.isEmpty;
     const { menuFixed } = this.state;
 
     //getting store currency
     if (config && store) {
-      getCurrency(config,store);
+      getCurrency(config, store);
       const currencies = config.currencies;
       const storeCurrency = store.currency;
       var value;
       var currency;
-      Object.keys(currencies).forEach(function(key) {
-      value = currencies[key];
-      if (key==storeCurrency){ currency=value}
+      Object.keys(currencies).forEach(function (key) {
+        value = currencies[key];
+        if (key == storeCurrency) {
+          currency = value;
+        }
       });
     }
 
-
-
     return (
       <div>
-        {store &&
-                <div>
-                {store && store.enableChatbot && <ChatButton storeId={currentStore} /> }
-                  <Container as={Link} to={`/${currentStore}/`}  style={{ marginTop: "2em" }}>
+        {store && (
+          <div>
+            <Helmet>
+              <title>{store.storeName}</title>
+            </Helmet>
+            {store && store.enableChatbot && (
+              <ChatButton storeId={currentStore} />
+            )}
+            <Container
+              as={Link}
+              to={`/${currentStore}/`}
+              style={{ marginTop: "2em" }}
+            >
+              <Image
+                alt="a"
+                src={store.storeCustomization.logo}
+                size="small"
+                centered
+              />
+            </Container>
+
+            <Visibility
+              onBottomPassed={this.stickTopMenu}
+              onBottomVisible={this.unStickTopMenu}
+              once={false}
+            >
+              <Menu
+                borderless
+                fixed={menuFixed ? "top" : undefined}
+                style={menuFixed ? fixedMenuStyle : menuStyle}
+              >
+                <Container fluid className="nav">
+                  <Menu.Item as={Link} to={`/${currentStore}/`} header>
                     <Image
-                      alt="a"
+                      size="tiny"
                       src={store.storeCustomization.logo}
-                      size="small"
-                      centered
+                      alt="a"
                     />
-                  </Container>
+                  </Menu.Item>
+                  <Menu.Menu position="right">
+                    <Menu.Item
+                      name="Home"
+                      as={Link}
+                      to={`/${currentStore}/`}
+                    ></Menu.Item>
+                    <Menu.Item
+                      name="Clothing"
+                      as={NavLink}
+                      to={`/${currentStore}/collection/all`}
+                    ></Menu.Item>
 
-                  <Visibility
-                    onBottomPassed={this.stickTopMenu}
-                    onBottomVisible={this.unStickTopMenu}
-                    once={false}
-                  >
-                    <Menu
-                      borderless
-                      fixed={menuFixed ? "top" : undefined}
-                      style={menuFixed ? fixedMenuStyle : menuStyle}
-                    >
-                      <Container fluid className="nav">
-                        <Menu.Item as={Link} to={`/${currentStore}/`} header>
-                          <Image  size="tiny" src={store.storeCustomization.logo} alt="a"/>
-                        </Menu.Item>
-                        <Menu.Menu position="right">
-                          <Menu.Item
-                            name="Home"
-                            as={Link}
-                            to={`/${currentStore}/`} 
-                          ></Menu.Item>
-                          <Menu.Item
-                            name="Clothing"
-                            as={NavLink}
-                            to={`/${currentStore}/collection/all`} 
-                          ></Menu.Item>
-
-                          <Dropdown item simple  text="Categories">
-                            <Dropdown.Menu className = 'categories'>
+                    <Dropdown item simple text="Categories">
+                      <Dropdown.Menu className="categories">
+                        <Dropdown.Item
+                          as={NavLink}
+                          to={`/${currentStore}/collection/all`}
+                        >
+                          All
+                        </Dropdown.Item>
+                        {store.categories &&
+                          store.categories.map((category) => (
                             <Dropdown.Item
-                                as={NavLink}
-                                to={`/${currentStore}/collection/all`}
-                              >All</Dropdown.Item>
-                            {store.categories && store.categories.map(category => ( 
-                              <Dropdown.Item
-                                key={category.name}
-                                as={NavLink}
-                                to={`/${currentStore}/collection/${category.name}`}
-                              >{_.capitalize(category.name)}</Dropdown.Item>
-                              ))}
-
-                            </Dropdown.Menu>
-                          </Dropdown>
-                        </Menu.Menu>
-                        <Menu.Menu position="right" >
-                        <Menu.Item style={{margin: '0', padding:'0', border: '0px'}}>
-                        <SearchBar items={items} currency={store.currency}currentStore={currentStore}/></Menu.Item>
-                        <Menu.Item title="My Bag" as={Link} to={`/${currentStore}/cart`}><Icon  name="shopping bag" size='large' /></Menu.Item>
-                        {authenticated ? (
-                          <SignedInMenu
-                            currentStore={currentStore}
-                            profile={profile}
-                            signOut={this.handleSignedOut}
-                          />
-                        ) : (
-                          <SignedOutMenu
-                            signIn={this.handleSignedIn}
-                            register={this.handleRegister}
-                          />
-                        )}
-                        <Menu.Item>
-                        <CurrencyFlag title={store.currency} currency={store.currency} size="lg" />
-                        </Menu.Item>
-                        </Menu.Menu>
-                      </Container>
-                    </Menu>
-                  </Visibility>
-                </div>
-        }
+                              key={category.name}
+                              as={NavLink}
+                              to={`/${currentStore}/collection/${category.name}`}
+                            >
+                              {_.capitalize(category.name)}
+                            </Dropdown.Item>
+                          ))}
+                      </Dropdown.Menu>
+                    </Dropdown>
+                  </Menu.Menu>
+                  <Menu.Menu position="right">
+                    <Menu.Item
+                      style={{ margin: "0", padding: "0", border: "0px" }}
+                    >
+                      <SearchBar
+                        items={items}
+                        currency={store.currency}
+                        currentStore={currentStore}
+                      />
+                    </Menu.Item>
+                    <Menu.Item
+                      title="My Bag"
+                      as={Link}
+                      to={`/${currentStore}/cart`}
+                    >
+                      <Icon name="shopping bag" size="large" />
+                    </Menu.Item>
+                    {authenticated ? (
+                      <SignedInMenu
+                        currentStore={currentStore}
+                        profile={profile}
+                        signOut={this.handleSignedOut}
+                      />
+                    ) : (
+                      <SignedOutMenu
+                        signIn={this.handleSignedIn}
+                        register={this.handleRegister}
+                      />
+                    )}
+                    <Menu.Item>
+                      <CurrencyFlag
+                        title={store.currency}
+                        currency={store.currency}
+                        size="lg"
+                      />
+                    </Menu.Item>
+                  </Menu.Menu>
+                </Container>
+              </Menu>
+            </Visibility>
+          </div>
+        )}
       </div>
     );
   }
 }
 
-export default withRouter(connect( mapState,actions)(firestoreConnect(currentStore => query(currentStore))(NavBar)));
+export default withRouter(
+  connect(
+    mapState,
+    actions
+  )(firestoreConnect((currentStore) => query(currentStore))(NavBar))
+);

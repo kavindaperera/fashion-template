@@ -8,6 +8,8 @@ import SideMenu from '../../slideMenu/SlideMenu/SideMenu'
 import StickyBox from "react-sticky-box";
 import Filter from "../../filter/Filter/Filter";
 import moment from 'moment';
+import { Helmet } from "react-helmet";
+import _ from "lodash";
 
 const mapState = (state, ownProps) => ({
   products: state.firestore.ordered.items,
@@ -121,8 +123,11 @@ class CollectionDashboard extends Component {
 
 
 
-    return (
-
+    return (<div>
+    {category &&
+            <Helmet>
+              <title>{_.startCase(category)} | {store.storeName}</title>
+            </Helmet>}
         <Grid centered>
           <Grid.Column width={2}>
             <StickyBox offsetTop={70} offsetBottom={20}>
@@ -159,7 +164,7 @@ class CollectionDashboard extends Component {
             />
           </Grid.Row>
           <Grid.Row></Grid.Row>
-        </Grid>
+        </Grid></div>
 
     );
   }

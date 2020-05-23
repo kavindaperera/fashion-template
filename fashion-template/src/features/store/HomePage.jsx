@@ -7,6 +7,7 @@ import { NavLink,} from "react-router-dom";
 import LoadingComponent from "../../app/layout/LoadingComponent"
 import { Carousel } from "react-responsive-carousel";
 import _ from "lodash";
+import { Helmet } from "react-helmet";
 
 const mapState = (state, ownProps) => ({
   /*store: state.firestore.ordered.store,*/
@@ -37,7 +38,10 @@ render (){
 
   return (
     <div className="masthead ">
-      {store &&
+      {store && <div>
+        <Helmet>
+              <title>Home | {store.storeName}</title>
+            </Helmet>
               <Grid key={store.id} className="main">
                 <Grid.Row>
                   <Grid.Column>
@@ -91,8 +95,7 @@ render (){
                         ))}
                 </Grid.Row>
                 <Grid.Row></Grid.Row>
-              </Grid>
-
+              </Grid></div>
         }
     </div>
   );
