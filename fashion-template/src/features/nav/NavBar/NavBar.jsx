@@ -152,6 +152,7 @@ class NavBar extends Component {
               once={false}
             >
               <Menu
+              stackable
                 borderless
                 fixed={menuFixed ? "top" : undefined}
                 style={menuFixed ? fixedMenuStyle : menuStyle}

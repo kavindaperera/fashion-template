@@ -15,6 +15,7 @@ const mapState = (state, ownProps) => ({
   subItems: state.collection.subItems,
   symbol: state.collection.symbol,
   selectedVariant: state.form.variantForm,
+  store : state.firestore.data.selectedStore,
 });
 
 
@@ -44,7 +45,7 @@ class ItemDetailedInfo extends Component {
 
   render() {
 
-    const { currentStore, product, discount, productId, addToCart, selectedVariant,  symbol, discountActive, reviews } = this.props;
+    const { currentStore, product, discount, productId, addToCart, selectedVariant,  symbol, discountActive, reviews, store  } = this.props;
 
     const { activeIndex } = this.state
 
@@ -53,6 +54,9 @@ class ItemDetailedInfo extends Component {
     let displayPrice = null;
     let stock = null;
     let subItemIndex = null;
+    let enableInventoryManagement = false;
+    
+
 
     selectedVariant && selectedVariant.values && subItems.map((s,i)=> {
       if (_.isEqual(selectedVariant.values, s.variants)){
@@ -61,6 +65,11 @@ class ItemDetailedInfo extends Component {
         stock = s.stock
       }
     });
+
+    if(store){
+      //console.log(store)
+      enableInventoryManagement = store.enableInventoryManagement;
+    }
 
 
   return (
@@ -75,7 +84,7 @@ class ItemDetailedInfo extends Component {
         <PriceTagLarge currency={symbol} displayPrice={displayPrice} price= {product.basePrice} discount= {discount} discountActive={discountActive} ></PriceTagLarge>
         </Grid.Row>
         <Grid.Row>
-          <StockTag stock={stock} selectedVariant={selectedVariant} />
+          <StockTag stock={stock} selectedVariant={selectedVariant} enableInventoryManagement={enableInventoryManagement}/>
         </Grid.Row>
         <Grid.Row >
           <Grid.Column>

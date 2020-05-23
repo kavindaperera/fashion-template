@@ -181,6 +181,18 @@ body {
 
 }
 
+
+@media screen and (max-width: 768px){
+
+  .ui.three.cards.group-collection{
+    width: 608px !important
+  }
+
+}
+
+
+
+
 /*product list item image*/
 
 .ui.slide.masked.reveal.image{
@@ -197,6 +209,30 @@ body {
   object-fit: cover;
   height: 660px !important
 }
+
+
+@media screen and (max-width: 768px){
+
+  .ui.slide.masked.reveal.image{
+    object-fit: cover;
+    height: 300px !important
+  }
+  
+  .ui.image.visible.content{
+    object-fit: cover;
+    height: 300px !important
+  }
+  
+  .ui.image.hidden.content{
+    object-fit: cover;
+    height: 300px !important
+  }
+
+}
+
+
+
+
 
 /* paypal-button */
 

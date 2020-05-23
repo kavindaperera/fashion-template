@@ -128,10 +128,10 @@ class CollectionDashboard extends Component {
             <Helmet>
               <title>{_.startCase(category)} | {store.storeName}</title>
             </Helmet>}
-        <Grid centered>
+        <Grid centered  stackable>
           <Grid.Column width={2}>
             <StickyBox offsetTop={70} offsetBottom={20}>
-              <SideMenu sortCategory={category} currentStore={currentStore}></SideMenu>
+              <SideMenu  sortCategory={category} currentStore={currentStore}></SideMenu>
             </StickyBox>
           </Grid.Column>
           <Grid.Column width={14}>

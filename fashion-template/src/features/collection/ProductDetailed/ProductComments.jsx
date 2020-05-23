@@ -10,14 +10,14 @@ export default class ProductComments extends Component {
         <Header as="h4" dividing>
           Product Reviews
         </Header>
-        {reviews.length==0 && <p> Still Not Rated </p>}
+        {reviews && reviews.length==0 && <p> Still Not Rated </p>}
 
         {reviews &&
           reviews.map((review) => (
             <Comment>
               <Comment.Avatar
                 as="a"
-                src={review.photoURL}
+                src={review.buyerImg}
               />
               <Comment.Content>
                 <Comment.Author as="a"> <Rating defaultRating={review.rating} maxRating={5} disabled /></Comment.Author>

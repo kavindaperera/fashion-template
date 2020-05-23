@@ -1,6 +1,8 @@
 import { SubmissionError, reset } from 'redux-form'
 import { closeModal } from '../modals/modalActions'
 import { toastr } from 'react-redux-toastr'
+import {Icon,} from 'semantic-ui-react';
+import React from 'react';
 
 export const login = (creds) => {
   return async (dispatch, getState, {getFirebase})=> {
@@ -48,6 +50,9 @@ export const socialLogin = (selectedProvider, currentStore) =>
   async (dispatch, getState, {getFirebase, getFirestore}) => {
     const firebase = getFirebase();
     const firestore = getFirestore();
+    const toastrOptions = {
+      icon: (<Icon  circular name='user outline' size='big' />),
+    }
     try {
       dispatch(closeModal());
       let user = await firebase.login({
@@ -72,9 +77,9 @@ export const socialLogin = (selectedProvider, currentStore) =>
           email: user.profile.email,
           createdAt: firestore.FieldValue.serverTimestamp(),
         });
-        toastr.light('New User', `Welcome to our store, ${user.user.displayName} !`)
+        toastr.light('New User', `Welcome to our store, ${user.user.displayName} !`,toastrOptions)
       }else{
-        toastr.light('Hello', `Welcome to our the Store`)
+        toastr.light('Hello', `Welcome to our the Store`,toastrOptions)
       }
     } catch (error) {
       console.log(error)

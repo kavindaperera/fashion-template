@@ -15,7 +15,8 @@ const mapState = (state, ownProps) => ({
   currentStore: ownProps.match.params.store,
   user: state.firestore.data.user,
   symbol: state.collection.symbol,
-  cartItems: state.cart.cart
+  cartItems: state.cart.cart,
+  
 });
 
 const actions = {getCart};
@@ -33,12 +34,15 @@ const query = ({ currentStore, auth }) => {
 
 class CartDashboard extends Component {
   render() {
-    const { user, symbol, currentStore, cartItems, getCart } = this.props;
+    const { user, symbol, currentStore, cartItems, getCart, } = this.props;
+
 
 
     if (user) {
       getCart(user);
     }
+
+
 
     if (!cartItems) return <LoadingComponent inverted={true} />;
 
@@ -47,7 +51,7 @@ class CartDashboard extends Component {
       <Grid.Row><Header as="h3">My Bag</Header></Grid.Row>
       <Grid.Row>
           <Grid.Column  width={11}>
-            <CartList currentStore={currentStore} symbol={symbol} cartItems={cartItems}/>
+            <CartList currentStore={currentStore} symbol={symbol} cartItems={cartItems} />
           </Grid.Column>
           <Grid.Column width={4}>
           {cartItems &&  cartItems.length>0 && (

@@ -47,7 +47,8 @@ export const createNewOrderItem = (cartItem, item, subItem)  => {
 export const createNewReviewObj = (buyer, review) =>{
   return {
     buyer: buyer.uid,
-    photoURL: buyer.photoURL,
+    buyerImg: buyer.photoURL,
+    buyerName: buyer.displayName,
     rating: review.rating,
     comment: review.comment
   }

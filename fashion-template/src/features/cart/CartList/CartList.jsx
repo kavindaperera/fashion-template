@@ -7,7 +7,8 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 
 const mapState = (state, ownProps) => ({
   mainItems: state.firestore.ordered.items,
-  loading: state.async.loading
+  loading: state.async.loading,
+  store:state.firestore.data.selectedStore
 });
 
 const actions = {};
@@ -25,7 +26,12 @@ const query = ({ currentStore,item }) => {
 
 class CartList extends Component {
   render() {
-      const {symbol, cartItems, currentStore,mainItems,loading} = this.props
+      const {symbol, cartItems, currentStore,mainItems,loading, store} = this.props
+
+      let enableInventoryManagement = false;
+      if(store){
+        enableInventoryManagement = store.enableInventoryManagement
+      }
 
       if (loading) return <LoadingComponent inverted={true} />;
 
@@ -36,7 +42,7 @@ class CartList extends Component {
           <Table.Body>
           {/*cartItems && cartItems.length==0 && <LoadingComponent inverted={true} />*/}
           {cartItems && cartItems.map((item,i)=> (
-            <CartListItem key={i} item={item} mainItems={mainItems} symbol={symbol} currentStore={currentStore} index={i}/>
+            <CartListItem key={i} item={item} mainItems={mainItems} symbol={symbol} currentStore={currentStore} index={i} enableInventoryManagement={enableInventoryManagement}/>
           ))}
           {cartItems && cartItems.length==0 && (
             <Table.Row>

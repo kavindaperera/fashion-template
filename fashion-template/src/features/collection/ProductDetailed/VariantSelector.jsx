@@ -33,8 +33,6 @@ class VariantSelector extends Component {
             quantity.push(x)
         }
 
-
-
         return (
                 <Form onSubmit={this.props.handleSubmit(this.onFormSubmit)}>
                 {variants && variants.map((variant, i)=>{
@@ -58,16 +56,9 @@ class VariantSelector extends Component {
                     />
                   );
                   })}
-                  {/*<Field
-                      name="quantity"
-                      type="number"
-                      component={SelectInput}
-                      options={quantity}
-                      placeholder="quantity"
-                    />*/}
                     <Divider/>
                     <Button.Group fluid>
-                    <Button labelPosition='right' icon='bookmark outline'  disabled={pristine || submitting || !stock } size='large' color='black' content='Add to Bag'/>
+                    <Button labelPosition='right' icon='bookmark outline'  disabled={pristine || submitting  || !stock } size='large' color='black' content='Add to Bag'/>
                     </Button.Group>
                 </Form>
 

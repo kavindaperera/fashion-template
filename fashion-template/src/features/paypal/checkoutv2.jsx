@@ -21,6 +21,8 @@ class CheckoutX extends Component {
   render() {
     const { currency, total, cartItems, currentStore, store, items } = this.props;
 
+    //console.log(store.enableInventoryManagement)
+
     const toastrOptions = {
       timeOut: 6000,
       icon: (<Icon  circular name='paypal' size='big' />),
@@ -30,7 +32,7 @@ class CheckoutX extends Component {
     return (
       <PayPalButton
         createOrder={(data, actions) => {
-          this.props.decrementStock(cartItems, currentStore, items)
+          store.enableInventoryManagement && this.props.decrementStock(cartItems, currentStore, items)
           return actions.order.create({
             purchase_units: [
               {
@@ -61,20 +63,21 @@ class CheckoutX extends Component {
 
         onCancel={(data) => { // User pressed "cancel" or close Paypal's popup!
           console.log("payment canceled")
-          this.props.incrementStock(cartItems, currentStore, items)
+          store.enableInventoryManagement && this.props.incrementStock(cartItems, currentStore, items)
           //console.log(data);
           toastr.error('The payment was cancelled!', "The payment was cancelled!")
         }}
 
         onError={(details) => { // The main Paypal's script cannot be loaded or somethings block the loading of that script!
           console.log('Server Error');
-          this.props.incrementStock(cartItems, currentStore, items)
+          store.enableInventoryManagement && this.props.incrementStock(cartItems, currentStore, items)
           toastr.light('Server Error!', "somethings block the loading of paypal!")
         }}
 
         options={{
           clientId: "AcHAO-vEol-c08pSu9GFksscdth-pVB7sce66pJvLGCeFg7ILKyMl_ZzTENVhcfLV2SVSWTyvlM-Z2JA",
             merchantId: store.merchantId,
+            currency
         }}
       />
     );

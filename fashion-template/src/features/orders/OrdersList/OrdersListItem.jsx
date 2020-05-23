@@ -61,7 +61,11 @@ export default class OrdersListItem extends Component {
             let subItemId = item.subItemId;
             let mainItem = items.filter((product) => product.id === item.item);
             //console.log('xxx', mainItem)
-            let url = mainItem[0].photos[0].thumbnail;
+            let url = null;
+            if(mainItem[0].photos[0]){
+               url = mainItem[0].photos[0].thumbnail;
+            }
+
             let name = mainItem[0].name;
             let subItem = mainItem[0].subItems[subItemId];
 

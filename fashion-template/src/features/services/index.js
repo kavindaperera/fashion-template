@@ -34,7 +34,7 @@ export const getCartTotal = (cartItems,items) => {
   }
 
 
-export const getStockAvailability = (cartItems, items) => {
+export const getStockAvailability = (cartItems, items, enableInventoryManagement) => {
   let availability = true
   //console.log(cartItems, items)
   items && cartItems && cartItems.forEach((cartItem) => {
@@ -43,10 +43,17 @@ export const getStockAvailability = (cartItems, items) => {
     let selectedItem = items.filter((product) => product.id == cartItem.item)[0];
     let selectedSubItem = selectedItem.subItems[subItemId];
     let stock = selectedSubItem.stock;
+    let deleted = selectedItem.deleted;
     if (stock == 0){
       availability = false
     }
-    else if (cartQty>stock){
+    else if (stock == null){
+      availability = false
+    }
+    else if (cartQty>stock && enableInventoryManagement){
+      availability = false
+    }
+    else if (deleted){
       availability = false
     }
   })

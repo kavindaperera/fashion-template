@@ -34,7 +34,10 @@ class CartListItem extends Component {
       mainItems,
       currentStore,
       index,
+      enableInventoryManagement
     } = this.props;
+
+    console.log(enableInventoryManagement)
 
 
     let subItemId = null;
@@ -116,11 +119,17 @@ class CartListItem extends Component {
         <Table.Cell width={3} textAlign="left" verticalAlign="top">
               <Button size="mini"  disabled={item.quantity==1} icon='minus' onClick={()=>this.handleDecrementQty(index, currentStore)} />
               <Label basic size="medium" >{item.quantity}</Label>
-              <Button size="mini" disabled={stock==item.quantity} icon='plus' onClick={()=>this.handleIncrementQty(index, currentStore)} />
 
-              {(stock==item.quantity) && <Label color="red" basic size="medium" >Out of Stock</Label>}
+              { enableInventoryManagement && <Button size="mini" disabled={stock==item.quantity  } icon='plus' onClick={()=>this.handleIncrementQty(index, currentStore)} />}
+              {!enableInventoryManagement && <Button size="mini"  icon='plus' onClick={()=>this.handleIncrementQty(index, currentStore)} />}
 
-              {(stock<item.quantity) && <Message size='mini' icon="warning" error header="Selected Quantity No Longer available"  content="change quantity please"/>}
+              {selectedItem.deleted && <Message size='mini' icon="warning" error header="This item is no longer available"  content="remove the item to continue checkout"/>}
+
+              {(stock==null) && <Message size='mini' icon="warning" error header="This variant of the item is no longer available"  content="remove the item to continue checkout"/>}
+
+              {enableInventoryManagement && (stock==item.quantity) && <Label color="red" basic size="medium" >Out of Stock</Label>}
+              {enableInventoryManagement && (stock<item.quantity) && <Message size='mini' icon="warning" error header="Selected Quantity No Longer available"  content="change quantity please"/>}
+              {!enableInventoryManagement && (stock==0) && <Message size='mini' icon="warning" error header="This item is out of stock"  content="remove the item to continue checkout"/>}
         </Table.Cell>
         <Table.Cell width={3} textAlign="right" verticalAlign="top">
           <Button

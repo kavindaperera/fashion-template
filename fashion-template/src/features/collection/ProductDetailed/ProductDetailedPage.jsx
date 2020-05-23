@@ -12,7 +12,7 @@ import moment from "moment";
 import { NavLink, Link } from "react-router-dom";
 import _ from "lodash";
 import ProductComments from "./ProductComments";
-
+import ProductNotFound  from '../../pages/ProductNotFound'
 
 const mapState = (state, ownProps) => {
   const productId = ownProps.match.params.id;
@@ -58,6 +58,7 @@ class ProductDetailedPage extends Component {
   async componentWillUnmount() {
     const { firestore, match } = this.props;
     await firestore.unsetListener(`collection/products/${match.params.id}`);
+
   }
 
   render() {
@@ -65,9 +66,10 @@ class ProductDetailedPage extends Component {
     let discountActive = false;
     let discount = 0;
     let reviews = null;
+    let enableRating = false;
 
 
-    if (product && !product.name) {return <LoadingComponent inverted={true} />} ;
+    if (product && !product.name && product.deleted) {return <LoadingComponent inverted={true} />} ;
 
     //checking Discount Status
     if (product && product.discount != null) {
@@ -80,19 +82,23 @@ class ProductDetailedPage extends Component {
 
     let currentCategory = ""
 
-    if(product){
+    if(product && store){
     const categories = store.categories;
     const currentCategoryIndex = product.category;
     const sortCategoryIndex = categories.map((category, index) =>  { if(index==currentCategoryIndex){ return category.name; } } )
     currentCategory= sortCategoryIndex.sort()[0]
+    enableRating = store.enableRating;
     }
 
     if (product){
       reviews = (product.reviews)
     }
 
+
+
+
     return (
-      <div>{product &&
+      <div>{product && !product.deleted &&
       <Grid>
       <Grid.Row>
         <Breadcrumb>
@@ -120,7 +126,7 @@ class ProductDetailedPage extends Component {
                 discount={discount}
                 reviews={reviews}
               />
-              <ProductComments reviews={reviews}/>
+              {enableRating && <ProductComments reviews={reviews}/>}
               </div>
             )}
           </StickyBox>
@@ -130,7 +136,7 @@ class ProductDetailedPage extends Component {
         <Grid.Column textAlign='center'>
               <Grid.Row ><h3 style={{ color:'grey', marginBottom:'1rem'}} >Shop More</h3></Grid.Row>
               <Grid.Row >
-          {store.categories &&
+          {store && store.categories &&
             store.categories.map((category) => (
               <Button basic
                 as={NavLink}
@@ -146,7 +152,9 @@ class ProductDetailedPage extends Component {
             </Grid.Column>
         </Grid.Row>
       </Grid> }
-      {(!product) && <LoadingComponent inverted={true} />} </div>
+      {(!product) && <ProductNotFound currentStore={currentStore} />}
+      { product && product.deleted &&  <ProductNotFound currentStore={currentStore} /> }
+      </div>
     );
   }
 }

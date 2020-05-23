@@ -34,12 +34,15 @@ class OrderDetailedItemList extends Component {
           order.orderItems.map((item) => {
             let subItemId = item.subItemId;
             let mainItem = items.filter((product) => product.id === item.item);
-            let url = mainItem[0].photos[0].thumbnail;
+            let url = null;
+            if(mainItem[0].photos[0]){
+               url = mainItem[0].photos[0].thumbnail;
+            }
             let name = mainItem[0].name;
 
             return (
               <Card className='orderdetail'>
-                <Image src={url} wrapped ui={false} />
+                <Image src={url || "/assets/product_list_image.png"} wrapped ui={false} />
                 <Card.Content textAlign="center">
                   <Card.Meta>
                     {name}

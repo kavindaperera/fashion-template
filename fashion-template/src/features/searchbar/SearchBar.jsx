@@ -4,7 +4,7 @@ import { Search, Grid,  Image,} from 'semantic-ui-react'
 
 const initialState = { isLoading: false, results: [], value: '' }
 
-const resultRenderer = ({ id, basePrice, name, photos }) => <div><Image className='searchImage' src= {photos[0].thumbnail}  size='large' ></Image><span>{name}</span></div>
+const resultRenderer = ({ id, basePrice, name, photos }) => <div>{photos[0] && <Image className='searchImage' src= {photos[0].thumbnail || "/assets/product_list_image.png"}  size='large' ></Image>}<span>{name}</span></div>
 
 
 export default class SearchBar extends Component {

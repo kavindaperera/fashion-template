@@ -17,15 +17,19 @@ class OrderSummary extends Component {
   render() {
     const { cartItems, symbol, items, currentStore, store } = this.props;
 
-    const subtotal = getCartTotal(cartItems, items,currentStore)
-    const availability = getStockAvailability(cartItems, items)
-    //console.log(availability)
-
     let currency = null;
+    let enableInventoryManagement = false;
 
     if(store){
       currency = store.currency;
+      enableInventoryManagement = store.enableInventoryManagement;
     }
+
+    const subtotal = getCartTotal(cartItems, items,currentStore)
+    const availability = getStockAvailability(cartItems, items, enableInventoryManagement)
+    //console.log(availability)
+
+    
     //console.log("CURRENCY:", currency)
 
 
