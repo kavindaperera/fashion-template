@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ProductListItem from './ProductListItem'
 import { Card } from "semantic-ui-react";
+import { connect } from "react-redux";
 
 
 class ProductList extends Component {
@@ -18,7 +19,7 @@ class ProductList extends Component {
             (  product.visible &&  (!product.deleted) && (product.category===(sortByIndex)) && <ProductListItem enableRating={enableRating} key={product.id}  product={product} store={store} currency={currency} />)
           ))}
           { (sortCategory==="all") && products && products.map(product => (
-            (  product.visible && (!product.deleted) && <ProductListItem enableRating={enableRating} key={product.id} product={product}  store={store} currency={currency}/>)
+            (  product.visible && (!product.deleted) && <ProductListItem enableRating={enableRating} key={product.id} product={product}  store={store} currency={currency} />)
           ))}
 
         </Card.Group>
@@ -26,5 +27,6 @@ class ProductList extends Component {
     );
   }
 }
+
 
 export default (ProductList);

@@ -5,13 +5,15 @@ import LoginModal from './LoginModal'
 import RegisterModal from './RegisterModal'
 import UnauthModal from './UnauthModal'
 import ReviewModal from './ReviewModal'
+import QuickViewModal from './QuickViewModal'
 
 const modalLookup = {
   TestModal,
   LoginModal,
   RegisterModal,
   UnauthModal,
-  ReviewModal
+  ReviewModal,
+  QuickViewModal
 }
 
 const mapState = (state) => ({

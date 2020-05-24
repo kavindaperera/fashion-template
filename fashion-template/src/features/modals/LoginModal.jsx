@@ -14,6 +14,7 @@ class LoginModal extends Component {
     render() {
         const {store} = this.props;
         return (
+            <div>
             <Modal
                 size='mini'
                 centered
@@ -27,7 +28,7 @@ class LoginModal extends Component {
                         <LoginForm currentStore={store} />
                     </Modal.Description>
                 </Modal.Content>
-            </Modal>
+            </Modal></div>
         );
     }
 }

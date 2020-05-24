@@ -10,6 +10,7 @@ import Filter from "../../filter/Filter/Filter";
 import moment from 'moment';
 import { Helmet } from "react-helmet";
 import _ from "lodash";
+import { openModal } from "../../modals/modalActions";
 
 const mapState = (state, ownProps) => ({
   products: state.firestore.ordered.items,
@@ -22,7 +23,7 @@ const mapState = (state, ownProps) => ({
   symbol: state.collection.symbol,
 });
 
-const actions = { };
+const actions = { openModal };
 
 const query = ({currentStore}) => {
   return [

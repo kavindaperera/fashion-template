@@ -78,6 +78,7 @@ class ProductDetailedPage extends Component {
       const endDate = product.discount.endDate.seconds;
       discountActive = startDate < dateNow && dateNow < endDate;
       discount = product.discount.percentage;
+      
     }
 
     let currentCategory = ""
@@ -88,6 +89,7 @@ class ProductDetailedPage extends Component {
     const sortCategoryIndex = categories.map((category, index) =>  { if(index==currentCategoryIndex){ return category.name; } } )
     currentCategory= sortCategoryIndex.sort()[0]
     enableRating = store.enableRating;
+    console.log(JSON.stringify(product, null, 2))
     }
 
     if (product){

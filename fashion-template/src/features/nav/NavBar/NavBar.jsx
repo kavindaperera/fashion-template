@@ -8,6 +8,7 @@ import {
   Visibility,
   Image,
   Icon,
+  Header
 } from "semantic-ui-react";
 import { NavLink, Link, withRouter } from "react-router-dom";
 import SignedOutMenu from "../Menus/SignedOutMenu";
@@ -138,12 +139,15 @@ class NavBar extends Component {
               to={`/${currentStore}/`}
               style={{ marginTop: "2em" }}
             >
-              <Image
+              {store.storeCustomization.logo && <Image
                 alt="a"
                 src={store.storeCustomization.logo}
                 size="small"
                 centered
-              />
+              />}
+               {!store.storeCustomization.logo && <Header as='h2' icon textAlign='center'>
+                                                          <Header.Content>{store.storeName}</Header.Content>
+                                                      </Header>}
             </Container>
 
             <Visibility
@@ -159,11 +163,11 @@ class NavBar extends Component {
               >
                 <Container fluid className="nav">
                   <Menu.Item as={Link} to={`/${currentStore}/`} header>
-                    <Image
+                  {store.storeCustomization.logo && <Image
                       size="tiny"
                       src={store.storeCustomization.logo}
                       alt="a"
-                    />
+                    />}
                   </Menu.Item>
                   <Menu.Menu position="right">
                     <Menu.Item

@@ -1,19 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
-import { Card, Label, Image, Rating } from "semantic-ui-react";
-import { Link,  } from "react-router-dom";
+import { Card, Label, Image, Rating, Button } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import PriceTag from "../../pricetag/PriceTag";
 import moment from "moment";
 
-
 class ProductListItem extends Component {
   render() {
-    const { product,  currency, enableRating } = this.props;
+    const {
+      product,
+      currency,
+      enableRating,
+    } = this.props;
+
     let discountActive = false;
     let discount = 0;
     let rating = product.rating.totalRating / product.rating.ratingCount;
-    if (isNaN(rating) ){
-      rating=0
+    if (isNaN(rating)) {
+      rating = 0;
     }
 
     //checking Discount Status
@@ -26,7 +30,11 @@ class ProductListItem extends Component {
     }
 
     return (
-      <Card className="card" title={product.name} as={Link} to={`product/${product.id}`}>
+      <Card
+        className="card"
+        title={product.name}
+        as={Link} to={`product/${product.id}`}
+      >
         {discountActive && product.discount.percentage > 0 && (
           <div>
             <Label circular color="red" floating>
@@ -39,15 +47,23 @@ class ProductListItem extends Component {
 
         {/*if 2 product images are available*/}
         {product.photos[0] && product.photos[1] && (
-          <div className="ui slide masked reveal image">
+          <div  className="ui slide masked reveal image" >
             <Image
               alt="1"
-              src={product.photos[0].url || "/assets/product_list_image.png"}
+              src={
+                product.photos[0].url ||
+                product.photos[0].thumbnail ||
+                "/assets/product_list_image.png"
+              }
               className="visible content"
             ></Image>
             <Image
               alt="2"
-              src={product.photos[1].url || "/assets/product_list_image.png"}
+              src={
+                product.photos[1].url ||
+                product.photos[0].thumbnail ||
+                "/assets/product_list_image.png"
+              }
               className="hidden content"
             ></Image>
           </div>
@@ -95,10 +111,14 @@ class ProductListItem extends Component {
               discountActive={discountActive}
             ></PriceTag>
             <div>
-            {enableRating && rating>0 && <Rating clearable defaultRating={rating} maxRating={5} /> }
-            {enableRating && rating==0 && <p style={{ color: "grey" }}>still not rated</p> }
-
+              {enableRating && rating > 0 && (
+                <Rating clearable defaultRating={rating} maxRating={5} />
+              )}
+              {enableRating && rating == 0 && (
+                <p style={{ color: "grey" }}>still not rated</p>
+              )}
             </div>
+            
           </div>
         </div>
       </Card>

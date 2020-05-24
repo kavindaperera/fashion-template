@@ -47,8 +47,9 @@ export const addToCart = (item,subItem,price,currentStore) =>{
               toastr.success('Added To Bag', 'Don’t miss out: Items in your bag are not reserved until payment is complete', toastrOptions))
         }
         ).catch((error) => {
-       console.log(error)
-       toastr.light("Item already in the cart", "Increase the quantity instead",toastrOptions);
+       console.log({error})
+       if(error.name=='FirebaseError'){toastr.error(error.name,'Please Login Again!');}
+       else{toastr.light(error.message,'Increase the quantity instead!',toastrOptions);}
      })
   }else{
     toastr.error('You\'re Not Logged in', 'Please Login!');

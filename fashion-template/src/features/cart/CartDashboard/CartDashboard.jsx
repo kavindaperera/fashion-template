@@ -6,7 +6,8 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 import StickyBox from "react-sticky-box";
 import OrderSummary from "../OrderSummary/OrderSummary";
 import CartList from "../CartList/CartList";
-import { getCart } from '../cartActions'
+import { getCart } from '../cartActions';
+import { Helmet } from "react-helmet";
 
 const mapState = (state, ownProps) => ({
   auth: state.firebase.auth,
@@ -16,7 +17,7 @@ const mapState = (state, ownProps) => ({
   user: state.firestore.data.user,
   symbol: state.collection.symbol,
   cartItems: state.cart.cart,
-  
+  store: state.firestore.data.selectedStore,
 });
 
 const actions = {getCart};
@@ -34,7 +35,7 @@ const query = ({ currentStore, auth }) => {
 
 class CartDashboard extends Component {
   render() {
-    const { user, symbol, currentStore, cartItems, getCart, } = this.props;
+    const { user, symbol, currentStore, cartItems, getCart, store} = this.props;
 
 
 
@@ -47,6 +48,10 @@ class CartDashboard extends Component {
     if (!cartItems) return <LoadingComponent inverted={true} />;
 
     return (
+      <div>{ store && <div>
+      <Helmet>
+              <title>My Bag | {store.storeName}</title>
+            </Helmet>
       <Grid  divided='vertically' columns={2}>
       <Grid.Row><Header as="h3">My Bag</Header></Grid.Row>
       <Grid.Row>
@@ -61,7 +66,7 @@ class CartDashboard extends Component {
             )}
           </Grid.Column>
         </Grid.Row>
-      </Grid>
+      </Grid></div>}</div>
     );
   }
 }

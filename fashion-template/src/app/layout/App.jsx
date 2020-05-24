@@ -12,13 +12,15 @@ import Footer from "../../features/footer/Footer";
 import NotFound from '../../features/pages/NotFound'
 import TestComponent from '../../features/testarea/TestComponent';
 import OrderDetailedPage from '../../features/orders/OrderDetailed/OrderDetailedPage'
-import { UserIsAuthenticated } from '../../features/auth/authWrapper'
+import { UserIsAuthenticated } from '../../features/auth/authWrapper';
 
 class App extends Component {
   render() {
     return (
       <div>
       <ModalManager/>
+
+
         <Switch>
           <Route exact path={`/:store/`} component={HomePage} />
         </Switch>

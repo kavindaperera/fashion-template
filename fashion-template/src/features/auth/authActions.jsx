@@ -54,6 +54,7 @@ export const socialLogin = (selectedProvider, currentStore) =>
       icon: (<Icon  circular name='user outline' size='big' />),
     }
     try {
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
       dispatch(closeModal());
       let user = await firebase.login({
         provider: selectedProvider,
