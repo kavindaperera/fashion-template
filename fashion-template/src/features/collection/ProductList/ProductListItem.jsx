@@ -36,7 +36,7 @@ class ProductListItem extends Component {
 
     return (
       <Card
-        className="card"
+        className="card-list"
         title={product.name}
         //as={Link} to={`product/${product.id}`}
       >
