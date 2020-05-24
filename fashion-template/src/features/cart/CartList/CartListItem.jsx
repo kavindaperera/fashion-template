@@ -137,6 +137,7 @@ class CartListItem extends Component {
             circular
             basic
             icon="delete"
+            data-title='remove'
           />
         </Table.Cell>
       </Table.Row>

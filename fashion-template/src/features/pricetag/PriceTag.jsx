@@ -6,7 +6,7 @@ function PriceTag({ currency, price, discount, discountActive }) {
     <div data-testid="price-tag">
       { discountActive  &&  discount > 0 && (
           <p>
-            <del style={{ color: "grey", fontFamily: "Lato"  }}>
+            <del style={{ color: "#565656", fontFamily: "Lato"  }}>
               {currency}
               {price}
             </del>
@@ -18,7 +18,7 @@ function PriceTag({ currency, price, discount, discountActive }) {
       )}
 
       { (!discountActive || discount == 0) && (
-        <p style={{ color: "grey", fontFamily: "Lato"  }}>
+        <p style={{ color: "#565656", fontFamily: "Lato"  }}>
           {currency}
           {price}
         </p>
