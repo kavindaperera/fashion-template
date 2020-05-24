@@ -172,12 +172,12 @@ body {
 /*Collections Page*/
 
 .ui.three.cards.group-collection{
-  width: 1540px !important
+  width: 1535px !important
 
 }
 
 .ui.cards.group-collection{
-  width: 1540px !important
+  width: 1535px !important
 
 }
 
@@ -190,24 +190,56 @@ body {
 
 }
 
+/*Quick View*/
 
+.ui.slide.masked.reveal.image .ui.button.quick-view{
+  display:none;
+  width: 98% !important;
+  position: absolute;
+  top: 94%;
+  left: 1%;
+  opacity: 95%;
+  z-index: 1000;
+  background-color: white;
+}
+
+.ui.slide.masked.reveal.image:hover .ui.button.quick-view{
+  display:block;
+}
+
+@media screen and (max-width: 768px){
+
+  .ui.slide.masked.reveal.image .ui.button.quick-view{
+    display:none;
+    width: 98% !important;
+    position: absolute;
+    top: 87%;
+    left: 1%;
+    opacity: 95%;
+    z-index: 1000;
+    background-color: white;
+  }
+
+}
 
 /*product list item image*/
 
 .ui.slide.masked.reveal.image{
-  object-fit: cover;
+  position: relative;
+  object-fit: cover !important;
+  height: 660px !important;
+}
+
+.ui.image.visible.content img{
+  object-fit: cover !important;
   height: 660px !important
 }
 
-.ui.image.visible.content{
-  object-fit: cover;
+.ui.image.hidden.content img{
+  object-fit: cover !important;
   height: 660px !important
 }
 
-.ui.image.hidden.content{
-  object-fit: cover;
-  height: 660px !important
-}
 
 
 @media screen and (max-width: 768px){
@@ -217,12 +249,12 @@ body {
     height: 300px !important
   }
 
-  .ui.image.visible.content{
+  .ui.image.visible.content img{
     object-fit: cover;
     height: 300px !important
   }
 
-  .ui.image.hidden.content{
+  .ui.image.hidden.content img{
     object-fit: cover;
     height: 300px !important
   }

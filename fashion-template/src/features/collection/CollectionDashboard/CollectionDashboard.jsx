@@ -149,9 +149,9 @@ class CollectionDashboard extends Component {
             <ProductList
               products={products}
               sortCategory={category}
-              store = {store}
               currency = {symbol}
               enableRating={enableRating}
+              currentStore = {currentStore}
             /> }
           </Grid.Column>
          <Grid.Row>

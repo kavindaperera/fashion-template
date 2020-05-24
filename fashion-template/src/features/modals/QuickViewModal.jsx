@@ -30,7 +30,7 @@ const QuickViewModal = ({ closeModal, data }) => {
                 {data.product.photos &&
                   data.product.photos.map((photo, i) => (
                     <img
-                      class="carousel-image"
+                      class="carousel-quick-view"
                       alt="a"
                       key={photo}
                       src={

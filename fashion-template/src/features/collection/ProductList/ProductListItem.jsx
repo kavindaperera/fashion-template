@@ -1,17 +1,22 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Card, Label, Image, Rating, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import PriceTag from "../../pricetag/PriceTag";
 import moment from "moment";
+import { openModal } from "../../modals/modalActions";
+
+const mapState = (state, ownProps) => ({
+
+});
+
+const actions = {openModal};
+
 
 class ProductListItem extends Component {
   render() {
-    const {
-      product,
-      currency,
-      enableRating,
-    } = this.props;
+    const { product, currency, enableRating , currentStore, openModal} = this.props;
 
     let discountActive = false;
     let discount = 0;
@@ -33,7 +38,7 @@ class ProductListItem extends Component {
       <Card
         className="card"
         title={product.name}
-        as={Link} to={`product/${product.id}`}
+        //as={Link} to={`product/${product.id}`}
       >
         {discountActive && product.discount.percentage > 0 && (
           <div>
@@ -47,8 +52,17 @@ class ProductListItem extends Component {
 
         {/*if 2 product images are available*/}
         {product.photos[0] && product.photos[1] && (
-          <div  className="ui slide masked reveal image" >
+          <div className="ui slide masked reveal image">
+            { currentStore && <Button
+              className="quick-view"
+              onClick={() => openModal("QuickViewModal", { product: product , currentStore: currentStore})
+              }
+            >
+              Quick View
+            </Button>}
             <Image
+              as={Link}
+              to={`product/${product.id}`}
               alt="1"
               src={
                 product.photos[0].url ||
@@ -58,6 +72,8 @@ class ProductListItem extends Component {
               className="visible content"
             ></Image>
             <Image
+              as={Link}
+              to={`product/${product.id}`}
               alt="2"
               src={
                 product.photos[1].url ||
@@ -72,12 +88,23 @@ class ProductListItem extends Component {
         {/*if only 1 product image is available*/}
         {product.photos[0] && !product.photos[1] && (
           <div className="ui slide masked reveal image">
+          { currentStore && <Button
+              className="quick-view"
+              onClick={() => openModal("QuickViewModal", { product: product , currentStore: currentStore})
+              }
+            >
+              Quick View
+            </Button>}
             <Image
+              as={Link}
+              to={`product/${product.id}`}
               alt="1"
               src={product.photos[0].url}
               className="visible content"
             ></Image>
             <Image
+              as={Link}
+              to={`product/${product.id}`}
               alt="2"
               src={product.photos[0].url}
               className="hidden content"
@@ -88,12 +115,17 @@ class ProductListItem extends Component {
         {/*if no product images are available*/}
         {!product.photos[0] && !product.photos[1] && (
           <div className="ui slide masked reveal image">
+
             <Image
+              as={Link}
+              to={`product/${product.id}`}
               alt="1"
               src={"/assets/product_list_image.png"}
               className="visible content"
             ></Image>
             <Image
+              as={Link}
+              to={`product/${product.id}`}
               alt="2"
               src={"/assets/product_list_image.png"}
               className="hidden content"
@@ -118,7 +150,6 @@ class ProductListItem extends Component {
                 <p style={{ color: "grey" }}>still not rated</p>
               )}
             </div>
-            
           </div>
         </div>
       </Card>
@@ -126,4 +157,4 @@ class ProductListItem extends Component {
   }
 }
 
-export default ProductListItem;
+export default connect(mapState,actions) (ProductListItem);
