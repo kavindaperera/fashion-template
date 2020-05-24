@@ -60,8 +60,8 @@ class OrderSummary extends Component {
                 <Table.Cell width={10} textAlign='right' style={{ color: "black", fontSize: "1.5rem", fontFamily: "Lato" }} >{symbol}{subtotal}</Table.Cell>
             </Table.Row>
 
-            <Table.Row>
-            <Table.Cell>
+            <Table.Row className='paypal-row'>
+            <Table.Cell className='paypal-cell'>
                 <Button className='paypal-button' basic fluid disabled={!availability}><CheckoutX currency={currency} total={subtotal} cartItems={cartItems} currentStore={currentStore} /></Button>
                 {/* <Checkout currency={currency} total={subtotal} cartItems={cartItems} currentStore={currentStore} />*/}
             </Table.Cell>

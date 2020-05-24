@@ -35,28 +35,25 @@ const query = ({ currentStore, auth }) => {
 
 class CartDashboard extends Component {
   render() {
-    const { user, symbol, currentStore, cartItems, getCart, store} = this.props;
-
+    const { user, symbol, currentStore, cartItems, getCart, store } = this.props;
 
 
     if (user) {
       getCart(user);
     }
 
-
-
     if (!cartItems) return <LoadingComponent inverted={true} />;
 
     return (
-      <div>{ store && <div>
-      <Helmet>
+    <>
+            {store && <Helmet>
               <title>My Bag | {store.storeName}</title>
-            </Helmet>
+            </Helmet>}
       <Grid  divided='vertically' columns={2}>
       <Grid.Row><Header as="h3">My Bag</Header></Grid.Row>
       <Grid.Row>
           <Grid.Column  width={11}>
-            <CartList currentStore={currentStore} symbol={symbol} cartItems={cartItems} />
+            <CartList currentStore={currentStore} symbol={symbol} cartItems={cartItems}/>
           </Grid.Column>
           <Grid.Column width={4}>
           {cartItems &&  cartItems.length>0 && (
@@ -66,7 +63,8 @@ class CartDashboard extends Component {
             )}
           </Grid.Column>
         </Grid.Row>
-      </Grid></div>}</div>
+      </Grid>
+      </>
     );
   }
 }

@@ -11,6 +11,7 @@ import moment from 'moment';
 import { Helmet } from "react-helmet";
 import _ from "lodash";
 import { openModal } from "../../modals/modalActions";
+import InfiniteScroll from 'react-infinite-scroller';
 
 const mapState = (state, ownProps) => ({
   products: state.firestore.ordered.items,
@@ -125,6 +126,7 @@ class CollectionDashboard extends Component {
 
 
     return (<div>
+
     {category &&
             <Helmet>
               <title>{_.startCase(category)} | {store.storeName}</title>

@@ -141,6 +141,7 @@ class ProductDetailedPage extends Component {
           {store && store.categories &&
             store.categories.map((category) => (
               <Button basic
+              className='detailed-page'
                 as={NavLink}
                 to={`/${currentStore}/collection/${category.name}`}
                 size="large"
