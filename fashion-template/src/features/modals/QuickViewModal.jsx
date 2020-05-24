@@ -4,6 +4,7 @@ import { closeModal } from "./modalActions";
 import { connect } from "react-redux";
 import { Carousel } from "react-responsive-carousel";
 import _ from "lodash";
+import { NavLink } from "react-router-dom";
 
 const actions = {
   closeModal,
@@ -76,7 +77,7 @@ const QuickViewModal = ({ closeModal, data }) => {
                 </Grid.Row>
                 <Grid.Row>
 
-                    <Button href={`/${data.currentStore}/collection/product/${data.product.id}`} basic size='large' color='grey' content='View Full Details'/>
+                    <Button href={`product/${data.product.id}`} basic size='large' color='grey' content='View Full Details'/>
 
                 </Grid.Row>
               </Grid>

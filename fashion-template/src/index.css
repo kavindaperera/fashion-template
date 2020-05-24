@@ -176,17 +176,18 @@ body {
 
 }
 
-.ui.cards.group-collection{
-  width: 1535px !important
 
-}
 
 
 @media screen and (max-width: 768px){
 
   .ui.three.cards.group-collection{
-    width: 608px !important
+    width: auto !important
   }
+  .ui.card{
+    width: 300px !important
+  }
+
 
 }
 
@@ -246,17 +247,20 @@ body {
 
   .ui.slide.masked.reveal.image{
     object-fit: cover;
-    height: 300px !important
+    width: 300px !important;
+    height: 400px !important
   }
 
   .ui.image.visible.content img{
     object-fit: cover;
-    height: 300px !important
+    width: 300px !important;
+    height: 400px !important
   }
 
   .ui.image.hidden.content img{
     object-fit: cover;
-    height: 300px !important
+    width: 300px !important;
+    height: 400px !important
   }
 
 }
