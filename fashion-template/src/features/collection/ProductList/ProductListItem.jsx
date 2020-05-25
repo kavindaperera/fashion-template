@@ -7,7 +7,6 @@ import { compose } from 'redux';
 import PriceTag from "../../pricetag/PriceTag";
 import moment from "moment";
 import { openModal } from "../../modals/modalActions";
-import { withFirestore } from "react-redux-firebase";
 
 const mapState = (state, ownProps) => ({
 
@@ -161,4 +160,4 @@ class ProductListItem extends Component {
   }
 }
 
-export default withFirestore(connect(mapState,actions)(ProductListItem));
+export default connect(mapState,actions)(ProductListItem);

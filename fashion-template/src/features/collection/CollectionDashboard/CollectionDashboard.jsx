@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
-import { Grid, Pagination } from "semantic-ui-react";
+import { Grid, Pagination , Select } from "semantic-ui-react";
 import ProductList from "../ProductList/ProductList";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import SideMenu from '../../slideMenu/SlideMenu/SideMenu'
@@ -11,9 +11,7 @@ import moment from 'moment';
 import { Helmet } from "react-helmet";
 import _ from "lodash";
 import { openModal } from "../../modals/modalActions";
-import { compose } from 'redux';
-import { withRouter  } from "react-router-dom";
-import { withFirestore } from "react-redux-firebase";
+
 
 const mapState = (state, ownProps) => ({
   products: state.firestore.ordered.items,
@@ -42,10 +40,14 @@ const query = ({currentStore}) => {
 
 class CollectionDashboard extends Component {
 
+
+
+
   state = { };
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   handleChangeSort = e => {
+    console.log(e,'xxx')
     this.setState({ sort: e });
     this.listProducts();
   };
@@ -61,19 +63,19 @@ class CollectionDashboard extends Component {
   listProducts = () => {
     this.setState(state => {
       if (state.sort !== "") {
-        this.props.products.sort((a, b) => 
+        this.props.products.sort((a, b) =>
           state.sort === "lowest"
-            ?  a.basePrice > b.basePrice 
+            ?  a.basePrice > b.basePrice
             ? 1 : -1
             : {}
         );
-        this.props.products.sort((a, b) => 
+        this.props.products.sort((a, b) =>
           state.sort === "highest"
-            ?  a.basePrice  < b.basePrice 
+            ?  a.basePrice  < b.basePrice
             ? 1 : -1
             : {}
         );
-        this.props.products.sort((a, b) => 
+        this.props.products.sort((a, b) =>
           state.sort === "atoz"
             ?  a.name && b.name && (a.name) > (b.name) ? 1 : -1
             : {}
@@ -125,6 +127,7 @@ class CollectionDashboard extends Component {
 
     if (!isLoaded(products) || isEmpty(products) || !availability) return <LoadingComponent inverted={true} />;
 
+    console.log('xx',products)
 
 
     return (<div>
@@ -149,9 +152,10 @@ class CollectionDashboard extends Component {
               count={filteredProducts && filteredProducts.length}
               availability = {availability}
             />
+
             {store && availability &&
             <ProductList
-              products={products}
+              //products={products}
               sortCategory={category}
               currency = {symbol}
               enableRating={enableRating}
@@ -179,4 +183,4 @@ class CollectionDashboard extends Component {
 //export default compose (withFirestore, withRouter,connect(mapState,actions),(firestoreConnect(currentStore => query(currentStore))))(CollectionDashboard);
 
 
-export default withFirestore(connect(mapState,actions)(firestoreConnect((currentStore) => query(currentStore))(CollectionDashboard)));
+export default connect(mapState,actions)(firestoreConnect((currentStore) => query(currentStore))(CollectionDashboard));

@@ -45,23 +45,23 @@ const actions = {};
 
 const query = ({ currentStore }) => {
   return [
-    {
+    /*{
       collection: "Stores",
       doc: currentStore,
       subcollections: [{ collection: "Items" }],
-      storeAs: "items",
-    },
+      s*oreAs: "items",
+    },*/
   ];
 };
 
 class ProductDetailedPage extends Component {
 
-  async componentDidMount() {
+  /*async componentDidMount() {
     const { firestore, match } = this.props;
     //let product =  await firestore.get(`Stores/${match.params.store}/items/${match.params.id}`);
     //console.log(product)
-    await firestore.setListener(`Stores/${match.params.store}/items`);
-  }
+    await firestore.setListener(`Stores/${match.params.store}/Items`);
+  }*/
 
 /*
   async componentWillUnmount() {

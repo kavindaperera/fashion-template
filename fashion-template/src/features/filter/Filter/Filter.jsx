@@ -8,24 +8,6 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 
-{/*const sortOptions = [
-  {
-    key: "Recommended",
-    text: "Recommended",
-    value: "",
-  },
-  {
-    key: "Name: A-Z Order",
-    text: "Name: A-Z Order",
-    value: "atoz",
-  },
-  {
-    key: "Name: Z-A Order",
-    text: "Name: Z-A Order",
-    value: "ztoa",
-  },
-];*/}
-
 
 
 
@@ -92,6 +74,7 @@ class Filter extends Component {
 
   handleChange = (e, { value }) => {
     this.setState({ value });
+    console.log(value)
     this.props.handleChangeSort(value);
   };
 
@@ -103,7 +86,6 @@ class Filter extends Component {
     return (
       <div>
 
-        
                 <Menu
                   borderless
                   fixed={menuFixed ? "top" : undefined}
@@ -133,7 +115,4 @@ class Filter extends Component {
   }
 }
 
-export default connect(
-  mapState,
-  actions
-)(firestoreConnect()(Filter));
+export default connect(mapState,actions)(Filter);

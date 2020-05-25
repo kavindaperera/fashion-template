@@ -77,10 +77,6 @@ const fixedMenuStyle = {
 
 class NavBar extends Component {
 
-  async componentDidMount() {
-    const { firestore, match } = this.props;
-    await firestore.setListener(`Stores/${match.params.store}/items`);
-  }
 
   handleSignedIn = () => {
     this.props.openModal("LoginModal", this.props.currentStore);
