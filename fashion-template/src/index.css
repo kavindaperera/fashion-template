@@ -18,6 +18,9 @@ body {
 }
 
 
+
+
+
 /*home page styles*/
 
 
@@ -332,6 +335,14 @@ body {
 .ui.grey.large.basic.button.detailed-page{
   margin-bottom: 2px;
 }
+
+
+
+.ui.card.orderdetail{
+  width:1000px;
+}
+
+
 
 
 

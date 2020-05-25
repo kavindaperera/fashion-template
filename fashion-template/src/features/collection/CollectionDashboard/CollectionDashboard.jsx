@@ -11,7 +11,9 @@ import moment from 'moment';
 import { Helmet } from "react-helmet";
 import _ from "lodash";
 import { openModal } from "../../modals/modalActions";
-import InfiniteScroll from 'react-infinite-scroller';
+import { compose } from 'redux';
+import { withRouter  } from "react-router-dom";
+import { withFirestore } from "react-redux-firebase";
 
 const mapState = (state, ownProps) => ({
   products: state.firestore.ordered.items,
@@ -174,11 +176,7 @@ class CollectionDashboard extends Component {
 }
 
 
-export default connect(
-  mapState,
-  actions
-)(
-  firestoreConnect(currentStore => query(currentStore))(
-    CollectionDashboard
-  )
-);
+//export default compose (withFirestore, withRouter,connect(mapState,actions),(firestoreConnect(currentStore => query(currentStore))))(CollectionDashboard);
+
+
+export default withFirestore(connect(mapState,actions)(firestoreConnect((currentStore) => query(currentStore))(CollectionDashboard)));

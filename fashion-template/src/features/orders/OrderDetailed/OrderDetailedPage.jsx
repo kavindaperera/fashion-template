@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { withFirestore } from "react-redux-firebase";
+import { withFirestore, isLoaded, isEmpty} from "react-redux-firebase";
 import { Breadcrumb, Grid, Segment, Tab, } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import OrderDetailedItemList from './OrderDetailedItemList'
 import { firestoreConnect } from "react-redux-firebase";
 import moment from "moment";
+import LoadingComponent from "../../../app/layout/LoadingComponent"
+import OrderNotFound from '../../pages/OrderNotFound/OrderNotFound'
 
 const mapState = (state, ownProps) => {
   const orderId = ownProps.match.params.id;
@@ -39,7 +41,15 @@ const query = ({ currentStore, orderId }) => {
 class OrderDetailedPage extends Component {
   render() {
     const { orderId, currentStore, order, config ,symbol} = this.props;
-    //console.log(symbol)
+
+    if(!isLoaded(order)) { return <LoadingComponent inverted={true} />; }
+
+
+    if(isLoaded(order)) {
+
+      if (isEmpty(order)) return <OrderNotFound />;
+
+    }
 
     let orderStates = null;
     let orderStatesX = null;

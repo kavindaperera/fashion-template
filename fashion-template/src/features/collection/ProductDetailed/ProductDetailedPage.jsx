@@ -26,6 +26,12 @@ const mapState = (state, ownProps) => {
   if (productId && products) {
     product = products.filter((product) => product.id === productId)[0];
   }
+  /*if(state.firestore.ordered.items && state.firestore.ordered.items[0]) {
+
+    product = state.firestore.ordered.items.filter((product) => product.id === productId)[0];
+  }*/
+
+
   return {
     product,
     products,
@@ -49,17 +55,19 @@ const query = ({ currentStore }) => {
 };
 
 class ProductDetailedPage extends Component {
+
   async componentDidMount() {
     const { firestore, match } = this.props;
-    let product = await firestore.get(`Stores/${match.params.store}/items/${match.params.id}`);
-    await firestore.setListener(`collection/products/${match.params.id}`);
+    //let product =  await firestore.get(`Stores/${match.params.store}/items/${match.params.id}`);
+    //console.log(product)
+    await firestore.setListener(`Stores/${match.params.store}/items`);
   }
 
+/*
   async componentWillUnmount() {
     const { firestore, match } = this.props;
-    await firestore.unsetListener(`collection/products/${match.params.id}`);
-
-  }
+    await firestore.setListener(`Stores/${match.params.store}/items`);
+  }*/
 
   render() {
     const { product, currentStore, store} = this.props;
@@ -78,7 +86,6 @@ class ProductDetailedPage extends Component {
       const endDate = product.discount.endDate.seconds;
       discountActive = startDate < dateNow && dateNow < endDate;
       discount = product.discount.percentage;
-      
     }
 
     let currentCategory = ""
@@ -89,7 +96,7 @@ class ProductDetailedPage extends Component {
     const sortCategoryIndex = categories.map((category, index) =>  { if(index==currentCategoryIndex){ return category.name; } } )
     currentCategory= sortCategoryIndex.sort()[0]
     enableRating = store.enableRating;
-    console.log(JSON.stringify(product, null, 2))
+    //console.log(JSON.stringify(product, null, 2))
     }
 
     if (product){
@@ -162,6 +169,6 @@ class ProductDetailedPage extends Component {
   }
 }
 
-export default compose( withFirestore, connect(mapState, actions), firestoreConnect((currentStore) => query(currentStore)))(ProductDetailedPage);
+//export default compose( withFirestore, connect(mapState, actions), firestoreConnect((currentStore) => query(currentStore)))(ProductDetailedPage);
 
-//export default withFirestore(connect(mapState,actions)(firestoreConnect((currentStore) => query(currentStore))(ProductDetailedPage)));
+export default withFirestore(connect(mapState,actions)(firestoreConnect((currentStore) => query(currentStore))(ProductDetailedPage)));

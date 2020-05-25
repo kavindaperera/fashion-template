@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Grid, Image, GridRow, Button, Icon, Header } from "semantic-ui-react";
-import { firestoreConnect } from "react-redux-firebase";
+import { firestoreConnect , isLoaded, isEmpty } from "react-redux-firebase";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { NavLink,} from "react-router-dom";
 import LoadingComponent from "../../app/layout/LoadingComponent"
 import { Carousel } from "react-responsive-carousel";
 import _ from "lodash";
 import { Helmet } from "react-helmet";
+import NotFound from '../pages/NotFound/NotFound'
+import StoreNotVerified from '../pages/StoreNotVerified/StoreNotVerified'
+
 
 const mapState = (state, ownProps) => ({
   /*store: state.firestore.ordered.store,*/
@@ -29,18 +32,43 @@ const query = ({currentStore}) => {
 }
 
 
+
 class HomePage extends Component  {
+
+  async componentDidMount() {
+    const { firestore, match } = this.props;
+    await firestore.setListener(`Stores/${match.params.store}`);
+  }
+  async componentWillUnmount() {
+    const { firestore, match } = this.props;
+    await firestore.unsetListener(`Stores/${match.params.store}`);
+  }
 
 render (){
   const { loading, history, store, currentStore, } = this.props;
-  
-  if (loading) return <LoadingComponent inverted={true} />;
+
+
+  if (!isLoaded(store) ||  loading) return <LoadingComponent inverted={true} />;
+
+  if(isLoaded(store)) {
+    if (store.verified == false) return <StoreNotVerified />;
+  }
+
+
+ /*var val = store.template.get().then(dataSnapshot => { let template = dataSnapshot.get('title'); return(template); })
+
+  val.then(function(val){
+    var isFashion = val
+    console.log(isFashion=='Fashion Store')
+  })*/
+
 
   return (
     <div className="masthead ">
-      {store && <div>
+      {isLoaded(store) && 
+      <div>
         <Helmet>
-              <title>Home | {store.storeName}</title>
+              <title>Home | {store.storeName}</title>s
             </Helmet>
               <Grid key={store.id} className="main">
                 <Grid.Row>
@@ -97,6 +125,7 @@ render (){
                 <Grid.Row></Grid.Row>
               </Grid></div>
         }
+
     </div>
   );
  }

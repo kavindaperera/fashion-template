@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import ProductListItem from './ProductListItem'
 import { Card } from "semantic-ui-react";
 import { connect } from "react-redux";
+import { compose } from 'redux';
+import { withFirestore } from "react-redux-firebase";
+import { withRouter  } from "react-router-dom";
 
 const mapState = (state, ownProps) => ({
   store: state.firestore.data.selectedStore,
@@ -34,4 +37,4 @@ class ProductList extends Component {
 }
 
 
-export default connect(mapState,actions)(ProductList);
+export default withFirestore(connect(mapState,actions)(ProductList));

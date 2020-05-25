@@ -9,7 +9,7 @@ import HomePage from "../../features/store/HomePage";
 import CartDashboard from '../../features/cart/CartDashboard/CartDashboard'
 import ModalManager from '../../features/modals/ModalManager'
 import Footer from "../../features/footer/Footer";
-import NotFound from '../../features/pages/NotFound'
+import NotFound from '../../features/pages/NotFound/NotFound'
 import TestComponent from '../../features/testarea/TestComponent';
 import OrderDetailedPage from '../../features/orders/OrderDetailed/OrderDetailedPage'
 import { UserIsAuthenticated } from '../../features/auth/authWrapper';
@@ -19,8 +19,6 @@ class App extends Component {
     return (
       <div>
       <ModalManager/>
-
-
         <Switch>
           <Route exact path={`/:store/`} component={HomePage} />
         </Switch>
@@ -37,7 +35,7 @@ class App extends Component {
                 <Route path={`/:store/my-account`} component={UserIsAuthenticated(SettingsDashboard)} />
                 <Route path={`/:store/order-detailed/:id`} component={UserIsAuthenticated(OrderDetailedPage)} />
                 <Route path={`/:store/cart`} component={UserIsAuthenticated(CartDashboard)} />
-                <Route path={`/:store/error`} component={NotFound} />
+                <Route exact path="*" component={NotFound} />
                 </Switch>
               </Grid>
               <Footer/>

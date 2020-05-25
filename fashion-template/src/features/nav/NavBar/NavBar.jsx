@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
+import { firestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
 import {
   Menu,
   Container,
@@ -21,6 +21,8 @@ import _ from "lodash";
 import ChatButton from "../../button/ChatButton";
 import SearchBar from "../../searchbar/SearchBar";
 import { Helmet } from "react-helmet";
+import LoadingComponent from "../../../app/layout/LoadingComponent"
+import StoreNotVerified from '../../pages/StoreNotVerified/StoreNotVerified'
 
 const actions = {
   openModal,
@@ -74,6 +76,12 @@ const fixedMenuStyle = {
 };
 
 class NavBar extends Component {
+
+  async componentDidMount() {
+    const { firestore, match } = this.props;
+    await firestore.setListener(`Stores/${match.params.store}/items`);
+  }
+
   handleSignedIn = () => {
     this.props.openModal("LoginModal", this.props.currentStore);
   };
@@ -96,6 +104,7 @@ class NavBar extends Component {
   stickTopMenu = () => this.setState({ menuFixed: true });
   unStickTopMenu = () => this.setState({ menuFixed: false });
 
+
   render() {
     const {
       auth,
@@ -109,8 +118,18 @@ class NavBar extends Component {
     const authenticated = auth.isLoaded && !auth.isEmpty;
     const { menuFixed } = this.state;
 
+  if (!isLoaded(store) ) return <LoadingComponent inverted={true} />;  
+
+  if(isLoaded(store)) {
+
+    if (store.verified == false) return <StoreNotVerified />;
+
+  }
+
+
     //getting store currency
     if (config && store) {
+
       getCurrency(config, store);
       const currencies = config.currencies;
       const storeCurrency = store.currency;
@@ -123,6 +142,7 @@ class NavBar extends Component {
         }
       });
     }
+
 
     return (
       <div>

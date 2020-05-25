@@ -2,10 +2,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card, Label, Image, Rating, Button } from "semantic-ui-react";
-import { Link } from "react-router-dom";
+import { Link, withRouter  } from "react-router-dom";
+import { compose } from 'redux';
 import PriceTag from "../../pricetag/PriceTag";
 import moment from "moment";
 import { openModal } from "../../modals/modalActions";
+import { withFirestore } from "react-redux-firebase";
 
 const mapState = (state, ownProps) => ({
 
@@ -16,7 +18,7 @@ const actions = {openModal};
 
 class ProductListItem extends Component {
   render() {
-    const { product, currency, enableRating , currentStore, openModal} = this.props;
+    const {history, product, currency, enableRating , currentStore, openModal} = this.props;
 
     let discountActive = false;
     let discount = 0;
@@ -63,6 +65,7 @@ class ProductListItem extends Component {
             <Image
               as={Link}
               to={`product/${product.id}`}
+              //onClick= {() => history.push(`product/${product.id}`)}
               alt="1"
               src={
                 product.photos[0].url ||
@@ -74,6 +77,7 @@ class ProductListItem extends Component {
             <Image
               as={Link}
               to={`product/${product.id}`}
+              //onClick= {() => history.push(`product/${product.id}`)}
               alt="2"
               src={
                 product.photos[1].url ||
@@ -157,4 +161,4 @@ class ProductListItem extends Component {
   }
 }
 
-export default connect(mapState,actions) (ProductListItem);
+export default withFirestore(connect(mapState,actions)(ProductListItem));
