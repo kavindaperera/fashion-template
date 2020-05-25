@@ -34,6 +34,13 @@ const query = ({ currentStore, auth }) => {
 };
 
 class CartDashboard extends Component {
+
+  /*async componentDidUnmount() {
+    const { firestore, match } = this.props;
+    await firestore.setListener(`Stores/${match.params.store}/Items`);
+  }*/
+
+
   render() {
     const { user, symbol, currentStore, cartItems, getCart, store } = this.props;
 

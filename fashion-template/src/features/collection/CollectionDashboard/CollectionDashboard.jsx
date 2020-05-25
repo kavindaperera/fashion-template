@@ -28,12 +28,12 @@ const actions = { openModal };
 
 const query = ({currentStore}) => {
   return [
-    {
+    /*{
       collection:'Stores',
       doc: currentStore,
       subcollections:[{collection: 'Items'}],
       storeAs: 'items',
-    }
+    }*/
   ]
 }
 
@@ -184,4 +184,4 @@ class CollectionDashboard extends Component {
 //export default compose (withFirestore, withRouter,connect(mapState,actions),(firestoreConnect(currentStore => query(currentStore))))(CollectionDashboard);
 
 
-export default connect(mapState,actions)(firestoreConnect((currentStore) => query(currentStore))(CollectionDashboard));
+export default connect(mapState,actions)(firestoreConnect(/*(currentStore) => query(currentStore)*/)(CollectionDashboard));

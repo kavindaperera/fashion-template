@@ -171,4 +171,4 @@ class ProductDetailedPage extends Component {
 
 //export default compose( withFirestore, connect(mapState, actions), firestoreConnect((currentStore) => query(currentStore)))(ProductDetailedPage);
 
-export default withFirestore(connect(mapState,actions)(firestoreConnect((currentStore) => query(currentStore))(ProductDetailedPage)));
+export default withFirestore(connect(mapState,actions)(firestoreConnect(/*(currentStore) => query(currentStore)*/)(ProductDetailedPage)));
