@@ -4,12 +4,6 @@ import { Card } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 
-const mapState = (state, ownProps) => ({
-  store: state.firestore.data.selectedStore,
-  products: state.firestore.ordered.items,
-});
-
-const actions = {};
 
 class ProductList extends Component {
 
@@ -37,4 +31,4 @@ class ProductList extends Component {
 }
 
 
-export default connect(mapState,actions)(ProductList);
+export default (ProductList);

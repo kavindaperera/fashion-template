@@ -155,7 +155,8 @@ class CollectionDashboard extends Component {
 
             {store && availability &&
             <ProductList
-              //products={products}
+              products={products}
+              store = {store}
               sortCategory={category}
               currency = {symbol}
               enableRating={enableRating}
