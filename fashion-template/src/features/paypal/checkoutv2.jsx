@@ -57,8 +57,9 @@ class CheckoutX extends Component {
 
         onSuccess={(details) => { // Congratulation, it came here means everything's fine!
           //console.log(details);
-          details && this.props.placeOrder(cartItems, currentStore, items, details) && console.log("deleting from cart") 
+          details && this.props.placeOrder(cartItems, currentStore, items, details) && console.log("deleting from cart")
           toastr.light('The payment was succeeded!', "Visit Orders page to view progress",toastrOptions)
+          window.location.href(`${currentStore}/my-account/order-history`)
         }}
 
         onCancel={(data) => { // User pressed "cancel" or close Paypal's popup!

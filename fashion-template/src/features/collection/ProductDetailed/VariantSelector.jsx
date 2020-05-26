@@ -24,7 +24,7 @@ class VariantSelector extends Component {
 
     render() {
 
-        const {pristine, submitting, stock, variants} = this.props;
+        const {pristine, submitting, stock, variants, loading} = this.props;
 
         let quantity = [];
 
@@ -58,7 +58,7 @@ class VariantSelector extends Component {
                   })}
                     <Divider/>
                     <Button.Group fluid>
-                    <Button labelPosition='right' icon='bookmark outline'  disabled={pristine || submitting  || !stock } size='large' color='black' content='Add to Bag'/>
+                    <Button labelPosition='right' icon='bookmark outline' loading={loading}  disabled={pristine || submitting  || !stock || loading} size='large' color='black' content='Add to Bag'/>
                     </Button.Group>
                 </Form>
 

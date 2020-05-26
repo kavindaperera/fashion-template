@@ -21,17 +21,18 @@ const mapState = (state,ownProps) => ({
   providerId: state.firebase.auth.isLoaded && state.firebase.auth.providerData[0].providerId,
   user: state.firebase.profile,
   currentStore: ownProps.match.params.store,
+  store: state.firestore.data.selectedStore,
 });
 
-const SettingsDashboard = ({loading, providerId, auth, user, updateProfile,currentStore}) => {
+const SettingsDashboard = ({loading, store, providerId, auth, user, updateProfile,currentStore}) => {
   return (
     <Grid divided='vertically' columns={2}>
     <Grid.Row>
       <Grid.Column width={12} >
         <Switch>
           <Redirect exact from={`/${currentStore}/my-account`} to={`/${currentStore}/my-account/edit-profile`} />
-          <Route path={`/${currentStore}/my-account/edit-profile`} render={() => <BasicPage updateProfile={updateProfile} initialValues={user}/>} />
-          <Route path={`/${currentStore}/my-account/edit-profile-facebook`} render={() => <AccountPage providerId={providerId} />}/>
+          <Route path={`/${currentStore}/my-account/edit-profile`} render={() => <BasicPage updateProfile={updateProfile} initialValues={user} />} />
+          <Route path={`/${currentStore}/my-account/edit-profile-facebook`} render={() => <AccountPage providerId={providerId}   />}/>
           <Route path={`/${currentStore}/my-account/order-history`} render={() => <OrdersDashboard currentStore={currentStore} user={user} />}/>
           <Route path="*" render={() => <NotFound  />}/>
 

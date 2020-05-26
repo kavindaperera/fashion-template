@@ -9,7 +9,7 @@ const SettingsNav = ({currentStore}) => {
         <Menu.Item as={NavLink} to={`/${currentStore}/my-account/order-history`}>Order History</Menu.Item>
         <Menu.Item as={NavLink} to={`/${currentStore}/my-account/edit-profile`}>Basic Details</Menu.Item>
         <Menu.Item as={NavLink} to={`/${currentStore}/my-account/edit-profile-facebook`}>Account Details</Menu.Item>
-        <Menu.Item as={NavLink} to={`/${currentStore}/cart`}>My Bag</Menu.Item>
+        <Menu.Item  href={`/${currentStore}/cart`}>My Bag</Menu.Item>
       </Menu>
     </Grid.Column>
   );

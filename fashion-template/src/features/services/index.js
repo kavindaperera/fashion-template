@@ -65,3 +65,35 @@ export const getItemCount = (items, sortCategory, categories) => {
 
 }
 
+export default function getItemsByCategory(items, categories, selectedCategory) {
+  let itemsOfSelectedCategory = [];
+  let selectedCategoryID; let
+    categoryIcon;
+
+  if (categories) {
+    categories.map(({ name, icon }, key) => {
+      if (name === selectedCategory) {
+        selectedCategoryID = key;
+      }
+      return null;
+    });
+
+    if (items) {
+
+      if (selectedCategory=='all'){
+        itemsOfSelectedCategory = items
+      }
+      Object.keys(items).map((key) => {
+        const item = items[key];
+        const itemCategoryID = item.category;
+        if (itemCategoryID === selectedCategoryID) {
+          itemsOfSelectedCategory.push(item);
+        }
+        return null;
+      });
+
+  }
+  }
+
+  return itemsOfSelectedCategory ;
+}

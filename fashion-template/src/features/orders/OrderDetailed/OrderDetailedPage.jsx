@@ -16,9 +16,11 @@ const mapState = (state, ownProps) => {
   const order = state.firestore.data.order;
   const config = state.firestore.data.config;
   const symbol = state.collection.symbol;
+  const loading = state.async.loading;
 
   return {
     orderId,
+    loading,
     currentStore,
     order,
     config,
@@ -40,7 +42,7 @@ const query = ({ currentStore, orderId }) => {
 
 class OrderDetailedPage extends Component {
   render() {
-    const { orderId, currentStore, order, config ,symbol} = this.props;
+    const { orderId, currentStore, order, config ,symbol, loading,} = this.props;
 
     if(!isLoaded(order)) { return <LoadingComponent inverted={true} />; }
 
@@ -71,7 +73,9 @@ class OrderDetailedPage extends Component {
       orderStates = order[orderId].orderState;
       orderStatesX = order[orderId].orderState;
       const address = order[orderId].shippingAddress;
-      currentOrderState = orderStates.pop();
+      if(orderStates){
+      currentOrderState = orderStates[orderStates.length - 1];
+      }
       name = address.name.full_name;
       address_line_1 = address.address.address_line_1;
       admin_area_1 = address.address.admin_area_1;
@@ -105,7 +109,6 @@ class OrderDetailedPage extends Component {
             {orderStatesX.map((s) => (<div>
               <p>{moment(s['date'].toDate()).format('LLLL')}:  {orderStatesConfig[s['stateId']]}</p></div>
             ))}
-            <p>{moment(currentOrderState.date.toDate()).format('LLLL')}:  {orderStatesConfig[currentOrderState.stateId]}</p>
 
           </Tab.Pane>
         ),

@@ -7,8 +7,8 @@ import {asyncActionStart,asyncActionFinish,asyncActionError} from "../async/asyn
 import { createNewReviewObj } from '../../app/common/util/helpers';
 import {Icon,} from 'semantic-ui-react';
 
-
-export const shareReview = (review, item, currentStore) => {
+/*
+export const oldShareReview = (review, item, currentStore) => {
 
     return async (dispatch, getState, { getFirebase, getFirestore }) => {
         const firestore = firebase.firestore();
@@ -55,10 +55,11 @@ export const shareReview = (review, item, currentStore) => {
                     dispatch(asyncActionFinish())
                 ).catch((error) => {
                     dispatch(asyncActionError())
-                    console.log(error)
+                    console.log(error.name)
                     toastr.error('Already Reviewed', "Visit Item Details to view the review",toastrOptions);
                 })
         } else {
+            dispatch(asyncActionError())
             toastr.error('Error', 'Something When Wrong, Try Again!!');
         }
     }
@@ -90,6 +91,66 @@ export const updateRatings = (rating, item, currentStore) => {
                         .doc(item)
                         .update({ 'rating' : ratingObj})
                  } )
+        }
+    }
+
+}*/
+
+
+
+export const shareReview = (review, item, currentStore) => {
+
+    return async (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firestore = firebase.firestore();
+        const fb = getFirebase();
+        const user = fb.auth().currentUser;
+        const toastrOptions = {
+            timeOut: 6000,
+            icon: (<Icon  circular name='star outline' size='big' />),
+            progressBar: true,
+          }
+
+        if(user!==null && review ){
+            dispatch(asyncActionStart());
+            let reviewObj = createNewReviewObj(user, review)
+
+            let ItemDocRef = firestore.collection('Stores')
+                                .doc(currentStore)
+                                .collection('Items')
+                                .doc(item)
+            await firestore.runTransaction( async (transaction) => {
+                const dataSnapshot = await transaction.get(ItemDocRef)
+                let reviews = dataSnapshot.get('reviews')
+                reviews.forEach( review => {
+                    if (review.buyer == user.uid){
+                        throw new Error ('Already Reviewed')
+                    }
+                    })
+                reviews.push(reviewObj)
+                console.log(reviews)
+
+                let ratingObj  = dataSnapshot.get('rating')
+                ratingObj.ratingCount += 1;
+                ratingObj.totalRating += review.rating;
+
+                await transaction.update(ItemDocRef, { 'reviews' : reviews, 'rating' : ratingObj} )
+
+                toastr.light('Review Shared', 'Thank you for Reviewing', toastrOptions)
+
+                dispatch(asyncActionFinish())
+
+                dispatch(closeModal())
+
+            })
+
+            .catch((error) => {
+                dispatch(asyncActionError())
+                console.log(error)
+                toastr.error("Transaction failed: ", error.message ,toastrOptions);
+            })
+        } else {
+            dispatch(asyncActionError())
+            toastr.error('Error', 'Something When Wrong, Try Again!!');
         }
     }
 

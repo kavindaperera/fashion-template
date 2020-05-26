@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { firestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
+import { compose } from 'redux';
+import { firestoreConnect, isLoaded, withFirestore, } from "react-redux-firebase";
 import {
   Menu,
   Container,
@@ -55,6 +56,10 @@ const query = ({ currentStore }) => {
       collection: "Stores",
       doc: currentStore,
       subcollections: [{ collection: "Items" }],
+      storeAs: "items",
+    },
+    {
+      collection: `/Stores/${currentStore}/Items`,
       storeAs: "items",
     },
   ];
@@ -151,8 +156,8 @@ class NavBar extends Component {
               <ChatButton storeId={currentStore} />
             )}
             <Container
-              as={Link}
-              to={`/${currentStore}/`}
+              //as={Link}
+              href={`/${currentStore}/`}
               style={{ marginTop: "2em" }}
             >
               {store.storeCustomization.logo && <Image
@@ -178,7 +183,7 @@ class NavBar extends Component {
                 style={menuFixed ? fixedMenuStyle : menuStyle}
               >
                 <Container fluid className="nav">
-                  <Menu.Item as={Link} to={`/${currentStore}/`} header>
+                  <Menu.Item  href={`/${currentStore}/`} header>
                   {store.storeCustomization.logo && <Image
                       size="tiny"
                       src={store.storeCustomization.logo}
@@ -230,8 +235,8 @@ class NavBar extends Component {
                     </Menu.Item>
                     <Menu.Item
                       title="My Bag"
-                      as={Link}
-                      to={`/${currentStore}/cart`}
+                      //as={Link}
+                      href={`/${currentStore}/cart`}
                     >
                       <Icon name="shopping bag" size="large" />
                     </Menu.Item>
@@ -265,9 +270,12 @@ class NavBar extends Component {
   }
 }
 
-export default withRouter(
+/*export default withRouter(
   connect(
     mapState,
     actions
   )(firestoreConnect((currentStore) => query(currentStore))(NavBar))
-);
+);*/
+
+
+export default compose(withRouter, withFirestore, connect(mapState,actions), firestoreConnect((currentStore) => query(currentStore) ))(NavBar);

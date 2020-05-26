@@ -86,8 +86,8 @@ render (){
                   {store.categories &&
                     store.categories.map(category => (
                       <Button className='home'
-                      as={NavLink}
-                      to={`/${currentStore}/collection/${category.name}`}
+                      //as={NavLink}
+                      href={`/${currentStore}/collection/${category.name}`}
                       size="large" color="black" key={category.name}>
                         {_.startCase(category.name)}
                       </Button>
@@ -107,7 +107,8 @@ render (){
                   <Button
                     color="black"
                     size="huge"
-                    onClick={() => history.push(`/${currentStore}/collection/all`)}
+                    //onClick={() => history.push(`/${currentStore}/collection/all`)}
+                    href={`/${currentStore}/collection/all`}
                   >
                     Enter Store
                     <Icon name="right arrow" />

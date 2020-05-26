@@ -45,7 +45,7 @@ class ItemDetailedInfo extends Component {
 
   render() {
 
-    const { currentStore, product, discount, productId, addToCart, selectedVariant,  symbol, discountActive, reviews, store  } = this.props;
+    const { currentStore, product, discount, productId, addToCart, selectedVariant,  symbol, discountActive, reviews, store, loading  } = this.props;
 
     const { activeIndex } = this.state
 
@@ -55,7 +55,6 @@ class ItemDetailedInfo extends Component {
     let stock = null;
     let subItemIndex = null;
     let enableInventoryManagement = false;
-    
 
 
     selectedVariant && selectedVariant.values && subItems.map((s,i)=> {
@@ -99,7 +98,7 @@ class ItemDetailedInfo extends Component {
         </Grid.Row>
         <Grid.Row columns={1}>
           <Grid.Column>
-          <VariantSelector stock={stock} variants={variants} product={product} subItemIndex={subItemIndex} displayPrice={displayPrice} currentStore={currentStore}/>
+          <VariantSelector loading={loading} stock={stock} variants={variants} product={product} subItemIndex={subItemIndex} displayPrice={displayPrice} currentStore={currentStore}/>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row >

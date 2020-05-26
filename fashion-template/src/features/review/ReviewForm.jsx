@@ -37,6 +37,8 @@ class ReviewForm extends Component {
 
   render() {
     const { closeModal, handleSubmit, error, invalid, submitting, data } = this.props;
+
+    console.log(data.loading)
     
     return (
       <div>
@@ -59,14 +61,14 @@ class ReviewForm extends Component {
               </Label>
             )}
             <Button
-              disabled={invalid || submitting}
+              disabled={invalid || submitting || data.loading}
+              loading = {data.loading}
               fluid
               size="large"
               color="black"
             >
               Share Review
             </Button>
-          
         </Form>
       </div>
     );

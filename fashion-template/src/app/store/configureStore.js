@@ -11,6 +11,7 @@ const rrfConfig = {
   attachAuthIsReady: true,
   //useFirestoreForProfile: false,
   updateProfileOnLogin: false,
+  //allowMultipleListeners: false
 };
 
 export const configureStore = preloadedState => {

@@ -74,7 +74,7 @@ export default class OrdersListItem extends Component {
                 <Table.Cell width={3}>
                   <Image
                     src={url || "/assets/product_list_image.png"}
-                    rounded
+                    className='order-list-mage'
                     size="small"
                   />
                 </Table.Cell>
@@ -89,7 +89,7 @@ export default class OrdersListItem extends Component {
                     View Item
                   </a>
                 </Table.Cell>
-                <Table.Cell width={6} textAlign="left" verticalAlign="top">
+                <Table.Cell style={{ color: "grey", fontFamily: "Lato" }} width={6} textAlign="left" verticalAlign="top">
                   {symbol}
                   {price}x{qty}
                 </Table.Cell>

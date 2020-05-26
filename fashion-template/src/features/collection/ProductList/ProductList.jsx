@@ -8,11 +8,12 @@ import { connect } from "react-redux";
 class ProductList extends Component {
 
   render() {
-    const { products, sortCategory, store, currency, enableRating, currentStore } = this.props;
+    const { products, allproducts, sortCategory, store, currency, enableRating, currentStore } = this.props;
     //Function to sort by Category Index
     const categories = store.categories;
     const sortCategoryIndex = categories.map((category, index) =>  { if(category.name==sortCategory){ return index; } } )
     const sortByIndex = sortCategoryIndex.sort()[0]
+
 
     return (
       <div>

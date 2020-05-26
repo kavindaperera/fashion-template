@@ -11,6 +11,7 @@ import moment from 'moment';
 import { Helmet } from "react-helmet";
 import _ from "lodash";
 import { openModal } from "../../modals/modalActions";
+import  getItemsByCategory  from '../../services/index'
 
 
 const mapState = (state, ownProps) => ({
@@ -44,7 +45,7 @@ class CollectionDashboard extends Component {
     this.state = {
       products: this.props.products,
       currentPage: 1,
-      postsPerPage: 9,
+      postsPerPage: 3,
       loading: false,
     };
   }
@@ -105,34 +106,40 @@ class CollectionDashboard extends Component {
   };
 
 
-
+  UNSAFE_componentWillReceiveProps(){
+    this.setState({ postsPerPage:  3 });
+  }
   render() {
     const { store, products, filteredProducts, currentStore, category, symbol} = this.props;
     const { currentPage, postsPerPage} = this.state;
+     
 
     let currentProducts=[]
-
-    if (isLoaded(products) ){
-    const indexOfLastProduct  =  currentPage * postsPerPage
-    const indexOfFirstProduct = indexOfLastProduct - postsPerPage
-    currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct)
-
-    console.log(currentProducts)
-    }
-
-    const seeMore = () => {
-      this.setState({ postsPerPage: postsPerPage * 2 });
-
-      console.log(currentPage)
-    }
-
+    let categories = [];
 
     let enableRating = false;
     let availability = true;
 
     if (store){
       enableRating = store.enableRating;
+      categories = store.categories;
     }
+
+
+    const sortedProducts = getItemsByCategory(products, categories, category);
+
+    if (isLoaded(products) ){
+    const indexOfLastProduct  =  currentPage * postsPerPage
+    const indexOfFirstProduct = indexOfLastProduct - postsPerPage
+    currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct)
+
+    //console.log(currentProducts)
+    }
+
+    const seeMore = () => {
+      this.setState({ postsPerPage: postsPerPage + 3 });
+    }
+
 
     if (store && (store.categories) ){
 
@@ -156,7 +163,6 @@ class CollectionDashboard extends Component {
     if (!isLoaded(products) || isEmpty(products) || !availability) return <LoadingComponent inverted={true} />;
 
     //console.log('xx',products)
-
 
     return (<div>
 
@@ -183,6 +189,7 @@ class CollectionDashboard extends Component {
 
             {store && availability &&
             <ProductList
+              allproducts = {products}
               products={currentProducts}
               store = {store}
               sortCategory={category}

@@ -17,6 +17,7 @@ function StockTag({ stock, selectedVariant, enableInventoryManagement }) {
       </div>
     ): ("")
     }
+
     </div>
   );
 }

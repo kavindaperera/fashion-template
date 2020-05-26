@@ -35,8 +35,8 @@ class SideMenu extends Component {
           name= "All"
           active={activeItem === {sortCategory}}
           onClick={this.handleItemClick}
-          as={NavLink}
-          to={`/${this.props.currentStore}/collection/all`}
+          //as={NavLink}
+          href={`/${this.props.currentStore}/collection/all`}
         />
         {store &&
          (store.categories && 

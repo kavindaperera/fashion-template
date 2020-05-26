@@ -171,6 +171,20 @@ body {
 }
 
 
+/* cart images*/
+
+.ui.medium.image.cartImg{
+  object-fit: cover !important;
+  height: 400px !important
+}
+
+
+/*order list image */
+
+.ui.small.image.order-list-mage{
+  object-fit: cover !important;
+  height: 220px !important
+}
 
 /*Collections Page*/
 
@@ -237,6 +251,7 @@ body {
   position: relative;
   object-fit: cover !important;
   height: 660px !important;
+  
 }
 
 .ui.image.visible.content img{
@@ -342,6 +357,8 @@ body {
   width:1000px;
 }
 
+/*collection see mmore*/
+
 
 .see-more{
   font-family: 'Montserrat', sans-serif;
@@ -362,6 +379,55 @@ body {
   color: #008080;
 }
 
+/*Quality slider*/
+
+
+.left.aligned.top.aligned.three.wide.qty-slider{
+  /*background-color: blueviolet;*/
+  /*width: 400px !important;*/
+}
+/*
+.ui.mini.icon.disabled.button.sub{
+  background-color: white;
+  height: 30px;
+  width: 30px;
+
+}/*/
+
+.ui.mini.icon.button.sub{
+  background-color: white;
+  background-color: 0px 0px 0px 1px transparent inset;
+  height: 30px;
+  width: 30px;
+  border-radius: 0;
+  border: 1px solid rgba(0, 0, 0, 0.418);
+
+}
+
+.ui.medium.basic.label.qty{
+  background-color: white;
+  height: 30px;
+  width: 30px;
+  text-align: center !important;
+  font-family: Lato;
+  border-radius: 0;
+  border: 1px solid rgba(0, 0, 0, 0.418);
+
+}
+
+.ui.mini.icon.button.add{
+  background-color: white;
+  background-color: 0px 0px 0px 1px transparent inset;
+  height: 30px;
+  width: 30px;
+  border-radius: 0;
+  border: 1px solid rgba(0, 0, 0, 0.418);
+
+}
+
+
+
+/*tooltips*/
 
 [data-title]:hover:after {
   opacity: 1;

@@ -20,6 +20,7 @@ const mapState = (state, ownProps) => {
   const currentStore = ownProps.match.params.store;
   const store = state.firestore.data.selectedStore;
   const config = state.firestore.data.config;
+  const loading = state.async.loading;
 
   let product = {};
 
@@ -36,6 +37,7 @@ const mapState = (state, ownProps) => {
     product,
     products,
     currentStore,
+    loading,
     store,
     config,
   };
@@ -70,7 +72,7 @@ class ProductDetailedPage extends Component {
   }*/
 
   render() {
-    const { product, currentStore, store} = this.props;
+    const { product, currentStore, store, loading} = this.props;
     let discountActive = false;
     let discount = 0;
     let reviews = null;
@@ -134,6 +136,7 @@ class ProductDetailedPage extends Component {
                 discountActive={discountActive}
                 discount={discount}
                 reviews={reviews}
+                loading={loading}
               />
               {enableRating && <ProductComments reviews={reviews}/>}
               </div>

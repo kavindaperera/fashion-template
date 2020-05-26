@@ -35,19 +35,21 @@ const query = ({ currentStore, auth }) => {
 
 class CartDashboard extends Component {
 
-  /*async componentDidUnmount() {
+  /*async componentWillMount() {
     const { firestore, match } = this.props;
-    await firestore.setListener(`Stores/${match.params.store}/Items`);
+    await firestore.setListener(`/Stores/${match.params.store}/Buyers/${this.props.auth.uid}`);
+    //this.props.firebase.watchEvent('value', `/Stores/${match.params.store}/Buyers/${this.props.auth.uid}`)
   }*/
 
-
   render() {
-    const { user, symbol, currentStore, cartItems, getCart, store } = this.props;
+    const { user, symbol, currentStore, cartItems, getCart, store, loading } = this.props;
 
 
     if (user) {
       getCart(user);
     }
+
+    
 
     if (!cartItems) return <LoadingComponent inverted={true} />;
 
@@ -56,7 +58,7 @@ class CartDashboard extends Component {
             {store && <Helmet>
               <title>My Bag | {store.storeName}</title>
             </Helmet>}
-      <Grid  divided='vertically' columns={2}>
+      <Grid  divided='vertically' stackable columns={2}>
       <Grid.Row><Header as="h3">My Bag</Header></Grid.Row>
       <Grid.Row>
           <Grid.Column  width={11}>

@@ -81,18 +81,20 @@ class CartListItem extends Component {
         <Table.Cell width={3}>
           {selectedItem.photos[0] && (
             <Image
+            className='cartImg'
               src={
                 selectedItem.photos[0].url || "/assets/product_list_image.png"
               }
-              rounded
+          
               size="medium"
             />
           )}
 
           {!selectedItem.photos[0] && (
             <Image
+
               src={"/assets/product_list_image.png"}
-              rounded
+              className='cartImg'
               size="medium"
             />
           )}
@@ -116,12 +118,12 @@ class CartListItem extends Component {
             Edit
           </a>
         </Table.Cell>
-        <Table.Cell width={3} textAlign="left" verticalAlign="top">
-              <Button size="mini"  disabled={item.quantity==1} icon='minus' onClick={()=>this.handleDecrementQty(index, currentStore)} />
-              <Label basic size="medium" >{item.quantity}</Label>
+        <Table.Cell className='qty-slider' width={3} textAlign="left" verticalAlign="top">
+              <Button size="mini" className='sub'  disabled={item.quantity==1} icon='minus' onClick={()=>this.handleDecrementQty(index, currentStore)} />
+              <Label className='qty' basic size="medium" >{item.quantity}</Label>
 
-              { enableInventoryManagement && <Button size="mini" disabled={stock==item.quantity  } icon='plus' onClick={()=>this.handleIncrementQty(index, currentStore)} />}
-              {!enableInventoryManagement && <Button size="mini"  icon='plus' onClick={()=>this.handleIncrementQty(index, currentStore)} />}
+              { enableInventoryManagement && <Button className='add'   size="mini" disabled={stock==item.quantity  } icon='plus' onClick={()=>this.handleIncrementQty(index, currentStore)} />}
+              {!enableInventoryManagement && <Button className='add'  size="mini"  icon='plus' onClick={()=>this.handleIncrementQty(index, currentStore)} />}
 
               {selectedItem.deleted && <Message size='mini' icon="warning" error header="This item is no longer available"  content="remove the item to continue checkout"/>}
 

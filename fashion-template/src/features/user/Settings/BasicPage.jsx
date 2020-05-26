@@ -3,12 +3,20 @@ import {Segment, Form, Header, Divider, Button} from 'semantic-ui-react';
 import {Field, reduxForm} from 'redux-form';
 import TextInput from "../../../app/common/form/TextInput";
 import RadioInput from "../../../app/common/form/RadioInput";
+import { Helmet } from "react-helmet";
+import { connect } from 'react-redux';
+
 
 class BasicPage extends Component {
 
     render() {
-        const {pristine, submitting, handleSubmit, updateProfile} = this.props;
+        const {pristine, submitting, handleSubmit, updateProfile,} = this.props;
         return (
+            <div>
+            {
+            <Helmet>
+              <title>Basic Details </title>
+            </Helmet>}
             <Segment>
                 <Header dividing size='large' content='Basic Details' />
                 <Form onSubmit={handleSubmit(updateProfile)}>
@@ -46,9 +54,9 @@ class BasicPage extends Component {
                     <Divider/>
                     <Button disabled={pristine || submitting} size='large' color='black' content='Update Profile'/>
                 </Form>
-            </Segment>
+            </Segment></div>
         );
     }
 }
 
-export default reduxForm({form: 'userProfile', enableReinitialize: true, destroyOnUnmount: false})(BasicPage);
+export default (reduxForm({form: 'userProfile', enableReinitialize: true, destroyOnUnmount: false})(BasicPage));

@@ -17,6 +17,7 @@ export const addToCart = (item,subItem,price,currentStore) =>{
       progressBar: true,
     }
     if(user!==null){
+      dispatch(asyncActionStart());
       let newCartItem = createNewCartItem (item,subItem,price);
       //console.log(newCartItem);
         return firestore 
@@ -44,10 +45,14 @@ export const addToCart = (item,subItem,price,currentStore) =>{
             .doc(user.uid)
             .update({ 'cart' : cart})
             .then(
-              toastr.success('Added To Bag', 'Don’t miss out: Items in your bag are not reserved until payment is complete', toastrOptions))
+              toastr.success('Added To Bag', 'Don’t miss out: Items in your bag are not reserved until payment is complete', toastrOptions)).then(
+                dispatch(asyncActionFinish())
+                
+                )
         }
         ).catch((error) => {
        console.log({error})
+       dispatch(asyncActionError())
        if(error.name=='FirebaseError'){toastr.error(error.name,'Please Login Again!');}
        else{toastr.light(error.message,'Increase the quantity instead!',toastrOptions);}
      })
@@ -59,8 +64,10 @@ export const addToCart = (item,subItem,price,currentStore) =>{
 export const placeOrder = (cart, currentStore, items, details) => {
   return async (dispatch, getState, {getFirebase, getFirestore}) => {
     const firestore = getFirestore();
+    const fs = firebase.firestore();
     const fb = getFirebase();
     const user = fb.auth().currentUser;
+    const batch = fs.batch();
     let orderItems= []
     //let NewOrderItem = createNewCartItem (cartItem, item, subItem);
     if (user!==null && items && details){
@@ -77,7 +84,26 @@ export const placeOrder = (cart, currentStore, items, details) => {
         //dispatch(addToPurchases(user.uid, cartItem, selectedSubItem ,currentStore))
         //dispatch(removeFromCart(cartItem, currentStore))
       })
-      return firestore.set({
+
+      const order = { id: orderId,
+        buyer: user.uid,
+        orderItems: orderItems,
+        date: firestore.Timestamp.fromDate(new Date()),
+        orderState: [{date: firestore.Timestamp.fromDate(new Date()) , stateId: 0}],
+        shippingAddress: address,
+        totalPrice: amount
+      }
+
+
+      const OrderDocRef = fs
+        .collection('Stores')
+        .doc(currentStore)
+        .collection('Orders')
+        .doc(orderId);
+
+      batch.set(OrderDocRef, order);
+
+      /*return firestore.set({
         collection:'Stores',
         doc:currentStore,
         subcollections:[{collection:'Orders', doc:orderId}]
@@ -89,26 +115,80 @@ export const placeOrder = (cart, currentStore, items, details) => {
         orderState: [{date: firestore.Timestamp.fromDate(new Date()) , stateId: 0}],
         shippingAddress: address,
         totalPrice: amount
-      })
-      .then( () =>
+      })*/
+
       cart.forEach((cartItem) => {
         let subItemId = cartItem.subItem;
         let selectedItem = items.filter((product) => product.id === cartItem.item)[0];
         let selectedSubItem = selectedItem.subItems[subItemId];
-        dispatch(addToPurchases(user.uid, cartItem, selectedSubItem ,currentStore))
-        dispatch(removeFromCart(cartItem, currentStore))
-      })
-      ).then(
+        //dispatch(addToPurchases(user.uid, cartItem, selectedSubItem ,currentStore))
+        //dispatch(removeFromCart(cartItem, currentStore))
+        const purchase = {
+          buyer: user.uid,
+          date: firestore.Timestamp.fromDate(new Date()),
+          noOfItems: cartItem.quantity,
+          subItem: cartItem.subItem,
+          unitPrice: selectedSubItem.price
+        }
+
+        const PurchaseDocRef = fs
+          .collection('Stores')
+          .doc(currentStore)
+          .collection('Items')
+          .doc(cartItem.item)
+          .collection('Purchases')
+          .doc();
+
+        batch.set(PurchaseDocRef, purchase);
+      });
+
+        const BuyerDocRef = fs
+          .collection('Stores')
+          .doc(currentStore)
+          .collection('Buyers')
+          .doc(user.uid);
+
+        batch.update(BuyerDocRef, { cart: [] });
+
+        batch.commit()
+
+      .then(
         dispatch(asyncActionFinish())
+
+
       ).catch((error) => {
+        dispatch(asyncActionError())
         console.log(error)
         toastr.light("Error");
       })
     }
   }
 }
+/*
+export const addToPurchases = (userId, cartItem, subItem, currentStore) => {
+  return async ( { getFirebase, getFirestore}) => {
+    const firestore = firebase.firestore();
+    const fs = getFirestore();
+    const batch = firestore.batch();
+    const purchase = {
+      buyer: userId,
+      date: fs.Timestamp.fromDate(new Date()),
+      noOfItems: cartItem.quantity,
+      subItem: cartItem.subItem,
+      unitPrice: subItem.price
+    }
+    const PurchaseDocRef = firestore
+      .collection('Stores')
+      .doc(currentStore)
+      .collection('Items')
+      .doc(cartItem.item)
+      .collection('Purchases')
+      .doc();
 
-//TODO
+    batch.set(PurchaseDocRef, purchase);
+  }
+}
+*/
 export const decrementStock = (cart, currentStore, items, ) => {
   return async (dispatch, getState, {getFirebase, getFirestore}) => {
     console.log('reserving running')
@@ -183,26 +263,6 @@ export const incrementStock = (cart, currentStore, items, ) => {
 
 
 
-export const addToPurchases = (userId, cartItem, subItem, currentStore) => {
-  return async (gistpacth, getState, { getFirebase, getFirestore}) => {
-    const firestore = firebase.firestore();
-    const fs = getFirestore();
-    return firestore 
-      .collection('Stores')
-      .doc(currentStore)
-      .collection('Items')
-      .doc(cartItem.item)
-      .collection('Purchases')
-      .doc()
-      .set({
-        buyer: userId,
-        date: fs.Timestamp.fromDate(new Date()),
-        noOfItems: cartItem.quantity,
-        subItem: cartItem.subItem,
-        unitPrice: subItem.price
-      })
-  }
-}
 
 export const removeFromCart = (item,currentStore) =>{
   return async (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -242,7 +302,7 @@ export const incrementQty = (index, currentStore) => {
     const fb = getFirebase();
     const user = fb.auth().currentUser;
     const toastrOptions = {
-      timeOut: 1000,
+      timeOut: 2000,
       icon: (<Icon  circular name='shopping bag' size='big' />),
       progressBar: true,
     }
@@ -290,7 +350,7 @@ export const decrementQty = (index, currentStore) => {
     const fb = getFirebase();
     const user = fb.auth().currentUser;
     const toastrOptions = {
-      timeOut: 4000,
+      timeOut: 2000,
       icon: (<Icon  circular name='shopping bag' size='big' />),
       progressBar: true,
     }
@@ -334,7 +394,9 @@ export const decrementQty = (index, currentStore) => {
 
 export const getCart = (user) =>
   async (dispatch, getState) => {
+    //dispatch(asyncActionStart());
     const cart = user.cart;
     dispatch({type: GET_CART, payload: {cart}})
+    //dispatch(asyncActionFinish());
     //console.log(cart)
 }

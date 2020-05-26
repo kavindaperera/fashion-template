@@ -6,6 +6,7 @@ import { openModal } from '../../modals/modalActions';
 
 const mapState = (state, ownProps) => ({
   items: state.firestore.ordered.items,
+  loading: state.async.loading,
 });
 
 const query = ({ currentStore }) => {
@@ -25,7 +26,7 @@ const actions = {
 
 class OrderDetailedItemList extends Component {
   render() {
-    const { items, openModal,  currentStore, order } = this.props;
+    const { items, openModal, currentStore, order, loading } = this.props;
 
     return (
       <Card.Group className='group-orderdetail' itemsPerRow={2}>
@@ -50,7 +51,7 @@ class OrderDetailedItemList extends Component {
                 </Card.Content>
 
                 <Card.Content textAlign="center">
-                  <Button onClick={() => openModal('ReviewModal', {currentStore: currentStore, item: item.item})} color="teal">Leave Review</Button>
+                  <Button onClick={() => openModal('ReviewModal', {currentStore: currentStore, item: item.item, loading: loading})} color="teal">Leave Review</Button>
                 </Card.Content>
               </Card>
             );
