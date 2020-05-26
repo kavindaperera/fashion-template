@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
-import { Grid, Pagination , Select } from "semantic-ui-react";
+import { Grid, Pagination , Select, Button} from "semantic-ui-react";
 import ProductList from "../ProductList/ProductList";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import SideMenu from '../../slideMenu/SlideMenu/SideMenu'
@@ -39,8 +39,15 @@ const query = ({currentStore}) => {
 
 
 class CollectionDashboard extends Component {
-
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: this.props.products,
+      currentPage: 1,
+      postsPerPage: 9,
+      loading: false,
+    };
+  }
 
 
   state = { };
@@ -51,6 +58,9 @@ class CollectionDashboard extends Component {
     this.setState({ sort: e });
     this.listProducts();
   };
+
+  onChangePage = (event, data) => {
+  }
 
 
   checkDiscountStatus = (product) => {
@@ -98,6 +108,24 @@ class CollectionDashboard extends Component {
 
   render() {
     const { store, products, filteredProducts, currentStore, category, symbol} = this.props;
+    const { currentPage, postsPerPage} = this.state;
+
+    let currentProducts=[]
+
+    if (isLoaded(products) ){
+    const indexOfLastProduct  =  currentPage * postsPerPage
+    const indexOfFirstProduct = indexOfLastProduct - postsPerPage
+    currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct)
+
+    console.log(currentProducts)
+    }
+
+    const seeMore = () => {
+      this.setState({ postsPerPage: postsPerPage * 2 });
+
+      console.log(currentPage)
+    }
+
 
     let enableRating = false;
     let availability = true;
@@ -127,7 +155,7 @@ class CollectionDashboard extends Component {
 
     if (!isLoaded(products) || isEmpty(products) || !availability) return <LoadingComponent inverted={true} />;
 
-    console.log('xx',products)
+    //console.log('xx',products)
 
 
     return (<div>
@@ -155,7 +183,7 @@ class CollectionDashboard extends Component {
 
             {store && availability &&
             <ProductList
-              products={products}
+              products={currentProducts}
               store = {store}
               sortCategory={category}
               currency = {symbol}
@@ -164,14 +192,12 @@ class CollectionDashboard extends Component {
             /> }
           </Grid.Column>
          <Grid.Row>
-            <Pagination
-              defaultActivePage={1}
-              firstItem={null}
-              lastItem={null}
-              pointing
-              secondary
+            {/*<Pagination
               totalPages={3}
-            />
+              activePage={this.state._page}
+              onPageChange={this.onChangePage}
+            />*/}
+            <a className='see-more' onClick={seeMore}>SEE MORE</a>
           </Grid.Row>
           <Grid.Row></Grid.Row>
         </Grid></div>
@@ -181,7 +207,7 @@ class CollectionDashboard extends Component {
 }
 
 
-//export default compose (withFirestore, withRouter,connect(mapState,actions),(firestoreConnect(currentStore => query(currentStore))))(CollectionDashboard);
 
+//export default connect(mapState,actions)(firestoreConnect(/*(currentStore) => query(currentStore)*/)(CollectionDashboard));
 
-export default connect(mapState,actions)(firestoreConnect(/*(currentStore) => query(currentStore)*/)(CollectionDashboard));
+export default connect(mapState,actions)(CollectionDashboard);

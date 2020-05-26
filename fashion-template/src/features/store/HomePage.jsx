@@ -35,15 +35,11 @@ const query = ({currentStore}) => {
 
 class HomePage extends Component  {
 
-  async componentDidMount() {
+  /*async componentDidMount() {
     const { firestore, match } = this.props;
     await firestore.setListener(`Stores/${match.params.store}`);
-  }
+  }*/
 
-  async componentWillUnmount() {
-    const { firestore, match } = this.props;
-    await firestore.setListener(`Stores/${match.params.store}`);
-  }
 
 render (){
   const { loading, history, store, currentStore, } = this.props;

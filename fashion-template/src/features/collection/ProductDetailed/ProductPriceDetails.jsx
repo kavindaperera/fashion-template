@@ -129,4 +129,4 @@ class ItemDetailedInfo extends Component {
   );}
 };
 
-export default connect(mapState, actions)(firestoreConnect()(ItemDetailedInfo));
+export default connect(mapState, actions)((ItemDetailedInfo));
