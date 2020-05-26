@@ -62,18 +62,14 @@ class ProductListItem extends Component {
             >
               Quick View
             </Button>}
-            <a className="visible content">
+            <a className="visible content" onClick= {() => history.push(`product/${product.id}`)}>
             <LazyImage 
-              //onClick= {() => history.push(`product/${product.id}`)}
               alt="1"
               src={product.photos[0].url || "/assets/product_list_image.png"}
               thumb={ product.photos[0].thumbnail || "/assets/product_list_image.png" }
             ></LazyImage></a>
-            <a className="hidden content">
+            <a className="hidden content" onClick= {() => history.push(`product/${product.id}`)}>
             <LazyImage
-              as={Link}
-              to={`product/${product.id}`}
-              //onClick= {() => history.push(`product/${product.id}`)}
               alt="2"
               src={product.photos[1].url || "/assets/product_list_image.png"}
               thumb={ product.photos[1].thumbnail || "/assets/product_list_image.png" }
@@ -91,20 +87,14 @@ class ProductListItem extends Component {
             >
               Quick View
             </Button>}
-            <a className="visible content" >
+            <a className="visible content" onClick= {() => history.push(`product/${product.id}`)}>
             <LazyImage
-              as={Link}
-              to={`product/${product.id}`}
-              //onClick= {() => history.push(`product/${product.id}`)}
               alt="1"
               src={product.photos[0].url || "/assets/product_list_image.png"}
               thumb={ product.photos[0].thumbnail || "/assets/product_list_image.png" }
             ></LazyImage></a>
-            <a className="hidden content">
+            <a className="hidden content" onClick= {() => history.push(`product/${product.id}`)}>
             <LazyImage
-              as={Link}
-              to={`product/${product.id}`}
-              //onClick= {() => history.push(`product/${product.id}`)}
               alt="2"
               src={product.photos[0].url || "/assets/product_list_image.png"}
               thumb={ product.photos[0].thumbnail || "/assets/product_list_image.png" }
@@ -115,20 +105,15 @@ class ProductListItem extends Component {
         {/*if no product images are available*/}
         {!product.photos[0] && !product.photos[1] && (
           <div className="ui slide masked reveal image">
-          <a className="visible content">x
+          <a className="visible content" onClick= {() => history.push(`product/${product.id}`)}>x
             <LazyImage
-              as={Link}
-              to={`product/${product.id}`}
-              //onClick= {() => history.push(`product/${product.id}`)}
+
               alt="1"
               src={"/assets/product_list_image.png"}
               thumb={"/assets/product_list_image.png" }
             ></LazyImage></a>
-            <a className="hidden content">
+            <a className="hidden content" onClick= {() => history.push(`product/${product.id}`)}>
             <LazyImage
-              as={Link}
-              to={`product/${product.id}`}
-              //onClick= {() => history.push(`product/${product.id}`)}
               alt="2"
               src={ "/assets/product_list_image.png"}
               thumb={"/assets/product_list_image.png" }
@@ -139,7 +124,6 @@ class ProductListItem extends Component {
         <div className="content" >
           <span className="description">{product.name}</span>
           <div className="meta">
-          <a className='see-more' href={`product/${product.id}`}>VIEW</a>
             <PriceTag
               currency={currency}
               price={product.basePrice}
@@ -161,4 +145,4 @@ class ProductListItem extends Component {
   }
 }
 
-export default connect(mapState,actions)(ProductListItem);
+export default withRouter(connect(mapState,actions)(ProductListItem));
