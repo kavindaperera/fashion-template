@@ -3,6 +3,7 @@ import {
   Image,
   Grid,
 } from "semantic-ui-react";
+import LazyImage from "../../lazyImage/LazyImage";
 //import { Carousel } from "react-responsive-carousel";
 
 
@@ -19,6 +20,7 @@ const ProductDetailedPhotoSlide = ({ product }) => {
                     </Carousel>*/}
                     {product.photos &&
             product.photos.map((photo,i) => (
+              /*<LazyImage key={i} style={{marginBottom:'3rem'}} fluid src={photo.url} thumb={photo.thumbnail}/>*/
               <Image key={i} style={{marginBottom:'3rem'}} fluid src={photo.url} />
             ))}
         </Grid.Column>

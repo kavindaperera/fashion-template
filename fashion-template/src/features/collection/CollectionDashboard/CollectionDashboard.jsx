@@ -45,7 +45,7 @@ class CollectionDashboard extends Component {
     this.state = {
       products: this.props.products,
       currentPage: 1,
-      postsPerPage: 3,
+      postsPerPage: 3,        //<--- TODO change this after adding more items
       loading: false,
     };
   }
@@ -107,7 +107,7 @@ class CollectionDashboard extends Component {
 
 
   UNSAFE_componentWillReceiveProps(){
-    this.setState({ postsPerPage:  3 });
+    this.setState({ postsPerPage:  3 }); //<--- TODO change this after adding more items
   }
   render() {
     const { store, products, filteredProducts, currentStore, category, symbol} = this.props;
