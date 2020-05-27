@@ -8,9 +8,12 @@ import "../NotFound/NotFound.css";
 
 class StoreNotVerified extends Component {
   render() {
-    console.log('404')
+    //console.log('404')
     return (
       <body id="error">
+      <Helmet>
+              <title>Store Not Verified | Coming Soon</title>
+            </Helmet>
         <div id="notfound">
           <div class="notfound">
             <div class="notfound-404">

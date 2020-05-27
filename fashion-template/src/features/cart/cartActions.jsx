@@ -47,13 +47,12 @@ export const addToCart = (item,subItem,price,currentStore) =>{
             .then(
               toastr.success('Added To Bag', 'Don’t miss out: Items in your bag are not reserved until payment is complete', toastrOptions)).then(
                 dispatch(asyncActionFinish())
-                
                 )
         }
         ).catch((error) => {
        console.log({error})
        dispatch(asyncActionError())
-       if(error.name=='FirebaseError'){toastr.error(error.name,'Please Login Again!');}
+       if(error.name=='FirebaseError'){toastr.error('Server Error','Please Login Again!');}
        else{toastr.light(error.message,'Increase the quantity instead!',toastrOptions);}
      })
   }else{

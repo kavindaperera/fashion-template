@@ -149,9 +149,9 @@ class NavBar extends Component {
       <div>
         {store && (
           <div>
-            <Helmet>
+            {/*<Helmet>
               <title>{store.storeName}</title>
-            </Helmet>
+            </Helmet>*/}
             {store && store.enableChatbot && (
               <ChatButton storeId={currentStore} />
             )}
@@ -222,6 +222,11 @@ class NavBar extends Component {
                           ))}
                       </Dropdown.Menu>
                     </Dropdown>
+                    <Menu.Item
+                      name="LookBook"
+                      as={NavLink}
+                      to={`/${currentStore}/lookbook`}
+                    ></Menu.Item>
                   </Menu.Menu>
                   <Menu.Menu position="right">
                     <Menu.Item

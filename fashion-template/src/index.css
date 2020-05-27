@@ -203,8 +203,15 @@ body {
 }
 
 /* cart images*/
-
-.ui.medium.image.cartImg{
+/*
+.three.wide.cartImg-Cell{
+  position: relative;
+  object-fit: cover !important;
+  width: 200px !important;
+  height: 400px !important
+}
+*/
+.cartImg {
   object-fit: cover !important;
   height: 400px !important
 }
@@ -318,6 +325,10 @@ body {
   }
 
 }
+
+
+
+
 
 
 /* paypal-button */

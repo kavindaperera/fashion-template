@@ -12,7 +12,7 @@ import moment from "moment";
 import { NavLink, Link } from "react-router-dom";
 import _ from "lodash";
 import ProductComments from "./ProductComments";
-import ProductNotFound  from '../../pages/ProductNotFound'
+import ProductNotFound  from '../../pages/ProductNotFound/ProductNotFound'
 import { Helmet } from "react-helmet";
 
 const mapState = (state, ownProps) => {

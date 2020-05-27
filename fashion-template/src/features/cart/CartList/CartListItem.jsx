@@ -5,16 +5,15 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { removeFromCart, incrementQty, decrementQty } from "../cartActions";
 import PriceTagCart from "../../pricetag/PriceTagCart";
 import moment from "moment";
+import LazyImage from "../../lazyImage/LazyImage";
 
 const actions = {
   removeFromCart,
   incrementQty,
-  decrementQty
+  decrementQty,
 };
 
 class CartListItem extends Component {
-
-
   handleItemDelete = (item, currentStore) => async () => {
     this.props.removeFromCart(item, currentStore);
   };
@@ -34,11 +33,10 @@ class CartListItem extends Component {
       mainItems,
       currentStore,
       index,
-      enableInventoryManagement
+      enableInventoryManagement,
     } = this.props;
 
-    console.log(enableInventoryManagement)
-
+    console.log(enableInventoryManagement);
 
     let subItemId = null;
     let selectedItem = null;
@@ -54,8 +52,6 @@ class CartListItem extends Component {
       selectedSubItem = selectedItem.subItems[subItemId];
       stock = selectedSubItem.stock;
     }
-
-
 
     let quantity = [];
 
@@ -73,33 +69,37 @@ class CartListItem extends Component {
       discount = selectedItem.discount.percentage;
     }
 
-    if (!selectedItem || !selectedSubItem ){
-      return <LoadingComponent inverted={true} />;}
-
+    if (!selectedItem || !selectedSubItem) {
+      return <LoadingComponent inverted={true} />;
+    }
     return (
       <Table.Row>
-        <Table.Cell width={3}>
+        <Table.Cell className="cartImg-Cell" width={3}>
           {selectedItem.photos[0] && (
             <Image
-            className='cartImg'
               src={
                 selectedItem.photos[0].url || "/assets/product_list_image.png"
               }
-          
+              className="cartImg"
+              
               size="medium"
             />
           )}
 
           {!selectedItem.photos[0] && (
             <Image
-
               src={"/assets/product_list_image.png"}
-              className='cartImg'
+              className="cartImg"
               size="medium"
             />
           )}
         </Table.Cell>
-        <Table.Cell width={3} textAlign="left" verticalAlign="top"  title={selectedItem.id}>
+        <Table.Cell
+          width={3}
+          textAlign="left"
+          verticalAlign="top"
+          title={selectedItem.id}
+        >
           {selectedItem.name}
         </Table.Cell>
         <Table.Cell width={3} textAlign="left" verticalAlign="top">
@@ -118,20 +118,84 @@ class CartListItem extends Component {
             Edit
           </a>
         </Table.Cell>
-        <Table.Cell className='qty-slider' width={3} textAlign="left" verticalAlign="top">
-              <Button size="mini" className='sub'  disabled={item.quantity==1} icon='minus' onClick={()=>this.handleDecrementQty(index, currentStore)} />
-              <Label className='qty' basic size="medium" >{item.quantity}</Label>
+        <Table.Cell
+          className="qty-slider"
+          width={3}
+          textAlign="left"
+          verticalAlign="top"
+        >
+          <Button
+            size="mini"
+            className="sub"
+            disabled={item.quantity == 1}
+            icon="minus"
+            onClick={() => this.handleDecrementQty(index, currentStore)}
+          />
+          <Label className="qty" basic size="medium">
+            {item.quantity}
+          </Label>
 
-              { enableInventoryManagement && <Button className='add'   size="mini" disabled={stock==item.quantity  } icon='plus' onClick={()=>this.handleIncrementQty(index, currentStore)} />}
-              {!enableInventoryManagement && <Button className='add'  size="mini"  icon='plus' onClick={()=>this.handleIncrementQty(index, currentStore)} />}
+          {enableInventoryManagement && (
+            <Button
+              className="add"
+              size="mini"
+              disabled={stock == item.quantity}
+              icon="plus"
+              onClick={() => this.handleIncrementQty(index, currentStore)}
+            />
+          )}
+          {!enableInventoryManagement && (
+            <Button
+              className="add"
+              size="mini"
+              icon="plus"
+              onClick={() => this.handleIncrementQty(index, currentStore)}
+            />
+          )}
 
-              {selectedItem.deleted && <Message size='mini' icon="warning" error header="This item is no longer available"  content="remove the item to continue checkout"/>}
+          {selectedItem.deleted && (
+            <Message
+              size="mini"
+              icon="warning"
+              error
+              header="This item is no longer available"
+              content="remove the item to continue checkout"
+            />
+          )}
 
-              {(stock==null) && <Message size='mini' icon="warning" error header="This variant of the item is no longer available"  content="remove the item to continue checkout"/>}
+          {stock == null && (
+            <Message
+              size="mini"
+              icon="warning"
+              error
+              header="This variant of the item is no longer available"
+              content="remove the item to continue checkout"
+            />
+          )}
 
-              {enableInventoryManagement && (stock==item.quantity) && <Label color="red" basic size="medium" >Out of Stock</Label>}
-              {enableInventoryManagement && (stock<item.quantity) && <Message size='mini' icon="warning" error header="Selected Quantity No Longer available"  content="change quantity please"/>}
-              {!enableInventoryManagement && (stock==0) && <Message size='mini' icon="warning" error header="This item is out of stock"  content="remove the item to continue checkout"/>}
+          {enableInventoryManagement && stock == item.quantity && (
+            <Label color="red" basic size="medium">
+              Out of Stock
+            </Label>
+          )}
+          {enableInventoryManagement && stock < item.quantity && (
+            <Message
+              size="mini"
+              icon="warning"
+              error
+              header="Selected Quantity No Longer available"
+              content="change quantity please"
+            />
+          )}
+          {!enableInventoryManagement && stock == 0 && (
+            <Message
+              size="mini"
+              icon="warning"
+              error
+              header="This item is out of stock"
+              content="remove the item to continue checkout"
+            />
+          )}
         </Table.Cell>
         <Table.Cell width={3} textAlign="right" verticalAlign="top">
           <Button
@@ -139,7 +203,7 @@ class CartListItem extends Component {
             circular
             basic
             icon="delete"
-            data-title='remove'
+            data-title="remove"
           />
         </Table.Cell>
       </Table.Row>
