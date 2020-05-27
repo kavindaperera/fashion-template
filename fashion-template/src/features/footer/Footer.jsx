@@ -18,6 +18,7 @@ const mapState = (state, ownProps) => ({
   auth: state.firebase.auth,
   profile: state.firebase.profile,
   store: state.firestore.data.selectedStore,
+  currentStore: ownProps.match.params.store,
 
 });
 
@@ -43,21 +44,16 @@ class Footer extends Component {
           <Grid  centered divided inverted >
             <Grid.Row>
               <Grid.Column width={3}>
-                <Header inverted as="h4" content="Get Help" />
+                <Header inverted as="h4" content={`Why shop at ${store.storeName}`} />
                 <List link inverted>
-                  <List.Item as="a">Size Guide</List.Item>
-                  <List.Item as="a">Contact Us</List.Item>
-                  <List.Item as="a">Shipping</List.Item>
-                  <List.Item as="a">Returns & Exchanges</List.Item>
-                  <List.Item as="a">Payments & Security</List.Item>
-                  <List.Item as="a">Order Tracking</List.Item>
+                  <List.Item as="a" href={`/${this.props.currentStore}/customer-feedback`}>Customer Testimonals</List.Item>
                 </List>
               </Grid.Column>
               <Grid.Column width={3}>
                 <Header inverted as="h4" content={store.storeName}/>
                 <List link inverted>
-                  <List.Item as="a">About Us</List.Item>
-                  <List.Item as="a">FAQ</List.Item>
+                  <List.Item as="a" href={`/${this.props.currentStore}/about-us`} >About Us</List.Item>
+                  <List.Item as="a" href={`/${this.props.currentStore}/contact-us`}>Contact Us</List.Item>
                 </List>
               </Grid.Column>
               <Grid.Column width={7}>

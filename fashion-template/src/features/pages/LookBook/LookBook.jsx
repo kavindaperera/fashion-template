@@ -57,7 +57,16 @@ class LookBook extends Component {
           let px = { src: product.photos[1].thumbnail };
           this.state.photos.push(px);
         }
-        //shuffle(this.state.photos)
+        if (product.photos && product.photos[2] && !product.deleted && product.visible) {
+          let px = { src: product.photos[2].url };
+          this.state.photos.push(px);
+        }
+
+
+
+
+        //setTimeout(shuffle(this.state.photos), 3000);
+
       });
     }
 
