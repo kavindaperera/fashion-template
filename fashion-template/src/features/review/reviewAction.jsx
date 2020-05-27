@@ -127,7 +127,7 @@ export const shareReview = (review, item, currentStore) => {
                     }
                     })
                 reviews.push(reviewObj)
-                console.log(reviews)
+                //console.log(reviews)
 
                 let ratingObj  = dataSnapshot.get('rating')
                 ratingObj.ratingCount += 1;
@@ -146,7 +146,7 @@ export const shareReview = (review, item, currentStore) => {
             .catch((error) => {
                 dispatch(asyncActionError())
                 console.log(error)
-                toastr.error("Transaction failed: ", error.message ,toastrOptions);
+                toastr.error("Transaction failed! ", error.message ,toastrOptions);
             })
         } else {
             dispatch(asyncActionError())

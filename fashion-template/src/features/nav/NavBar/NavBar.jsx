@@ -193,8 +193,8 @@ class NavBar extends Component {
                   <Menu.Menu position="right">
                     <Menu.Item
                       name="Home"
-                      as={Link}
-                      to={`/${currentStore}/`}
+                      //as={Link}
+                      href={`/${currentStore}/`}
                     ></Menu.Item>
                     <Menu.Item
                       name="Clothing"

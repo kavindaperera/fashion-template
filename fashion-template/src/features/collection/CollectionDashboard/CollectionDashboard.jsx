@@ -185,6 +185,8 @@ class CollectionDashboard extends Component {
               handleChangeSort={this.handleChangeSort}
               count={filteredProducts && filteredProducts.length}
               availability = {availability}
+              fullLength={sortedProducts.length}
+              showLength = {currentProducts.length}
             />
 
             {store && availability &&

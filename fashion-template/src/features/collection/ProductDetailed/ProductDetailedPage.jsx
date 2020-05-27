@@ -13,6 +13,7 @@ import { NavLink, Link } from "react-router-dom";
 import _ from "lodash";
 import ProductComments from "./ProductComments";
 import ProductNotFound  from '../../pages/ProductNotFound'
+import { Helmet } from "react-helmet";
 
 const mapState = (state, ownProps) => {
   const productId = ownProps.match.params.id;
@@ -109,7 +110,11 @@ class ProductDetailedPage extends Component {
 
 
     return (
-      <div>{product && !product.deleted &&
+      <div>{product && !product.deleted && store &&
+      <div>
+            <Helmet>
+              <title>{_.startCase(product.name)} | {store.storeName}</title>
+            </Helmet>
       <Grid>
       <Grid.Row>
         <Breadcrumb>
@@ -164,9 +169,19 @@ class ProductDetailedPage extends Component {
 
             </Grid.Column>
         </Grid.Row>
-      </Grid> }
-      {(!product) && <ProductNotFound currentStore={currentStore} />}
-      { product && product.deleted &&  <ProductNotFound currentStore={currentStore} /> }
+      </Grid> </div>}
+
+      {(!product) && store && <div> 
+        <Helmet>
+              <title>404 Error | {store.storeName}</title>
+            </Helmet>
+      <ProductNotFound currentStore={currentStore} /></div>}
+
+      {store && product && (product.deleted ) && <div>
+        <Helmet>
+              <title>Not Available | {store.storeName}</title>
+            </Helmet>
+      <ProductNotFound currentStore={currentStore} /></div> }
       </div>
     );
   }

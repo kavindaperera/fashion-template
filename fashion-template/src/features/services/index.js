@@ -79,14 +79,19 @@ export default function getItemsByCategory(items, categories, selectedCategory) 
     });
 
     if (items) {
-
       if (selectedCategory=='all'){
-        itemsOfSelectedCategory = items
+        Object.keys(items).map((key) => {
+          const item = items[key];
+          if (item.deleted===false && item.visible===true) {
+            itemsOfSelectedCategory.push(item);
+          }
+          return null;
+        });
       }
       Object.keys(items).map((key) => {
         const item = items[key];
         const itemCategoryID = item.category;
-        if (itemCategoryID === selectedCategoryID) {
+        if (itemCategoryID === selectedCategoryID && item.deleted===false && item.visible===true) {
           itemsOfSelectedCategory.push(item);
         }
         return null;

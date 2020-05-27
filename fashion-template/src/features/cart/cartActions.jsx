@@ -103,19 +103,6 @@ export const placeOrder = (cart, currentStore, items, details) => {
 
       batch.set(OrderDocRef, order);
 
-      /*return firestore.set({
-        collection:'Stores',
-        doc:currentStore,
-        subcollections:[{collection:'Orders', doc:orderId}]
-      },
-      { id: orderId,
-        buyer: user.uid,
-        orderItems: orderItems,
-        date: firestore.Timestamp.fromDate(new Date()),
-        orderState: [{date: firestore.Timestamp.fromDate(new Date()) , stateId: 0}],
-        shippingAddress: address,
-        totalPrice: amount
-      })*/
 
       cart.forEach((cartItem) => {
         let subItemId = cartItem.subItem;
@@ -201,10 +188,10 @@ export const decrementStock = (cart, currentStore, items, ) => {
       cart.map((cartItem) => {
         let selectedItem = items.filter((product) => product.id === cartItem.item)[0];
         let subItems = selectedItem.subItems;
-        console.log(subItems)
+        //console.log(subItems)
         const newStock = subItems[cartItem.subItem].stock - cartItem.quantity;
         subItems[cartItem.subItem].stock = newStock;
-        console.log(subItems)
+        //console.log(subItems)
 
         const itemDocRef = firestore
           .collection('Stores')
@@ -237,11 +224,10 @@ export const incrementStock = (cart, currentStore, items, ) => {
       cart.map((cartItem) => {
         let selectedItem = items.filter((product) => product.id === cartItem.item)[0];
         let subItems = selectedItem.subItems;
-        console.log(subItems)
+        //console.log(subItems)
         const newStock = subItems[cartItem.subItem].stock + cartItem.quantity;
         subItems[cartItem.subItem].stock = newStock;
-        console.log(subItems)
-
+        //console.log(subItems)
         const itemDocRef = firestore
           .collection('Stores')
           .doc(currentStore)

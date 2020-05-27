@@ -93,11 +93,11 @@ class Filter extends Component {
                 >
                   <Container fluid className="nav">
                     <Menu.Menu position="left">
-                      <Menu.Item>{this.props.count} styles available</Menu.Item>
+                      <Menu.Item>showing {this.props.showLength} of {this.props.fullLength} available styles</Menu.Item>
 
                     </Menu.Menu>
                     <Menu.Menu position="right">
-                      <Menu.Item>Sort By:</Menu.Item>
+                      <Menu.Item>{this.props.fullLength} items sort By:</Menu.Item>
                       <Menu.Item>
                         <Dropdown
                           placeholder={sortOptions[0].text}

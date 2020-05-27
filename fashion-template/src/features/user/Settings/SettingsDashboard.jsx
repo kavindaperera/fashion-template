@@ -35,7 +35,6 @@ const SettingsDashboard = ({loading, store, providerId, auth, user, updateProfil
           <Route path={`/${currentStore}/my-account/edit-profile-facebook`} render={() => <AccountPage providerId={providerId}   />}/>
           <Route path={`/${currentStore}/my-account/order-history`} render={() => <OrdersDashboard currentStore={currentStore} user={user} />}/>
           <Route path="*" render={() => <NotFound  />}/>
-
         </Switch>
       </Grid.Column>
       <Grid.Column width={4}>
