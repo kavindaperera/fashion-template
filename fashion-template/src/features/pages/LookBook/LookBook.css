@@ -1,0 +1,15 @@
+.lookbook{
+    background-image: url("https://img.freepik.com/free-photo/bokeh-abstract-blurred-silver-white-beautiful-background-soft-color-light-glitter-sparkles_51768-59.jpg?size=626&ext=jpg");
+    /* Add the blur effect */
+    background-repeat: repeat repeat;
+    background-size: cover;
+    filter: blur(8px);
+  -webkit-filter: blur(8px);
+  width:100%;
+  height: 100000px;
+  margin-top: 0%;
+  position: absolute;
+  left: 0px;
+  top: 140px;
+  z-index: -1;
+}
