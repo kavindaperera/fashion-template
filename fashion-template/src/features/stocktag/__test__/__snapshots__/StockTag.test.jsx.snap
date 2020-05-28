@@ -4,19 +4,7 @@ exports[`matches snapshot 1 1`] = `
 <div
   data-testid="stock-tag"
 >
-  <div>
-    <div
-      className="ui green small basic label"
-      onClick={[Function]}
-    >
-      <i
-        aria-hidden="true"
-        className="check icon"
-      />
-       
-      10 items in stock
-    </div>
-  </div>
+  <div />
 </div>
 `;
 

@@ -14,7 +14,7 @@ it("renders without crashing", ()=>{
 });
 
 it("renders stock tag correctly",()=>{
-    const {getByTestId} = render(<StockTag stock={10}></StockTag>)
+    const {getByTestId} = render(<StockTag enableInventoryManagement={true} stock={10}></StockTag>)
     expect(getByTestId('stock-tag')).toHaveTextContent("10 items in stock")
 });
 

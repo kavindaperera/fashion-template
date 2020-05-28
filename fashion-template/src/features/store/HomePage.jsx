@@ -95,7 +95,16 @@ render (){
                 </Grid.Row>
                 <Grid.Row>
                   <Grid.Column>
-                    <Carousel className='carousel-home' swipeable={true} showThumbs= {false} showStatus={false} centerMode centerSlidePercentage={25}>
+                    <Carousel 
+                    className='carousel-home' 
+                    swipeable={true} 
+                    showThumbs= {false} 
+                    showStatus={false} 
+                    //autoPlay={true}
+                    //infiniteLoop={true}
+                    stopOnHover={true}
+                    centerMode 
+                    centerSlidePercentage={25}>
                       {store.storeCustomization.coverPhotos.carousel && 
                         store.storeCustomization.coverPhotos.carousel.map(photo => (
                             <img class='carousel-image' alt="a" key={photo} src={photo || "/assets/product_list_image.png"} />
@@ -107,6 +116,7 @@ render (){
                   <Button
                     color="black"
                     size="huge"
+                    className='enter-store'
                     //onClick={() => history.push(`/${currentStore}/collection/all`)}
                     href={`/${currentStore}/collection/all`}
                   >

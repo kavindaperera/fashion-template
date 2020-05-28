@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cart reducer should handle GET_CART snapshot 1 1`] = `
+Object {
+  "cart": Array [
+    Object {
+      "added": "2020-05-27",
+      "item": "2ByX54HZo5CKxXsUbrIx",
+      "price": 98,
+      "quantity": 1,
+      "subItem": 0,
+    },
+    Object {
+      "added": "2020-05-27",
+      "item": "2ByX54HZo5CKxXsUbrIx",
+      "price": 98,
+      "quantity": 1,
+      "subItem": 1,
+    },
+  ],
+}
+`;
+
+exports[`cart reducer should handle GET_CART snapshot 2 1`] = `
+Object {
+  "cart": Array [],
+}
+`;

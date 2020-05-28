@@ -38,7 +38,7 @@ class CartList extends Component {
 
     return (
       <div>
-        <Table basic="very"  collapsing>
+        <Table basic="very" stackable collapsing>
           <Table.Body>
           {/*cartItems && cartItems.length==0 && <LoadingComponent inverted={true} />*/}
           {cartItems && cartItems.map((item,i)=> (

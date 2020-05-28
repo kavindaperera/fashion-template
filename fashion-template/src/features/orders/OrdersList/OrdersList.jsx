@@ -30,6 +30,13 @@ class OrdersList extends Component {
             {orders && orders.map((order, i) => (
             <OrdersListItem key={i} order={order} currentStore={currentStore} symbol={symbol} items={mainItems}/>
         ))}
+        {orders && orders.length==0 && <Table.Row>
+                <Table.Cell width={3} textAlign='left' verticalAlign='top'>
+                  You haven't ordered any products.
+                  <br></br>
+                  <a href={`/${currentStore}/collection/all`}>Continue Shopping</a>
+                </Table.Cell>
+              </Table.Row> }
             </Table.Body>
     );
   }

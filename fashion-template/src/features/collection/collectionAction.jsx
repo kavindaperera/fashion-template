@@ -1,8 +1,7 @@
-import { toastr } from 'react-redux-toastr'
-import { FETCH_PRODUCTS, FETCH_SUBITEMS , GET_CURRENCY }  from "./collectionConstants";
+
+import {  GET_CURRENCY }  from "./collectionConstants";
 import {asyncActionStart,asyncActionFinish,asyncActionError
 } from "../async/asyncActions";
-import firebase from '../../app/config/firebase'
 import moment from "moment";
 
 

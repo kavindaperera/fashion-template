@@ -29,7 +29,7 @@ class SideMenu extends Component {
     const { activeItem } = this.state
 
     return (
-      <Menu  stackable pointing secondary vertical>
+      <Menu stackable pointing secondary vertical>
       <Menu.Item header>CATEGORY</Menu.Item>
       <Menu.Item
           name= "All"

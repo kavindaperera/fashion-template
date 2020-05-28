@@ -10,6 +10,7 @@ import CartDashboard from '../../features/cart/CartDashboard/CartDashboard'
 import ModalManager from '../../features/modals/ModalManager'
 import Footer from "../../features/footer/Footer";
 import NotFound from '../../features/pages/NotFound/NotFound'
+import LandingPage from '../../features/pages/LandingPage/LandingPage'
 import TestComponent from '../../features/testarea/TestComponent';
 import OrderDetailedPage from '../../features/orders/OrderDetailed/OrderDetailedPage'
 import LookBook from '../../features/pages/LookBook/LookBook'
@@ -21,6 +22,7 @@ class App extends Component {
       <div>
       <ModalManager/>
         <Switch>
+          <Route exact path={`/`} component={LandingPage}/>
           <Route exact path={`/:store/`} component={HomePage} />
         </Switch>
         <Route

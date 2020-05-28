@@ -8,7 +8,7 @@ exports[`matches snapshot 1 1`] = `
     <del
       style={
         Object {
-          "color": "grey",
+          "color": "#565656",
           "fontFamily": "Lato",
         }
       }
@@ -38,7 +38,7 @@ exports[`matches snapshot 2 1`] = `
   <p
     style={
       Object {
-        "color": "grey",
+        "color": "#565656",
         "fontFamily": "Lato",
       }
     }

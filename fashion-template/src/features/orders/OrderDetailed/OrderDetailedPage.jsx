@@ -116,7 +116,7 @@ class OrderDetailedPage extends Component {
     ];
 
     return (
-      <Grid>
+      <Grid >
         <Grid.Row>
           <Breadcrumb>
             <Breadcrumb.Section

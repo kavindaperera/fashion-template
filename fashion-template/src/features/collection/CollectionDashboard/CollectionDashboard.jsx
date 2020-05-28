@@ -170,13 +170,13 @@ class CollectionDashboard extends Component {
             <Helmet>
               <title>{_.startCase(category)} | {store.storeName}</title>
             </Helmet>}
-        <Grid centered  stackable>
-          <Grid.Column width={2}>
+        <Grid centered >
+          <Grid.Column  className='side-menu-collection' tablet={0}  width={2}>
             <StickyBox offsetTop={70} offsetBottom={20}>
               <SideMenu  sortCategory={category} currentStore={currentStore}></SideMenu>
             </StickyBox>
           </Grid.Column>
-          <Grid.Column width={14}>
+          <Grid.Column tablet={16} computer={14}>
            <Filter
               size={this.state.size}
               sort={this.state.sort}

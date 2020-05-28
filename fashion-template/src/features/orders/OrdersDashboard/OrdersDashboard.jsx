@@ -22,6 +22,7 @@ class OrdersDashboard extends Component {
   }
   render() {
     const { orders, currentStore, symbol, store} = this.props;
+    //console.log(JSON.stringify(orders, null, 2))
     return (
       <div>{ store &&
         <div>

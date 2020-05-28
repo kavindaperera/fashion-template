@@ -183,7 +183,7 @@ class NavBar extends Component {
                 style={menuFixed ? fixedMenuStyle : menuStyle}
               >
                 <Container fluid className="nav">
-                  <Menu.Item  href={`/${currentStore}/`} header>
+                  <Menu.Item className="navbar-hide"  href={`/${currentStore}/`} header>
                   {store.storeCustomization.logo && <Image
                       size="tiny"
                       src={store.storeCustomization.logo}
@@ -223,6 +223,7 @@ class NavBar extends Component {
                       </Dropdown.Menu>
                     </Dropdown>
                     <Menu.Item
+                      className="navbar-hide"
                       name="LookBook"
                       as={NavLink}
                       to={`/${currentStore}/lookbook`}
@@ -241,6 +242,7 @@ class NavBar extends Component {
                     <Menu.Item
                       title="My Bag"
                       //as={Link}
+                      className="navbar-hide"
                       href={`/${currentStore}/cart`}
                     >
                       <Icon name="shopping bag" size="large" />

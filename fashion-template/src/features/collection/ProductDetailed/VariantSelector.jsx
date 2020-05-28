@@ -58,7 +58,7 @@ class VariantSelector extends Component {
                   })}
                     <Divider/>
                     <Button.Group fluid>
-                    <Button labelPosition='right' icon='bookmark outline' loading={loading}  disabled={pristine || submitting  || !stock || loading} size='large' color='black' content='Add to Bag'/>
+                    <Button className='add-to-bag' labelPosition='right' icon='bookmark outline' loading={loading}  disabled={pristine || submitting  || !stock || loading} size='large' color='black' content='Add to Bag'/>
                     </Button.Group>
                 </Form>
 
