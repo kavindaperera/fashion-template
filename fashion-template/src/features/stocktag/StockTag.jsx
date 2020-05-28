@@ -9,7 +9,7 @@ function StockTag({ stock, selectedVariant, enableInventoryManagement }) {
           <Label size="small" basic color="green">
             <Icon name="check" /> {stock + " items in stock"}
           </Label>
-        ) : ( 
+        ) : (
           <Label size="small" basic color="red">
             <Icon name="ban" /> {"Out of Stock"}
           </Label>

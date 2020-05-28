@@ -19,6 +19,11 @@ it("renders stock tag correctly",()=>{
 });
 
 it("renders stock tag correctly",()=>{
+    const {getByTestId} = render(<StockTag enableInventoryManagement={false} stock={1}></StockTag>)
+    expect(getByTestId('stock-tag')).toHaveTextContent("")
+});
+
+it("renders stock tag correctly",()=>{
     const {getByTestId} = render(<StockTag stock={0}></StockTag>)
     expect(getByTestId('stock-tag')).toHaveTextContent("Out of Stock")
 });
@@ -28,17 +33,22 @@ it("renders stock tag correctly",()=>{
     expect(getByTestId('stock-tag')).toHaveTextContent("")
 });
 
-it('matches snapshot 1', ()=>{
-    const tree = renderer.create(<StockTag stock={10}></StockTag>).toJSON();
+it('matches snapshot 0', ()=>{
+    const tree = renderer.create(<StockTag enableInventoryManagement={true} stock={10}></StockTag>).toJSON();
     expect(tree).toMatchSnapshot();
 })
 
 it('matches snapshot 1', ()=>{
+    const tree = renderer.create(<StockTag enableInventoryManagement={false} stock={1}></StockTag>).toJSON();
+    expect(tree).toMatchSnapshot();
+})
+
+it('matches snapshot 2', ()=>{
     const tree = renderer.create(<StockTag stock={0}></StockTag>).toJSON();
     expect(tree).toMatchSnapshot();
 })
 
-it('matches snapshot 1', ()=>{
+it('matches snapshot 3', ()=>{
     const tree = renderer.create(<StockTag stock={null}></StockTag>).toJSON();
     expect(tree).toMatchSnapshot();
 })
