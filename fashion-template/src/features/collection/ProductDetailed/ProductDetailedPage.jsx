@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { withFirestore } from "react-redux-firebase";
 import { Grid, Button, Breadcrumb, Image } from "semantic-ui-react";
-import { firestoreConnect } from "react-redux-firebase";
+import { firestoreConnect, isLoaded } from "react-redux-firebase";
 import ProductDetailedPhotoSlide from "./ProductDetailedPhotoSlide";
 import ProductPriceDetails from "./ProductPriceDetails";
 import StickyBox from "react-sticky-box";
@@ -80,6 +80,8 @@ class ProductDetailedPage extends Component {
     if (product && !product.name && product.deleted) {
       return <LoadingComponent inverted={true} />;
     }
+
+
 
     //checking Discount Status
     if (product && product.discount != null) {

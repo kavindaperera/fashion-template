@@ -38,7 +38,7 @@ class ReviewForm extends Component {
   render() {
     const { closeModal, handleSubmit, error, invalid, submitting, data } = this.props;
 
-    console.log(data.loading)
+    //console.log(data.loading)
     
     return (
       <div>
@@ -78,4 +78,4 @@ class ReviewForm extends Component {
 export default connect(
   null,
   actions
-)(reduxForm({ form: "reviewrForm", validate })(ReviewForm));
+)(reduxForm({ form: "reviewForm", validate })(ReviewForm));

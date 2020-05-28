@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import OrdersList from '../OrdersList/OrdersList';
 import { getOrderHistory } from '../ordersAction';
 import { Helmet } from "react-helmet";
+import {isLoaded } from "react-redux-firebase";
 
 const mapState = (state, ownProps) => ({
   auth: state.firebase.auth,
@@ -22,7 +23,7 @@ class OrdersDashboard extends Component {
   }
   render() {
     const { orders, currentStore, symbol, store} = this.props;
-    //console.log(JSON.stringify(orders, null, 2))
+    
     return (
       <div>{ store &&
         <div>

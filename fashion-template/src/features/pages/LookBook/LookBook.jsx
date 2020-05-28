@@ -88,7 +88,7 @@ class LookBook extends Component {
           className="lookbook-images"
           numOfImagesPerRow={{xs: 1,s: 2,m: 3,l: 3,xl: 4,xxl:5}}
           screenWidthSizes={{xs: 420,s: 600,m: 768,l: 992,xl: 1200}}
-          images={this.state.photos}
+          images={this.state.photos.slice(0, Math.floor(Math.random() * (this.state.photos.length)) ) }    //Math.floor(Math.random() * 10); 
           orderL
           useLightBox={true}
         />

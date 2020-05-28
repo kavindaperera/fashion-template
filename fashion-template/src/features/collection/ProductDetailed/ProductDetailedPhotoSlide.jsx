@@ -40,7 +40,7 @@ class ProductDetailedPhotoSlide extends Component {
                 className="carousel-detailed-hide"
                 autoPlay={true}
                 infiniteLoop={true}
-                stopOnHover={true}
+                //stopOnHover={true}
                 showStatus={false}
                 showArrows={false}
                 centerMode

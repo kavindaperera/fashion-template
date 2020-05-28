@@ -27,6 +27,8 @@ const QuickViewModal = ({ closeModal, data }) => {
                 showThumbs={false}
                 showStatus={true}
                 infiniteLoop={true}
+                autoPlay={true}
+                infiniteLoop={true}
               >
                 {data.product.photos &&
                   data.product.photos.map((photo, i) => (

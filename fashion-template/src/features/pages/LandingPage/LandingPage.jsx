@@ -1,23 +1,37 @@
 import React, { Component } from "react";
-import { Grid, Image, GridRow, Button, Icon, Header } from "semantic-ui-react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { NavLink } from "react-router-dom";
 import _ from "lodash";
+import "./LandingPage.css";
 import { Helmet } from "react-helmet";
-import "../NotFound/NotFound.css";
-
 class LandingPage extends Component {
   render() {
-    console.log('404')
     return (
-      <body id="error">
-        <div id="notfound">
-          <div class="notfound">
-            <div class="notfound-404">
-              <h1>SHOPR</h1>
-              <h2>Fashion Store</h2>
-            </div>
-            <a href="javascript:history.back()">Go Back</a>
+      <body id="landing">
+        <div className="title-shopr">
+          <h1 className="shopr">
+            SHOPR
+            <br />
+            FASHION
+          </h1>
+        </div>
+        <div class="wrapper">
+          <div class="letters">
+            <span class="letter">f</span>
+            <span class="letter">a</span>
+            <span class="letter">s</span>
+            <span class="letter">h</span>
+            <span class="letter">i</span>
+            <span class="letter">o</span>
+            <span class="letter">n</span>
+            <span class="letter">.</span>
+            <span class="letter">s</span>
+            <span class="letter">h</span>
+            <span class="letter">o</span>
+            <span class="letter">p</span>
+            <span class="letter">r</span>
+            <span class="letter">.</span>
+            <span class="letter">c</span>
+            <span class="letter">f</span>
           </div>
         </div>
       </body>

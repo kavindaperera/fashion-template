@@ -65,6 +65,8 @@ class Footer extends Component {
                   as={Link} to={`/`}    
                   target="_blank"
                 /><p>© 2020-2021 TUSK TM. All rights reserved.</p>
+                <p>This is a mock website created for an academic purpose</p>
+                <p>All the images and data used in this website are owned by Aritzia.com© and Reiss.com©</p>
               </Grid.Column>
 
             </Grid.Row>
