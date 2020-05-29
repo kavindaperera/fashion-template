@@ -23,7 +23,6 @@ class OrdersDashboard extends Component {
   }
   render() {
     const { orders, currentStore, symbol, store} = this.props;
-    
     return (
       <div>{ store &&
         <div>

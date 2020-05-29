@@ -7,6 +7,7 @@ import { openModal } from '../../modals/modalActions';
 const mapState = (state, ownProps) => ({
   items: state.firestore.ordered.items,
   loading: state.async.loading,
+  symbol: state.collection.symbol,
 });
 
 const query = ({ currentStore }) => {
@@ -26,14 +27,15 @@ const actions = {
 
 class OrderDetailedItemList extends Component {
   render() {
-    const { items, openModal, currentStore, order, loading } = this.props;
+    const { items, openModal, currentStore, order, loading , symbol} = this.props;
 
     return (
-      <Card.Group className='group-orderdetail' itemsPerRow={2}>
+      <Card.Group className='group-orderdetail' itemsPerRow={4}>
         {order &&
           items &&
           order.orderItems.map((item) => {
             let subItemId = item.subItemId;
+            let price = item.unitPrice;
             let mainItem = items.filter((product) => product.id === item.item);
             let url = null;
             if(mainItem[0].photos[0]){
@@ -42,13 +44,17 @@ class OrderDetailedItemList extends Component {
             let name = mainItem[0].name;
 
             return (
-              <Card className='orderdetail'>
+              <Card  className='orderdetail'>
                 <Image className='order-detailed-img' src={url || "/assets/product_list_image.png"} wrapped ui={false} />
                 <Card.Content textAlign="center">
                   <Card.Meta>
                     {name}
                   </Card.Meta>
+                  <Card.Meta style={{fontFamily:'Lato'}}>
+                    {symbol}{price}
+                  </Card.Meta>
                 </Card.Content>
+
 
                 <Card.Content textAlign="center">
                   <Button onClick={() => openModal('ReviewModal', {currentStore: currentStore, item: item.item, loading: loading})} color="teal">Leave Review</Button>

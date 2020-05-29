@@ -193,11 +193,13 @@ class NavBar extends Component {
                   <Menu.Menu position="right">
                     <Menu.Item
                       name="Home"
+                      title="Home Page"
                       //as={Link}
                       href={`/${currentStore}/`}
                     ></Menu.Item>
                     <Menu.Item
                       name="Clothing"
+                      title="All Products"
                       as={NavLink}
                       to={`/${currentStore}/collection/all`}
                     ></Menu.Item>
@@ -225,6 +227,7 @@ class NavBar extends Component {
                     <Menu.Item
                       className="navbar-hide"
                       name="LookBook"
+                      title="Gallery of Products"
                       as={NavLink}
                       to={`/${currentStore}/lookbook`}
                     ></Menu.Item>
