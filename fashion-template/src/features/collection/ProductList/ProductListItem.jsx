@@ -8,6 +8,7 @@ import PriceTag from "../../pricetag/PriceTag";
 import moment from "moment";
 import { openModal } from "../../modals/modalActions";
 import LazyImage from "../../lazyImage/LazyImage";
+import RatingTag from "../../ratingtag/RatingTag";
 
 const mapState = (state, ownProps) => ({
 
@@ -131,12 +132,7 @@ class ProductListItem extends Component {
               discountActive={discountActive}
             ></PriceTag>
             <div>
-              {enableRating && rating > 0 && (
-                <Rating  disabled defaultRating={rating} maxRating={5} />
-              )}
-              {enableRating && rating == 0 && (
-                <p style={{ color: "grey" }}>still not rated</p>
-              )}
+              <RatingTag enableRating={enableRating} rating={rating}/>
             </div>
           </div>
         </div>

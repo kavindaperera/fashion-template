@@ -44,6 +44,8 @@ class HomePage extends Component  {
 render (){
   const { loading, history, store, currentStore, } = this.props;
 
+  console.log(isLoaded(store), isEmpty(store))
+
 
   if (!isLoaded(store) ||  loading) return <LoadingComponent inverted={true} />;
 
@@ -52,12 +54,7 @@ render (){
   }
 
 
- /*var val = store.template.get().then(dataSnapshot => { let template = dataSnapshot.get('title'); return(template); })
 
-  val.then(function(val){
-    var isFashion = val
-    console.log(isFashion=='Fashion Store')
-  })*/
 
 
   return (
@@ -95,15 +92,15 @@ render (){
                 </Grid.Row>
                 <Grid.Row>
                   <Grid.Column>
-                    <Carousel 
-                    className='carousel-home' 
-                    swipeable={true} 
-                    showThumbs= {false} 
-                    showStatus={false} 
+                    <Carousel
+                    className='carousel-home'
+                    swipeable={true}
+                    showThumbs= {false}
+                    showStatus={false}
                     //autoPlay={true}
                     //infiniteLoop={true}
                     stopOnHover={true}
-                    centerMode 
+                    centerMode
                     centerSlidePercentage={25}>
                       {store.storeCustomization.coverPhotos.carousel && 
                         store.storeCustomization.coverPhotos.carousel.map(photo => (
@@ -117,6 +114,8 @@ render (){
                     color="black"
                     size="huge"
                     className='enter-store'
+                    //as={NavLink}
+                    //to={`/${currentStore}/collection/all`}
                     //onClick={() => history.push(`/${currentStore}/collection/all`)}
                     href={`/${currentStore}/collection/all`}
                   >
@@ -143,3 +142,8 @@ export default connect(
   mapState,
   actions
 )(firestoreConnect(currentStore => query(currentStore))(HomePage));
+
+
+HomePage.defaultProps = {
+  store: undefined,
+};

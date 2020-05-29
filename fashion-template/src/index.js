@@ -11,6 +11,10 @@ import { configureStore } from "./app/store/configureStore";
 import ScrollToTop from "./app/common/util/ScrollToTop";
 import 'semantic-ui-less/semantic.less'
 
+import { ReactReduxFirebaseProvider, isLoaded } from 'react-redux-firebase';
+import { createFirestoreInstance } from 'redux-firestore'; 
+import firebase, { rrfConfig } from './app/store/configureStore';
+
 const store = configureStore();
 
 const rootEl = document.getElementById("root");

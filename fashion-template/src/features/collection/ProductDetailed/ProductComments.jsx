@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Rating , Header, Comment } from "semantic-ui-react";
+import RatingTag from "../../ratingtag/RatingTag";
 
 export default class ProductComments extends Component {
   render() {

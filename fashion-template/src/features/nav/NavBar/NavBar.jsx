@@ -241,7 +241,7 @@ class NavBar extends Component {
                     </Menu.Item>
                     <Menu.Item
                       title="My Bag"
-                      //as={Link}
+                      //as={NavLink}
                       className="navbar-hide"
                       href={`/${currentStore}/cart`}
                     >

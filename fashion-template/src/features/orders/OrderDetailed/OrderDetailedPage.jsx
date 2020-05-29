@@ -116,7 +116,7 @@ class OrderDetailedPage extends Component {
     ];
 
     return (
-      <Grid >
+      <Grid  >
         <Grid.Row>
           <Breadcrumb>
             <Breadcrumb.Section
@@ -147,8 +147,8 @@ class OrderDetailedPage extends Component {
           {/*<OrderDetailedStep state={currentOrderStateId}/>*/}
         </Grid.Row>
 
-        <Grid centered>
-          <Grid.Column width={10}>
+        <Grid  centered>
+          <Grid.Column width={16}>
             <Grid.Row></Grid.Row>
             {currentOrderState != null ? (
               <Segment
@@ -172,7 +172,7 @@ class OrderDetailedPage extends Component {
 
             <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
           </Grid.Column>
-          <Grid.Column width={6}>
+          <Grid.Column width={16}>
             {order &&  <OrderDetailedItemList order={order[orderId]} currentStore={currentStore} symbol={symbol} />}
           </Grid.Column>
           <Grid.Row></Grid.Row>
