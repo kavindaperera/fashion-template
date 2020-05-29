@@ -13,3 +13,24 @@
   top: 140px;
   z-index: -1;
 }
+
+
+.ui.button.lb-nxt,
+.ui.button.lb-prv{
+  border-radius: 0rem !important;
+  border: 2px solid;
+  background: transparent !important;
+}
+
+.ui.button.lb-nxt:hover,
+.ui.button.lb-prv:hover{
+  color: #008080;
+}
+
+.lb-btn-grp{
+  display: flex;
+	flex-direction: row;
+  align-items: center;
+	justify-content: center;
+
+}

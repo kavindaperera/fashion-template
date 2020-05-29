@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
-import { Grid, Pagination , Select, Button} from "semantic-ui-react";
+import { Grid, } from "semantic-ui-react";
 import ProductList from "../ProductList/ProductList";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import SideMenu from '../../slideMenu/SlideMenu/SideMenu'

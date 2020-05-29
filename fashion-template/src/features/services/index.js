@@ -103,4 +103,3 @@ export default function getItemsByCategory(items, categories, selectedCategory) 
   return itemsOfSelectedCategory ;
 }
 
-
