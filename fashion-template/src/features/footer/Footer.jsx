@@ -47,13 +47,17 @@ class Footer extends Component {
                 <Header inverted as="h4" content={`Why shop at ${store.storeName}`} />
                 <List link inverted>
                   <List.Item as="a" href={`/${this.props.currentStore}/customer-feedback`}>Customer Testimonals</List.Item>
+                  <p>This is a mock website created for an academic purpose</p>
+                
                 </List>
               </Grid.Column>
               <Grid.Column width={3}>
                 <Header inverted as="h4" content={store.storeName}/>
                 <List link inverted>
+                <List.Item as="a" href={`/${this.props.currentStore}/lookbook`} >LookBook</List.Item>
                   <List.Item as="a" href={`/${this.props.currentStore}/about-us`} >About Us</List.Item>
                   <List.Item as="a" href={`/${this.props.currentStore}/contact-us`}>Contact Us</List.Item>
+                  <p>All the images and data used in this website are owned by Aritzia.com© and Reiss.com©</p>
                 </List>
               </Grid.Column>
               <Grid.Column width={7}>
@@ -65,8 +69,7 @@ class Footer extends Component {
                   as={Link} to={`/`}    
                   target="_blank"
                 /><p>© 2020-2021 TUSK TM. All rights reserved.</p>
-                <p>This is a mock website created for an academic purpose</p>
-                <p>All the images and data used in this website are owned by Aritzia.com© and Reiss.com©</p>
+
               </Grid.Column>
 
             </Grid.Row>

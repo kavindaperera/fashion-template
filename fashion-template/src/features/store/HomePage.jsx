@@ -68,7 +68,7 @@ render (){
                 <Grid.Row>
                   <Grid.Column>
                     {store.storeCustomization.logo && <Image
-                      onClick={() => history.push(`/${currentStore}/collection/all`)}
+                      //onClick={() => history.push(`/${currentStore}/collection/all`)}
                       alt="a"
                       src={store.storeCustomization.logo}
                       size="small"
