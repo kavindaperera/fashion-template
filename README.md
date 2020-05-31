@@ -3,6 +3,6 @@
 ### Template for a fashion webstore
 ### All the images and product data used are owned by aritzia.com, reiss.com and hobbs.com
 #### Powered by TUSK
-![1](fashion-template/screenshots/gif(1).gif)
+![1](fashion-template/screenshots/gif (1).gif)
 
 
