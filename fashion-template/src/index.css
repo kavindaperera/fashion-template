@@ -274,19 +274,18 @@ body {
 /*Quick View*/
 
 .ui.slide.masked.reveal.image .ui.button.quick-view{
-  display: block!important;
+  display: none !important;
   width: 98% !important;
   position: absolute;
   top: 94%;
   left: 1%;
-  opacity: 95%;
   z-index: 10;
   background-color: white;
 }
-/*
+
 .ui.slide.masked.reveal.image:hover .ui.button.quick-view{
   display:block !important;
-}*/
+}
 
 @media screen and (max-width: 825px){
 
@@ -296,7 +295,6 @@ body {
     position: absolute;
     top: 87%;
     left: 1%;
-    opacity: 95%;
     z-index: 10;
     background-color: white;
   }
