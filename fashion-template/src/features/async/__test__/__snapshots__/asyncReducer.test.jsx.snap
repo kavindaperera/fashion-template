@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`async reducer should handle ASYNC_ACTION_ERROR 1`] = `
+Object {
+  "loading": false,
+}
+`;
+
+exports[`async reducer should handle ASYNC_ACTION_FINISH 1`] = `
+Object {
+  "loading": false,
+}
+`;
+
+exports[`async reducer should handle ASYNC_ACTION_START 1`] = `
+Object {
+  "loading": true,
+}
+`;

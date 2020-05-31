@@ -2,7 +2,7 @@ import React from "react";
 import { Rating } from "semantic-ui-react";
 function RatingTag({ enableRating, rating }) {
   return (
-    <div>
+    <div data-testid="rating-tag">
       {enableRating && rating > 0 && (
         <Rating disabled defaultRating={rating} maxRating={5} />
       )}

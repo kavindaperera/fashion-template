@@ -51,11 +51,15 @@ class CartDashboard extends Component {
       loading,
     } = this.props;
 
+    //console.log(loading)
+
     if (user) {
       getCart(user);
     }
 
-    if (!cartItems) return <LoadingComponent inverted={true} />;
+    if (!cartItems || loading) return <LoadingComponent inverted={true} />;
+
+
 
     return (
       <>

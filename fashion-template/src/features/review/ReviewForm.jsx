@@ -38,8 +38,8 @@ class ReviewForm extends Component {
   render() {
     const { closeModal, handleSubmit, error, invalid, submitting, data } = this.props;
 
-    //console.log(data.loading)
-    
+    console.log(data.loading)
+
     return (
       <div>
         <Form size="large" onSubmit={handleSubmit(this.onFormSubmit)}>
@@ -61,7 +61,7 @@ class ReviewForm extends Component {
               </Label>
             )}
             <Button
-              disabled={invalid || submitting || data.loading}
+              disabled={invalid || submitting }
               loading = {data.loading}
               fluid
               size="large"

@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`auth reducer should handle SIGN_OUT_USER 1`] = `
+Object {
+  "authenticated": false,
+  "currentUser": Object {},
+}
+`;
+
+exports[`auth reducer should handle SIGN_OUT_USER 2`] = `
+Object {
+  "authenticated": false,
+  "currentUser": Object {},
+}
+`;
+
+exports[`auth reducer should handle SIGN_OUT_USER 3`] = `
+Object {
+  "authenticated": false,
+  "currentUser": Object {},
+}
+`;

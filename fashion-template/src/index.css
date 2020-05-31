@@ -233,8 +233,7 @@ body {
 /*Collections Page*/
 
 .ui.three.cards.group-collection{
-  width: 1535px !important
-
+  width: 1535px !important;
 }
 
 .ui.card.card-list{
@@ -439,23 +438,13 @@ body {
 /*enter store button*/
 
 .ui.button.enter-store{
-  border-radius: 0rem !important;
+  border-radius: 0.5rem !important;
 }
 
 .ui.button.enter-store:hover {
-  -webkit-transform: scale(1.2, 1.2);
-    -moz-transform: scale(1.2, 1.2);
-    -ms-transform: scale(1.2, 1.2);
-    -o-transform: scale(1.2, 1.2);
-    transform: scale(1.2, 1.2);
-  -webkit-transition: all 1s ease-out;
-  -moz-transition: all 1s ease-out;
-  -ms-transition: all 1s ease-out;
-  -o-transition: all 1s ease-out;
-  transition: all 1s ease-out;
+ border-radius: 1rem !important;
+ transition: border-radius 1s;
 }
-
-
 
 
 .ui.card.orderdetail{

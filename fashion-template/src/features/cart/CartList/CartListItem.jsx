@@ -36,7 +36,7 @@ class CartListItem extends Component {
       enableInventoryManagement,
     } = this.props;
 
-    console.log(enableInventoryManagement);
+    //console.log(enableInventoryManagement);
 
     let subItemId = null;
     let selectedItem = null;

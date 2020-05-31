@@ -28,7 +28,8 @@ class SideMenu extends Component {
     const { store, sortCategory } = this.props;
     const { activeItem } = this.state
 
-    return (
+    return ( //style={{overflowY: 'auto', overflowX: 'hidden'}}
+    <div>
       <Menu stackable pointing secondary vertical>
       <Menu.Item header>CATEGORY</Menu.Item>
       <Menu.Item
@@ -40,7 +41,7 @@ class SideMenu extends Component {
         />
         {store &&
          (store.categories && 
-         store.categories.map(category => 
+         store.categories.map(category =>
          <Menu.Item
           name= {category.name}
           key={category.name}
@@ -52,7 +53,7 @@ class SideMenu extends Component {
          ))
         }
 
-      </Menu>
+      </Menu></div>
     )
   }
 }
