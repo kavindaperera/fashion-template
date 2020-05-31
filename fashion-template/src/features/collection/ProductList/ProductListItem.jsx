@@ -56,7 +56,7 @@ class ProductListItem extends Component {
         {/*if 2 product images are available*/}
         {product.photos[0] && product.photos[1] && (
           <div className="ui slide masked reveal image">
-            { currentStore && <Button
+          { currentStore && <Button
               className="quick-view"
               onClick={() => openModal("QuickViewModal", { product: product , currentStore: currentStore})
               }
