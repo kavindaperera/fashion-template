@@ -17,7 +17,7 @@ class ProductList extends Component {
 
     return (
       <div>
-        <Card.Group className='group-collection' itemsPerRow={3}>
+        <Card.Group doubling  className='group-collection' itemsPerRow={3}>
           { (sortCategory!=="") && products && products.map(product => (
             (  product.visible &&  (!product.deleted) && (product.category===(sortByIndex)) && <ProductListItem enableRating={enableRating} key={product.id}  product={product}  currency={currency} currentStore={currentStore} />)
           ))}

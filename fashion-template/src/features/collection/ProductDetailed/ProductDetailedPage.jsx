@@ -148,12 +148,12 @@ class ProductDetailedPage extends Component {
                 </Breadcrumb>
               </Grid.Row>
               <Grid.Row>
-                <Grid.Column width={8}>
+                <Grid.Column className="photo-details" width={8}>
                   <div>
                     <ProductDetailedPhotoSlide product={product} />
                   </div>
                 </Grid.Column>
-                <Grid.Column className="price-details" width={4}>
+                <Grid.Column className="price-details" width={5}>
                   <StickyBox offsetTop={70} offsetBottom={30}>
                     {store && product && (
                       <div>
