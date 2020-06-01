@@ -10,9 +10,12 @@ export default class ChatButton extends PureComponent {
           customData: { language: 'en' },
           socketUrl: 'https://rasa.shopr.cf',
           socketPath: '/socket.io/',
-          title: 'Title',
-          subtitle: 'Subtitle',
+          title: 'AI Assistant',
+          storage: 'session',
+          subtitle: 'Shopr',
+          InputTextFieldHint: 'Type a message...'
         });
+        window.WebChat.send(`/set_id{"store":"${this.props.storeId}"}`)
       }
    }
 
