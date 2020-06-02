@@ -56,7 +56,6 @@ class ItemDetailedInfo extends Component {
     let subItemIndex = null;
     let enableInventoryManagement = false;
 
-    
 
 
     selectedVariant && selectedVariant.values && subItems.map((s,i)=> {

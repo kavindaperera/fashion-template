@@ -26,7 +26,6 @@ class VariantSelector extends Component {
 
         const {pristine, submitting, stock, variants, loading} = this.props;
 
-        
 
         let quantity = [];
 
