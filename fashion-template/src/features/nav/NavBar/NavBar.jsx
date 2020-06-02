@@ -24,6 +24,7 @@ import SearchBar from "../../searchbar/SearchBar";
 import { Helmet } from "react-helmet";
 import LoadingComponent from "../../../app/layout/LoadingComponent"
 import StoreNotVerified from '../../pages/StoreNotVerified/StoreNotVerified'
+import NotFound from "../../pages/NotFound/NotFound";
 
 const actions = {
   openModal,
@@ -122,9 +123,8 @@ class NavBar extends Component {
   if (!isLoaded(store) ) return <LoadingComponent inverted={true} />;  
 
   if(isLoaded(store)) {
-
     if (store.verified == false) return <StoreNotVerified />;
-
+    if (store.template.id !== 'hUuhCYjpgWUM9DAmHiKq') return <NotFound />;
   }
 
 

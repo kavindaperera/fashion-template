@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Grid, Image, GridRow, Button, Icon, Header } from "semantic-ui-react";
-import { firestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
+import { firestoreConnect, isLoaded } from "react-redux-firebase";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { NavLink } from "react-router-dom";
 import LoadingComponent from "../../app/layout/LoadingComponent";
@@ -40,13 +40,14 @@ class HomePage extends Component {
   render() {
     const { loading, history, store, currentStore } = this.props;
 
-    console.log(isLoaded(store), isEmpty(store));
+    //console.log(isLoaded(store), isEmpty(store));
 
     if (!isLoaded(store) || loading)
       return <LoadingComponent inverted={true} />;
 
     if (isLoaded(store)) {
       if (store.verified == false) return <StoreNotVerified />;
+      if (store.template.id !== 'hUuhCYjpgWUM9DAmHiKq') return <NotFound />;
     }
 
     return (

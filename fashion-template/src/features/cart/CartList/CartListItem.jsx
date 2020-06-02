@@ -5,7 +5,6 @@ import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { removeFromCart, incrementQty, decrementQty } from "../cartActions";
 import PriceTagCart from "../../pricetag/PriceTagCart";
 import moment from "moment";
-import LazyImage from "../../lazyImage/LazyImage";
 
 const actions = {
   removeFromCart,

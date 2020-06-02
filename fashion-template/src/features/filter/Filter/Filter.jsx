@@ -6,7 +6,6 @@ import {
 } from "semantic-ui-react";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
 
 
 
@@ -79,7 +78,7 @@ class Filter extends Component {
   };
 
   render() {
-    const { loading, availability } = this.props;
+    const { loading} = this.props;
     const { menuFixed, value } = this.state;
     if (loading) return <LoadingComponent inverted={true} />;
 

@@ -4,7 +4,6 @@ import { closeModal } from "./modalActions";
 import { connect } from "react-redux";
 import { Carousel } from "react-responsive-carousel";
 import _ from "lodash";
-import { NavLink } from "react-router-dom";
 
 const actions = {
   closeModal,

@@ -4,7 +4,6 @@ import {Field, reduxForm} from 'redux-form';
 import TextInput from "../../../app/common/form/TextInput";
 import RadioInput from "../../../app/common/form/RadioInput";
 import { Helmet } from "react-helmet";
-import { connect } from 'react-redux';
 
 
 class BasicPage extends Component {
