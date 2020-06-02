@@ -1,34 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
-import { firestoreConnect , isLoaded, isEmpty } from "react-redux-firebase";
-import PropTypes from 'prop-types';
-import ResponsiveGallery from 'react-responsive-gallery';
+import { firestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
+import PropTypes from "prop-types";
+import _ from "lodash";
 
 const mapState = (state, ownProps) => ({
   loading: state.async.loading,
   currentStore: ownProps.match.params.store,
-  products: state.firestore.ordered.items,
+  store: state.firestore.data.selectedStore,
 });
 
 const actions = {};
 
-
 class TestComponent extends Component {
   constructor(props) {
-		super(props);
+    super(props);
   }
 
+  render() {
+    const { loading, products, store } = this.props;
 
-    render() {
-      const { loading, products } = this.props;
+    return (
+      <div className = 'home-marquee'>
 
-      return(
-                <div>
-
-                </div>
-        );
-    }
-};
+      </div>
+    );
+  }
+}
 
 /*
 TestComponent.propTypes = {
@@ -38,7 +36,4 @@ TestComponent.propTypes = {
   numOfCols: PropTypes.number
 };*/
 
-export default connect(
-  mapState,
-  actions
-)(TestComponent);
+export default connect(mapState, actions)(TestComponent);
