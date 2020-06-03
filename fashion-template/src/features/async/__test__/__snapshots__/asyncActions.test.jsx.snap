@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`asyncActionError Dispatches the correct action and payload 1`] = `
+Array [
+  Object {
+    "type": "ASYNC_ACTION_ERROR",
+  },
+]
+`;
+
+exports[`asyncActionFinish Dispatches the correct action and payload 1`] = `
+Array [
+  Object {
+    "type": "ASYNC_ACTION_FINISH",
+  },
+]
+`;
+
+exports[`asyncActionStart Dispatches the correct action and payload 1`] = `
+Array [
+  Object {
+    "type": "ASYNC_ACTION_START",
+  },
+]
+`;

@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getCurrency Dispatches the correct action and payload 1`] = `
+Array [
+  Object {
+    "type": "ASYNC_ACTION_START",
+  },
+  Object {
+    "payload": Object {
+      "symbol": "$",
+    },
+    "type": "GET_CURRENCY",
+  },
+  Object {
+    "type": "ASYNC_ACTION_FINISH",
+  },
+]
+`;
+
+exports[`getCurrency Dispatches the correct action and payload 2`] = `
+Array [
+  Object {
+    "type": "ASYNC_ACTION_START",
+  },
+  Object {
+    "payload": Object {
+      "symbol": "€",
+    },
+    "type": "GET_CURRENCY",
+  },
+  Object {
+    "type": "ASYNC_ACTION_FINISH",
+  },
+]
+`;
