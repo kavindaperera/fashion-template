@@ -150,7 +150,7 @@ class HomePage extends Component {
                     />
                   ))}
               </Grid.Row>
-              <Grid.Row></Grid.Row>
+              <Grid.Row><p>This is a mock website created for an academic purpose. </p><p>All the images and data used in this website are owned by Aritzia.com© and Reiss.com©</p></Grid.Row>
             </Grid>
           </div>
         )}

@@ -165,7 +165,6 @@ class CartListItem extends Component {
           {stock == null && (
             <Message
               size="mini"
-              icon="warning"
               error
               header="This variant of the item is no longer available"
               content="remove the item to continue checkout"
@@ -189,7 +188,6 @@ class CartListItem extends Component {
           {!enableInventoryManagement && stock == 0 && (
             <Message
               size="mini"
-              icon="warning"
               error
               header="This item is out of stock"
               content="remove the item to continue checkout"

@@ -6,11 +6,11 @@ function StockTag({ stock, selectedVariant, enableInventoryManagement }) {
     {stock!= null ? (
         <div>
         {stock > 0  ? ( enableInventoryManagement &&
-          <Label size="small" basic color="green">
+          <Label className='green-tag'  size="small" basic color="green">
             <Icon name="check" /> {stock + " items in stock"}
           </Label>
         ) : (
-          <Label size="small" basic color="red">
+          <Label className='red-tag'  size="small" basic color="red">
             <Icon name="ban" /> {"Out of Stock"}
           </Label>
         )}

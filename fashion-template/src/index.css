@@ -217,10 +217,18 @@ body {
   height: 400px !important
 }
 
+@media screen and (max-width: 1366px){
+  .cartImg {
+    object-fit: cover !important;
+    width: 200px !important;
+    height: auto !important
+  }
+}
+
 @media screen and (max-width: 825px){
   .cartImg {
     object-fit: cover !important;
-    width: 100px !important;
+    width: 150px !important;
     height: auto !important
   }
 }
@@ -538,6 +546,7 @@ body {
 
 }/*/
 
+
 .ui.mini.icon.button.sub{
   background-color: white;
   background-color: 0px 0px 0px 1px transparent inset;
@@ -556,6 +565,7 @@ body {
   font-family: Lato;
   border-radius: 0;
   border: 1px solid rgba(0, 0, 0, 0.418);
+  margin-top: 0px;
 
 }
 
@@ -567,6 +577,10 @@ body {
   border-radius: 0;
   border: 1px solid rgba(0, 0, 0, 0.418);
 
+}
+
+.left.aligned.top.aligned.three.wide.qty-slider{
+  min-width: 125px !important;
 }
 
 
@@ -719,4 +733,15 @@ body {
 .MarqueeContent {
   display: inline-block;
   text-overflow: clip; 
+}
+
+
+/*STOCK TAG*/
+
+.ui.red.small.basic.label.red-tag{
+  border-radius: 0rem;
+}
+
+.ui.green.small.basic.label.green-tag{
+  border-radius: 0rem;
 }
