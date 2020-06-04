@@ -47,7 +47,7 @@ class ProductListItem extends Component {
           <div>
             <Label circular color="red" floating>
               {"-"}
-              {product.discount.percentage}
+              {product.discount.percentage.toFixed(0)}
               {"%"}
             </Label>
           </div>

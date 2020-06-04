@@ -8,7 +8,7 @@ function PriceTag({ currency, price, discount, discountActive }) {
           <p>
             <del style={{ color: "#565656", fontFamily: "Lato"  }}>
               {currency}
-              {price}
+              {price.toFixed(2)}
             </del>
             <a style={{ color: "red", fontFamily: "Lato"  }}>
               {currency}

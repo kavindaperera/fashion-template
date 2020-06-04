@@ -37,7 +37,7 @@ export const addToCart = (item,subItem,price,currentStore) =>{
             }
           })
           cart.push(newCartItem)
-          console.log(cart)
+          //console.log(cart)
           return firestore
             .collection('Stores')
             .doc(currentStore)

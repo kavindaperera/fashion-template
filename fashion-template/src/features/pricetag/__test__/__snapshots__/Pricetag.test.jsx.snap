@@ -14,7 +14,7 @@ exports[`matches snapshot 1 1`] = `
       }
     >
       $
-      100
+      100.00
     </del>
     <a
       style={
@@ -25,7 +25,7 @@ exports[`matches snapshot 1 1`] = `
       }
     >
       $
-      50
+      50.00
     </a>
   </p>
 </div>
@@ -44,7 +44,7 @@ exports[`matches snapshot 2 1`] = `
     }
   >
     $
-    100
+    100.00
   </p>
 </div>
 `;
@@ -63,7 +63,7 @@ exports[`matches snapshot 3 1`] = `
       }
     >
       $
-      100
+      100.00
     </del>
     <a
       style={
@@ -74,7 +74,7 @@ exports[`matches snapshot 3 1`] = `
       }
     >
       $
-      50
+      50.00
     </a>
   </p>
 </div>
@@ -93,7 +93,7 @@ exports[`matches snapshot 4 1`] = `
     }
   >
     $
-    100
+    100.00
   </p>
 </div>
 `;

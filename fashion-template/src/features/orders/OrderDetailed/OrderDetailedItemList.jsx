@@ -27,7 +27,8 @@ const actions = {
 
 class OrderDetailedItemList extends Component {
   render() {
-    const { items, openModal, currentStore, order, loading , symbol} = this.props;
+    const { items, openModal, currentStore, order, loading , symbol, currentOrderState} = this.props;
+
 
     return (
       <Card.Group className='group-orderdetail' itemsPerRow={4}>
@@ -51,13 +52,15 @@ class OrderDetailedItemList extends Component {
                     {name}
                   </Card.Meta>
                   <Card.Meta style={{fontFamily:'Lato'}}>
-                    {symbol}{price}
+                    {symbol}{price.toFixed(2)}
                   </Card.Meta>
                 </Card.Content>
 
 
                 <Card.Content textAlign="center">
-                  <Button onClick={() => openModal('ReviewModal', {currentStore: currentStore, item: item.item, loading: loading})} color="teal">Leave Review</Button>
+                {currentOrderState && currentOrderState.stateId == 2 && <Button onClick={() => openModal('ReviewModal', {currentStore: currentStore, item: item.item, loading: loading})} color="teal">Leave Review</Button> }
+                {/*currentOrderState && currentOrderState.stateId == 1 && <Button onClick={() => openModal('OrderRecievedModal', {currentStore: currentStore, orderId: order.id, loading: loading})} color="teal">Recieved</Button> */}
+                {currentOrderState && currentOrderState.stateId < 2 && <Button disabled color="teal">Leave Review</Button> }
                 </Card.Content>
               </Card>
             );

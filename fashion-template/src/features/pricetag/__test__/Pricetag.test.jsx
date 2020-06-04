@@ -18,12 +18,12 @@ it("price tag renders without crashing", ()=>{
 
 it("renders price tag correctly",()=>{
     const {getByTestId} = render(<PriceTag currency='$' price={100} discountActive={true} discount="50"></PriceTag>)
-    expect(getByTestId('price-tag')).toHaveTextContent("$100$50")
+    expect(getByTestId('price-tag')).toHaveTextContent("$100.00$50.00")
 });
 
 it("renders price tag correctly",()=>{
     const {getByTestId} = render(<PriceTag currency='$' price={100} discountActive={true} discount="0"></PriceTag>)
-    expect(getByTestId('price-tag')).toHaveTextContent("$100")
+    expect(getByTestId('price-tag')).toHaveTextContent("$100.00")
 });
 
 it('matches snapshot 1', ()=>{
@@ -45,12 +45,12 @@ it("price tag cart renders without crashing", ()=>{
 
 it("renders price tag cart correctly",()=>{
     const {getByTestId} = render(<PriceTagCart currency='$' price={100} discountActive={true} discount="50"></PriceTagCart>)
-    expect(getByTestId('price-tag-cart')).toHaveTextContent("$100$50")
+    expect(getByTestId('price-tag-cart')).toHaveTextContent("$100.00$50.00")
 });
 
 it("renders price tag cart correctly",()=>{
     const {getByTestId} = render(<PriceTagCart currency='$' price={100} discountActive={true} discount="0"></PriceTagCart>)
-    expect(getByTestId('price-tag-cart')).toHaveTextContent("$100")
+    expect(getByTestId('price-tag-cart')).toHaveTextContent("$100.00")
 });
 
 it('matches snapshot 3', ()=>{
