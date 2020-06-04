@@ -67,7 +67,6 @@ class ItemDetailedInfo extends Component {
     });
 
     if(store){
-      //console.log(store)
       enableInventoryManagement = store.enableInventoryManagement;
     }
 

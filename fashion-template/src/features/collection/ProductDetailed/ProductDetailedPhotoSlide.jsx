@@ -41,6 +41,7 @@ class ProductDetailedPhotoSlide extends Component {
                 autoPlay={true}
                 infiniteLoop={true}
                 //stopOnHover={true}
+                showThumbs={false}
                 showStatus={false}
                 showArrows={false}
                 centerMode

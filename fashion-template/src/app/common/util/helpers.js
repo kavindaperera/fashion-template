@@ -39,7 +39,7 @@ export const createNewOrderItem = (cartItem, item, subItem)  => {
     item: cartItem.item,
     noOfItems: cartItem.quantity,
     subItemId: cartItem.subItem,
-    unitPrice: price
+    unitPrice: parseFloat(price.toFixed(2))
   }
 }
 
