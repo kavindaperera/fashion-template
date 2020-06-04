@@ -12,45 +12,45 @@ function PriceTagLarge({
     <div>
       {displayPrice ? (
         <div data-testid="price-tag">
-          {discountActive && discount > 0 && (
+          {discountActive && discount > 0 && price &&(
             <h2>
               <del style={{ color: "grey", fontFamily: "Lato"  }}>
                 {currency}
-                {displayPrice}
+                {displayPrice.toFixed(2)}
               </del>
               <a style={{ color: "red" , fontFamily: "Lato" }}>
                 {"   "} {currency}
-                {displayPrice - (displayPrice * discount) / 100}
+                {(displayPrice - (displayPrice * discount) / 100).toFixed(2)}
               </a>
             </h2>
           )}
 
-          {(!discountActive || discount == 0) && (
+          {(!discountActive || discount == 0) && price && (
             <h1>
               {currency}
-              {displayPrice}
+              {displayPrice.toFixed(2)}
             </h1>
           )}
         </div>
       ): (
         <div data-testid="price-tag">
-          {discountActive && discount > 0 && (
+          {discountActive && discount > 0 && price &&(
             <h2>
               <del style={{ color: "grey", fontFamily: "Lato"  }}>
                 {currency}
-                {price}
+                {price.toFixed(2)}
               </del>
               <a style={{ color: "red", fontFamily: "Lato"  }}>
                 {"   "} {currency}
-                {price - (price * discount) / 100}
+                {(price - (price * discount) / 100).toFixed(2)}
               </a>
             </h2>
           )}
 
-          {(!discountActive || discount == 0) && (
+          {(!discountActive || discount == 0) && price && (
             <h1>
               {currency}
-              {price}
+              {price.toFixed(2)}
             </h1>
           )}
         </div>

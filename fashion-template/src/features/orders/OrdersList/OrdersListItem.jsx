@@ -34,7 +34,7 @@ export default class OrdersListItem extends Component {
             Order Amount:
             <a style={{ color: "red", fontFamily: "Lato" }}>
               {symbol}
-              {order.totalPrice}
+              {(order.totalPrice).toFixed(2)}
             </a>
           </Table.Cell>
           <Table.Cell

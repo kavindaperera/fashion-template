@@ -130,6 +130,7 @@ class NavBar extends Component {
 
     //getting store currency
     if (config && store) {
+      //console.log(JSON.stringify(items))
 
       getCurrency(config, store);
       const currencies = config.currencies;

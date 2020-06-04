@@ -70,7 +70,7 @@ export const placeOrder = (cart, currentStore, items, details) => {
     let orderItems= []
     //let NewOrderItem = createNewCartItem (cartItem, item, subItem);
     if (user!==null && items && details){
-      dispatch(asyncActionStart());
+      //dispatch(asyncActionStart());
       const orderId = details.id
       const address = details.purchase_units[0].shipping
       const amount = details.purchase_units[0].amount.value
@@ -90,7 +90,7 @@ export const placeOrder = (cart, currentStore, items, details) => {
         date: firestore.Timestamp.fromDate(new Date()),
         orderState: [{date: firestore.Timestamp.fromDate(new Date()) , stateId: 0}],
         shippingAddress: address,
-        totalPrice: amount
+        totalPrice:  parseFloat(amount)
       }
 
 
@@ -138,12 +138,12 @@ export const placeOrder = (cart, currentStore, items, details) => {
 
         batch.commit()
 
-      .then(
+      /*.then(
         dispatch(asyncActionFinish())
 
 
-      ).catch((error) => {
-        dispatch(asyncActionError())
+      )*/.catch((error) => {
+        //dispatch(asyncActionError())
         console.log(error)
         toastr.light("Error");
       })
@@ -183,7 +183,7 @@ export const decrementStock = (cart, currentStore, items, ) => {
     const fb = getFirebase();
     const user = fb.auth().currentUser;
     if (user!==null && items ){
-      dispatch(asyncActionStart());
+      //dispatch(asyncActionStart());
       cart.map((cartItem) => {
         let selectedItem = items.filter((product) => product.id === cartItem.item)[0];
         let subItems = selectedItem.subItems;
@@ -200,11 +200,11 @@ export const decrementStock = (cart, currentStore, items, ) => {
         batch.update(itemDocRef, {subItems})
       });
       batch.commit()
-      .then(() => {
-        dispatch(asyncActionFinish())
-      })
-      .catch((error => {
-        dispatch(asyncActionError())
+      /*.then(() => {
+        //dispatch(asyncActionFinish())
+      })*/
+      .catch((error => {console.log(error)
+        //dispatch(asyncActionError())
       }))
     }
   }
@@ -291,7 +291,7 @@ export const incrementQty = (index, currentStore) => {
       icon: (<Icon  circular name='shopping bag' size='big' />),
       progressBar: true,
     }
-    console.log(user.uid,index, currentStore)
+    //console.log(user.uid,index, currentStore)
 
     if(user!==null){
       dispatch(asyncActionStart());
@@ -339,7 +339,7 @@ export const decrementQty = (index, currentStore) => {
       icon: (<Icon  circular name='shopping bag' size='big' />),
       progressBar: true,
     }
-    console.log(user.uid,index, currentStore)
+    //console.log(user.uid,index, currentStore)
 
     if(user!==null){
       dispatch(asyncActionStart());

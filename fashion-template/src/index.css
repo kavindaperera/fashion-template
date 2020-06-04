@@ -87,7 +87,7 @@ body {
 }
 
 .ui.search .result {
-  display: flex;
+
   flex-direction: row-reverse;
 }
 
@@ -95,7 +95,7 @@ body {
   background-color: rgb(151, 151, 151);
   height: 50%;
   width: 100px;
-
+  border-radius: 0em;
 }
 
 
