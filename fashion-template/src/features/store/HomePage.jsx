@@ -108,7 +108,7 @@ class HomePage extends Component {
                       store.storeCustomization.coverPhotos.carousel.map(
                         (photo) => (
                           <img
-                            class="carousel-image"
+                            className="carousel-image"
                             alt="a"
                             key={photo}
                             src={photo || "/assets/product_list_image.png"}

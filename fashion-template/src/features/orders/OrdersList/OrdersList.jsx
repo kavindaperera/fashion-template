@@ -28,7 +28,7 @@ class OrdersList extends Component {
     if(loading) return (<LoadingComponent inverted={true} />)
 
     if(orders){
-      orders.sort((a,b) => a.date.seconds < b.date.seconds ? 1 : -1)
+      orders.sort((a,b) => a.date && b.date && a.date.seconds < b.date.seconds ? 1 : -1)
     }
 
     return (

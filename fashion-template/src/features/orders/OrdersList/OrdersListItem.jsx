@@ -11,8 +11,11 @@ export default class OrdersListItem extends Component {
       let orderStates = order.orderState;
     }
 
+    console.log(order)
+
     return (
       <Table.Row>
+      {order && order.date && order.id && order.totalPrice &&
         <Table.Row style={{ backgroundColor: "#f5f5f5" }}>
           <Table.Cell
             style={{ color: "black", fontFamily: "Lato", fontSize: "1rem" }}
@@ -52,9 +55,9 @@ export default class OrdersListItem extends Component {
               view
             </Button>
           </Table.Cell>
-        </Table.Row>
+        </Table.Row>}
         {order &&
-          items &&
+          items && order.orderItems &&
           order.orderItems.map((item) => {
             let qty = item.noOfItems;
             let price = item.unitPrice;
