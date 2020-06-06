@@ -79,6 +79,7 @@ export default class OrdersListItem extends Component {
                     src={url || "/assets/product_list_image.png"}
                     className='order-list-mage'
                     size="small"
+                    title={name}
                   />
                 </Table.Cell>
                 <Table.Cell width={6} textAlign="left" verticalAlign="top">

@@ -107,12 +107,12 @@ class OrderDetailedPage extends Component {
             <p>
               <strong>Contact Name:</strong> {name}
             </p>
-            <p style={{display: 'flex'}}>
+            <p style={{ display: "flex" }}>
               <strong>Address:</strong>{" "}
-              <div style={{marginLeft:'1rem'}}>
+              <div style={{ marginLeft: "1rem" }}>
                 {" "}
                 {printAddress.map((line, i) => (
-                  <p  style={{margin: '0rem'}} >{line}</p>
+                  <p style={{ margin: "0rem" }}>{line}</p>
                 ))}
               </div>
             </p>
@@ -175,13 +175,7 @@ class OrderDetailedPage extends Component {
           <Grid.Column width={16}>
             <Grid.Row></Grid.Row>
             {currentOrderState != null ? (
-              <Segment
-                textAlign="left"
-                title={currentOrderState.date}
-                padded="very"
-                inverted
-                clearing
-              >
+              <Segment textAlign="left" padded="very" inverted clearing>
                 Order Number: {orderId}
                 <br />
                 <br />
@@ -191,7 +185,7 @@ class OrderDetailedPage extends Component {
                 </strong>{" "}
                 {moment(currentOrderState.date.toDate()).fromNow()}
                 {currentOrderState && currentOrderState.stateId == 0 && (
-                  <Button disabled floated="right" color="teal">
+                  <Button disabled floated="right" color="teal" title='Disabled until Shipped'>
                     Confirm Recieved
                   </Button>
                 )}
@@ -204,6 +198,7 @@ class OrderDetailedPage extends Component {
                         loading: loading,
                       })
                     }
+                    title='Confirm after you receive your items'
                     floated="right"
                     color="teal"
                   >
@@ -211,7 +206,7 @@ class OrderDetailedPage extends Component {
                   </Button>
                 )}
                 {currentOrderState && currentOrderState.stateId == 2 && (
-                  <Button disabled floated="right" color="teal">
+                  <Button disabled floated="right" color="teal" title='Confirmed Delivery'>
                     Confirmed Recieved
                   </Button>
                 )}

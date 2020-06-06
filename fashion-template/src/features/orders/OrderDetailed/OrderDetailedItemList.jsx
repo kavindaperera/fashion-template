@@ -45,7 +45,7 @@ class OrderDetailedItemList extends Component {
             let name = mainItem[0].name;
 
             return (
-              <Card  className='orderdetail'>
+              <Card title={name}  className='orderdetail'>
                 <Image className='order-detailed-img' src={url || "/assets/product_list_image.png"} wrapped ui={false} />
                 <Card.Content textAlign="center">
                   <Card.Meta>

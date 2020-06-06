@@ -80,7 +80,7 @@ class CartListItem extends Component {
                 selectedItem.photos[0].url || "/assets/product_list_image.png"
               }
               className="cartImg"
-              
+              title={selectedItem.name}
               size="medium"
             />
           )}
@@ -89,6 +89,7 @@ class CartListItem extends Component {
             <Image
               src={"/assets/product_list_image.png"}
               className="cartImg"
+              title={selectedItem.name}
               size="medium"
             />
           )}
@@ -127,6 +128,7 @@ class CartListItem extends Component {
             size="mini"
             className="sub"
             disabled={item.quantity == 1}
+            title='Decrease Quantity'
             icon="minus"
             onClick={() => this.handleDecrementQty(index, currentStore)}
           />
@@ -139,6 +141,7 @@ class CartListItem extends Component {
               className="add"
               size="mini"
               disabled={stock == item.quantity}
+              title='Increase Quantity'
               icon="plus"
               onClick={() => this.handleIncrementQty(index, currentStore)}
             />
@@ -147,6 +150,7 @@ class CartListItem extends Component {
             <Button
               className="add"
               size="mini"
+              title='Increase Quantity'
               icon="plus"
               onClick={() => this.handleIncrementQty(index, currentStore)}
             />
