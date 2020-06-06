@@ -11,7 +11,7 @@ export default class OrdersListItem extends Component {
       let orderStates = order.orderState;
     }
 
-    console.log(order)
+    //console.log(order)
 
     return (
       <Table.Row>

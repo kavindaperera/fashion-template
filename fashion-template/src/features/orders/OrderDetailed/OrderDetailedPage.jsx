@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { withFirestore, isLoaded, isEmpty} from "react-redux-firebase";
+import { withFirestore, isLoaded, isEmpty } from "react-redux-firebase";
 import { Breadcrumb, Grid, Segment, Tab, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import OrderDetailedItemList from './OrderDetailedItemList'
+import OrderDetailedItemList from "./OrderDetailedItemList";
 import { firestoreConnect } from "react-redux-firebase";
 import moment from "moment";
-import LoadingComponent from "../../../app/layout/LoadingComponent"
-import OrderNotFound from '../../pages/OrderNotFound/OrderNotFound';
-import { openModal } from '../../modals/modalActions';
+import LoadingComponent from "../../../app/layout/LoadingComponent";
+import OrderNotFound from "../../pages/OrderNotFound/OrderNotFound";
+import { openModal } from "../../modals/modalActions";
 
 const mapState = (state, ownProps) => {
   const orderId = ownProps.match.params.id;
@@ -25,7 +25,7 @@ const mapState = (state, ownProps) => {
     currentStore,
     order,
     config,
-    symbol
+    symbol,
   };
 };
 
@@ -47,15 +47,22 @@ const actions = {
 
 class OrderDetailedPage extends Component {
   render() {
-    const { orderId, currentStore, order, config ,symbol, loading, openModal} = this.props;
+    const {
+      orderId,
+      currentStore,
+      order,
+      config,
+      symbol,
+      loading,
+      openModal,
+    } = this.props;
 
-    if(!isLoaded(order)) { return <LoadingComponent inverted={true} />; }
+    if (!isLoaded(order)) {
+      return <LoadingComponent inverted={true} />;
+    }
 
-
-    if(isLoaded(order)) {
-
+    if (isLoaded(order)) {
       if (isEmpty(order)) return <OrderNotFound />;
-
     }
 
     let orderStates = null;
@@ -68,6 +75,7 @@ class OrderDetailedPage extends Component {
     let admin_area_2 = "N/A";
     let country_code = "N/A";
     let postal_code = "N/A";
+    const printAddress = [];
 
     let orderStatesConfig = null;
 
@@ -79,20 +87,15 @@ class OrderDetailedPage extends Component {
       orderStates = order[orderId].orderState;
       orderStatesX = order[orderId].orderState;
       const address = order[orderId].shippingAddress;
-      //console.log(address)
-      if(orderStates){
-      currentOrderState = orderStates[orderStates.length - 1];
+      for (let [key, value] of Object.entries(address.address)) {
+        printAddress.push(value);
+      }
+      printAddress.pop();
+
+      if (orderStates) {
+        currentOrderState = orderStates[orderStates.length - 1];
       }
       name = address.name.full_name;
-      if(address.address.address_line_1){
-        address_line_1 = address.address.address_line_1;
-      }
-      if(address.address.address_line_2){
-        address_line_2 = address.address.address_line_2;
-      }
-      admin_area_1 = address.address.admin_area_1;
-      admin_area_2 = address.address.admin_area_2;
-      country_code = address.address.country_code;
       postal_code = address.address.postal_code;
     }
 
@@ -104,9 +107,14 @@ class OrderDetailedPage extends Component {
             <p>
               <strong>Contact Name:</strong> {name}
             </p>
-            <p>
-              <strong>Address:</strong> {address_line_1}, {address_line_2}, {admin_area_1},{" "}
-              {admin_area_2}, {country_code}
+            <p style={{display: 'flex'}}>
+              <strong>Address:</strong>{" "}
+              <div style={{marginLeft:'1rem'}}>
+                {" "}
+                {printAddress.map((line, i) => (
+                  <p  style={{margin: '0rem'}} >{line}</p>
+                ))}
+              </div>
             </p>
             <p>
               <strong>Zip Code:</strong> {postal_code}
@@ -117,18 +125,22 @@ class OrderDetailedPage extends Component {
       {
         menuItem: "Logistics Information",
         render: () => (
-          <Tab.Pane style={{fontFamily: "Lato" }} attached={false}>
-            {orderStatesX.map((s) => (<div>
-              <p>{moment(s['date'].toDate()).format('LLLL')}:  {orderStatesConfig[s['stateId']]}</p></div>
+          <Tab.Pane style={{ fontFamily: "Lato" }} attached={false}>
+            {orderStatesX.map((s) => (
+              <div>
+                <p>
+                  {moment(s["date"].toDate()).format("LLLL")}:{" "}
+                  {orderStatesConfig[s["stateId"]]}
+                </p>
+              </div>
             ))}
-
           </Tab.Pane>
         ),
       },
     ];
 
     return (
-      <Grid  >
+      <Grid>
         <Grid.Row>
           <Breadcrumb>
             <Breadcrumb.Section
@@ -159,7 +171,7 @@ class OrderDetailedPage extends Component {
           {/*<OrderDetailedStep state={currentOrderStateId}/>*/}
         </Grid.Row>
 
-        <Grid  centered>
+        <Grid centered>
           <Grid.Column width={16}>
             <Grid.Row></Grid.Row>
             {currentOrderState != null ? (
@@ -178,9 +190,31 @@ class OrderDetailedPage extends Component {
                   {orderStatesConfig[currentOrderState.stateId]}
                 </strong>{" "}
                 {moment(currentOrderState.date.toDate()).fromNow()}
-                {currentOrderState && currentOrderState.stateId == 0 && <Button disabled floated='right' color='teal'>Confirm Recieved</Button> }
-                {currentOrderState && currentOrderState.stateId == 1 && <Button onClick={() => openModal('OrderRecievedModal', {currentStore: currentStore, orderId: orderId, loading: loading})} floated='right' color='teal' >Confirm Recieved</Button> }
-                {currentOrderState && currentOrderState.stateId == 2 && <Button disabled floated='right' color='teal'>Confirmed Recieved</Button> }
+                {currentOrderState && currentOrderState.stateId == 0 && (
+                  <Button disabled floated="right" color="teal">
+                    Confirm Recieved
+                  </Button>
+                )}
+                {currentOrderState && currentOrderState.stateId == 1 && (
+                  <Button
+                    onClick={() =>
+                      openModal("OrderRecievedModal", {
+                        currentStore: currentStore,
+                        orderId: orderId,
+                        loading: loading,
+                      })
+                    }
+                    floated="right"
+                    color="teal"
+                  >
+                    Confirm Recieved
+                  </Button>
+                )}
+                {currentOrderState && currentOrderState.stateId == 2 && (
+                  <Button disabled floated="right" color="teal">
+                    Confirmed Recieved
+                  </Button>
+                )}
               </Segment>
             ) : (
               ""
@@ -189,7 +223,14 @@ class OrderDetailedPage extends Component {
             <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
           </Grid.Column>
           <Grid.Column width={16}>
-            {order &&  <OrderDetailedItemList currentOrderState={currentOrderState} order={order[orderId]} currentStore={currentStore} symbol={symbol} />}
+            {order && (
+              <OrderDetailedItemList
+                currentOrderState={currentOrderState}
+                order={order[orderId]}
+                currentStore={currentStore}
+                symbol={symbol}
+              />
+            )}
           </Grid.Column>
           <Grid.Row></Grid.Row>
         </Grid>
@@ -200,6 +241,6 @@ class OrderDetailedPage extends Component {
 
 export default compose(
   withFirestore,
-  connect(mapState,actions),
+  connect(mapState, actions),
   firestoreConnect((currentStore, orderId) => query(currentStore, orderId))
 )(OrderDetailedPage);
