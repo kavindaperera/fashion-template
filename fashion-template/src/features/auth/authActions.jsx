@@ -80,6 +80,14 @@ export const socialLogin = (selectedProvider, currentStore) =>
         });
         toastr.light('New User', `Welcome to our store, ${user.user.displayName} !`,toastrOptions)
       }else{
+        await firestore.update({
+          collection:'Stores',
+          doc:currentStore,
+          subcollections:[{collection:'Buyers', doc: user.user.uid }]
+        },
+        { displayName: user.profile.displayName,
+          email: user.profile.email,
+        });
         toastr.light('Hello', `Welcome to our the Store`,toastrOptions)
       }
     } catch (error) {
