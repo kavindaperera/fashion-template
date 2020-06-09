@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1 1`] = `
+<body
+  data-testid="not-found"
+  id="error"
+>
+  <div
+    id="notfound"
+  >
+    <div
+      className="notfound"
+    >
+      <div
+        className="notfound-404"
+      >
+        <h1>
+          404
+        </h1>
+        <h2>
+          Page not found
+        </h2>
+      </div>
+      <a
+        href="javascript:history.back()"
+      >
+        Go Back
+      </a>
+    </div>
+  </div>
+</body>
+`;
