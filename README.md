@@ -1,7 +1,6 @@
 ## Fashion-Template
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
-###----------------------------------------------------------------------
-[Demo](https://fashion-shopr.web.app/rRTaztATW5R03ougKLtzWHr5V1g2/)
+Website [Demo](https://fashion-shopr.web.app/rRTaztATW5R03ougKLtzWHr5V1g2/)
 
 ### Created using React, Redux and Firebase
 ### Template for a fashion webstore
