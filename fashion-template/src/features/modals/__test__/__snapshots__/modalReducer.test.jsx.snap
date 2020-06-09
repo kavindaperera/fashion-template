@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`modal reducer should handle MODAL_CLOSE snapshot 1 1`] = `null`;
+
+exports[`modal reducer should handle MODAL_OPEN snapshot 1 1`] = `
+Object {
+  "modalProps": undefined,
+  "modalType": "test",
+}
+`;
+
+exports[`modal reducer should handle MODAL_OPEN snapshot 2 1`] = `
+Object {
+  "modalProps": Object {
+    "data": "testData",
+  },
+  "modalType": "test",
+}
+`;

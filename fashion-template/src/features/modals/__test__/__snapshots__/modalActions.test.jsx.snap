@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`closeModal Dispatches the correct action and payload 1`] = `
+Array [
+  Object {
+    "type": "MODAL_CLOSE",
+  },
+]
+`;
+
+exports[`openModal Dispatches the correct action and payload 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "modalProps": undefined,
+      "modalType": undefined,
+    },
+    "type": "MODAL_OPEN",
+  },
+]
+`;
