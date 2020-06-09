@@ -207,7 +207,7 @@ class OrderDetailedPage extends Component {
                 )}
                 {currentOrderState && currentOrderState.stateId == 2 && (
                   <Button disabled floated="right" color="teal" title='Confirmed Delivery'>
-                    Confirmed Recieved
+                    Recieved
                   </Button>
                 )}
               </Segment>
