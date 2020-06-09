@@ -69,11 +69,6 @@ class OrderDetailedPage extends Component {
     let orderStatesX = null;
     let currentOrderState = null;
     let name = "N/A";
-    let address_line_1 = "N/A";
-    let address_line_2 = "N/A";
-    let admin_area_1 = "N/A";
-    let admin_area_2 = "N/A";
-    let country_code = "N/A";
     let postal_code = "N/A";
     const printAddress = [];
 

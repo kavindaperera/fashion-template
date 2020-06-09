@@ -162,6 +162,7 @@ class NavBar extends Component {
               style={{ marginTop: "2em" }}
             >
               {store.storeCustomization.logo && <Image
+                className='nav-large'
                 alt="a"
                 src={store.storeCustomization.logo}
                 size="small"
@@ -184,8 +185,9 @@ class NavBar extends Component {
                 style={menuFixed ? fixedMenuStyle : menuStyle}
               >
                 <Container fluid className="nav">
-                  <Menu.Item className="navbar-hide"  href={`/${currentStore}/`} header>
+                  <Menu.Item className="navbar-hide" href={`/${currentStore}/`} header>
                   {store.storeCustomization.logo && <Image
+                      className='nav-logo' 
                       size="tiny"
                       src={store.storeCustomization.logo}
                       alt="a"

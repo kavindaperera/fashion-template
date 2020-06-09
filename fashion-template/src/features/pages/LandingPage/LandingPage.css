@@ -599,3 +599,27 @@
 	}
   }
   
+
+
+
+
+.landing-page-tabs{
+	background-color: black;
+}
+
+.landing-page-tabs .ui.pointing.secondary.menu .item{
+	color: white;
+}
+
+.landing-page-tabs .ui.secondary.pointing.menu .active.item{
+	color: white !important;
+	border-color: white !important;
+}
+
+.landing-page-tabs .ui.secondary.menu a.item:hover{
+	color: teal !important;
+}
+
+.ui.segment.active.tab.landing-pane{
+	background: rgb(54, 54, 54) !important;
+}

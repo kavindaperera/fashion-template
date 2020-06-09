@@ -59,6 +59,7 @@ class ItemDetailedInfo extends Component {
 
 
     selectedVariant && selectedVariant.values && subItems.map((s,i)=> {
+      //console.log(selectedVariant)
       if (_.isEqual(selectedVariant.values, s.variants)){
         subItemIndex = i
         displayPrice = s.price

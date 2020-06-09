@@ -904,3 +904,16 @@ body {
 .ui.green.small.basic.label.green-tag{
   border-radius: 0rem;
 }
+
+/*Nav Bar Logos*/
+
+.ui.tiny.image.nav-logo{
+  height: 16px;
+  object-fit: scale-down
+}
+
+.ui.small.centered.image.nav-large{
+  height: 30px;
+  object-fit: scale-down
+}
+

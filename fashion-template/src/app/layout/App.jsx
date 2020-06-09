@@ -33,7 +33,7 @@ class App extends Component {
               <Grid className="main">
                 <Switch>
                 <Route path={`/:store/collection/product/:id`} component={ProductDetailedPage} />
-                <Route path="/:store/test" component={TestComponent} />
+                {/*<Route path="/:store/test" component={TestComponent} />*/}
                 <Route path="/:store/lookbook" component={LookBook} />
                 <Route path={`/:store/collection/:category`}  component={CollectionDashboard} />
                 <Route path={`/:store/my-account`} component={UserIsAuthenticated(SettingsDashboard)} />

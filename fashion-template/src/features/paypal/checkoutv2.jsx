@@ -63,14 +63,14 @@ class CheckoutX extends Component {
         }}
 
         onCancel={(data) => { // User pressed "cancel" or close Paypal's popup!
-          console.log("payment canceled")
+          //console.log("payment canceled")
           store.enableInventoryManagement && this.props.incrementStock(cartItems, currentStore, items)
           //console.log(data);
           toastr.error('The payment was cancelled!', "The payment was cancelled!")
         }}
 
         onError={(details) => { // The main Paypal's script cannot be loaded or somethings block the loading of that script!
-          console.log('Server Error');
+          //console.log('Server Error');
           store.enableInventoryManagement && this.props.incrementStock(cartItems, currentStore, items)
           toastr.light('Server Error!', "somethings block the loading of paypal!")
         }}

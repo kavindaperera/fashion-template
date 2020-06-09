@@ -150,34 +150,10 @@ export const placeOrder = (cart, currentStore, items, details) => {
     }
   }
 }
-/*
-export const addToPurchases = (userId, cartItem, subItem, currentStore) => {
-  return async ( { getFirebase, getFirestore}) => {
-    const firestore = firebase.firestore();
-    const fs = getFirestore();
-    const batch = firestore.batch();
-    const purchase = {
-      buyer: userId,
-      date: fs.Timestamp.fromDate(new Date()),
-      noOfItems: cartItem.quantity,
-      subItem: cartItem.subItem,
-      unitPrice: subItem.price
-    }
-    const PurchaseDocRef = firestore
-      .collection('Stores')
-      .doc(currentStore)
-      .collection('Items')
-      .doc(cartItem.item)
-      .collection('Purchases')
-      .doc();
 
-    batch.set(PurchaseDocRef, purchase);
-  }
-}
-*/
 export const decrementStock = (cart, currentStore, items, ) => {
   return async (dispatch, getState, {getFirebase, getFirestore}) => {
-    console.log('reserving running')
+    //console.log('reserving running')
     const firestore = firebase.firestore();
     const batch = firestore.batch();
     const fb = getFirebase();
@@ -213,7 +189,7 @@ export const decrementStock = (cart, currentStore, items, ) => {
 //TODO
 export const incrementStock = (cart, currentStore, items, ) => {
   return async (dispatch, getState, {getFirebase, getFirestore}) => {
-    console.log('replacing running')
+    //console.log('replacing running')
     const firestore = firebase.firestore();
     const batch = firestore.batch();
     const fb = getFirebase();
@@ -307,7 +283,7 @@ export const incrementQty = (index, currentStore) => {
           })
           .then( cart => {
             cart[index].quantity += 1;
-            console.log(cart)
+            //console.log(cart)
             return firestore
               .collection('Stores')
               .doc(currentStore)
@@ -357,7 +333,7 @@ export const decrementQty = (index, currentStore) => {
             if(cart[index].quantity>1){
             cart[index].quantity -= 1;
           }
-            console.log(cart)
+            //console.log(cart)
             return firestore
               .collection('Stores')
               .doc(currentStore)
