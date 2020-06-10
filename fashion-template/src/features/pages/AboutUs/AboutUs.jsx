@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
+import { NavLink, Link } from "react-router-dom";
 import {
   Button,
   Container,
@@ -22,13 +23,14 @@ import { Helmet } from "react-helmet";
 
 const mapState = (state, ownProps) => ({
   store: state.firestore.data.selectedStore,
+  currentStore: ownProps.match.params.store,
 });
 
 const actions = {};
 
 class AboutUs extends Component {
   render() {
-    const { store } = this.props;
+    const { store, currentStore } = this.props;
 
     return (
       <div>
@@ -61,6 +63,40 @@ class AboutUs extends Component {
                     />
                   </Grid.Column>
                 </Grid.Row>
+                <Grid.Row>
+                  <Grid.Column floated="left" width={6}>
+                    <Image
+                      bordered
+                      size="large"
+                      src={
+                        store.storeCustomization.coverPhotos.carousel[1] ||
+                        "/assets/product_list_image.png"
+                      }
+                    />
+                  </Grid.Column>
+                  <Grid.Column width={8}>
+                    <Header as="h3" style={{ fontSize: "2em" }}>
+                      Our Collections
+                    </Header>
+                    <Grid.Row>
+                      {store &&
+                        store.categories &&
+                        store.categories.map((category) => (
+                          <Button
+                            basic
+                            className="detailed-page"
+                            as={NavLink}
+                            to={`/${currentStore}/collection/${category.name}`}
+                            size="large"
+                            color="grey"
+                            key={category.name}
+                          >
+                            {_.startCase(category.name)}
+                          </Button>
+                        ))}
+                    </Grid.Row>
+                  </Grid.Column>
+                </Grid.Row>
               </Grid>
             </Segment>
             <Segment style={{ padding: "0em" }} vertical>
@@ -83,7 +119,7 @@ class AboutUs extends Component {
                       Other ways to get in touch
                     </Header>
                     <p style={{ fontSize: "1.33em" }}>
-                      <Icon  name="call" />
+                      <Icon name="call" />
                       {store.telephoneNo || "N/A"}
                     </p>
                     <p style={{ fontSize: "1.33em" }}>
