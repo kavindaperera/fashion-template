@@ -15,6 +15,7 @@ import TestComponent from '../../features/testarea/TestComponent';
 import OrderDetailedPage from '../../features/orders/OrderDetailed/OrderDetailedPage'
 import LookBook from '../../features/pages/LookBook/LookBook'
 import { UserIsAuthenticated } from '../../features/auth/authWrapper';
+import AboutUs from "../../features/pages/AboutUs/AboutUs";
 
 class App extends Component {
   render() {
@@ -35,10 +36,12 @@ class App extends Component {
                 <Route path={`/:store/collection/product/:id`} component={ProductDetailedPage} />
                 {/*<Route path="/:store/test" component={TestComponent} />*/}
                 <Route path="/:store/lookbook" component={LookBook} />
+                <Route path="/:store/about-us" component={AboutUs} />
                 <Route path={`/:store/collection/:category`}  component={CollectionDashboard} />
                 <Route path={`/:store/my-account`} component={UserIsAuthenticated(SettingsDashboard)} />
                 <Route path={`/:store/order-detailed/:id`} component={UserIsAuthenticated(OrderDetailedPage)} />
                 <Route path={`/:store/cart`} component={UserIsAuthenticated(CartDashboard)} />
+
                 <Route exact path="*" component={NotFound} />
                 </Switch>
               </Grid>

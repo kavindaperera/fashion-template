@@ -56,7 +56,7 @@ class Footer extends Component {
                 <List link inverted>
                 <List.Item as="a" href={`/${this.props.currentStore}/lookbook`} >LookBook</List.Item>
                   <List.Item as="a" href={`/${this.props.currentStore}/about-us`} >About Us</List.Item>
-                  <List.Item as="a" href={`/${this.props.currentStore}/contact-us`}>Contact Us</List.Item>
+                  <List.Item as="a" href={`/${this.props.currentStore}/about-us`}>Contact Us</List.Item>
                 </List>
               </Grid.Column>
               <Grid.Column width={7}>
