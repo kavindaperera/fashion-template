@@ -1,0 +1,181 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1 1`] = `
+<body
+  data-testid="landing"
+  id="landing"
+>
+  <div
+    className="title-shopr"
+  >
+    <h1
+      className="shopr"
+    >
+      SHOPR
+      <br />
+      FASHION
+    </h1>
+  </div>
+  <div
+    class="wrapper"
+  >
+    <div
+      class="letters"
+    >
+      <span
+        class="letter"
+      >
+        f
+      </span>
+      <span
+        class="letter"
+      >
+        a
+      </span>
+      <span
+        class="letter"
+      >
+        s
+      </span>
+      <span
+        class="letter"
+      >
+        h
+      </span>
+      <span
+        class="letter"
+      >
+        i
+      </span>
+      <span
+        class="letter"
+      >
+        o
+      </span>
+      <span
+        class="letter"
+      >
+        n
+      </span>
+      <span
+        class="letter"
+      >
+        .
+      </span>
+      <span
+        class="letter"
+      >
+        s
+      </span>
+      <span
+        class="letter"
+      >
+        h
+      </span>
+      <span
+        class="letter"
+      >
+        o
+      </span>
+      <span
+        class="letter"
+      >
+        p
+      </span>
+      <span
+        class="letter"
+      >
+        r
+      </span>
+      <span
+        class="letter"
+      >
+        .
+      </span>
+      <span
+        class="letter"
+      >
+        c
+      </span>
+      <span
+        class="letter"
+      >
+        f
+      </span>
+    </div>
+  </div>
+  <div
+    className="Info-shopr"
+  >
+    <h1
+      className="Info-shopr-title"
+      style={
+        Object {
+          "color": "white",
+        }
+      }
+    >
+      CREATE YOUR OWN ONLINE FASHION STORE
+    </h1>
+    <a
+      href="https://www.shopr.cf/"
+    >
+      GET STARTED
+    </a>
+  </div>
+  <div
+    className="Info-shopr-2"
+  >
+    <div
+      className="landing-page-tabs"
+    >
+      <div
+        className="ui pointing secondary menu"
+      >
+        <a
+          className="active item"
+          onClick={[Function]}
+        >
+          Home
+        </a>
+        <a
+          className="item"
+          onClick={[Function]}
+        >
+          Product Catalog
+        </a>
+        <a
+          className="item"
+          onClick={[Function]}
+        >
+          AI Assistant
+        </a>
+        <a
+          className="item"
+          onClick={[Function]}
+        >
+          Cart
+        </a>
+        <a
+          className="item"
+          onClick={[Function]}
+        >
+          LookBook
+        </a>
+      </div>
+      <div
+        className="ui segment active tab landing-pane"
+      >
+        <div
+          className="ui segment Info-shopr-img"
+        >
+          <img
+            className="ui image"
+            src="https://firebasestorage.googleapis.com/v0/b/ecom-cse.appspot.com/o/fashion-template%2FLanding%20Page%2FHome.png?alt=media&token=9bc262e5-2a69-456a-8216-e22a6f99a543"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

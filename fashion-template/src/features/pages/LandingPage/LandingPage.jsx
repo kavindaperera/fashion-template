@@ -71,7 +71,7 @@ class LandingPage extends Component {
     ];
 
     return (
-      <body id="landing">
+      <body data-testid="landing" id="landing">
         <div className="title-shopr">
           <h1 className="shopr">
             SHOPR
