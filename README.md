@@ -48,7 +48,7 @@
 
 ![TestImage](https://firebasestorage.googleapis.com/v0/b/kavinda1013.appspot.com/o/Chatbot.png?alt=media&token=5bfddcb8-7ac8-480a-9206-8009f1c521d9)
 
-### `Aniamted`
+### `Animated`
 
 ![TestImage](https://firebasestorage.googleapis.com/v0/b/kavinda1013.appspot.com/o/display-text.png?alt=media&token=9527f268-43af-4584-b3d4-7b4049e001c0)
 
